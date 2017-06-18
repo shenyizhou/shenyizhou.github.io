@@ -185,7 +185,7 @@ th {
 }
 body {
   position: relative;
-  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
   line-height: 2;
   color: #555;
@@ -216,7 +216,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 h2,
 h3,
@@ -476,8 +476,8 @@ pre,
   margin: 20px 0;
   padding: 0;
   font-size: 13px;
-  color: #eaeaea;
-  background: #000;
+  color: #4d4d4c;
+  background: #f7f7f7;
   line-height: 1.6;
 }
 pre,
@@ -494,7 +494,7 @@ code {
 }
 pre code {
   padding: 0;
-  color: #eaeaea;
+  color: #4d4d4c;
   background: none;
   text-shadow: none;
 }
@@ -517,7 +517,7 @@ pre code {
 }
 .highlight figcaption {
   font-size: 1em;
-  color: #eaeaea;
+  color: #4d4d4c;
   line-height: 1em;
   margin-bottom: 1em;
 }
@@ -531,23 +531,23 @@ pre code {
 }
 .highlight figcaption a {
   float: right;
-  color: #eaeaea;
+  color: #4d4d4c;
 }
 .highlight figcaption a:hover {
-  border-bottom-color: #eaeaea;
+  border-bottom-color: #4d4d4c;
 }
 .highlight .gutter pre {
   padding-left: 10px;
   padding-right: 10px;
-  color: #666;
+  color: #869194;
   text-align: right;
-  background-color: #292929;
+  background-color: #eff2f3;
 }
 .highlight .code pre {
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #000;
+  background-color: #f7f7f7;
 }
 .highlight .line {
   height: 20px;
@@ -565,16 +565,16 @@ pre code {
   border: none;
 }
 pre .deletion {
-  background: #008000;
+  background: #fdd;
 }
 pre .addition {
-  background: #800000;
+  background: #dfd;
 }
 pre .meta {
-  color: #c397d8;
+  color: #8959a8;
 }
 pre .comment {
-  color: #969896;
+  color: #8e908c;
 }
 pre .variable,
 pre .attribute,
@@ -588,7 +588,7 @@ pre .html .doctype,
 pre .css .id,
 pre .css .class,
 pre .css .pseudo {
-  color: #d54e53;
+  color: #c82829;
 }
 pre .number,
 pre .preprocessor,
@@ -597,7 +597,7 @@ pre .literal,
 pre .params,
 pre .constant,
 pre .command {
-  color: #e78c45;
+  color: #f5871f;
 }
 pre .ruby .class .title,
 pre .css .rules .attribute,
@@ -610,11 +610,11 @@ pre .xml .cdata,
 pre .special,
 pre .number,
 pre .formula {
-  color: #b9ca4a;
+  color: #718c00;
 }
 pre .title,
 pre .css .hexcolor {
-  color: #70c0b1;
+  color: #3e999f;
 }
 pre .function,
 pre .python .decorator,
@@ -624,11 +624,11 @@ pre .ruby .title .keyword,
 pre .perl .sub,
 pre .javascript .title,
 pre .coffeescript .title {
-  color: #7aa6da;
+  color: #4271ae;
 }
 pre .keyword,
 pre .javascript .function {
-  color: #c397d8;
+  color: #8959a8;
 }
 .full-image.full-image.full-image {
   border: none;
@@ -1000,7 +1000,7 @@ pre .javascript .function {
   line-height: 36px;
   font-size: 20px;
   font-weight: normal;
-  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .site-subtitle {
   margin-top: 10px;
@@ -1088,7 +1088,7 @@ pre .javascript .function {
   opacity: 0;
 }
 .post-body {
-  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 @media (max-width: 767px) {
   .post-body {
@@ -1361,7 +1361,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
   color: #999;
-  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1520,9 +1520,6 @@ pre .javascript .function {
 .fancybox-close:hover {
   border: none;
 }
-.post-wordcount {
-  display: inline-block;
-}
 .sidebar {
   position: fixed;
   right: 0;
@@ -1680,7 +1677,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b0edd7;
+  background: #ffbdff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2221,6 +2218,13 @@ pre .javascript .function {
 .site-pv .busuanzi-value,
 .page-pv .busuanzi-value {
   margin: 0 5px;
+}
+.site-uv {
+  margin-right: 10px;
+}
+.site-uv::after {
+  content: "|";
+  padding-left: 10px;
 }
 .use-motion .post {
   opacity: 0;
