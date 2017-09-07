@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C#,深入理解C#," />
+  <meta name="keywords" content="C#," />
 
 
 
@@ -93,17 +93,14 @@
 
 
 
-<meta name="description" content="处理未知数据   版本 排序     C# 1.0 标志、包装类型、魔数   C# 2.0/3.0 可空类型   C# 4.0 可选参数">
-<meta name="keywords" content="C#,深入理解C#">
+<meta name="keywords" content="C#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《深入理解C Sharp》第3版（3）">
-<meta property="og:url" content="http://yoursite.com/2017/08/17/2017-08-17-《深入理解C Sharp》第3版（3）/index.html">
+<meta property="og:title" content="2017-09-06-Visual Studio各版本比较">
+<meta property="og:url" content="http://yoursite.com/2017/09/06/2017-09-06-Visual Studio各版本比较/index.html">
 <meta property="og:site_name" content="无主之地">
-<meta property="og:description" content="处理未知数据   版本 排序     C# 1.0 标志、包装类型、魔数   C# 2.0/3.0 可空类型   C# 4.0 可选参数">
-<meta property="og:updated_time" content="2017-08-28T02:43:36.322Z">
+<meta property="og:updated_time" content="2017-09-06T05:57:23.748Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《深入理解C Sharp》第3版（3）">
-<meta name="twitter:description" content="处理未知数据   版本 排序     C# 1.0 标志、包装类型、魔数   C# 2.0/3.0 可空类型   C# 4.0 可选参数">
+<meta name="twitter:title" content="2017-09-06-Visual Studio各版本比较">
 
 
 
@@ -131,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/17/2017-08-17-《深入理解C Sharp》第3版（3）/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/06/2017-09-06-Visual Studio各版本比较/"/>
 
 
 
 
 
-  <title>《深入理解C Sharp》第3版（3） | 无主之地</title>
+  <title>2017-09-06-Visual Studio各版本比较 | 无主之地</title>
   
 
 
@@ -305,7 +302,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/2017-08-17-《深入理解C Sharp》第3版（3）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/06/2017-09-06-Visual Studio各版本比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yizhou Shen">
@@ -322,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">《深入理解C Sharp》第3版（3）</h1>
+          <h1 class="post-title" itemprop="name headline">2017-09-06-Visual Studio各版本比较</h1>
         
 
         <div class="post-meta">
@@ -334,8 +331,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T12:09:19+08:00">
-                2017-08-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-06T10:46:59+08:00">
+                2017-09-06
               </time>
             
 
@@ -375,8 +372,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/17/2017-08-17-《深入理解C Sharp》第3版（3）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/17/2017-08-17-《深入理解C Sharp》第3版（3）/" itemprop="commentCount"></span>
+                <a href="/2017/09/06/2017-09-06-Visual Studio各版本比较/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/06/2017-09-06-Visual Studio各版本比较/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -384,7 +381,7 @@
 
           
           
-             <span id="/2017/08/17/2017-08-17-《深入理解C Sharp》第3版（3）/" class="leancloud_visitors" data-flag-title="《深入理解C Sharp》第3版（3）">
+             <span id="/2017/09/06/2017-09-06-Visual Studio各版本比较/" class="leancloud_visitors" data-flag-title="2017-09-06-Visual Studio各版本比较">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -412,28 +409,47 @@
       
 
       
-        <h3 id="处理未知数据"><a href="#处理未知数据" class="headerlink" title="处理未知数据"></a>处理未知数据</h3><table>
-<thead>
+        <!-- | IDE | C# | Step Over | Step Return | Resume |
+|-----------|----|----|
+| Visual Studio .NET 2002 | F11 | F10 | Shift+F11 | F8 |
+| IntelliJ | F7 | F8 | Shift+F8 | F9 |
+| MyEclipse | F5 | F6 | F7 | F8 |
+| Visual Studio | F11 | F10 | Shift+F11 | F5 |
+
+<table>
 <tr>
-<th>版本</th>
-<th>排序</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>C# 1.0</td>
-<td>标志、包装类型、魔数</td>
+    <td rowspan="7"> 文件状态：<br/>
+        [√] 草稿<br/>
+        [√] 正在修改<br/>
+        [√] 正式发布 </td>
+    <td>文件标识：</td>
+    <td> </td>
 </tr>
 <tr>
-<td>C# 2.0/3.0</td>
-<td>可空类型</td>
+    <td>当前版本：</td>
+    <td>2.7</td>
 </tr>
 <tr>
-<td>C# 4.0</td>
-<td>可选参数</td>
+    <td>作    者：</td>
+    <td></td>
 </tr>
-</tbody>
-</table>
+<tr>
+    <td>创建日期：</td>
+    <td></td>
+</tr>
+<tr>
+    <td>最后更新：</td>
+    <td></td>
+</tr>
+<tr>
+    <td>密    级：</td>
+    <td></td>
+</tr>
+<tr>
+    <td>版权说明：</td>
+    <td></td>
+</tr>
+</table> -->
 
       
     </div>
@@ -465,8 +481,6 @@
           
             <a href="/tags/C/" rel="tag"># C#</a>
           
-            <a href="/tags/深入理解C/" rel="tag"># 深入理解C#</a>
-          
         </div>
       
 
@@ -478,8 +492,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/16/2017-08-16-《深入理解C Sharp》第3版（2）/" rel="next" title="《深入理解C Sharp》第3版（2）">
-                <i class="fa fa-chevron-left"></i> 《深入理解C Sharp》第3版（2）
+              <a href="/2017/08/18/2017-08-18-《深入理解C Sharp》第3版（4）/" rel="next" title="《深入理解C Sharp》第3版（4）">
+                <i class="fa fa-chevron-left"></i> 《深入理解C Sharp》第3版（4）
               </a>
             
           </div>
@@ -487,10 +501,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/18/2017-08-18-《深入理解C Sharp》第3版（4）/" rel="prev" title="《深入理解C Sharp》第3版（4）">
-                《深入理解C Sharp》第3版（4） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -542,8 +552,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/08/17/2017-08-17-《深入理解C Sharp》第3版（3）/"
-           data-title="《深入理解C Sharp》第3版（3）" data-url="http://yoursite.com/2017/08/17/2017-08-17-《深入理解C Sharp》第3版（3）/">
+      <div class="ds-thread" data-thread-key="2017/09/06/2017-09-06-Visual Studio各版本比较/"
+           data-title="2017-09-06-Visual Studio各版本比较" data-url="http://yoursite.com/2017/09/06/2017-09-06-Visual Studio各版本比较/">
       </div>
     
   </div>
@@ -567,17 +577,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -724,22 +725,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理未知数据"><span class="nav-number">1.</span> <span class="nav-text">处理未知数据</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
