@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="String() 可以转换undefined和null .toString() 不行另外常见转化：+xxx转化为数字，!!xxx转化为布尔">
+<meta name="description" content="String() 可以转换undefined和null .toString() 不行另外常见转化：+xxx转化为数字（+new Date()），!!xxx转化为布尔">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS转化字符串">
 <meta property="og:url" content="http://yoursite.com/2017/12/02/2017-12-02-JS转化字符串/index.html">
 <meta property="og:site_name" content="无主之地">
-<meta property="og:description" content="String() 可以转换undefined和null .toString() 不行另外常见转化：+xxx转化为数字，!!xxx转化为布尔">
-<meta property="og:updated_time" content="2017-12-09T08:58:09.157Z">
+<meta property="og:description" content="String() 可以转换undefined和null .toString() 不行另外常见转化：+xxx转化为数字（+new Date()），!!xxx转化为布尔">
+<meta property="og:updated_time" content="2017-12-12T12:52:46.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS转化字符串">
-<meta name="twitter:description" content="String() 可以转换undefined和null .toString() 不行另外常见转化：+xxx转化为数字，!!xxx转化为布尔">
+<meta name="twitter:description" content="String() 可以转换undefined和null .toString() 不行另外常见转化：+xxx转化为数字（+new Date()），!!xxx转化为布尔">
 
 
 
@@ -412,7 +412,7 @@
       
 
       
-        <h3 id="String-可以转换undefined和null-toString-不行"><a href="#String-可以转换undefined和null-toString-不行" class="headerlink" title="String() 可以转换undefined和null .toString() 不行"></a><code>String()</code> 可以转换undefined和null <code>.toString()</code> 不行</h3><p>另外常见转化：<code>+xxx</code>转化为数字，<code>!!xxx</code>转化为布尔</p>
+        <h3 id="String-可以转换undefined和null-toString-不行"><a href="#String-可以转换undefined和null-toString-不行" class="headerlink" title="String() 可以转换undefined和null .toString() 不行"></a><code>String()</code> 可以转换undefined和null <code>.toString()</code> 不行</h3><p>另外常见转化：<code>+xxx</code>转化为数字（<code>+new Date()</code>），<code>!!xxx</code>转化为布尔</p>
 <a id="more"></a>
 <p>（顺带说一句，加法的处理真奇怪）</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">3</span> + <span class="string">'1'</span> <span class="comment">// 31</span></div><div class="line"><span class="number">3</span> - <span class="string">'1'</span> <span class="comment">// 2</span></div><div class="line">+<span class="string">'1'</span> <span class="comment">// 1</span></div><div class="line">-<span class="string">'1'</span> <span class="comment">// -1</span></div></pre></td></tr></table></figure>
@@ -573,7 +573,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
