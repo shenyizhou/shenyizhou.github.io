@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content=".example-item {     margin-bottom: 80px;   }    .example1 {     margin: 10px 0;   }    .label {     display: inline-block !important;     width: 96px;     color: #2f4f4f;     font-size: 16px;">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="v-watermark">
+<meta property="og:url" content="http://shenyizhou.github.io/2018/06/05/2018-6-5-v-watermark/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content=".example-item {     margin-bottom: 80px;   }    .example1 {     margin: 10px 0;   }    .label {     display: inline-block !important;     width: 96px;     color: #2f4f4f;     font-size: 16px;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://user-images.githubusercontent.com/10329054/40955992-4d68eccc-68c0-11e8-8d7f-d5a33d681031.png">
+<meta property="og:updated_time" content="2018-06-05T06:41:23.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="v-watermark">
+<meta name="twitter:description" content=".example-item {     margin-bottom: 80px;   }    .example1 {     margin: 10px 0;   }    .label {     display: inline-block !important;     width: 96px;     color: #2f4f4f;     font-size: 16px;">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/10329054/40955992-4d68eccc-68c0-11e8-8d7f-d5a33d681031.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://shenyizhou.github.io/2018/06/05/2018-6-5-v-watermark/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>v-watermark | 无主之地</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75479065-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75479065-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无主之地</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">静存高远</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '2zYkpfCfgCQsM5MEzwEH','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://shenyizhou.github.io/2018/06/05/2018-6-5-v-watermark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yizhou Shen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无主之地">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">v-watermark
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018年06月05日 11:56:04 / 修改时间：14:41:23" itemprop="dateCreated datePublished" datetime="2018-06-05T11:56:04+08:00">2018年06月05日</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+
+<style type="text/css">
+  .example-item {
+    margin-bottom: 80px;
+  }
+
+  .example1 {
+    margin: 10px 0;
+  }
+
+  .label {
+    display: inline-block !important;
+    width: 96px;
+    color: #2f4f4f;
+    font-size: 16px;
+    display: inline-block;
+    /*margin: 15px 30px 15px 0;*/
+  }
+
+  .input {
+    position: relative;
+    display: inline-block;
+    margin: 15px 30px 15px 0;
+    padding: 4px 7px;
+    width: 50px;
+    height: 28px;
+    cursor: text;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, .65);
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+  }
+
+  .pre {
+    display: block;
+    padding: 8px 15px;
+    background-color: #f6f8fa;
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    overflow-x: auto;
+    font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+    color: #333;
+    font-size: 12px;
+  }
+
+</style>
+<div id="app">
+  <div class="container">
+    <div class="example-item">
+      <v-watermark :width="width" :height="height" :row="row" :column="column" :item-width="itemWidth" :item-heigth="itemHeight" :text="text" :angle="angle" :x-start="xStart" :x-space="xSpace" :y-start="yStart" :y-space="ySpace" :font-size="fontSize" :font="font" :color="color" :alpha="alpha" class="example1">
+        <img :style="{
+            width: width + 'px',
+            height: height + 'px',
+            max-width: width + 'px'
+          }" style="margin:0;" src="https://user-images.githubusercontent.com/10329054/40955992-4d68eccc-68c0-11e8-8d7f-d5a33d681031.png">
+      </v-watermark>
+      <div>
+        <label class="label" for="widthInput">
+          width:
+        </label>
+        <input v-model.number="width" id="widthInput" class="input" type="number">
+        <label class="label" for="heightInput">
+          height:
+        </label>
+        <input v-model.number="height" id="heightInput" class="input" type="number">
+        <label class="label" for="rowInput">
+          row:
+        </label>
+        <input v-model.number="row" id="rowInput" class="input" type="number">
+        <label class="label" for="columnInput">
+          column:
+        </label>
+        <input v-model.number="column" id="columnInput" class="input" type="number">
+        <br>
+        <label class="label" for="itemWidthInput">
+          item-width:
+        </label>
+        <input v-model.number="itemWidth" id="itemWidthInput" class="input" type="number">
+        <label class="label" for="itemHeightInput">
+          item-height:
+        </label>
+        <input v-model.number="itemHeight" id="itemHeightInput" class="input" type="number">
+        <label class="label" for="textInput">
+          text:
+        </label>
+        <input v-model="text" id="textInput" class="input" type="text">
+        <label class="label" for="angleInput">
+          angle:
+        </label>
+        <input v-model.number="angle" id="angleInput" class="input" type="number">
+        <br>
+        <label class="label" for="xStartInput">
+          x-start:
+        </label>
+        <input v-model.number="xStart" id="xStartInput" class="input" type="number">
+        <label class="label" for="yStartInput">
+          y-start:
+        </label>
+        <input v-model.number="yStart" id="yStartInput" class="input" type="number">
+        <label class="label" for="xSpaceInput">
+          x-space:
+        </label>
+        <input v-model.number="xSpace" id="xSpaceInput" class="input" type="number">
+        <label class="label" for="ySpaceInput">
+          y-space:
+        </label>
+        <input v-model.number="ySpace" id="ySpaceInput" class="input" type="number">
+        <br>
+        <label class="label" for="fontSizeInput">
+          font-size:
+        </label>
+        <input v-model="fontSize" id="fontSizeInput" class="input" type="text">
+        <label class="label" for="fontInput">
+          font:
+        </label>
+        <input v-model="font" id="fontInput" class="input" type="text">
+        <label class="label" for="colorInput">
+          color:
+        </label>
+        <input v-model="color" id="colorInput" class="input" type="text">
+        <label class="label" for="alphaInput">
+          alpha:
+        </label>
+        <input v-model.number="alpha" id="alphaInput" class="input" type="number">
+        <br>
+      </div>
+      <pre class="pre">
+&lt;v-watermark
+  :width=&quot;{{width}}px&quot;
+  :height=&quot;{{height}}px&quot;
+  :row=&quot;{{row}}&quot;
+  :column=&quot;{{column}}&quot;
+  :item-width=&quot;{{itemWidth}}px&quot;
+  :item-height=&quot;{{itemHeight}}px&quot;
+  :text=&quot;{{text}}&quot;
+  :angle=&quot;{{angle}}&quot;
+  :x-start=&quot;{{xStart}}&quot;
+  :y-start=&quot;{{yStart}}&quot;
+  :x-space=&quot;{{xSpace}}&quot;
+  :y-space=&quot;{{ySpace}}&quot;
+  :font-size=&quot;{{fontSize}}&quot;
+  :font=&quot;{{font}}&quot;
+  :color=&quot;{{color}}&quot;
+  :alpha=&quot;{{alpha}}&quot;
+  class=&quot;example1&quot;
+&gt;
+  &lt;img src=&#x27;./src/asserts/ace.webp&#x27;/&gt;
+&lt;/v-watermark&gt;</pre>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+!function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define("VWatermark",[],e):"object"==typeof exports?exports.VWatermark=e():t.VWatermark=e()}("undefined"!=typeof self?self:this,function(){return function(t){function e(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,e),o.l=!0,o.exports}var n={};return e.m=t,e.c=n,e.d=function(t,n,r){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:r})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="/dist/",e(e.s=1)}([function(t,e,n){"use strict";e.a={name:"v-watermark",props:{target:{type:String,default:""},width:{type:Number,default:960},height:{type:Number,default:540},row:{type:Number,default:0},column:{type:Number,default:0},itemWidth:{type:Number,default:120},itemHeight:{type:Number,default:80},text:{type:String,default:"data"},angle:{type:Number,default:-15},xStart:{type:Number,default:0},yStart:{type:Number,default:0},xSpace:{type:Number,default:0,validator:function(t){return t>=0}},ySpace:{type:Number,default:0,validator:function(t){return t>=0}},fontSize:{type:String,default:"20px"},font:{type:String,default:"微软雅黑"},color:{type:String,default:"#000000",validator:function(t){return/^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/.test(t)}},alpha:{type:Number,default:.3,validator:function(t){return t>=0&&t<=1}}},computed:{_row:function(){return this.row?this.row:this.contentHeight-this.yStart?(this.contentHeight-this.yStart)/this.yTotal:1},_column:function(){return this.column?this.column:this.contentWidth-this.xStart?(this.contentWidth-this.xStart)/this.xTotal:1},rowInt:function(){return this._row>=1?Math.floor(Number(this._row)):1},columnInt:function(){return this._column>=1?Math.floor(Number(this._column)):1},xTotal:function(){return this.xSpace+this.itemWidth},yTotal:function(){return this.ySpace+this.itemHeight},contentWidth:function(){this.$refs.wrapper;return this.width},contentHeight:function(){return this.height}},mounted:function(){this.$refs.wrapper}}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r=n(2),o={install:function(t,e){t.component(r.a.name,r.a)}};e.default=o,"undefined"!=typeof window&&window.Vue&&window.Vue.component("v-watermark",r.a)},function(t,e,n){"use strict";function r(t){n(3)}var o=n(0),i=n(9),a=n(8),u=r,s=a(o.a,i.a,!1,u,"data-v-2192fea9",null);e.a=s.exports},function(t,e,n){var r=n(4);"string"==typeof r&&(r=[[t.i,r,""]]),r.locals&&(t.exports=r.locals);n(6)("0bd0b6ea",r,!0,{})},function(t,e,n){e=t.exports=n(5)(!1),e.push([t.i,"",""])},function(t,e){function n(t,e){var n=t[1]||"",o=t[3];if(!o)return n;if(e&&"function"==typeof btoa){var i=r(o);return[n].concat(o.sources.map(function(t){return"/*# sourceURL="+o.sourceRoot+t+" */"})).concat([i]).join("\n")}return[n].join("\n")}function r(t){return"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(t))))+" */"}t.exports=function(t){var e=[];return e.toString=function(){return this.map(function(e){var r=n(e,t);return e[2]?"@media "+e[2]+"{"+r+"}":r}).join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var r={},o=0;o<this.length;o++){var i=this[o][0];"number"==typeof i&&(r[i]=!0)}for(o=0;o<t.length;o++){var a=t[o];"number"==typeof a[0]&&r[a[0]]||(n&&!a[2]?a[2]=n:n&&(a[2]="("+a[2]+") and ("+n+")"),e.push(a))}},e}},function(t,e,n){function r(t){for(var e=0;e<t.length;e++){var n=t[e],r=c[n.id];if(r){r.refs++;for(var o=0;o<r.parts.length;o++)r.parts[o](n.parts[o]);for(;o<n.parts.length;o++)r.parts.push(i(n.parts[o]));r.parts.length>n.parts.length&&(r.parts.length=n.parts.length)}else{for(var a=[],o=0;o<n.parts.length;o++)a.push(i(n.parts[o]));c[n.id]={id:n.id,refs:1,parts:a}}}}function o(){var t=document.createElement("style");return t.type="text/css",l.appendChild(t),t}function i(t){var e,n,r=document.querySelector("style["+y+'~="'+t.id+'"]');if(r){if(h)return m;r.parentNode.removeChild(r)}if(g){var i=p++;r=d||(d=o()),e=a.bind(null,r,i,!1),n=a.bind(null,r,i,!0)}else r=o(),e=u.bind(null,r),n=function(){r.parentNode.removeChild(r)};return e(t),function(r){if(r){if(r.css===t.css&&r.media===t.media&&r.sourceMap===t.sourceMap)return;e(t=r)}else n()}}function a(t,e,n,r){var o=n?"":r.css;if(t.styleSheet)t.styleSheet.cssText=b(e,o);else{var i=document.createTextNode(o),a=t.childNodes;a[e]&&t.removeChild(a[e]),a.length?t.insertBefore(i,a[e]):t.appendChild(i)}}function u(t,e){var n=e.css,r=e.media,o=e.sourceMap;if(r&&t.setAttribute("media",r),v.ssrId&&t.setAttribute(y,e.id),o&&(n+="\n/*# sourceURL="+o.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(o))))+" */"),t.styleSheet)t.styleSheet.cssText=n;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(n))}}var s="undefined"!=typeof document;if("undefined"!=typeof DEBUG&&DEBUG&&!s)throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var f=n(7),c={},l=s&&(document.head||document.getElementsByTagName("head")[0]),d=null,p=0,h=!1,m=function(){},v=null,y="data-vue-ssr-id",g="undefined"!=typeof navigator&&/msie [6-9]\b/.test(navigator.userAgent.toLowerCase());t.exports=function(t,e,n,o){h=n,v=o||{};var i=f(t,e);return r(i),function(e){for(var n=[],o=0;o<i.length;o++){var a=i[o],u=c[a.id];u.refs--,n.push(u)}e?(i=f(t,e),r(i)):i=[];for(var o=0;o<n.length;o++){var u=n[o];if(0===u.refs){for(var s=0;s<u.parts.length;s++)u.parts[s]();delete c[u.id]}}}};var b=function(){var t=[];return function(e,n){return t[e]=n,t.filter(Boolean).join("\n")}}()},function(t,e){t.exports=function(t,e){for(var n=[],r={},o=0;o<e.length;o++){var i=e[o],a=i[0],u=i[1],s=i[2],f=i[3],c={id:t+":"+o,css:u,media:s,sourceMap:f};r[a]?r[a].parts.push(c):n.push(r[a]={id:a,parts:[c]})}return n}},function(t,e){t.exports=function(t,e,n,r,o,i){var a,u=t=t||{},s=typeof t.default;"object"!==s&&"function"!==s||(a=t,u=t.default);var f="function"==typeof u?u.options:u;e&&(f.render=e.render,f.staticRenderFns=e.staticRenderFns,f._compiled=!0),n&&(f.functional=!0),o&&(f._scopeId=o);var c;if(i?(c=function(t){t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,t||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),r&&r.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(i)},f._ssrRegister=c):r&&(c=r),c){var l=f.functional,d=l?f.render:f.beforeCreate;l?(f._injectStyles=c,f.render=function(t,e){return c.call(e),d(t,e)}):f.beforeCreate=d?[].concat(d,c):[c]}return{esModule:a,exports:u,options:f}}},function(t,e,n){"use strict";var r=function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{ref:"wrapper",staticStyle:{position:"relative"}},[t._t("default"),t._v(" "),t._l(new Array(t.rowInt),function(e,r){return n("div",{key:r},t._l(new Array(t.columnInt),function(e,o){return n("div",{key:o,staticStyle:{position:"absolute","z-index":"999",display:"inline-block",overflow:"hidden","text-align":"center","pointer-events":"none"},style:{top:t.yStart+t.yTotal*r+"px",left:t.xStart+t.xTotal*o+"px",width:t.itemWidth+"px",height:t.itemHeight+"px","line-height":t.itemHeight+"px",fontSize:t.fontSize,fontFamily:t.font,color:t.color,opacity:t.alpha,transform:"rotate("+t.angle+"deg)"}},[t._v("\n      "+t._s(t.text)+"\n    ")])}))})],2)},o=[],i={render:r,staticRenderFns:o};e.a=i}])});
+//# sourceMappingURL=v-watermark.min.js.map
+  const Main = {
+    name: 'test',
+    data() {
+      return {
+        width: 880,
+        height: 505,
+        row: 0,
+        column: 0,
+        itemWidth: 120,
+        itemHeight: 80,
+        text: '水印',
+        angle: -15,
+        xStart: 0,
+        yStart: 0,
+        xSpace: 0,
+        ySpace: 0,
+        fontSize: '20px',
+        font: '微软雅黑',
+        color: '#000000',
+        alpha: 0.3
+      }
+    }
+  }
+
+  const Ctor = Vue.extend(Main)
+  new Ctor().$mount('#app')
+
+</script>
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/28/2018-5-28-js动态添加脚本/" rel="next" title="js动态添加脚本">
+                <i class="fa fa-chevron-left"></i> js动态添加脚本
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Yizhou Shen" />
+            
+              <p class="site-author-name" itemprop="name">Yizhou Shen</p>
+              <p class="site-description motion-element" itemprop="description">静存高远</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">71</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/shenyizhou" target="_blank" title="github" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>github</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://douban.com/people/135239127" target="_blank" title="douban" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>douban</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/1709606462" target="_blank" title="weibo" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>weibo</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/qwerasdzxc12346" target="_blank" title="twitter" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.zhihu.com/people/chen-lin-lu" target="_blank" title="zhihu" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>zhihu</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://sxl5513.github.io/" title="Anber" target="_blank">Anber</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://annjun1224.github.io/" title="Annjun" target="_blank">Annjun</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://junlegao.github.io/" title="GorgeGao" target="_blank">GorgeGao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hx0702.github.io/" title="Hexue" target="_blank">Hexue</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://yuan0.github.io/" title="Junifer" target="_blank">Junifer</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.bigger.red/" title="Leslie" target="_blank">Leslie</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://zhicongchen.github.io/" title="Let there be light" target="_blank">Let there be light</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://lcdlovel.github.io/" title="Lovel" target="_blank">Lovel</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://guanjiexu.github.io/" title="Marsman" target="_blank">Marsman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://richardcao.me/" title="Richardcao" target="_blank">Richardcao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://forshenjie.github.io/" title="Shenjie" target="_blank">Shenjie</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.importcjj.com/" title="Signal" target="_blank">Signal</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.terenceyu.top/" title="Terenceyu" target="_blank">Terenceyu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaoke33i.github.io/" title="Xiaoke" target="_blank">Xiaoke</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yizhou Shen</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.6.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
