@@ -102,18 +102,18 @@
 
 
 
-  <meta name="description" content="在 github 建立一个云端仓库右上角”+”号New repository，比如我在自己的shenyizhou账号下建了一个zy-ui仓库，默认不用 README.md">
+  <meta name="description" content="在 github 建立一个云端仓库右上角+号New repository，比如我在自己的shenyizhou账号下建了一个zy-ui仓库，默认不用 README.md">
 <meta name="keywords" content="Git,UI,NPM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手把手搭建自己的UI库">
 <meta property="og:url" content="http://shenyizhou.github.io/2018/06/23/2018-6-23-手把手搭建自己的UI库/index.html">
 <meta property="og:site_name" content="无主之地">
-<meta property="og:description" content="在 github 建立一个云端仓库右上角”+”号New repository，比如我在自己的shenyizhou账号下建了一个zy-ui仓库，默认不用 README.md">
+<meta property="og:description" content="在 github 建立一个云端仓库右上角+号New repository，比如我在自己的shenyizhou账号下建了一个zy-ui仓库，默认不用 README.md">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-02T07:18:47.508Z">
+<meta property="og:updated_time" content="2018-07-02T07:33:51.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手把手搭建自己的UI库">
-<meta name="twitter:description" content="在 github 建立一个云端仓库右上角”+”号New repository，比如我在自己的shenyizhou账号下建了一个zy-ui仓库，默认不用 README.md">
+<meta name="twitter:description" content="在 github 建立一个云端仓库右上角+号New repository，比如我在自己的shenyizhou账号下建了一个zy-ui仓库，默认不用 README.md">
 
 
 
@@ -389,7 +389,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018年07月02日 15:18:47" itemprop="dateModified" datetime="2018-07-02T15:18:47+08:00">2018年07月02日</time>
+                <time title="修改时间：2018年07月02日 15:33:51" itemprop="dateModified" datetime="2018-07-02T15:33:51+08:00">2018年07月02日</time>
               
             
           </span>
@@ -440,7 +440,7 @@
       
 
       
-        <h3 id="在-github-建立一个云端仓库"><a href="#在-github-建立一个云端仓库" class="headerlink" title="在 github 建立一个云端仓库"></a>在 github 建立一个云端仓库</h3><p>右上角”+”号<code>New repository</code>，比如我在自己的<code>shenyizhou</code>账号下建了一个<code>zy-ui</code>仓库，默认不用 README.md</p>
+        <h3 id="在-github-建立一个云端仓库"><a href="#在-github-建立一个云端仓库" class="headerlink" title="在 github 建立一个云端仓库"></a>在 github 建立一个云端仓库</h3><p>右上角+号<code>New repository</code>，比如我在自己的<code>shenyizhou</code>账号下建了一个<code>zy-ui</code>仓库，默认不用 README.md</p>
 <a id="more"></a>
 <h3 id="用-vue-cli-初始化一个本地仓库"><a href="#用-vue-cli-初始化一个本地仓库" class="headerlink" title="用 vue-cli 初始化一个本地仓库"></a>用 vue-cli 初始化一个本地仓库</h3><p><code>vue init webpack-simple zy-ui</code>按自己需求填写</p>
 <p>然后进项目<code>yarn</code>或<code>npm i</code>安装依赖</p>
@@ -449,11 +449,12 @@
 <p>注意:</p>
 <ol>
 <li><code>git remote add origin https://github.com/shenyizhou/zy-ui.git</code>只能运行一次，如果关联错了，请删除项目文件夹下的隐藏文件夹<code>.git</code>，重新运行<code>git remote add</code>命令。</li>
-<li><code>git log --pretty=online</code>可以看提交的commit id。</li>
-<li><code>git reset --hard commit id</code> 设置版本回退到commit id对应的版本。</li>
+<li><code>git log --pretty=online</code>可以看提交的 commit id，<code>--pretty=online</code>参数将 commit 信息都显示在一行。</li>
+<li><code>git reset --hard commit id</code> 设置版本回退到 commit id 对应的版本。</li>
+<li>如果是 github 组织开发，<code>git push</code>报 403 没有权限的错误，请把组织的<code>Member</code>权限改为<code>Owner</code>权限。</li>
 </ol>
 <h3 id="修改-Webpack-配置文件"><a href="#修改-Webpack-配置文件" class="headerlink" title="修改 Webpack 配置文件"></a>修改 Webpack 配置文件</h3><p>Webpack 是用来将 Vue 组件打包成 JS 的重要工具，也能支持热重载。</p>
-<p>修改<code>webpack.config.js</code>文件，把生成文件名即配置<code>output</code>中的<code>filename</code>改为<code>zy-ui.min.js</code><br>：</p>
+<p>修改<code>webpack.config.js</code>文件，把生成文件名即配置<code>output</code>中的<code>filename</code>改为<code>zy-ui.min.js</code>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">entry: <span class="string">'./src/main.js'</span>, <span class="comment">// 入口文件名</span></div><div class="line">output: &#123;</div><div class="line">  <span class="attr">path</span>: path.resolve(__dirname, <span class="string">'./dist'</span>),</div><div class="line">  <span class="attr">publicPath</span>: <span class="string">'/dist/'</span>,</div><div class="line">  <span class="comment">// filename: 'build.js'</span></div><div class="line">  filename: <span class="string">'zy-ui.min.js'</span></div><div class="line">&#125;,</div></pre></td></tr></table></figure>
 <h3 id="修改入口文件"><a href="#修改入口文件" class="headerlink" title="修改入口文件"></a>修改入口文件</h3><p>Webpack 的入口文件也就是我们要执行的语句和生成的组件，之后也将写入<code>package.json</code>的<code>main</code>字段中作为 NPM 的入口。</p>
 <p>修改入口文件<code>./src/main.js</code>（例子是将 label 和 input 组合的<code>ZyInputGroup</code>组件）：</p>
@@ -475,18 +476,18 @@
 <p>其中：</p>
 <ol>
 <li><code>mian</code>指定入口文件，即项目的入口。</li>
-<li><code>private</code>默认是true私人的，需要改为false，不然会无法发布。</li>
+<li><code>private</code>默认是 true 私人的，需要改为 false，不然会无法发布。</li>
 <li><code>repository</code>指定代码存放地址。</li>
 </ol>
 <p>接下来注册一个 NPM 账号，有以下两种方式：</p>
-<ul>
-<li><p><a href="https://www.npmjs.com/signup" target="_blank" rel="noopener">官网注册</a></p>
-</li>
-<li><p>npm adduser 命令</p>
-</li>
-</ul>
+<ol>
+<li><a href="https://www.npmjs.com/signup" target="_blank" rel="noopener">官网注册</a>。</li>
+<li>npm adduser 命令。</li>
+</ol>
 <p>首次上传操作前需要输入<code>npm login</code>登录，按照提示输入用户名、密码和邮箱。</p>
-<p>如果遇到<code>npm ERR! no_perms Private mode enable, only admin can publish this module:</code>问题，重新设为原来的镜像<code>npm config set registry=http://registry.npmjs.org</code><br>最后一个简单的上传命令<code>npm publish</code>就 OK 啦。<br>如果提示创建名有类似或已存在，只要修改<code>package.json</code>中的<code>name</code>即可。</p>
+<p>如果遇到<code>npm ERR! no_perms Private mode enable, only admin can publish this module:</code>问题，重新设为原来的镜像<code>npm config set registry=http://registry.npmjs.org</code>。</p>
+<p>最后一个简单的上传命令<code>npm publish</code>就 OK 啦。</p>
+<p>如果提示创建名有类似或已存在，只要修改<code>package.json</code>中的<code>name</code>即可。</p>
 <h3 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h3><h4 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h4><p>可以在根目录中添加<code>.prettierrc.json</code>：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  "semi": true, // 有行尾分号</div><div class="line">  "singleQuote": true, // 使用单引号</div><div class="line">  "trailingComma": "all", // 有尾逗号</div><div class="line">  "bracketSpacing": false, // &#123; x &#125; 有空格</div><div class="line">  "jsxBracketSameLine": true, // &lt;&gt;标签的&gt;不换行</div><div class="line">  "arrowParens": "always" // 箭头函数参数加括号 (x) =&gt; &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>并在<code>Visual Studio Code</code>中添加<code>Prettier - Code formatter</code>插件，并修改以下首选项的设置便可以在相应时点自动格式化：</p>
