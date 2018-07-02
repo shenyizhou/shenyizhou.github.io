@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="概要Grunt 是一款构建工具，它可以创建任务，完成对配置里的源文件执行插件对应的操作后生成目标文件的操作，从而实现压缩、编译、单元测试、linting 等工作">
+<meta name="keywords" content="Grunt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grunt点解">
+<meta property="og:url" content="http://shenyizhou.github.io/2018/06/29/2018-6-29-Grunt点解/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content="概要Grunt 是一款构建工具，它可以创建任务，完成对配置里的源文件执行插件对应的操作后生成目标文件的操作，从而实现压缩、编译、单元测试、linting 等工作">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-29T09:03:02.173Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Grunt点解">
+<meta name="twitter:description" content="概要Grunt 是一款构建工具，它可以创建任务，完成对配置里的源文件执行插件对应的操作后生成目标文件的操作，从而实现压缩、编译、单元测试、linting 等工作">
+
+
+
+
+
+
+  <link rel="canonical" href="http://shenyizhou.github.io/2018/06/29/2018-6-29-Grunt点解/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Grunt点解 | 无主之地</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75479065-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75479065-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无主之地</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">静存高远</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '2zYkpfCfgCQsM5MEzwEH','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://shenyizhou.github.io/2018/06/29/2018-6-29-Grunt点解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yizhou Shen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无主之地">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Grunt点解
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018年06月29日 11:58:36 / 修改时间：17:03:02" itemprop="dateCreated datePublished" datetime="2018-06-29T11:58:36+08:00">2018年06月29日</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>Grunt 是一款构建工具，它可以创建任务，完成对配置里的源文件执行插件对应的操作后生成目标文件的操作，从而实现压缩、编译、单元测试、linting 等工作</p>
+<a id="more"></a>
+<h3 id="前提准备"><a href="#前提准备" class="headerlink" title="前提准备"></a>前提准备</h3><p>需要安装<code>grunt</code>和<code>grunt-cli</code>，<code>grunt-cli</code>一般为全局安装，而<code>grunt</code>一般为本地项目内的</p>
+<p>在项目中执行<code>grunt-cli</code>的<code>grunt</code>命令，就会利用 node 的<code>require()</code>查找本地安装的 Grunt，所以在项目的任意子目录中运行即可</p>
+<h3 id="必要文件"><a href="#必要文件" class="headerlink" title="必要文件"></a>必要文件</h3><p><code>package.json</code>: grunt 和 Grunt 插件都安装在 devDependencies 配置段内，<code>grunt-init</code>脚手架可以创建出默认模板</p>
+<p><code>Gruntfile</code>: 用来配置或定义任务(task)并加载 Grunt 插件，一般命名为 Gruntfile.js 或 Gruntfile.coffee</p>
+<h4 id="Gruntfile-构成"><a href="#Gruntfile-构成" class="headerlink" title="Gruntfile 构成"></a>Gruntfile 构成</h4><ul>
+<li>“wrapper”函数</li>
+<li>项目与任务配置</li>
+<li>加载 grunt 插件和任务</li>
+<li>自定义任务</li>
+</ul>
+<h5 id="“wrapper”函数"><a href="#“wrapper”函数" class="headerlink" title="“wrapper”函数"></a>“wrapper”函数</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;&#125;;</div></pre></td></tr></table></figure>
+<h5 id="项目与任务配置"><a href="#项目与任务配置" class="headerlink" title="项目与任务配置"></a>项目与任务配置</h5><p>定义在一个 object 中，并传递给<code>grunt.initConfig</code> 方法</p>
+<p>在这个对象里模板字符串<code>&lt;% %&gt;</code>可以引用任意配置属性，一般都会<code>pkg: grunt.file.readJSON(&#39;package.json&#39;)</code>引入项目元数据(metadata)，然后用<code>&lt;% pkg.name %&gt;</code>使用里面的属性</p>
+<p>每个属性都是一个 task，里面有诸如<code>options</code>(配置项，里面会有诸如<code>banner</code>，可以用来在文件顶部生成一个注释)、<code>src</code>(来源文件，可以采用数组形式，可以使用通配符)、<code>dest</code>(目标文件或目录)等默认值</p>
+<p>还可以在 task 里加入 target，比如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">grunt.initConfig(&#123;</div><div class="line">  <span class="attr">concat</span>: &#123;</div><div class="line">    <span class="attr">options</span>: &#123;&#125;,</div><div class="line">    <span class="attr">foo</span>: &#123;</div><div class="line">      <span class="attr">options</span>: &#123;&#125;,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">bar</span>: &#123;&#125;,</div><div class="line">  &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>就定义了 foo 和 bar 两个对象，可以通过<code>grunt concat:foo</code>来单独处理该目标，而默认则会遍历所有目标并依次处理</p>
+<h5 id="加载-Grunt-插件和任务"><a href="#加载-Grunt-插件和任务" class="headerlink" title="加载 Grunt 插件和任务"></a>加载 Grunt 插件和任务</h5><p><code>grunt-contrib-uglify</code>已经通过 npm 安装</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grunt.loadNpmTasks(<span class="string">'grunt-contrib-uglify'</span>);</div></pre></td></tr></table></figure>
+<h5 id="自定义任务"><a href="#自定义任务" class="headerlink" title="自定义任务"></a>自定义任务</h5><p>定义<code>default</code>任务可以让 Grunt 默认执行多个任务(即运行<code>grunt</code>命令时不指定参数)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grunt.registerTask(<span class="string">"default"</span>, [<span class="string">"jshint"</span>, <span class="string">"uglify"</span>]);</div></pre></td></tr></table></figure>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><h4 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h4><h5 id="grunt-contrib-uglify"><a href="#grunt-contrib-uglify" class="headerlink" title="grunt-contrib-uglify"></a>grunt-contrib-uglify</h5><p>使用 UglifyJS 压缩 js 文件</p>
+<h5 id="grunt-contrib-cssmin"><a href="#grunt-contrib-cssmin" class="headerlink" title="grunt-contrib-cssmin"></a>grunt-contrib-cssmin</h5><p>压缩 css 文件</p>
+<h5 id="grunt-contrib-htmlmin"><a href="#grunt-contrib-htmlmin" class="headerlink" title="grunt-contrib-htmlmin"></a>grunt-contrib-htmlmin</h5><p>压缩 html 文件</p>
+<h5 id="grunt-contrib-imagemin"><a href="#grunt-contrib-imagemin" class="headerlink" title="grunt-contrib-imagemin"></a>grunt-contrib-imagemin</h5><p>压缩图片</p>
+<h5 id="grunt-contrib-jshint"><a href="#grunt-contrib-jshint" class="headerlink" title="grunt-contrib-jshint"></a>grunt-contrib-jshint</h5><p>使用 JSHint 检查 js 语法</p>
+<h5 id="grunt-contrib-qunit"><a href="#grunt-contrib-qunit" class="headerlink" title="grunt-contrib-qunit"></a>grunt-contrib-qunit</h5><p>使用 PhantomJS 实现自动化单元测试</p>
+<h5 id="grunt-contrib-less"><a href="#grunt-contrib-less" class="headerlink" title="grunt-contrib-less"></a>grunt-contrib-less</h5><p>将 LESS 编译成 CSS</p>
+<h5 id="grunt-contrib-concat"><a href="#grunt-contrib-concat" class="headerlink" title="grunt-contrib-concat"></a>grunt-contrib-concat</h5><p>连接、合并文件</p>
+<h5 id="grunt-contrib-copy"><a href="#grunt-contrib-copy" class="headerlink" title="grunt-contrib-copy"></a>grunt-contrib-copy</h5><p>复制文件和文件夹</p>
+<h5 id="grunt-contrib-clean"><a href="#grunt-contrib-clean" class="headerlink" title="grunt-contrib-clean"></a>grunt-contrib-clean</h5><p>清空文件和文件夹</p>
+<h5 id="grunt-contrib-watch"><a href="#grunt-contrib-watch" class="headerlink" title="grunt-contrib-watch"></a>grunt-contrib-watch</h5><p>文件发生改变时运行任务</p>
+<h5 id="grunt-contrib-connect"><a href="#grunt-contrib-connect" class="headerlink" title="grunt-contrib-connect"></a>grunt-contrib-connect</h5><p>构建静态文件服务器，本身集成了 livereload</p>
+<h4 id="创建插件"><a href="#创建插件" class="headerlink" title="创建插件"></a>创建插件</h4><ol>
+<li>全局安装<code>grunt-init</code></li>
+<li>安装 Grunt 插件模板<code>git clone git://github.com/gruntjs/grunt-init-gruntplugin.git ~/.grunt-init/gruntplugin</code></li>
+<li>在空目录执行<code>grunt-init gruntplugin</code></li>
+</ol>
+<p>“grunt-contrib”命名空间保留给 Grunt 团队使用</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grunt/" rel="tag"># Grunt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/29/2018-6-29-Gulp窥径/" rel="next" title="Gulp窥径">
+                <i class="fa fa-chevron-left"></i> Gulp窥径
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Yizhou Shen" />
+            
+              <p class="site-author-name" itemprop="name">Yizhou Shen</p>
+              <p class="site-description motion-element" itemprop="description">静存高远</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/shenyizhou" target="_blank" title="github" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>github</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://douban.com/people/135239127" target="_blank" title="douban" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>douban</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/1709606462" target="_blank" title="weibo" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>weibo</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/qwerasdzxc12346" target="_blank" title="twitter" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.zhihu.com/people/chen-lin-lu" target="_blank" title="zhihu" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>zhihu</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://sxl5513.github.io/" title="Anber" target="_blank">Anber</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://annjun1224.github.io/" title="Annjun" target="_blank">Annjun</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://junlegao.github.io/" title="GorgeGao" target="_blank">GorgeGao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hx0702.github.io/" title="Hexue" target="_blank">Hexue</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://yuan0.github.io/" title="Junifer" target="_blank">Junifer</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.bigger.red/" title="Leslie" target="_blank">Leslie</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://zhicongchen.github.io/" title="Let there be light" target="_blank">Let there be light</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://lcdlovel.github.io/" title="Lovel" target="_blank">Lovel</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://guanjiexu.github.io/" title="Marsman" target="_blank">Marsman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://richardcao.me/" title="Richardcao" target="_blank">Richardcao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://forshenjie.github.io/" title="Shenjie" target="_blank">Shenjie</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.importcjj.com/" title="Signal" target="_blank">Signal</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.terenceyu.top/" title="Terenceyu" target="_blank">Terenceyu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaoke33i.github.io/" title="Xiaoke" target="_blank">Xiaoke</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概要"><span class="nav-number">1.</span> <span class="nav-text">概要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前提准备"><span class="nav-number">2.</span> <span class="nav-text">前提准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必要文件"><span class="nav-number">3.</span> <span class="nav-text">必要文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Gruntfile-构成"><span class="nav-number">3.1.</span> <span class="nav-text">Gruntfile 构成</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#“wrapper”函数"><span class="nav-number">3.1.1.</span> <span class="nav-text">“wrapper”函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#项目与任务配置"><span class="nav-number">3.1.2.</span> <span class="nav-text">项目与任务配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载-Grunt-插件和任务"><span class="nav-number">3.1.3.</span> <span class="nav-text">加载 Grunt 插件和任务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义任务"><span class="nav-number">3.1.4.</span> <span class="nav-text">自定义任务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件"><span class="nav-number">4.</span> <span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用插件"><span class="nav-number">4.1.</span> <span class="nav-text">常用插件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-uglify"><span class="nav-number">4.1.1.</span> <span class="nav-text">grunt-contrib-uglify</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-cssmin"><span class="nav-number">4.1.2.</span> <span class="nav-text">grunt-contrib-cssmin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-htmlmin"><span class="nav-number">4.1.3.</span> <span class="nav-text">grunt-contrib-htmlmin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-imagemin"><span class="nav-number">4.1.4.</span> <span class="nav-text">grunt-contrib-imagemin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-jshint"><span class="nav-number">4.1.5.</span> <span class="nav-text">grunt-contrib-jshint</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-qunit"><span class="nav-number">4.1.6.</span> <span class="nav-text">grunt-contrib-qunit</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-less"><span class="nav-number">4.1.7.</span> <span class="nav-text">grunt-contrib-less</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-concat"><span class="nav-number">4.1.8.</span> <span class="nav-text">grunt-contrib-concat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-copy"><span class="nav-number">4.1.9.</span> <span class="nav-text">grunt-contrib-copy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-clean"><span class="nav-number">4.1.10.</span> <span class="nav-text">grunt-contrib-clean</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-watch"><span class="nav-number">4.1.11.</span> <span class="nav-text">grunt-contrib-watch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grunt-contrib-connect"><span class="nav-number">4.1.12.</span> <span class="nav-text">grunt-contrib-connect</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建插件"><span class="nav-number">4.2.</span> <span class="nav-text">创建插件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yizhou Shen</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.6.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
