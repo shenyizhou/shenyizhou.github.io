@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="无主之地">
 <meta property="og:description" content="概述Gulp 是基于 NodeJS 的自动任务运行器，它可以自动化地完成测试、合并、压缩、格式化、生成文件、监听文件等任务 相比于 Grunt 的频繁 IO 操作，Gulp 的流操作更快，Gulp 还借鉴了 Unix 的管道(pipe)思想，前一级的输出直接变成后一级的输入">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-06T09:36:54.068Z">
+<meta property="og:updated_time" content="2018-07-06T10:07:51.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gulp初探">
 <meta name="twitter:description" content="概述Gulp 是基于 NodeJS 的自动任务运行器，它可以自动化地完成测试、合并、压缩、格式化、生成文件、监听文件等任务 相比于 Grunt 的频繁 IO 操作，Gulp 的流操作更快，Gulp 还借鉴了 Unix 的管道(pipe)思想，前一级的输出直接变成后一级的输入">
@@ -389,7 +389,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018年07月06日 17:36:54" itemprop="dateModified" datetime="2018-07-06T17:36:54+08:00">2018年07月06日</time>
+                <time title="修改时间：2018年07月06日 18:07:51" itemprop="dateModified" datetime="2018-07-06T18:07:51+08:00">2018年07月06日</time>
               
             
           </span>
@@ -452,7 +452,7 @@
 <h4 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h4><p>在要使用该插件的项目里编写<code>gulpfile.js</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">"gulp"</span>),</div><div class="line">  prefix = <span class="built_in">require</span>(<span class="string">"gulp-prefix"</span>);</div><div class="line"></div><div class="line">gulp.task(<span class="string">"default"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  gulp</div><div class="line">    .src(<span class="string">"src/*.js"</span>)</div><div class="line">    .pipe(prefix(<span class="string">"prefix data"</span>))</div><div class="line">    .pipe(gulp.dest(<span class="string">"js"</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>运行<code>gulp</code>就 ok 啦</p>
-<h4 id="测试插件"><a href="#测试插件" class="headerlink" title="测试插件"></a>测试插件</h4>
+
       
     </div>
 
@@ -494,10 +494,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/04/2018-7-4-神策埋点/" rel="prev" title="神策埋点">
-                神策埋点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -601,7 +597,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-count">76</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -803,7 +799,7 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-count">51</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -934,7 +930,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前提准备"><span class="nav-number">2.</span> <span class="nav-text">前提准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件-gulpfile-js"><span class="nav-number">3.</span> <span class="nav-text">配置文件 gulpfile.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行-gulp"><span class="nav-number">4.</span> <span class="nav-text">运行 gulp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建插件"><span class="nav-number">5.</span> <span class="nav-text">创建插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#编写插件内容"><span class="nav-number">5.1.</span> <span class="nav-text">编写插件内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用插件"><span class="nav-number">5.2.</span> <span class="nav-text">使用插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试插件"><span class="nav-number">5.3.</span> <span class="nav-text">测试插件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前提准备"><span class="nav-number">2.</span> <span class="nav-text">前提准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件-gulpfile-js"><span class="nav-number">3.</span> <span class="nav-text">配置文件 gulpfile.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行-gulp"><span class="nav-number">4.</span> <span class="nav-text">运行 gulp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建插件"><span class="nav-number">5.</span> <span class="nav-text">创建插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#编写插件内容"><span class="nav-number">5.1.</span> <span class="nav-text">编写插件内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用插件"><span class="nav-number">5.2.</span> <span class="nav-text">使用插件</span></a></li></ol></li></ol></div>
             
 
           </div>
