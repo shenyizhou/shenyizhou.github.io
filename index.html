@@ -1,23 +1,1100 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
 
-{% block title %}{{ config.title }}{% if theme.index_with_subtitle and config.subtitle %} - {{config.subtitle }}{% endif %}{% endblock %}
+  
+  <title>无主之地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="静存高远">
+<meta property="og:type" content="website">
+<meta property="og:title" content="无主之地">
+<meta property="og:url" content="http://shenyizhou.github.io/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content="静存高远">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Yizhou Shen">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="无主之地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">无主之地</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shenyizhou.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2018-8-23-jira" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/12/10/2018-8-23-jira/" class="article-date">
+  <time datetime="2020-12-09T19:18:32.985Z" itemprop="datePublished">2020年12月10日</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参照文章：<a target="_blank" rel="noopener" href="https://www.evget.com/article/2015/8/10/22539.html">https://www.evget.com/article/2015/8/10/22539.html</a></p>
+<p>1.1 筛选器设置<br>点击 问题 → 搜索问题 进入搜索页面，在最上方可以看到 筛选器 部分，如下图所示：</p>
+<p>筛选器 分为 简单 和 高级 两种模式，简单 模式是使用预设的几个筛选项，高级 模式则是通过编写类似SQL的 JQL 语句来实现。</p>
+<p>1.1.1 创建简单筛选器<br>常用的简单筛选器就是查询 经办人 是自己的任务：</p>
+<p>在 经办人 中选择 当前用户 ，然后保存并为自己的筛选器取名即可。</p>
+<p>具体的操作如下图所示：</p>
+<p>保存完毕就可以在 问题 的 筛选器 下看到 我的筛选器，如下图所示：</p>
+<p>1.1.2 创建高级筛选器<br>我们还是在 经办人 中选择 当前用户，然后点击 高级 按钮，如下图所示：</p>
+<p>这时候我们可以看到查询 经办人 为 当前用户 的筛选变成了这样一行命令：</p>
+<p>assignee in (currentUser())</p>
+<p>如下图所示：</p>
+<p>这就是 JQL，是不区分大小写的。</p>
+<p>解释一下这行命令，assignee 即 经办人，in 是存在于，() 即 数组，currentUser() 即获取的 当前用户，返回值是字符串比如 shenyizhou，连起来就是查询经办人是当前用户的所有任务。</p>
+<p>判断逻辑有以下几种：</p>
+<p>=、!=、<del>(包含)、&lt;=、&gt;=、&gt;、&lt;、!</del>(不包含)、is not、is、not in、in</p>
+<p>=、!=、&lt;=、&gt;=、&gt;、&lt; 都是数值的判断，<del>、!</del> 是判断前面的字符串是否包含后面的字符串，is not、is 后面一般跟 EMPTY，not in、in 后面跟数组即 ()。</p>
+<p>字段别名有以下几种：</p>
+<p>affectedVersion // 影响版本，当前所有任务都为EMPTY</p>
+<p>assignee // 经办人，可以是id、全名或者邮箱，assignee was currentUser() 即查询经办人曾经是自己的任务</p>
+<p>attachments // 附件，is EMPTY 或 is not EMPTY</p>
+<p>category // 任务种类，当前所有任务都为EMPTY</p>
+<p>comment // 备注</p>
+<p>created // 创建时间，可以跟 &gt;= startOfMonth() 即查询这个月的任务，可以跟 &gt; -1d 即查询今天创建的任务</p>
+<p>createdDate // 同上</p>
+<p>description // 描述</p>
+<p>due // 到期时间，可以跟 &lt;= endOfWeek() 即查询这个礼拜前需要完成的任务</p>
+<p>duedate // 同上</p>
+<p>environment // 环境</p>
+<p>filter // 筛选器</p>
+<p>fixVersion // 修复版本</p>
+<p>id // 问题id，别名有 issue、issuekey、key ，可以跟 in watchedIssues() 即查询自己关注的任务</p>
+<p>issuetype // 任务类型，别名 type，如Epic、Story、子任务等</p>
+<p>labels // 标签，如前端、管理后台、体验课等</p>
+<p>lastViewed // 最近被浏览时间</p>
+<p>level // 问题安全级别，当前所有任务都为EMPTY</p>
+<p>originalEstimate // 任务估时，= 1d 即估时1天， &gt; 6h 即估时超过6小时</p>
+<p>parent // parent = TMS-157 即查询TMS-157的所有子任务</p>
+<p>priority // 优先级，如Highest、Medium等</p>
+<p>project // 项目，如LEAR、TMS等</p>
+<p>remainingEstimate // 剩余时间</p>
+<p>reporter // 报告人</p>
+<p>resolution // 解决结果，为 Done 或 Unresolved</p>
+<p>resolved // 解决时间</p>
+<p>resolvedDate // 同上</p>
+<p>status // 任务状态，如待开发、开发中等</p>
+<p>summary // 标题</p>
+<p>text // 所有文本，包括 summary、description、environment、comment</p>
+<p>updated // 更新时间，Updated &gt;= startOfDay() 即查询今天更新的所有任务</p>
+<p>updatedDate // 同上</p>
+<p>watcher // 关注人</p>
+<p>watchers // 关注人数</p>
+<p>所以如果想筛选自己 经办 或者 关注 的任务，可以写成：</p>
+<p>assignee in (currentUser()) or watcher in (currentUser())</p>
+<p>写完再点击 搜索 后，就可以 保存为 自己的筛选器了</p>
+<p>之后就会出现在左侧的 我的筛选器 列表中，再次想查询的时候直接点击即可</p>
+<p>1.2 面板设置<br>1.2.1 根据筛选器创建面板<br>点击 面板 → 查看全部面板，选择 创建面板，如下图所示：</p>
+<p>在命名看板的时候选择筛选器，如果下拉也找不到可以直接打字输入筛选器名称，名称就是步骤 1.1.2 保存的筛选器名称</p>
+<p>创建面板 后就能看到的满足筛选器条件的任务了，并可以在 面板 里看到该面板</p>
+<p>1.2.2 面板的列管理<br>在 面板 中点击 配置 进入配置页面，选择 列 设置</p>
+<p>点击 添加列 就会出现新的列，然后可以按照自己的想法自由拖动元素到想展现的列里</p>
+<p>比如我按照产品开发的不同阶段拆分了列，对应的效果如下图所示：</p>
+<p>1.2.3 面板的泳道管理<br>之前说了列管理，那么泳道管理就是面板的行管理了</p>
+<p>在 配置 页面选择 泳道 设置，点击 添加 就可以添加新的泳道，泳道的筛选方式也是SQL，会把满足SQL筛选的条件放到同一泳道中</p>
+<p>比如我按照任务优先级进行了泳道的分类，最后效果图如下所示：</p>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2020/12/10/2018-8-23-jira/" data-id="ckihsvc3x00742aglb8j22h1e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+
+  
+    <article id="post-2020-12-10-记一次前端 Mac 新机配置之路" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" class="article-date">
+  <time datetime="2020-12-09T17:52:22.000Z" itemprop="datePublished">2020年12月10日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/">记一次前端 Mac 新机配置之路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="记一次前端-Mac-新机配置之路"><a href="#记一次前端-Mac-新机配置之路" class="headerlink" title="记一次前端 Mac 新机配置之路"></a>记一次前端 Mac 新机配置之路</h2><h3 id="首先肯定是拷贝老机子的内容啦"><a href="#首先肯定是拷贝老机子的内容啦" class="headerlink" title="首先肯定是拷贝老机子的内容啦"></a>首先肯定是拷贝老机子的内容啦</h3><p>这时候正好手边没有 U 盘，叫外卖性价比太低，京东又要等双十二才有优惠，怎么办呢？</p>
+<p>这时候我们可以直接用局域网来传递，在老机子上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i -g host-your-folder</span><br><span class="line">host-your-folder -g</span><br><span class="line"><span class="comment"># listen on :::50771</span></span><br></pre></td></tr></table></figure>
+
+<p>这时候访问老机子的 ip 就可以访问用户目录下的文件啦！如 <code>xxx.xxx.xxx.xxx:50771/xxx.zip</code>。</p>
+<p>但是要注意的是 .ssh 之类 <code>.</code> 开头的文件是系统文件，没法通过这种方式传递，需要改个其他名字。</p>
+<p>最容易的办法就是把所有要传递的文件打包成一个 <code>xxx.zip</code> 放在用户目录下一起下载。</p>
+<p>另外要转移代码的话记得先删除 <code>node_modules</code>，用如下的命令就可以对当前目录下所有仓库执行删除：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -name node_modules -<span class="built_in">type</span> d -<span class="built_in">exec</span> rm -rf &#123;&#125; \;</span><br><span class="line"><span class="comment"># 找到所有名字为 node_modules 的目录并执行删除</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-git-和配置-ssh"><a href="#安装-git-和配置-ssh" class="headerlink" title="安装 git 和配置 ssh"></a>安装 git 和配置 ssh</h3><p>Mac 在命令行里打 <code>git</code> 就能安装了。</p>
+<p>然后因为上述操作迁移过 <code>.ssh</code> 文件夹，直接拷贝到用户根目录就行啦！</p>
+<blockquote>
+<p>注：记得显示隐藏文件，快捷键是 <code>Shift + cmd + .</code></p>
+</blockquote>
+<p>不用每次都再用如下麻烦的方式生成一遍 ssh 文件啦：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C “xxx@xxx.com”</span><br><span class="line">cat ~/.ssh/id_rsa.pub | pbcopy</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-brew"><a href="#安装-brew" class="headerlink" title="安装 brew"></a>安装 brew</h3><p><code>Homebrew</code> 是一款 Mac OS 平台下必备的软件包管理工具，没有它安装和卸载可真的很麻烦。</p>
+<p>尝试了下在公司内网可以执行<code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code>，但是卡在 github 那步。</p>
+<p>后来发现在公司内网没法用 ssh 连 github，改为用流量就可以了。但是用流量访问上述链接会 403。</p>
+<p>最后在流量下执行<code>/usr/bin/ruby -e &quot;$(curl -fsSL https://cdn.jsdelivr.net/gh/ineo6/homebrew-install/install)&quot;</code> 终于下载成功。</p>
+<h3 id="安装-nvm-和-npm"><a href="#安装-nvm-和-npm" class="headerlink" title="安装 nvm 和 npm"></a>安装 nvm 和 npm</h3><p>用 nvm 来管理 npm 的版本是种很优雅的方式，nvm 的安装如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.37.2/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：0.37.2 是编者写文章时的最新版，见<a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">nvm仓库</a></p>
+</blockquote>
+<p>之后就是用 nvm 安装 node 和 npm</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm install node</span><br><span class="line">nvm use node</span><br></pre></td></tr></table></figure>
+
+<h3 id="然后就是下载常用的软件啦"><a href="#然后就是下载常用的软件啦" class="headerlink" title="然后就是下载常用的软件啦"></a>然后就是下载常用的软件啦</h3><p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5192833655/e6a2/d1a0/de8e/fb7ed6c18027dd1c6e28e92cd04ca215.jpg" alt="image"></p>
+<p>最重要的当然是 chrome，没有 chrome 的收藏夹和记住密码简直寸步难行！</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5192874733/ff38/9ec2/a448/29d7fa333c425db05cc33a4883453f76.png" alt="image"></p>
+<p>剩下除了公司自带的几个，ppduck 压图真的好使，强烈建议买正式版！</p>
+<p>xcode 的 simulator 配合测试包可以直接在 Mac 上方便地调试 webview 下的效果~</p>
+<p>iterm2 好看的配色、灵活的快捷键、智能的选中和点击地址跳转，配合 Oh My Zsh 的快捷命令，用起来十分舒服。</p>
+<h3 id="接下来就准备开始开发了"><a href="#接下来就准备开始开发了" class="headerlink" title="接下来就准备开始开发了"></a>接下来就准备开始开发了</h3><p>VSCode Insiders 可以登录账户同步的功能真是太棒啦，直接就把配置和插件安装了。</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5192897486/505c/b816/3882/c073e8da218268eeba4b7cffd1845518.png" alt="image"></p>
+<p>Chinese 汉化、gitlens 查看提交记录、eslint 统一规范自是不必多说。</p>
+<p>prettier 格式化 js 很好看，我通常都会时不时地手动格式化一下，然后保存的时候再解决一下 eslint 报错和调整 import 顺序，设置如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;editor.codeActionsOnSave&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;source.organizeImports&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">&quot;source.fixAll.eslint&quot;</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>csscomb 可以很好地格式化 css 文件，能按照<a target="_blank" rel="noopener" href="https://github.com/shenyizhou/css-comb/blob/master/csscomb.json">配置文件</a>指定的顺序排列样式，一般我都是按照以下顺序：</p>
+<ol>
+<li>位置属性（如 position、top、z-index、display、flex、margin、padding 等）</li>
+<li>自身属性（如 width、border、background、color 等）</li>
+<li>文字属性（如 text-align、word-wrap、font、line-height 等）</li>
+<li>动画属性及其他</li>
+</ol>
+<p>统一 css 顺序不仅美观，而且不容易出错，用法就是 <code>Shift + cmd + p</code> 执行格式化命令。</p>
+<p>jsdoc 是为了方便加函数注解，markdown preview enhanced 让 md 写作的体验更上一层楼。</p>
+<p>最后隆重地介绍下 Tabnine，用完之后我简直可以不带脑子写代码，人工智能就帮我写好了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" data-id="ckihsvc3y00782agl61ix8bgr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-7-11-跨域" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/" class="article-date">
+  <time datetime="2018-07-11T04:14:29.000Z" itemprop="datePublished">2018年07月11日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/">跨域</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="跨域产生原因"><a href="#跨域产生原因" class="headerlink" title="跨域产生原因"></a>跨域产生原因</h1><p>首先要说下浏览器的同源策略，也就是相同协议、域名、端口的才算作同源，浏览器只允许同源之间互发请求</p>
+<p>然后在不同源间发的请求就算作是跨域请求啦</p>
+<p>因为只是浏览器的限制，所以在 Postman 或者 Electron 下就没有跨域限制</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/" data-id="ckihsvc3v006w2agl6yec6aco" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-7-8-Node初探" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/" class="article-date">
+  <time datetime="2018-07-08T07:50:42.000Z" itemprop="datePublished">2018年07月08日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Node/">Node</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/">Node初探</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="从一个简单的-Hello-World-开始"><a href="#从一个简单的-Hello-World-开始" class="headerlink" title="从一个简单的 Hello World 开始"></a>从一个简单的 Hello World 开始</h1><p>借鉴自<a target="_blank" rel="noopener" href="https://github.com/yjhjstz">yjhjstz</a>的 <a target="_blank" rel="noopener" href="https://github.com/yjhjstz/deep-into-node">deep-into-node</a>这篇文章</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/" data-id="ckihsvc3w00702aglco6x07q5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/" rel="tag">Node</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-6-30-Gulp初探" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/" class="article-date">
+  <time datetime="2018-06-30T03:58:36.000Z" itemprop="datePublished">2018年06月30日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/">Gulp初探</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Gulp 是基于 NodeJS 的自动任务运行器，它可以自动化地完成测试、合并、压缩、格式化、生成文件、监听文件等任务</p>
+<p>相比于 Grunt 的频繁 IO 操作，Gulp 的流操作更快，Gulp 还借鉴了 Unix 的管道(pipe)思想，前一级的输出直接变成后一级的输入</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/" data-id="ckihsvc3s006i2aglf9ee5an3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-6-29-Grunt初探" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/29/2018-6-29-Grunt%E5%88%9D%E6%8E%A2/" class="article-date">
+  <time datetime="2018-06-29T03:58:36.000Z" itemprop="datePublished">2018年06月29日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/29/2018-6-29-Grunt%E5%88%9D%E6%8E%A2/">Grunt初探</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>Grunt 是一款构建工具，它可以创建任务，完成对配置里的源文件执行插件对应的操作后生成目标文件的操作，从而实现压缩、编译、单元测试、linting 等工作</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/06/29/2018-6-29-Grunt%E5%88%9D%E6%8E%A2/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2018/06/29/2018-6-29-Grunt%E5%88%9D%E6%8E%A2/" data-id="ckihsvc3r006f2aglakiqetes" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-6-23-手把手搭建自己的UI库" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/23/2018-6-23-%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84UI%E5%BA%93/" class="article-date">
+  <time datetime="2018-06-23T06:44:13.000Z" itemprop="datePublished">2018年06月23日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/23/2018-6-23-%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84UI%E5%BA%93/">手把手搭建自己的UI库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="在-github-建立一个云端仓库"><a href="#在-github-建立一个云端仓库" class="headerlink" title="在 github 建立一个云端仓库"></a>在 github 建立一个云端仓库</h3><p>右上角+号<code>New repository</code>，比如我在自己的<code>shenyizhou</code>账号下建了一个<code>zy-ui</code>仓库，默认不用 README.md</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/06/23/2018-6-23-%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84UI%E5%BA%93/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2018/06/23/2018-6-23-%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84UI%E5%BA%93/" data-id="ckihsvc3o00672agl45bkcpmx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/" rel="tag">UI</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-6-7-Webpack入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/07/2018-6-7-Webpack%E5%85%A5%E9%97%A8/" class="article-date">
+  <time datetime="2018-06-07T09:52:27.000Z" itemprop="datePublished">2018年06月07日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Webpack/">Webpack</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/07/2018-6-7-Webpack%E5%85%A5%E9%97%A8/">Webpack入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h3><p>Webpack 2 开始对 ES6、CommonJS、AMD 内置支持</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/06/07/2018-6-7-Webpack%E5%85%A5%E9%97%A8/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2018/06/07/2018-6-7-Webpack%E5%85%A5%E9%97%A8/" data-id="ckihsvc3u006t2aglgf4q22wc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-6-7-CSS的@规则" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/" class="article-date">
+  <time datetime="2018-06-07T07:40:24.000Z" itemprop="datePublished">2018年06月07日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/">CSS的@规则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="规则"><a href="#规则" class="headerlink" title="@规则"></a>@规则</h3><h4 id="charset"><a href="#charset" class="headerlink" title="@charset"></a>@charset</h4><p>样式表的第一个元素，前面不得有任意字符,只有第一个会被使用，属性值大小写不敏感且必须用双引号，主常用于让content属性使用非ASCII字符</p>
+<p>浏览器查找样式表字符编码顺序：</p>
+<ol>
+<li>BOM(byte-order mark)</li>
+<li>Content-Type: Http header中的charset属性</li>
+<li>@charset</li>
+<li>link元素的charset属性(HTML5标准已废弃)</li>
+<li>假设文档是UTF-8</li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/" data-id="ckihsvc3t006m2agladyv9pfh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-6-5-Vue水印组件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/05/2018-6-5-Vue%E6%B0%B4%E5%8D%B0%E7%BB%84%E4%BB%B6/" class="article-date">
+  <time datetime="2018-06-05T03:56:04.000Z" itemprop="datePublished">2018年06月05日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/05/2018-6-5-Vue%E6%B0%B4%E5%8D%B0%E7%BB%84%E4%BB%B6/">Vue水印组件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+
+<style type="text/css">
+  .example-item {
+    margin-bottom: 80px;
+  }
+
+  .example1 {
+    margin: 10px 0;
+  }
+
+  .label {
+    display: inline-block !important;
+    width: 96px;
+    color: #2f4f4f;
+    font-size: 16px;
+    display: inline-block;
+    /*margin: 15px 30px 15px 0;*/
+  }
+
+  .input {
+    position: relative;
+    display: inline-block;
+    margin: 15px 30px 15px 0;
+    padding: 4px 7px;
+    width: 50px;
+    height: 28px;
+    cursor: text;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, .65);
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+  }
+
+  .pre {
+    display: block;
+    padding: 8px 15px;
+    background-color: #f6f8fa;
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    overflow-x: auto;
+    font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+    color: #333;
+    font-size: 12px;
+  }
+
+</style>
+<div id="app">
+  <div class='container'>
+    <div class="example-item">
+      <v-watermark
+        :width="width"
+        :height="height"
+        :row="row"
+        :column="column"
+        :item-width="itemWidth"
+        :item-heigth="itemHeight"
+        :text="text"
+        :angle="angle"
+        :x-start="xStart"
+        :x-space="xSpace"
+        :y-start="yStart"
+        :y-space="ySpace"
+        :font-size="fontSize"
+        :font="font"
+        :color="color"
+        :alpha="alpha"
+        class="example1"
+      >
+        <img
+          :style="{
+            width: width + 'px',
+            height: height + 'px',
+            maxWidth: width + 'px'
+          }"
+          style="margin:0;"
+          src='https://user-images.githubusercontent.com/10329054/40955992-4d68eccc-68c0-11e8-8d7f-d5a33d681031.png'
+        />
+      </v-watermark>
+      <div>
+        <label
+          class="label"
+          for="widthInput"
+        >
+          width:
+        </label>
+        <input
+          v-model.number='width'
+          id='widthInput'
+          class="input"
+          type="number"
+        />
+        <label
+          class="label"
+          for="heightInput"
+        >
+          height:
+        </label>
+        <input
+          v-model.number='height'
+          id='heightInput'
+          class="input"
+          type="number"
+        />
+        <label
+          class="label"
+          for="rowInput"
+        >
+          row:
+        </label>
+        <input
+          v-model.number='row'
+          id='rowInput'
+          class="input"
+          type="number"
+        />
+        <label
+          class="label"
+          for="columnInput"
+        >
+          column:
+        </label>
+        <input
+          v-model.number='column'
+          id='columnInput'
+          class="input"
+          type="number"
+        />
+        <br/>
+        <label
+          class="label"
+          for="itemWidthInput"
+        >
+          item-width:
+        </label>
+        <input
+          v-model.number='itemWidth'
+          id='itemWidthInput'
+          class="input"
+          type="number"
+        />
+        <label
+          class="label"
+          for="itemHeightInput"
+        >
+          item-height:
+        </label>
+        <input
+          v-model.number='itemHeight'
+          id='itemHeightInput'
+          class="input"
+          type="number"
+        />
+        <label
+          class="label"
+          for="textInput"
+        >
+          text:
+        </label>
+        <input
+          v-model='text'
+          id='textInput'
+          class="input"
+          type="text"
+        />
+        <label
+          class="label"
+          for="angleInput"
+        >
+          angle:
+        </label>
+        <input
+          v-model.number='angle'
+          id='angleInput'
+          class="input"
+          type="number"
+        />
+        <br/>
+        <label
+          class="label"
+          for="xStartInput"
+        >
+          x-start:
+        </label>
+        <input
+          v-model.number='xStart'
+          id='xStartInput'
+          class="input"
+          type="number"
+        />
+        <label
+          class="label"
+          for="yStartInput"
+        >
+          y-start:
+        </label>
+        <input
+          v-model.number='yStart'
+          id='yStartInput'
+          class="input"
+          type="number"
+        />
+        <label
+          class="label"
+          for="xSpaceInput"
+        >
+          x-space:
+        </label>
+        <input
+          v-model.number='xSpace'
+          id='xSpaceInput'
+          class="input"
+          type="number"
+        />
+        <label
+          class="label"
+          for="ySpaceInput"
+        >
+          y-space:
+        </label>
+        <input
+          v-model.number='ySpace'
+          id='ySpaceInput'
+          class="input"
+          type="number"
+        />
+        <br/>
+        <label
+          class="label"
+          for="fontSizeInput"
+        >
+          font-size:
+        </label>
+        <input
+          v-model='fontSize'
+          id='fontSizeInput'
+          class="input"
+          type="text"
+        />
+        <label
+          class="label"
+          for="fontInput"
+        >
+          font:
+        </label>
+        <input
+          v-model='font'
+          id='fontInput'
+          class="input"
+          type="text"
+        />
+        <label
+          class="label"
+          for="colorInput"
+        >
+          color:
+        </label>
+        <input
+          v-model='color'
+          id='colorInput'
+          class="input"
+          type="text"
+        />
+        <label
+          class="label"
+          for="alphaInput"
+        >
+          alpha:
+        </label>
+        <input
+          v-model.number='alpha'
+          id='alphaInput'
+          class="input"
+          type="number"
+        />
+        <br/>
+      </div>
+      <pre class="pre">
+&lt;v-watermark
+  :width=&quot;{{width}}px&quot;
+  :height=&quot;{{height}}px&quot;
+  :row=&quot;{{row}}&quot;
+  :column=&quot;{{column}}&quot;
+  :item-width=&quot;{{itemWidth}}px&quot;
+  :item-height=&quot;{{itemHeight}}px&quot;
+  :text=&quot;{{text}}&quot;
+  :angle=&quot;{{angle}}&quot;
+  :x-start=&quot;{{xStart}}&quot;
+  :y-start=&quot;{{yStart}}&quot;
+  :x-space=&quot;{{xSpace}}&quot;
+  :y-space=&quot;{{ySpace}}&quot;
+  :font-size=&quot;{{fontSize}}&quot;
+  :font=&quot;{{font}}&quot;
+  :color=&quot;{{color}}&quot;
+  :alpha=&quot;{{alpha}}&quot;
+  class=&quot;example1&quot;
+&gt;
+  &lt;img src=&#x27;./src/asserts/ace.webp&#x27;/&gt;
+&lt;/v-watermark&gt;</pre>
+    </div>
+  </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+!function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define("VWatermark",[],e):"object"==typeof exports?exports.VWatermark=e():t.VWatermark=e()}("undefined"!=typeof self?self:this,function(){return function(t){function e(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,e),o.l=!0,o.exports}var n={};return e.m=t,e.c=n,e.d=function(t,n,r){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:r})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="/dist/",e(e.s=1)}([function(t,e,n){"use strict";e.a={name:"v-watermark",props:{target:{type:String,default:""},width:{type:Number,default:960},height:{type:Number,default:540},row:{type:Number,default:0},column:{type:Number,default:0},itemWidth:{type:Number,default:120},itemHeight:{type:Number,default:80},text:{type:String,default:"data"},angle:{type:Number,default:-15},xStart:{type:Number,default:0},yStart:{type:Number,default:0},xSpace:{type:Number,default:0,validator:function(t){return t>=0}},ySpace:{type:Number,default:0,validator:function(t){return t>=0}},fontSize:{type:String,default:"20px"},font:{type:String,default:"微软雅黑"},color:{type:String,default:"#000000",validator:function(t){return/^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/.test(t)}},alpha:{type:Number,default:.3,validator:function(t){return t>=0&&t<=1}}},computed:{_row:function(){return this.row?this.row:this.contentHeight-this.yStart?(this.contentHeight-this.yStart)/this.yTotal:1},_column:function(){return this.column?this.column:this.contentWidth-this.xStart?(this.contentWidth-this.xStart)/this.xTotal:1},rowInt:function(){return this._row>=1?Math.floor(Number(this._row)):1},columnInt:function(){return this._column>=1?Math.floor(Number(this._column)):1},xTotal:function(){return this.xSpace+this.itemWidth},yTotal:function(){return this.ySpace+this.itemHeight},contentWidth:function(){this.$refs.wrapper;return this.width},contentHeight:function(){return this.height}},mounted:function(){this.$refs.wrapper}}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r=n(2),o={install:function(t,e){t.component(r.a.name,r.a)}};e.default=o,"undefined"!=typeof window&&window.Vue&&window.Vue.component("v-watermark",r.a)},function(t,e,n){"use strict";function r(t){n(3)}var o=n(0),i=n(9),a=n(8),u=r,s=a(o.a,i.a,!1,u,"data-v-641fdb13",null);e.a=s.exports},function(t,e,n){var r=n(4);"string"==typeof r&&(r=[[t.i,r,""]]),r.locals&&(t.exports=r.locals);n(6)("78211a2f",r,!0,{})},function(t,e,n){e=t.exports=n(5)(!1),e.push([t.i,"",""])},function(t,e){function n(t,e){var n=t[1]||"",o=t[3];if(!o)return n;if(e&&"function"==typeof btoa){var i=r(o);return[n].concat(o.sources.map(function(t){return"/*# sourceURL="+o.sourceRoot+t+" */"})).concat([i]).join("\n")}return[n].join("\n")}function r(t){return"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(t))))+" */"}t.exports=function(t){var e=[];return e.toString=function(){return this.map(function(e){var r=n(e,t);return e[2]?"@media "+e[2]+"{"+r+"}":r}).join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var r={},o=0;o<this.length;o++){var i=this[o][0];"number"==typeof i&&(r[i]=!0)}for(o=0;o<t.length;o++){var a=t[o];"number"==typeof a[0]&&r[a[0]]||(n&&!a[2]?a[2]=n:n&&(a[2]="("+a[2]+") and ("+n+")"),e.push(a))}},e}},function(t,e,n){function r(t){for(var e=0;e<t.length;e++){var n=t[e],r=c[n.id];if(r){r.refs++;for(var o=0;o<r.parts.length;o++)r.parts[o](n.parts[o]);for(;o<n.parts.length;o++)r.parts.push(i(n.parts[o]));r.parts.length>n.parts.length&&(r.parts.length=n.parts.length)}else{for(var a=[],o=0;o<n.parts.length;o++)a.push(i(n.parts[o]));c[n.id]={id:n.id,refs:1,parts:a}}}}function o(){var t=document.createElement("style");return t.type="text/css",d.appendChild(t),t}function i(t){var e,n,r=document.querySelector("style["+y+'~="'+t.id+'"]');if(r){if(h)return m;r.parentNode.removeChild(r)}if(g){var i=p++;r=l||(l=o()),e=a.bind(null,r,i,!1),n=a.bind(null,r,i,!0)}else r=o(),e=u.bind(null,r),n=function(){r.parentNode.removeChild(r)};return e(t),function(r){if(r){if(r.css===t.css&&r.media===t.media&&r.sourceMap===t.sourceMap)return;e(t=r)}else n()}}function a(t,e,n,r){var o=n?"":r.css;if(t.styleSheet)t.styleSheet.cssText=x(e,o);else{var i=document.createTextNode(o),a=t.childNodes;a[e]&&t.removeChild(a[e]),a.length?t.insertBefore(i,a[e]):t.appendChild(i)}}function u(t,e){var n=e.css,r=e.media,o=e.sourceMap;if(r&&t.setAttribute("media",r),v.ssrId&&t.setAttribute(y,e.id),o&&(n+="\n/*# sourceURL="+o.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(o))))+" */"),t.styleSheet)t.styleSheet.cssText=n;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(n))}}var s="undefined"!=typeof document;if("undefined"!=typeof DEBUG&&DEBUG&&!s)throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var f=n(7),c={},d=s&&(document.head||document.getElementsByTagName("head")[0]),l=null,p=0,h=!1,m=function(){},v=null,y="data-vue-ssr-id",g="undefined"!=typeof navigator&&/msie [6-9]\b/.test(navigator.userAgent.toLowerCase());t.exports=function(t,e,n,o){h=n,v=o||{};var i=f(t,e);return r(i),function(e){for(var n=[],o=0;o<i.length;o++){var a=i[o],u=c[a.id];u.refs--,n.push(u)}e?(i=f(t,e),r(i)):i=[];for(var o=0;o<n.length;o++){var u=n[o];if(0===u.refs){for(var s=0;s<u.parts.length;s++)u.parts[s]();delete c[u.id]}}}};var x=function(){var t=[];return function(e,n){return t[e]=n,t.filter(Boolean).join("\n")}}()},function(t,e){t.exports=function(t,e){for(var n=[],r={},o=0;o<e.length;o++){var i=e[o],a=i[0],u=i[1],s=i[2],f=i[3],c={id:t+":"+o,css:u,media:s,sourceMap:f};r[a]?r[a].parts.push(c):n.push(r[a]={id:a,parts:[c]})}return n}},function(t,e){t.exports=function(t,e,n,r,o,i){var a,u=t=t||{},s=typeof t.default;"object"!==s&&"function"!==s||(a=t,u=t.default);var f="function"==typeof u?u.options:u;e&&(f.render=e.render,f.staticRenderFns=e.staticRenderFns,f._compiled=!0),n&&(f.functional=!0),o&&(f._scopeId=o);var c;if(i?(c=function(t){t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,t||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),r&&r.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(i)},f._ssrRegister=c):r&&(c=r),c){var d=f.functional,l=d?f.render:f.beforeCreate;d?(f._injectStyles=c,f.render=function(t,e){return c.call(e),l(t,e)}):f.beforeCreate=l?[].concat(l,c):[c]}return{esModule:a,exports:u,options:f}}},function(t,e,n){"use strict";var r=function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{ref:"wrapper",staticStyle:{position:"relative"},style:{width:t.width+"px",height:t.height+"px"}},[t._t("default"),t._v(" "),t._l(new Array(t.rowInt),function(e,r){return n("div",{key:r},t._l(new Array(t.columnInt),function(e,o){return n("div",{key:o,staticStyle:{position:"absolute","z-index":"999",display:"inline-block",overflow:"hidden","text-align":"center","pointer-events":"none"},style:{top:t.yStart+t.yTotal*r+"px",left:t.xStart+t.xTotal*o+"px",width:t.itemWidth+"px",height:t.itemHeight+"px","line-height":t.itemHeight+"px",fontSize:t.fontSize,fontFamily:t.font,color:t.color,opacity:t.alpha,transform:"rotate("+t.angle+"deg)"}},[t._v("\n      "+t._s(t.text)+"\n    ")])}))})],2)},o=[],i={render:r,staticRenderFns:o};e.a=i}])});
+//# sourceMappingURL=v-watermark.min.js.map
+  const Main = {
+    name: 'test',
+    data() {
+      return {
+        width: 880,
+        height: 495,
+        row: 0,
+        column: 0,
+        itemWidth: 120,
+        itemHeight: 80,
+        text: '水印',
+        angle: -15,
+        xStart: 0,
+        yStart: 0,
+        xSpace: 0,
+        ySpace: 0,
+        fontSize: '20px',
+        font: '微软雅黑',
+        color: '#000000',
+        alpha: 0.3
+      }
+    }
+  }
+
+  const Ctor = Vue.extend(Main)
+  new Ctor().$mount('#app')
+
+</script>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2018/06/05/2018-6-5-Vue%E6%B0%B4%E5%8D%B0%E7%BB%84%E4%BB%B6/" data-id="ckihsvc3t006p2agla1i32ijc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/DataBase/">DataBase</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ionic/">Ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/NPM/">NPM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VPN/">VPN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/">技术名词</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%AF%94%E8%BE%83/">技术比较</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/">技术综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/">技术陷阱</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%AE%B0/">杂记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/" rel="tag">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataBase/" rel="tag">DataBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ElementUI/" rel="tag">ElementUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ionic/" rel="tag">Ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LuaSocket/" rel="tag">LuaSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyEclipse/" rel="tag">MyEclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Power-Designer/" rel="tag">Power Designer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPF/" rel="tag">WPF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mock/" rel="tag">mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-json/" rel="tag">package.json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" rel="tag">域名劫持</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/" rel="tag">基本类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E5%85%A5/" rel="tag">导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag">微机原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" rel="tag">技术综合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E9%87%8A/" rel="tag">注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" rel="tag">深入理解C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%95%A5/" rel="tag">略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A5%E9%9B%B6/" rel="tag">补零</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%AF%E5%BE%84/" rel="tag">路径</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 12.86px;">Android</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/CSS/" style="font-size: 15.71px;">CSS</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/DataBase/" style="font-size: 10px;">DataBase</a> <a href="/tags/ElementUI/" style="font-size: 11.43px;">ElementUI</a> <a href="/tags/Git/" style="font-size: 17.14px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Grunt/" style="font-size: 11.43px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IDE/" style="font-size: 11.43px;">IDE</a> <a href="/tags/Ionic/" style="font-size: 10px;">Ionic</a> <a href="/tags/Java/" style="font-size: 11.43px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 18.57px;">JavaScript</a> <a href="/tags/Lua/" style="font-size: 11.43px;">Lua</a> <a href="/tags/LuaSocket/" style="font-size: 10px;">LuaSocket</a> <a href="/tags/MyEclipse/" style="font-size: 10px;">MyEclipse</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Power-Designer/" style="font-size: 11.43px;">Power Designer</a> <a href="/tags/SEO/" style="font-size: 10px;">SEO</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/WPF/" style="font-size: 10px;">WPF</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/mock/" style="font-size: 10px;">mock</a> <a href="/tags/package-json/" style="font-size: 10px;">package.json</a> <a href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" style="font-size: 10px;">域名劫持</a> <a href="/tags/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">基本类型</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AF%BC%E5%85%A5/" style="font-size: 10px;">导入</a> <a href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" style="font-size: 11.43px;">微机原理</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" style="font-size: 10px;">技术综合</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 11.43px;">术语</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 11.43px;">汇编</a> <a href="/tags/%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">注释</a> <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" style="font-size: 14.29px;">深入理解C#</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 10px;">状态码</a> <a href="/tags/%E7%95%A5/" style="font-size: 10px;">略</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 10px;">缓存</a> <a href="/tags/%E8%A1%A5%E9%9B%B6/" style="font-size: 10px;">补零</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 12.86px;">跨域</a> <a href="/tags/%E8%B7%AF%E5%BE%84/" style="font-size: 10px;">路径</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/10/2018-8-23-jira/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/">记一次前端 Mac 新机配置之路</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/">跨域</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/">Node初探</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/">Gulp初探</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Yizhou Shen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
