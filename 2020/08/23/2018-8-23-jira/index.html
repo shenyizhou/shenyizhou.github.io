@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shenyizhou.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="参照文章：https:&#x2F;&#x2F;www.evget.com&#x2F;article&#x2F;2015&#x2F;8&#x2F;10&#x2F;22539.html 1.1 筛选器设置点击 问题 → 搜索问题 进入搜索页面，在最上方可以看到 筛选器 部分，如下图所示： 筛选器 分为 简单 和 高级 两种模式，简单 模式是使用预设的几个筛选项，高级 模式则是通过编写类似SQL的 JQL 语句来实现。 1.1.1 创建简单筛选器常用的简单筛选器就是查询">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jira demo（待完善）">
+<meta property="og:url" content="http://shenyizhou.github.io/2020/08/23/2018-8-23-jira/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content="参照文章：https:&#x2F;&#x2F;www.evget.com&#x2F;article&#x2F;2015&#x2F;8&#x2F;10&#x2F;22539.html 1.1 筛选器设置点击 问题 → 搜索问题 进入搜索页面，在最上方可以看到 筛选器 部分，如下图所示： 筛选器 分为 简单 和 高级 两种模式，简单 模式是使用预设的几个筛选项，高级 模式则是通过编写类似SQL的 JQL 语句来实现。 1.1.1 创建简单筛选器常用的简单筛选器就是查询">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-22T17:52:22.000Z">
+<meta property="article:modified_time" content="2020-12-09T19:37:01.329Z">
+<meta property="article:author" content="Yizhou Shen">
+<meta property="article:tag" content="jira">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://shenyizhou.github.io/2020/08/23/2018-8-23-jira/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>jira demo（待完善） | 无主之地</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">无主之地</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">静存高远</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yizhou Shen</p>
+  <div class="site-description" itemprop="description">静存高远</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://shenyizhou.github.io/2020/08/23/2018-8-23-jira/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yizhou Shen">
+      <meta itemprop="description" content="静存高远">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无主之地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jira demo（待完善）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020年08月23日 01:52:22" itemprop="dateCreated datePublished" datetime="2020-08-23T01:52:22+08:00">2020年08月23日</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020年12月10日 03:37:01" itemprop="dateModified" datetime="2020-12-10T03:37:01+08:00">2020年12月10日</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">杂记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>参照文章：<a target="_blank" rel="noopener" href="https://www.evget.com/article/2015/8/10/22539.html">https://www.evget.com/article/2015/8/10/22539.html</a></p>
+<p>1.1 筛选器设置<br>点击 问题 → 搜索问题 进入搜索页面，在最上方可以看到 筛选器 部分，如下图所示：</p>
+<p>筛选器 分为 简单 和 高级 两种模式，简单 模式是使用预设的几个筛选项，高级 模式则是通过编写类似SQL的 JQL 语句来实现。</p>
+<p>1.1.1 创建简单筛选器<br>常用的简单筛选器就是查询 经办人 是自己的任务：</p>
+<p>在 经办人 中选择 当前用户 ，然后保存并为自己的筛选器取名即可。</p>
+<p>具体的操作如下图所示：</p>
+<p>保存完毕就可以在 问题 的 筛选器 下看到 我的筛选器，如下图所示：</p>
+<p>1.1.2 创建高级筛选器<br>我们还是在 经办人 中选择 当前用户，然后点击 高级 按钮，如下图所示：</p>
+<p>这时候我们可以看到查询 经办人 为 当前用户 的筛选变成了这样一行命令：</p>
+<p>assignee in (currentUser())</p>
+<p>如下图所示：</p>
+<p>这就是 JQL，是不区分大小写的。</p>
+<p>解释一下这行命令，assignee 即 经办人，in 是存在于，() 即 数组，currentUser() 即获取的 当前用户，返回值是字符串比如 shenyizhou，连起来就是查询经办人是当前用户的所有任务。</p>
+<p>判断逻辑有以下几种：</p>
+<p>=、!=、<del>(包含)、&lt;=、&gt;=、&gt;、&lt;、!</del>(不包含)、is not、is、not in、in</p>
+<p>=、!=、&lt;=、&gt;=、&gt;、&lt; 都是数值的判断，<del>、!</del> 是判断前面的字符串是否包含后面的字符串，is not、is 后面一般跟 EMPTY，not in、in 后面跟数组即 ()。</p>
+<p>字段别名有以下几种：</p>
+<p>affectedVersion // 影响版本，当前所有任务都为EMPTY</p>
+<p>assignee // 经办人，可以是id、全名或者邮箱，assignee was currentUser() 即查询经办人曾经是自己的任务</p>
+<p>attachments // 附件，is EMPTY 或 is not EMPTY</p>
+<p>category // 任务种类，当前所有任务都为EMPTY</p>
+<p>comment // 备注</p>
+<p>created // 创建时间，可以跟 &gt;= startOfMonth() 即查询这个月的任务，可以跟 &gt; -1d 即查询今天创建的任务</p>
+<p>createdDate // 同上</p>
+<p>description // 描述</p>
+<p>due // 到期时间，可以跟 &lt;= endOfWeek() 即查询这个礼拜前需要完成的任务</p>
+<p>duedate // 同上</p>
+<p>environment // 环境</p>
+<p>filter // 筛选器</p>
+<p>fixVersion // 修复版本</p>
+<p>id // 问题id，别名有 issue、issuekey、key ，可以跟 in watchedIssues() 即查询自己关注的任务</p>
+<p>issuetype // 任务类型，别名 type，如Epic、Story、子任务等</p>
+<p>labels // 标签，如前端、管理后台、体验课等</p>
+<p>lastViewed // 最近被浏览时间</p>
+<p>level // 问题安全级别，当前所有任务都为EMPTY</p>
+<p>originalEstimate // 任务估时，= 1d 即估时1天， &gt; 6h 即估时超过6小时</p>
+<p>parent // parent = TMS-157 即查询TMS-157的所有子任务</p>
+<p>priority // 优先级，如Highest、Medium等</p>
+<p>project // 项目，如LEAR、TMS等</p>
+<p>remainingEstimate // 剩余时间</p>
+<p>reporter // 报告人</p>
+<p>resolution // 解决结果，为 Done 或 Unresolved</p>
+<p>resolved // 解决时间</p>
+<p>resolvedDate // 同上</p>
+<p>status // 任务状态，如待开发、开发中等</p>
+<p>summary // 标题</p>
+<p>text // 所有文本，包括 summary、description、environment、comment</p>
+<p>updated // 更新时间，Updated &gt;= startOfDay() 即查询今天更新的所有任务</p>
+<p>updatedDate // 同上</p>
+<p>watcher // 关注人</p>
+<p>watchers // 关注人数</p>
+<p>所以如果想筛选自己 经办 或者 关注 的任务，可以写成：</p>
+<p>assignee in (currentUser()) or watcher in (currentUser())</p>
+<p>写完再点击 搜索 后，就可以 保存为 自己的筛选器了</p>
+<p>之后就会出现在左侧的 我的筛选器 列表中，再次想查询的时候直接点击即可</p>
+<p>1.2 面板设置<br>1.2.1 根据筛选器创建面板<br>点击 面板 → 查看全部面板，选择 创建面板，如下图所示：</p>
+<p>在命名看板的时候选择筛选器，如果下拉也找不到可以直接打字输入筛选器名称，名称就是步骤 1.1.2 保存的筛选器名称</p>
+<p>创建面板 后就能看到的满足筛选器条件的任务了，并可以在 面板 里看到该面板</p>
+<p>1.2.2 面板的列管理<br>在 面板 中点击 配置 进入配置页面，选择 列 设置</p>
+<p>点击 添加列 就会出现新的列，然后可以按照自己的想法自由拖动元素到想展现的列里</p>
+<p>比如我按照产品开发的不同阶段拆分了列，对应的效果如下图所示：</p>
+<p>1.2.3 面板的泳道管理<br>之前说了列管理，那么泳道管理就是面板的行管理了</p>
+<p>在 配置 页面选择 泳道 设置，点击 添加 就可以添加新的泳道，泳道的筛选方式也是SQL，会把满足SQL筛选的条件放到同一泳道中</p>
+<p>比如我按照任务优先级进行了泳道的分类，最后效果图如下所示：</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/jira/" rel="tag"># jira</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/" rel="prev" title="跨域">
+                  <i class="fa fa-chevron-left"></i> 跨域
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" rel="next" title="记一次前端 Mac 新机配置之路">
+                  记一次前端 Mac 新机配置之路 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yizhou Shen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+</body>
+</html>
