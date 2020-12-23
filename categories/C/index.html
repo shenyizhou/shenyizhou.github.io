@@ -1,38 +1,542 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post-collapse.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
 
-{% block title %}{{ __('title.category') }}: {{ page.category }} | {{ config.title }}{% endblock %}
 
-{% block content %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  {######################}
-  {### CATEGORY BLOCK ###}
-  {######################}
-  <div class="post-block category">
+<link rel="stylesheet" href="/css/main.css">
 
-    <div id="posts" class="posts-collapse">
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shenyizhou.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="静存高远">
+<meta property="og:type" content="website">
+<meta property="og:title" content="无主之地">
+<meta property="og:url" content="http://shenyizhou.github.io/categories/C/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content="静存高远">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Yizhou Shen">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://shenyizhou.github.io/categories/C/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>分类: C# | 无主之地</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">无主之地</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">静存高远</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yizhou Shen</p>
+  <div class="site-description" itemprop="description">静存高远</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner category posts-collapse">
+
+
+  
+  
+  
+  <div class="post-block">
+    <div class="post-content">
       <div class="collection-title">
-        <{% if theme.seo %}h2{% else %}h1{% endif %}>{#
-        #}{{ page.category }}{#
-        #}<small>{{  __('title.category')  }}</small>
-        </{% if theme.seo %}h2{% else %}h1{% endif %}>
+        <h2 class="collection-header">C#
+          <small>分类</small>
+        </h2>
       </div>
 
-      {% for post in page.posts %}
-        {{ post_template.render(post) }}
-      {% endfor %}
+      
+    <div class="collection-year">
+      <span class="collection-header">2017</span>
     </div>
 
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-09-11T16:34:31+08:00"
+              content="2017年09月11日">
+          09-11
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/09/11/2017-09-11-toggleSwitch%E7%9A%84IsChecked/" itemprop="url">
+            <span itemprop="name">toggleSwitch的IsChecked</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-09-06T10:46:59+08:00"
+              content="2017年09月06日">
+          09-06
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/09/06/2017-09-06-Visual%20Studio%E5%90%84%E7%89%88%E6%9C%AC%E6%AF%94%E8%BE%83/" itemprop="url">
+            <span itemprop="name">Visual Studio各版本比较</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-08-18T10:43:08+08:00"
+              content="2017年08月18日">
+          08-18
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/08/18/2017-08-18-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%884%EF%BC%89/" itemprop="url">
+            <span itemprop="name">《深入理解C Sharp》第3版（4）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-08-17T12:09:19+08:00"
+              content="2017年08月17日">
+          08-17
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/08/17/2017-08-17-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%883%EF%BC%89/" itemprop="url">
+            <span itemprop="name">《深入理解C Sharp》第3版（3）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-08-16T14:03:50+08:00"
+              content="2017年08月16日">
+          08-16
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/08/16/2017-08-16-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%882%EF%BC%89/" itemprop="url">
+            <span itemprop="name">《深入理解C Sharp》第3版（2）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-08-08T13:21:32+08:00"
+              content="2017年08月08日">
+          08-08
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/08/08/2017-08-08-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%881%EF%BC%89/" itemprop="url">
+            <span itemprop="name">《深入理解C Sharp》第3版（1）</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-07-15T13:19:16+08:00"
+              content="2017年07月15日">
+          07-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/07/15/2017-07-15-%E5%9C%A8%E6%9F%90%E4%B8%AA%E7%BB%8F%E7%BA%AC%E5%BA%A6%E9%99%84%E8%BF%91/" itemprop="url">
+            <span itemprop="name">在某个经纬度附近</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-06-28T20:17:46+08:00"
+              content="2017年06月28日">
+          06-28
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/06/28/2017-06-28-CSharp%E6%97%A0%E6%B3%95%E5%BC%95%E7%94%A8DLL%E7%9A%84BUG/" itemprop="url">
+            <span itemprop="name">CSharp无法引用DLL的BUG</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-06-27T16:57:26+08:00"
+              content="2017年06月27日">
+          06-27
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/06/27/2017-06-27-CSharp%E5%8A%A0%E8%A7%A3%E5%AF%86/" itemprop="url">
+            <span itemprop="name">CSharp加解密</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-06-25T18:58:56+08:00"
+              content="2017年06月25日">
+          06-25
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/06/25/2017-06-25-%E4%B8%80%E7%9B%B4%E4%BB%A5%E4%B8%BA@%E6%98%AF%E5%8F%96%E7%BB%9D%E5%AF%B9%E5%9C%B0%E5%9D%80%E7%AC%A6/" itemprop="url">
+            <span itemprop="name">一直以为@是取绝对地址符</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-05-09T09:41:51+08:00"
+              content="2017年05月09日">
+          05-09
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/05/09/2017-05-09-CSharp%E5%AF%B9%E6%9E%9A%E4%B8%BE%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E5%8C%96/" itemprop="url">
+            <span itemprop="name">CSharp对枚举和字符串的转化</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2017-03-26T23:04:18+08:00"
+              content="2017年03月26日">
+          03-26
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2017/03/26/2017-03-26-%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E8%83%BD%E7%9B%91%E5%90%AC%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96%E7%9A%84%E5%AD%97%E5%85%B8%EF%BC%81/" itemprop="url">
+            <span itemprop="name">手写一个能监听内容变化的字典！</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+    </div>
   </div>
-  {##########################}
-  {### END CATEGORY BLOCK ###}
-  {##########################}
+  
+  
+  
 
-  {% include '_partials/pagination.swig' %}
 
-{% endblock %}
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yizhou Shen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+</body>
+</html>
