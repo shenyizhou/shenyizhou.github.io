@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
-
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"shenyizhou.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
-  </script>
-<meta name="description" content="静存高远">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Yizhou Shen">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Yizhou Shen">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="静存高远">
+    <meta name="description" content="静存高远">
 <meta property="og:type" content="website">
 <meta property="og:title" content="无主之地">
 <meta property="og:url" content="http://shenyizhou.github.io/archives/page/4/index.html">
@@ -33,676 +30,2504 @@
 <meta property="article:author" content="Yizhou Shen">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>无主之地</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
 
 
-<link rel="canonical" href="http://shenyizhou.github.io/archives/page/4/">
-
-
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
 </script>
-<title>归档 | 无主之地</title>
-  
 
-
-
-  <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <h1 class="site-title">无主之地</h1>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">静存高远</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-        
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-overview-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
-        </section>
-        <!--/noindex-->
-
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Yizhou Shen</p>
-  <div class="site-description" itemprop="description">静存高远</div>
-</div>
-<div class="site-state-wrap site-overview-item animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">81</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">27</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">54</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-
-
-
-        </section>
-      </div>
-    </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+    
+<header class="header">
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <a class="home-link" href=/>无主之地</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
 
 
-    <div class="main-inner archive posts-collapse">
 
 
-  
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
+
+
+">
+    
+    <!-- 主页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+        </p>
+        <!-- 文章页meta -->
         
-        <span class="collection-header">很好! 目前共计 81 篇日志。 继续努力。</span>
-      </div>
-
-      
-    <div class="collection-year">
-      <span class="collection-header">2017</span>
     </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-06-27T16:57:26+08:00"
-              content="2017年06月27日">
-          06-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/06/27/2017-06-27-CSharp%E5%8A%A0%E8%A7%A3%E5%AF%86/" itemprop="url">
-            <span itemprop="name">CSharp加解密</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-06-26T18:58:36+08:00"
-              content="2017年06月26日">
-          06-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/06/26/2017-06-26-%E5%AF%B9%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC%E7%9A%84%E6%80%9D%E8%80%83/" itemprop="url">
-            <span itemprop="name">对编程语言版本的思考</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-06-25T18:58:56+08:00"
-              content="2017年06月25日">
-          06-25
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/06/25/2017-06-25-%E4%B8%80%E7%9B%B4%E4%BB%A5%E4%B8%BA@%E6%98%AF%E5%8F%96%E7%BB%9D%E5%AF%B9%E5%9C%B0%E5%9D%80%E7%AC%A6/" itemprop="url">
-            <span itemprop="name">一直以为@是取绝对地址符</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-05-09T09:41:51+08:00"
-              content="2017年05月09日">
-          05-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/05/09/2017-05-09-CSharp%E5%AF%B9%E6%9E%9A%E4%B8%BE%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E5%8C%96/" itemprop="url">
-            <span itemprop="name">CSharp对枚举和字符串的转化</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-05-05T15:07:49+08:00"
-              content="2017年05月05日">
-          05-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/05/05/2017-05-05-%E5%8F%91%E7%8E%B0%E6%88%91Atom%E7%94%A8%E7%9A%84%E6%9C%80%E5%A4%9A%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%B1%85%E7%84%B6%E6%98%AF.../" itemprop="url">
-            <span itemprop="name">发现我Atom用的最多的快捷键居然是...</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-05-04T10:57:37+08:00"
-              content="2017年05月04日">
-          05-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/05/04/2017-05-04-%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%881%EF%BC%89/" itemprop="url">
-            <span itemprop="name">那些坑（1）</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-04-10T14:34:07+08:00"
-              content="2017年04月10日">
-          04-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/04/10/2017-04-10-%E8%B7%A8%E5%9F%9F%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F/" itemprop="url">
-            <span itemprop="name">跨域到底是什么呢？</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-04-06T13:10:22+08:00"
-              content="2017年04月06日">
-          04-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/04/06/2017-04-06-JS%E2%80%9C%E7%A9%BA%E2%80%9D%E4%B9%8B%E7%A6%85/" itemprop="url">
-            <span itemprop="name">JS“空”之禅</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-03-29T23:53:14+08:00"
-              content="2017年03月29日">
-          03-29
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/03/29/2017-03-29-%E9%82%A3%E4%BA%9B%E5%90%8D%E8%AF%8D%EF%BC%882%EF%BC%89/" itemprop="url">
-            <span itemprop="name">那些名词（2）</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-03-28T23:05:05+08:00"
-              content="2017年03月28日">
-          03-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/03/28/2017-03-28-%E9%82%A3%E4%BA%9B%E5%90%8D%E8%AF%8D%EF%BC%881%EF%BC%89/" itemprop="url">
-            <span itemprop="name">那些名词（1）</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-03-27T10:37:45+08:00"
-              content="2017年03月27日">
-          03-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/03/27/2017-03-27-%E6%88%91%E7%9C%9F%E7%9A%84%E7%9C%9F%E7%9A%84%E7%9C%9F%E7%9A%84%E5%8F%AA%E6%83%B3%E6%9F%A5%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%81/" itemprop="url">
-            <span itemprop="name">我真的真的真的只想查条数据！</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-03-26T23:04:18+08:00"
-              content="2017年03月26日">
-          03-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/03/26/2017-03-26-%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E8%83%BD%E7%9B%91%E5%90%AC%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96%E7%9A%84%E5%AD%97%E5%85%B8%EF%BC%81/" itemprop="url">
-            <span itemprop="name">手写一个能监听内容变化的字典！</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-03-25T23:20:56+08:00"
-              content="2017年03月25日">
-          03-25
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/03/25/2017-03-25-%E4%B8%8D%E6%83%B3%E8%AE%A9%E5%8D%9A%E5%AE%A2%E8%8D%92%E5%BA%9F%E4%BA%8E%E6%98%AF%E4%B9%8E/" itemprop="url">
-            <span itemprop="name">不想让博客荒废于是乎</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2016</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2016-04-11T09:14:17+08:00"
-              content="2016年04月11日">
-          04-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2016/04/11/2016-04-11-%E7%94%A8LuaSocket%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E4%B8%8B%E5%9B%BE/" itemprop="url">
-            <span itemprop="name">用LuaSocket实现批量下图</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2016-04-10T20:33:08+08:00"
-              content="2016年04月10日">
-          04-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2016/04/10/2016-04-10-Lua%E5%B0%8F%E5%BF%83%E5%BE%97/" itemprop="url">
-            <span itemprop="name">Lua小心得</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2016-04-07T20:33:08+08:00"
-              content="2016年04月07日">
-          04-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2016/04/07/2016-04-07-%E5%90%84%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" itemprop="url">
-            <span itemprop="name">各语言数据类型</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2016-04-06T20:33:08+08:00"
-              content="2016年04月06日">
-          04-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2016/04/06/2016-04-06-%E5%90%84%E8%AF%AD%E8%A8%80%E6%B3%A8%E9%87%8A%E3%80%81%E5%AF%BC%E5%85%A5%E5%86%99%E6%B3%95/" itemprop="url">
-            <span itemprop="name">各语言注释、导入写法</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2016-03-22T23:46:04+08:00"
-              content="2016年03月22日">
-          03-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2016/03/22/2016-03-22-%E5%BE%AE%E6%9C%BA%E6%8C%87%E4%BB%A4%EF%BC%882%EF%BC%89/" itemprop="url">
-            <span itemprop="name">微机指令（2）</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2016-03-20T23:46:04+08:00"
-              content="2016年03月20日">
-          03-20
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2016/03/20/2016-03-20-%E5%BE%AE%E6%9C%BA%E6%8C%87%E4%BB%A4%EF%BC%881%EF%BC%89/" itemprop="url">
-            <span itemprop="name">微机指令（1）</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2016-03-15T06:04:39+08:00"
-              content="2016年03月15日">
-          03-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2016/03/15/2016-03-15-IFE%E4%BB%BB%E5%8A%A1%E4%B8%80%E6%94%B6%E8%8E%B7/" itemprop="url">
-            <span itemprop="name">IFE任务一收获</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-
-    </div>
-  </div>
-  
-  
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
       }
     }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
   }
-</script>
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main index-page">
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/07/07/2017-07-07-%E6%A0%87%E7%AD%BE%E4%B8%8ESEO/" >
+            
+                <span>标签与SEO</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="今天听于老师讲div和span区别的时候意外听到了跟SEO有关的东西"><a href="#今天听于老师讲div和span区别的时候意外听到了跟SEO有关的东西" class="headerlink" title="今天听于老师讲div和span区别的时候意外听到了跟SEO有关的东西"></a>今天听于老师讲div和span区别的时候意外听到了跟SEO有关的东西</h1>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/07/07</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "HTML">HTML</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "SEO">SEO</a>
+    
 </div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Yizhou Shen</span>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/07/04/2017-07-04-MyEclipse%E5%BF%AB%E9%94%AE%E9%94%AE/" >
+            
+                <span>MyEclipse快键键</span>
+        </a>
+        <div class="abstract-content">
+            <h3 id="最常用的当属Alt-自动补全了"><a href="#最常用的当属Alt-自动补全了" class="headerlink" title="最常用的当属Alt+/自动补全了"></a>最常用的当属Alt+/自动补全了</h3><p>至于为什么不设置全局自动补全，那是因为太卡</p>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/07/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "MyEclipse">MyEclipse</a>
+    
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/06/28/2017-06-28-CSharp%E6%97%A0%E6%B3%95%E5%BC%95%E7%94%A8DLL%E7%9A%84BUG/" >
+            
+                <span>CSharp无法引用DLL的BUG</span>
+        </a>
+        <div class="abstract-content">
+            <h2 id="关于无法加载DLL-quot-XXX-dll-quot-找不到指定的模块（异常来自HRESULT-0x8007007E）"><a href="#关于无法加载DLL-quot-XXX-dll-quot-找不到指定的模块（异常来自HRESULT-0x8007007E）" class="headerlink" title="关于无法加载DLL&quot;XXX.dll&quot;:找不到指定的模块（异常来自HRESULT:0x8007007E）"></a>关于无法加载DLL&quot;XXX.dll&quot;:找不到指定的模块（异常来自HRESULT:0x8007007E）</h2>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/06/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C#">C#</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/06/27/2017-06-27-CSharp%E5%8A%A0%E8%A7%A3%E5%AF%86/" >
+            
+                <span>CSharp加解密</span>
+        </a>
+        <div class="abstract-content">
+            <h2 id="先是MD5加密"><a href="#先是MD5加密" class="headerlink" title="先是MD5加密"></a>先是MD5加密</h2>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/06/27</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C#">C#</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/06/26/2017-06-26-%E5%AF%B9%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC%E7%9A%84%E6%80%9D%E8%80%83/" >
+            
+                <span>对编程语言版本的思考</span>
+        </a>
+        <div class="abstract-content">
+            <h2 id="老版本的稳定是毋庸置疑的，新版本的新特性也能提供极大便利"><a href="#老版本的稳定是毋庸置疑的，新版本的新特性也能提供极大便利" class="headerlink" title="老版本的稳定是毋庸置疑的，新版本的新特性也能提供极大便利"></a>老版本的稳定是毋庸置疑的，新版本的新特性也能提供极大便利</h2><h3 id="比如说只有Java-8才有java-time"><a href="#比如说只有Java-8才有java-time" class="headerlink" title="比如说只有Java 8才有java.time"></a>比如说只有Java 8才有java.time</h3>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/06/26</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "技术综合">技术综合</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Java">Java</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/06/25/2017-06-25-%E4%B8%80%E7%9B%B4%E4%BB%A5%E4%B8%BA@%E6%98%AF%E5%8F%96%E7%BB%9D%E5%AF%B9%E5%9C%B0%E5%9D%80%E7%AC%A6/" >
+            
+                <span>一直以为@是取绝对地址符</span>
+        </a>
+        <div class="abstract-content">
+            其实是不对用@引起来的字符串作转义或任何处理
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/06/25</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C#">C#</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/05/09/2017-05-09-CSharp%E5%AF%B9%E6%9E%9A%E4%B8%BE%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E5%8C%96/" >
+            
+                <span>CSharp对枚举和字符串的转化</span>
+        </a>
+        <div class="abstract-content">
+            Enum.GetName(typeof(XXX),xxx) 和 Enum.Parse(typeof(XXX),string)
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/05/09</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C#">C#</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/05/05/2017-05-05-%E5%8F%91%E7%8E%B0%E6%88%91Atom%E7%94%A8%E7%9A%84%E6%9C%80%E5%A4%9A%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%B1%85%E7%84%B6%E6%98%AF.../" >
+            
+                <span>发现我Atom用的最多的快捷键居然是...</span>
+        </a>
+        <div class="abstract-content">
+            <h2 id="Shift-Ctrl-Alt-一键折叠"><a href="#Shift-Ctrl-Alt-一键折叠" class="headerlink" title="Shift + Ctrl + Alt + [ 一键折叠"></a>Shift + Ctrl + Alt + [ 一键折叠</h2><h2 id="以及"><a href="#以及" class="headerlink" title="以及"></a>以及</h2><h2 id="Shift-Ctrl-Alt-一键展开"><a href="#Shift-Ctrl-Alt-一键展开" class="headerlink" title="Shift + Ctrl + Alt + ] 一键展开"></a>Shift + Ctrl + Alt + ] 一键展开</h2>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/05/05</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Atom">Atom</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/05/04/2017-05-04-%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%881%EF%BC%89/" >
+            
+                <span>那些坑（1）</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="唉先吐槽一句全英文Mac系统好难受"><a href="#唉先吐槽一句全英文Mac系统好难受" class="headerlink" title="唉先吐槽一句全英文Mac系统好难受"></a>唉先吐槽一句全英文Mac系统好难受</h1>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/05/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "路径">路径</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/04/10/2017-04-10-%E8%B7%A8%E5%9F%9F%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F/" >
+            
+                <span>跨域到底是什么呢？</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="因为不懂这个我被当作了一个假的前端虽然我本来就是"><a href="#因为不懂这个我被当作了一个假的前端虽然我本来就是" class="headerlink" title="因为不懂这个我被当作了一个假的前端虽然我本来就是"></a>因为不懂这个我被当作了一个假的前端虽然我本来就是</h1>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/04/10</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "跨域">跨域</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/04/06/2017-04-06-JS%E2%80%9C%E7%A9%BA%E2%80%9D%E4%B9%8B%E7%A6%85/" >
+            
+                <span>JS“空”之禅</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="测了我好半天"><a href="#测了我好半天" class="headerlink" title="测了我好半天"></a>测了我好半天</h1><p>// 虽然只是for循环</p>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/04/06</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JavaScript">JavaScript</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/03/29/2017-03-29-%E9%82%A3%E4%BA%9B%E5%90%8D%E8%AF%8D%EF%BC%882%EF%BC%89/" >
+            
+                <span>那些名词（2）</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="AMP、PWA"><a href="#AMP、PWA" class="headerlink" title="AMP、PWA"></a>AMP、PWA</h1><p>一开始被拼写搞蒙了，但其实是很简单的概念</p>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/29</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "术语">术语</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/03/28/2017-03-28-%E9%82%A3%E4%BA%9B%E5%90%8D%E8%AF%8D%EF%BC%881%EF%BC%89/" >
+            
+                <span>那些名词（1）</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="异步、并行"><a href="#异步、并行" class="headerlink" title="异步、并行"></a>异步、并行</h1><p>我想了一天异步和并行、同步和串行有什么区别</p>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "术语">术语</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/03/27/2017-03-27-%E6%88%91%E7%9C%9F%E7%9A%84%E7%9C%9F%E7%9A%84%E7%9C%9F%E7%9A%84%E5%8F%AA%E6%83%B3%E6%9F%A5%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%81/" >
+            
+                <span>我真的真的真的只想查条数据！</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="怎么那么难"><a href="#怎么那么难" class="headerlink" title="怎么那么难"></a>怎么那么难</h1>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/27</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C#">C#</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "DataBase">DataBase</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Scala">Scala</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/03/26/2017-03-26-%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E8%83%BD%E7%9B%91%E5%90%AC%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96%E7%9A%84%E5%AD%97%E5%85%B8%EF%BC%81/" >
+            
+                <span>手写一个能监听内容变化的字典！</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="我绝对（不）是一个标题党"><a href="#我绝对（不）是一个标题党" class="headerlink" title="我绝对（不）是一个标题党"></a>我绝对（不）是一个标题党</h1>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/26</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C#">C#</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/03/25/2017-03-25-%E4%B8%8D%E6%83%B3%E8%AE%A9%E5%8D%9A%E5%AE%A2%E8%8D%92%E5%BA%9F%E4%BA%8E%E6%98%AF%E4%B9%8E/" >
+            
+                <span>不想让博客荒废于是乎</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="当当当当"><a href="#当当当当" class="headerlink" title="当当当当"></a>当当当当</h1><h2 id="决定从今天开始日更"><a href="#决定从今天开始日更" class="headerlink" title="决定从今天开始日更"></a>决定从今天开始日更</h2>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/25</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "略">略</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2016/04/11/2016-04-11-%E7%94%A8LuaSocket%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E4%B8%8B%E5%9B%BE/" >
+            
+                <span>用LuaSocket实现批量下图</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="步骤一-创建目录"><a href="#步骤一-创建目录" class="headerlink" title="步骤一 创建目录"></a>步骤一 创建目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">local start_time &#x3D; os.time() --获取当前时间作为目录名</span><br><span class="line">local dir &#x3D; &quot;D:\\Picture\\Spider\\&quot; .. start_time .. &quot;\\&quot; --windows结构目录名</span><br><span class="line">if (os.execute(&quot;mkdir &quot;..dir) &#x3D;&#x3D; 0) then print(&quot;&gt;&gt; 创建目录成功：&quot; .. dir) --创建目录</span><br><span class="line">else print(&quot;&gt;&gt; 创建目录失败：&quot; .. dir) return -1 end --失败返回</span><br></pre></td></tr></table></figure>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/04/11</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Lua">Lua</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "LuaSocket">LuaSocket</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2016/04/10/2016-04-10-Lua%E5%B0%8F%E5%BF%83%E5%BE%97/" >
+            
+                <span>Lua小心得</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>删除变量：把变量赋值为 nil</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b = <span class="literal">nil</span></span><br><span class="line"><span class="built_in">print</span>(b)	<span class="comment">-- nil</span></span><br></pre></td></tr></table></figure>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/04/10</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Lua">Lua</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2016/04/07/2016-04-07-%E5%90%84%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" >
+            
+                <span>各语言数据类型</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="语言类型"><a href="#语言类型" class="headerlink" title="语言类型"></a>语言类型</h1><h2 id="静态类型"><a href="#静态类型" class="headerlink" title="静态类型"></a>静态类型</h2><p>C、C++、C#、Go、Java</p>
+<h2 id="动态类型"><a href="#动态类型" class="headerlink" title="动态类型"></a>动态类型</h2><p>JavaScript、Lisp、Lua、Perl、PHP、Python、Scheme</p>
+<h2 id="强类型"><a href="#强类型" class="headerlink" title="强类型"></a>强类型</h2><p>C#、Go、Java、Lisp、Python、Scheme</p>
+<h2 id="弱类型"><a href="#弱类型" class="headerlink" title="弱类型"></a>弱类型</h2><p>C、C++、JavaScript、Lua、Perl、PHP</p>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/04/07</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "基本类型">基本类型</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2016/04/06/2016-04-06-%E5%90%84%E8%AF%AD%E8%A8%80%E6%B3%A8%E9%87%8A%E3%80%81%E5%AF%BC%E5%85%A5%E5%86%99%E6%B3%95/" >
+            
+                <span>各语言注释、导入写法</span>
+        </a>
+        <div class="abstract-content">
+            <h1 id="常见语言注释写法"><a href="#常见语言注释写法" class="headerlink" title="常见语言注释写法"></a>常见语言注释写法</h1><h2 id="行注释"><a href="#行注释" class="headerlink" title="行注释"></a>行注释</h2><h3 id="注释内容"><a href="#注释内容" class="headerlink" title="// 注释内容"></a>// 注释内容</h3><p>C、C++、C#、Go、Java、JavaScript、LESS、Objective-C、PHP、SASS、Swift</p>
+<h3 id="注释内容-1"><a href="#注释内容-1" class="headerlink" title="# 注释内容"></a># 注释内容</h3><p>Perl、PHP、Python、Ruby、Shell</p>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/04/06</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "注释">注释</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "导入">导入</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/archives/page/3/">&lt; PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/5/">NEXT &gt;</a>
+    </nav>
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:shenyizhou@126.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/shenyizhou" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer qq" title=qq>
+                  
+                  <img class="profile-qr" src="/4555168247" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
 
     </div>
-  </footer>
-
-  
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-</body>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 84
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/" >文档编写指北</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/17</span><a class="archive-post-title" href= "/2021/01/17/2021-01-17-%E5%86%B3%E6%96%97%E9%93%BE%E6%8E%A5/" >决斗链接</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/10</span><a class="archive-post-title" href= "/2021/01/10/2021-01-10-%E5%BF%AB%E4%B9%90%E7%A8%8B%E5%BA%A6%E8%A1%A8/" >快乐程度表</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/23</span><a class="archive-post-title" href= "/2020/12/23/2020-12-23-%E9%85%92%E9%A6%86%E6%88%98%E6%A3%8B/" >酒馆战棋</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2020/12/22/2020-12-22-%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" >王者荣耀</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span><a class="archive-post-title" href= "/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" >记一次前端 Mac 新机配置之路</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/11</span><a class="archive-post-title" href= "/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/" >跨域</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span><a class="archive-post-title" href= "/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/" >Node初探</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/30</span><a class="archive-post-title" href= "/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/" >Gulp初探</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2018/06/29/2018-6-29-Grunt%E5%88%9D%E6%8E%A2/" >Grunt初探</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/23</span><a class="archive-post-title" href= "/2018/06/23/2018-6-23-%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84UI%E5%BA%93/" >手把手搭建自己的UI库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2018/06/07/2018-6-7-Webpack%E5%85%A5%E9%97%A8/" >Webpack入门</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/" >CSS的@规则</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2018/06/05/2018-6-5-Vue%E6%B0%B4%E5%8D%B0%E7%BB%84%E4%BB%B6/" >Vue水印组件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/28</span><a class="archive-post-title" href= "/2018/05/28/2018-5-28-js%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E8%84%9A%E6%9C%AC/" >js动态添加脚本</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2018/05/25/2018-5-25-git%20ssh%E5%A4%9A%E9%82%AE%E7%AE%B1%E9%85%8D%E7%BD%AE/" >git ssh多邮箱配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/24</span><a class="archive-post-title" href= "/2018/05/24/2018-5-24-git%20flow/" >git flow</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span><a class="archive-post-title" href= "/2018/05/23/2018-5-23-%E7%BC%93%E5%AD%98/" >缓存</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/15</span><a class="archive-post-title" href= "/2018/05/15/2018-5-15-Vue%E6%9D%82%E8%AE%B0/" >Vue杂记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/14</span><a class="archive-post-title" href= "/2018/05/14/2018-5-14-package.json%E6%9D%82%E8%AE%B0/" >package.json杂记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2018/04/26/2018-4-26-%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%A4%87%E5%BF%98%E5%BD%95/" >重装系统后备忘录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2018/04/24/2018-4-24-%E6%90%AD%E5%BB%BA%E8%87%AA%E7%94%A8%E6%A2%AF%E5%AD%90/" >搭建自用梯子</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/26</span><a class="archive-post-title" href= "/2018/03/26/2018-3-26-%E5%AE%89%E5%8D%93%E5%9C%86%E5%BD%A2%E5%9B%BE%E7%89%87%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/" >安卓圆形图片两种方式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2018/03/20/2018-3-20-%E5%AE%89%E5%8D%93%E9%BB%91%E5%B1%8F%E4%B8%8E%E9%94%81%E5%B1%8F/" >安卓黑屏与锁屏</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2018/02/26/2018-2-26-%E6%96%B0%E7%9B%91%E7%AE%A1%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E4%B9%A6/" >新监管平台说明书（自用）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/10</span><a class="archive-post-title" href= "/2018/01/10/2018-1-10-%E5%BC%80%E5%A7%8B%E5%AD%A6Android%E7%AC%AC%E4%B8%80%E5%A4%A9/" >开始学Android第一天</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/09</span><a class="archive-post-title" href= "/2018/01/09/2018-1-10-Power%20Designer%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/" >Power Designer常见用法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/09</span><a class="archive-post-title" href= "/2018/01/09/2018-1-9-Power%20Designer%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/" >Power Designer常见用法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2018/01/02/2018-1-2-%E5%8F%88%E5%BC%80%E5%A7%8B%E7%94%A8ionic%E4%BA%86/" >又开始用ionic了</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2017/12/29/2017-12-29-calc/" >calc</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/25</span><a class="archive-post-title" href= "/2017/12/25/2017-12-25-OO%20in%20JS%EF%BC%883%EF%BC%89/" >OO in JS（3）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/24</span><a class="archive-post-title" href= "/2017/12/24/2017-12-24-OO%20in%20JS%EF%BC%882%EF%BC%89/" >OO in JS（2）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2017/12/20/2017-12-20-%E5%89%8D%E7%AB%AF%E5%AD%97%E4%BD%93/" >前端字体</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/17</span><a class="archive-post-title" href= "/2017/12/17/2017-12-17-OO%20in%20JS%EF%BC%881%EF%BC%89/" >OO in JS（1）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/14</span><a class="archive-post-title" href= "/2017/12/14/2017-12-14-WebStorm%E6%96%87%E4%BB%B6%E6%A8%A1%E6%9D%BF/" >WebStorm文件模板</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2017/12/12/2017-12-12-Vue%E8%A7%84%E8%8C%83%EF%BC%88%E8%87%AA%E7%94%A8%EF%BC%89/" >Vue规范（自用）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/11</span><a class="archive-post-title" href= "/2017/12/11/2017-12-11-%E6%9C%80%E8%BF%91%E5%9C%A8%E7%9C%8B%E7%BA%A2%E5%AE%9D%E4%B9%A6/" >最近在看红宝书</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span><a class="archive-post-title" href= "/2017/12/10/2017-12-10-%E5%AD%A6Web%E7%9A%84%E8%BF%98%E6%80%95%E8%A2%AB%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81%EF%BC%9F/" >学Web的还怕被域名劫持？</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span><a class="archive-post-title" href= "/2017/12/09/2017-12-09-Nginx%E8%B7%91index.php/" >Nginx跑index.php</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/08</span><a class="archive-post-title" href= "/2017/12/08/2017-12-08-%E5%9B%9B%E4%B8%AA%E6%96%B9%E5%90%91border%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" >四个方向border的实现原理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/07</span><a class="archive-post-title" href= "/2017/12/07/2017-12-07-sourcetree%E8%A6%81%E6%80%8E%E4%B9%88%E4%BF%AE%E6%94%B9%E4%BF%9D%E5%AD%98%E7%9A%84%E5%AF%86%E7%A0%81%E5%95%8A%E5%95%8A%E5%95%8A/" >sourcetree要怎么修改保存的密码啊啊啊</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2017/12/06/2017-12-06-JS%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E7%9A%84%E7%A0%94%E7%A9%B6/" >JS语句执行顺序的研究</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/05</span><a class="archive-post-title" href= "/2017/12/05/2017-12-05-%E5%9C%A8el-table%E4%B8%AD%E4%BD%BF%E7%94%A8el-input-number%E4%BC%A0%E5%80%BC%E5%BB%B6%E8%BF%9F/" >在el-table中使用el-input-number传值延迟</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2017/12/04/2017-12-04-%E7%A5%9E%E5%BF%97%E4%B8%8D%E6%B8%85%E5%86%99%E4%B8%8B%E7%9A%84%E4%BB%A3%E7%A0%81/" >神志不清写下的代码</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span><a class="archive-post-title" href= "/2017/12/03/2017-12-03-%E5%90%84%E8%AF%AD%E8%A8%80%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6/" >各语言获取字符串长度</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/02</span><a class="archive-post-title" href= "/2017/12/02/2017-12-02-JS%E8%BD%AC%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" >JS转化字符串</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/01</span><a class="archive-post-title" href= "/2017/12/01/2017-12-01-JS%E5%B0%8F%E5%8E%86%E5%8F%B2/" >JS小历史</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/30</span><a class="archive-post-title" href= "/2017/11/30/2017-11-30-puer%E7%9C%9F%E6%98%AF%E5%A4%AA%E5%A5%BD%E7%94%A8%E4%BA%86/" >puer真是太好用了</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/11</span><a class="archive-post-title" href= "/2017/09/11/2017-09-11-toggleSwitch%E7%9A%84IsChecked/" >toggleSwitch的IsChecked</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2017/09/06/2017-09-06-Visual%20Studio%E5%90%84%E7%89%88%E6%9C%AC%E6%AF%94%E8%BE%83/" >Visual Studio各版本比较</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2017/08/29/2017-08-29-github%E5%88%B7%E7%BB%BF%E7%82%B9/" >github刷绿点</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2017/08/18/2017-08-18-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%884%EF%BC%89/" >《深入理解C Sharp》第3版（4）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href= "/2017/08/17/2017-08-17-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%883%EF%BC%89/" >《深入理解C Sharp》第3版（3）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/2017-08-16-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%882%EF%BC%89/" >《深入理解C Sharp》第3版（2）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/08</span><a class="archive-post-title" href= "/2017/08/08/2017-08-08-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%881%EF%BC%89/" >《深入理解C Sharp》第3版（1）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2017/08/03/2017-08-03-Java%E5%8C%85%E8%A3%85%E7%B1%BB/" >Java包装类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/27</span><a class="archive-post-title" href= "/2017/07/27/2017-07-27-gogs%E9%85%8D%E7%BD%AE/" >gogs配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/15</span><a class="archive-post-title" href= "/2017/07/15/2017-07-15-%E5%9C%A8%E6%9F%90%E4%B8%AA%E7%BB%8F%E7%BA%AC%E5%BA%A6%E9%99%84%E8%BF%91/" >在某个经纬度附近</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/14</span><a class="archive-post-title" href= "/2017/07/14/2017-07-14-%E7%8A%B6%E6%80%81%E7%A0%81%E6%9C%89%E6%84%9F/" >状态码有感</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span><a class="archive-post-title" href= "/2017/07/08/2017-07-08-%E5%90%84%E7%A7%8DIDE%E7%9A%84%E8%B0%83%E8%AF%95%E5%BF%AB%E6%8D%B7%E9%94%AE/" >各种IDE的调试快捷键</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/07</span><a class="archive-post-title" href= "/2017/07/07/2017-07-07-%E6%A0%87%E7%AD%BE%E4%B8%8ESEO/" >标签与SEO</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2017/07/04/2017-07-04-MyEclipse%E5%BF%AB%E9%94%AE%E9%94%AE/" >MyEclipse快键键</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/28</span><a class="archive-post-title" href= "/2017/06/28/2017-06-28-CSharp%E6%97%A0%E6%B3%95%E5%BC%95%E7%94%A8DLL%E7%9A%84BUG/" >CSharp无法引用DLL的BUG</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2017/06/27/2017-06-27-CSharp%E5%8A%A0%E8%A7%A3%E5%AF%86/" >CSharp加解密</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2017/06/26/2017-06-26-%E5%AF%B9%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC%E7%9A%84%E6%80%9D%E8%80%83/" >对编程语言版本的思考</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/25</span><a class="archive-post-title" href= "/2017/06/25/2017-06-25-%E4%B8%80%E7%9B%B4%E4%BB%A5%E4%B8%BA@%E6%98%AF%E5%8F%96%E7%BB%9D%E5%AF%B9%E5%9C%B0%E5%9D%80%E7%AC%A6/" >一直以为@是取绝对地址符</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/09</span><a class="archive-post-title" href= "/2017/05/09/2017-05-09-CSharp%E5%AF%B9%E6%9E%9A%E4%B8%BE%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E5%8C%96/" >CSharp对枚举和字符串的转化</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/05</span><a class="archive-post-title" href= "/2017/05/05/2017-05-05-%E5%8F%91%E7%8E%B0%E6%88%91Atom%E7%94%A8%E7%9A%84%E6%9C%80%E5%A4%9A%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%B1%85%E7%84%B6%E6%98%AF.../" >发现我Atom用的最多的快捷键居然是...</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span><a class="archive-post-title" href= "/2017/05/04/2017-05-04-%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%881%EF%BC%89/" >那些坑（1）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2017/04/10/2017-04-10-%E8%B7%A8%E5%9F%9F%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F/" >跨域到底是什么呢？</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/06</span><a class="archive-post-title" href= "/2017/04/06/2017-04-06-JS%E2%80%9C%E7%A9%BA%E2%80%9D%E4%B9%8B%E7%A6%85/" >JS“空”之禅</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2017/03/29/2017-03-29-%E9%82%A3%E4%BA%9B%E5%90%8D%E8%AF%8D%EF%BC%882%EF%BC%89/" >那些名词（2）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/28</span><a class="archive-post-title" href= "/2017/03/28/2017-03-28-%E9%82%A3%E4%BA%9B%E5%90%8D%E8%AF%8D%EF%BC%881%EF%BC%89/" >那些名词（1）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2017/03/27/2017-03-27-%E6%88%91%E7%9C%9F%E7%9A%84%E7%9C%9F%E7%9A%84%E7%9C%9F%E7%9A%84%E5%8F%AA%E6%83%B3%E6%9F%A5%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%81/" >我真的真的真的只想查条数据！</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/26</span><a class="archive-post-title" href= "/2017/03/26/2017-03-26-%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E8%83%BD%E7%9B%91%E5%90%AC%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96%E7%9A%84%E5%AD%97%E5%85%B8%EF%BC%81/" >手写一个能监听内容变化的字典！</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2017/03/25/2017-03-25-%E4%B8%8D%E6%83%B3%E8%AE%A9%E5%8D%9A%E5%AE%A2%E8%8D%92%E5%BA%9F%E4%BA%8E%E6%98%AF%E4%B9%8E/" >不想让博客荒废于是乎</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/11</span><a class="archive-post-title" href= "/2016/04/11/2016-04-11-%E7%94%A8LuaSocket%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E4%B8%8B%E5%9B%BE/" >用LuaSocket实现批量下图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2016/04/10/2016-04-10-Lua%E5%B0%8F%E5%BF%83%E5%BE%97/" >Lua小心得</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/07</span><a class="archive-post-title" href= "/2016/04/07/2016-04-07-%E5%90%84%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" >各语言数据类型</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/06</span><a class="archive-post-title" href= "/2016/04/06/2016-04-06-%E5%90%84%E8%AF%AD%E8%A8%80%E6%B3%A8%E9%87%8A%E3%80%81%E5%AF%BC%E5%85%A5%E5%86%99%E6%B3%95/" >各语言注释、导入写法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span><a class="archive-post-title" href= "/2016/03/22/2016-03-22-%E5%BE%AE%E6%9C%BA%E6%8C%87%E4%BB%A4%EF%BC%882%EF%BC%89/" >微机指令（2）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2016/03/20/2016-03-20-%E5%BE%AE%E6%9C%BA%E6%8C%87%E4%BB%A4%EF%BC%881%EF%BC%89/" >微机指令（1）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2016/03/15/2016-03-15-IFE%E4%BB%BB%E5%8A%A1%E4%B8%80%E6%94%B6%E8%8E%B7/" >IFE任务一收获</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2016/03/13/2016-03-13-%E5%89%8D%E7%AB%AF%E9%94%99%E9%A2%98%E9%9B%86%EF%BC%881%EF%BC%89/" >前端错题集（1）</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="JavaScript"><span class="iconfont-archer">&#xe606;</span>JavaScript</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="汇编"><span class="iconfont-archer">&#xe606;</span>汇编</span>
+    
+        <span class="sidebar-tag-name" data-tags="微机原理"><span class="iconfont-archer">&#xe606;</span>微机原理</span>
+    
+        <span class="sidebar-tag-name" data-tags="注释"><span class="iconfont-archer">&#xe606;</span>注释</span>
+    
+        <span class="sidebar-tag-name" data-tags="导入"><span class="iconfont-archer">&#xe606;</span>导入</span>
+    
+        <span class="sidebar-tag-name" data-tags="基本类型"><span class="iconfont-archer">&#xe606;</span>基本类型</span>
+    
+        <span class="sidebar-tag-name" data-tags="Lua"><span class="iconfont-archer">&#xe606;</span>Lua</span>
+    
+        <span class="sidebar-tag-name" data-tags="LuaSocket"><span class="iconfont-archer">&#xe606;</span>LuaSocket</span>
+    
+        <span class="sidebar-tag-name" data-tags="略"><span class="iconfont-archer">&#xe606;</span>略</span>
+    
+        <span class="sidebar-tag-name" data-tags="C#"><span class="iconfont-archer">&#xe606;</span>C#</span>
+    
+        <span class="sidebar-tag-name" data-tags="DataBase"><span class="iconfont-archer">&#xe606;</span>DataBase</span>
+    
+        <span class="sidebar-tag-name" data-tags="Scala"><span class="iconfont-archer">&#xe606;</span>Scala</span>
+    
+        <span class="sidebar-tag-name" data-tags="术语"><span class="iconfont-archer">&#xe606;</span>术语</span>
+    
+        <span class="sidebar-tag-name" data-tags="跨域"><span class="iconfont-archer">&#xe606;</span>跨域</span>
+    
+        <span class="sidebar-tag-name" data-tags="路径"><span class="iconfont-archer">&#xe606;</span>路径</span>
+    
+        <span class="sidebar-tag-name" data-tags="Atom"><span class="iconfont-archer">&#xe606;</span>Atom</span>
+    
+        <span class="sidebar-tag-name" data-tags="技术综合"><span class="iconfont-archer">&#xe606;</span>技术综合</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
+    
+        <span class="sidebar-tag-name" data-tags="MyEclipse"><span class="iconfont-archer">&#xe606;</span>MyEclipse</span>
+    
+        <span class="sidebar-tag-name" data-tags="SEO"><span class="iconfont-archer">&#xe606;</span>SEO</span>
+    
+        <span class="sidebar-tag-name" data-tags="IDE"><span class="iconfont-archer">&#xe606;</span>IDE</span>
+    
+        <span class="sidebar-tag-name" data-tags="状态码"><span class="iconfont-archer">&#xe606;</span>状态码</span>
+    
+        <span class="sidebar-tag-name" data-tags="Git"><span class="iconfont-archer">&#xe606;</span>Git</span>
+    
+        <span class="sidebar-tag-name" data-tags="深入理解C#"><span class="iconfont-archer">&#xe606;</span>深入理解C#</span>
+    
+        <span class="sidebar-tag-name" data-tags="GitHub"><span class="iconfont-archer">&#xe606;</span>GitHub</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="WPF"><span class="iconfont-archer">&#xe606;</span>WPF</span>
+    
+        <span class="sidebar-tag-name" data-tags="mock"><span class="iconfont-archer">&#xe606;</span>mock</span>
+    
+        <span class="sidebar-tag-name" data-tags="字符串"><span class="iconfont-archer">&#xe606;</span>字符串</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Vue"><span class="iconfont-archer">&#xe606;</span>Vue</span>
+    
+        <span class="sidebar-tag-name" data-tags="ElementUI"><span class="iconfont-archer">&#xe606;</span>ElementUI</span>
+    
+        <span class="sidebar-tag-name" data-tags="Nginx"><span class="iconfont-archer">&#xe606;</span>Nginx</span>
+    
+        <span class="sidebar-tag-name" data-tags="PHP"><span class="iconfont-archer">&#xe606;</span>PHP</span>
+    
+        <span class="sidebar-tag-name" data-tags="域名劫持"><span class="iconfont-archer">&#xe606;</span>域名劫持</span>
+    
+        <span class="sidebar-tag-name" data-tags="WebStorm"><span class="iconfont-archer">&#xe606;</span>WebStorm</span>
+    
+        <span class="sidebar-tag-name" data-tags="字体"><span class="iconfont-archer">&#xe606;</span>字体</span>
+    
+        <span class="sidebar-tag-name" data-tags="Power Designer"><span class="iconfont-archer">&#xe606;</span>Power Designer</span>
+    
+        <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
+    
+        <span class="sidebar-tag-name" data-tags="Ionic"><span class="iconfont-archer">&#xe606;</span>Ionic</span>
+    
+        <span class="sidebar-tag-name" data-tags="补零"><span class="iconfont-archer">&#xe606;</span>补零</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPN"><span class="iconfont-archer">&#xe606;</span>VPN</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Chrome"><span class="iconfont-archer">&#xe606;</span>Chrome</span>
+    
+        <span class="sidebar-tag-name" data-tags="package.json"><span class="iconfont-archer">&#xe606;</span>package.json</span>
+    
+        <span class="sidebar-tag-name" data-tags="缓存"><span class="iconfont-archer">&#xe606;</span>缓存</span>
+    
+        <span class="sidebar-tag-name" data-tags="UI"><span class="iconfont-archer">&#xe606;</span>UI</span>
+    
+        <span class="sidebar-tag-name" data-tags="NPM"><span class="iconfont-archer">&#xe606;</span>NPM</span>
+    
+        <span class="sidebar-tag-name" data-tags="Grunt"><span class="iconfont-archer">&#xe606;</span>Grunt</span>
+    
+        <span class="sidebar-tag-name" data-tags="Webpack"><span class="iconfont-archer">&#xe606;</span>Webpack</span>
+    
+        <span class="sidebar-tag-name" data-tags="Node"><span class="iconfont-archer">&#xe606;</span>Node</span>
+    
+        <span class="sidebar-tag-name" data-tags="王者"><span class="iconfont-archer">&#xe606;</span>王者</span>
+    
+        <span class="sidebar-tag-name" data-tags="快乐"><span class="iconfont-archer">&#xe606;</span>快乐</span>
+    
+        <span class="sidebar-tag-name" data-tags="游戏王"><span class="iconfont-archer">&#xe606;</span>游戏王</span>
+    
+        <span class="sidebar-tag-name" data-tags="文档"><span class="iconfont-archer">&#xe606;</span>文档</span>
+    
+        <span class="sidebar-tag-name" data-tags="炉石"><span class="iconfont-archer">&#xe606;</span>炉石</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="前端综合"><span class="iconfont-archer">&#xe60a;</span>前端综合</span>
+    
+        <span class="sidebar-category-name" data-categories="汇编"><span class="iconfont-archer">&#xe60a;</span>汇编</span>
+    
+        <span class="sidebar-category-name" data-categories="技术比较"><span class="iconfont-archer">&#xe60a;</span>技术比较</span>
+    
+        <span class="sidebar-category-name" data-categories="Lua"><span class="iconfont-archer">&#xe60a;</span>Lua</span>
+    
+        <span class="sidebar-category-name" data-categories="杂记"><span class="iconfont-archer">&#xe60a;</span>杂记</span>
+    
+        <span class="sidebar-category-name" data-categories="C"><span class="iconfont-archer">&#xe60a;</span>C</span>
+    
+        <span class="sidebar-category-name" data-categories="DataBase"><span class="iconfont-archer">&#xe60a;</span>DataBase</span>
+    
+        <span class="sidebar-category-name" data-categories="技术名词"><span class="iconfont-archer">&#xe60a;</span>技术名词</span>
+    
+        <span class="sidebar-category-name" data-categories="JavaScript"><span class="iconfont-archer">&#xe60a;</span>JavaScript</span>
+    
+        <span class="sidebar-category-name" data-categories="技术陷阱"><span class="iconfont-archer">&#xe60a;</span>技术陷阱</span>
+    
+        <span class="sidebar-category-name" data-categories="IDE"><span class="iconfont-archer">&#xe60a;</span>IDE</span>
+    
+        <span class="sidebar-category-name" data-categories="技术综合"><span class="iconfont-archer">&#xe60a;</span>技术综合</span>
+    
+        <span class="sidebar-category-name" data-categories="HTML"><span class="iconfont-archer">&#xe60a;</span>HTML</span>
+    
+        <span class="sidebar-category-name" data-categories="Git"><span class="iconfont-archer">&#xe60a;</span>Git</span>
+    
+        <span class="sidebar-category-name" data-categories="Java"><span class="iconfont-archer">&#xe60a;</span>Java</span>
+    
+        <span class="sidebar-category-name" data-categories="NPM"><span class="iconfont-archer">&#xe60a;</span>NPM</span>
+    
+        <span class="sidebar-category-name" data-categories="CSS"><span class="iconfont-archer">&#xe60a;</span>CSS</span>
+    
+        <span class="sidebar-category-name" data-categories="Vue"><span class="iconfont-archer">&#xe60a;</span>Vue</span>
+    
+        <span class="sidebar-category-name" data-categories="Nginx"><span class="iconfont-archer">&#xe60a;</span>Nginx</span>
+    
+        <span class="sidebar-category-name" data-categories="Database"><span class="iconfont-archer">&#xe60a;</span>Database</span>
+    
+        <span class="sidebar-category-name" data-categories="Android"><span class="iconfont-archer">&#xe60a;</span>Android</span>
+    
+        <span class="sidebar-category-name" data-categories="Ionic"><span class="iconfont-archer">&#xe60a;</span>Ionic</span>
+    
+        <span class="sidebar-category-name" data-categories="Project"><span class="iconfont-archer">&#xe60a;</span>Project</span>
+    
+        <span class="sidebar-category-name" data-categories="VPN"><span class="iconfont-archer">&#xe60a;</span>VPN</span>
+    
+        <span class="sidebar-category-name" data-categories="Webpack"><span class="iconfont-archer">&#xe60a;</span>Webpack</span>
+    
+        <span class="sidebar-category-name" data-categories="Node"><span class="iconfont-archer">&#xe60a;</span>Node</span>
+    
+        <span class="sidebar-category-name" data-categories="游戏"><span class="iconfont-archer">&#xe60a;</span>游戏</span>
+    
+        <span class="sidebar-category-name" data-categories="生活"><span class="iconfont-archer">&#xe60a;</span>生活</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Yizhou Shen"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+     
+    </body>
 </html>
+
+
