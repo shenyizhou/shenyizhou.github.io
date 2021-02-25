@@ -20,15 +20,15 @@
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="静存高远">
-    <meta name="description" content="文档编写指北整体思路 目录（如果内容多的话）   写法是- [环境](#env) 配合对应位置的&lt;a id&#x3D;&quot;env&quot;&gt;&lt;&#x2F;a&gt;   前言   适用条件，如：iOS 10.3及以上、Android 5.0及以上系统版本可以使用   有啥兼容性问题，如：由于MSE当前的兼容性在移动端受限，建议在PC-WEB下使用该组件   在一些场景下是否建议用其他组">
+    <meta name="description" content="[TOC]   文档编写指北整体结构 目录（如果内容多的话）   可以用- [目录名](#目录名) 的写法   前言   适用条件，如：iOS 10.3及以上、Android 5.0及以上系统版本可以使用   有啥兼容性问题，如：由于MSE当前的兼容性在移动端受限，建议在PC-WEB下使用该组件   在一些场景下是否建议用其他组件，如：移动端建议使用：@music&#x2F;activity-audio">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文档编写指北">
 <meta property="og:url" content="http://shenyizhou.github.io/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/index.html">
 <meta property="og:site_name" content="无主之地">
-<meta property="og:description" content="文档编写指北整体思路 目录（如果内容多的话）   写法是- [环境](#env) 配合对应位置的&lt;a id&#x3D;&quot;env&quot;&gt;&lt;&#x2F;a&gt;   前言   适用条件，如：iOS 10.3及以上、Android 5.0及以上系统版本可以使用   有啥兼容性问题，如：由于MSE当前的兼容性在移动端受限，建议在PC-WEB下使用该组件   在一些场景下是否建议用其他组">
+<meta property="og:description" content="[TOC]   文档编写指北整体结构 目录（如果内容多的话）   可以用- [目录名](#目录名) 的写法   前言   适用条件，如：iOS 10.3及以上、Android 5.0及以上系统版本可以使用   有啥兼容性问题，如：由于MSE当前的兼容性在移动端受限，建议在PC-WEB下使用该组件   在一些场景下是否建议用其他组件，如：移动端建议使用：@music&#x2F;activity-audio">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-27T02:40:01.000Z">
-<meta property="article:modified_time" content="2021-02-04T08:02:41.597Z">
+<meta property="article:modified_time" content="2021-02-25T02:16:39.423Z">
 <meta property="article:author" content="Yizhou Shen">
 <meta property="article:tag" content="文档">
 <meta name="twitter:card" content="summary">
@@ -285,7 +285,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">759</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.1k</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -414,68 +414,55 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <!-- 大概遍览了一下云音乐的 React 组件库，整理了一下文档编写的要点 -->
+        <p>[TOC]</p>
+<!-- 大概遍览了一下云音乐的 React 组件库，整理了一下文档编写的要点 -->
 
-<h1 id="文档编写指北"><a href="#文档编写指北" class="headerlink" title="文档编写指北"></a>文档编写指北</h1><h2 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h2><ul>
+<h1 id="文档编写指北"><a href="#文档编写指北" class="headerlink" title="文档编写指北"></a>文档编写指北</h1><h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><ul>
 <li>目录（如果内容多的话）<ul>
-<li>  写法是<code>- [环境](#env)</code> 配合对应位置的<code>&lt;a id=&quot;env&quot;&gt;&lt;/a&gt;</code></li>
+<li>  可以用<code>- [目录名](#目录名)</code> 的写法</li>
 </ul>
 </li>
 <li>前言<ul>
 <li>  适用条件，如：<code>iOS 10.3及以上、Android 5.0及以上系统版本可以使用</code></li>
 <li>  有啥兼容性问题，如：<code>由于MSE当前的兼容性在移动端受限，建议在PC-WEB下使用该组件</code></li>
 <li>  在一些场景下是否建议用其他组件，如：<code>移动端建议使用：@music/activity-audio</code></li>
-<li>支持功能<ul>
-<li>  可以用这种写法：✔︎ 支持绑定音频、视频播放器播放</li>
-</ul>
-</li>
+<li>  想明确列一下支持功能，可以用这种写法：<code>✔︎ 支持绑定音频、视频播放器播放</code></li>
 </ul>
 </li>
 <li>快速开始<ul>
 <li>  下载和安装</li>
 <li>快速使用<ul>
 <li>  准备工作和配置</li>
-<li>  具体使用</li>
+<li>  hello world 代码示例</li>
 </ul>
 </li>
-<li>  hello world 代码示例</li>
 <li>  核心概念简介</li>
 </ul>
 </li>
 <li>详细内容<ul>
-<li>各组件的属性和方法定义<ul>
-<li>  包括内部对象的属性定义、LESS 变量的定义</li>
-</ul>
-</li>
-<li>具体使用<ul>
+<li>  各组件属性和方法的定义</li>
+<li>场景用例<ul>
 <li>场景 1<ol>
 <li>描述下场景需求</li>
-<li><code>![]()</code> 放张图</li>
-<li>``` 加点关键代码 ```</li>
+<li>放个图 <code>![xxx](xxx)</code></li>
+<li>写下关键代码 ``` xxx ```</li>
 </ol>
 </li>
-<li>  场景 2</li>
+<li>  场景 2 …</li>
 </ul>
 </li>
-<li>其他概念介绍<ul>
-<li>  生命周期</li>
-<li>  渲染方式</li>
-<li>  覆盖场景等等</li>
-</ul>
-</li>
+<li>  其他概念介绍，如生命周期、渲染方式、覆盖场景等等</li>
 </ul>
 </li>
 <li>后记<ul>
-<li>  版本更迭</li>
-<li>功能展望<ul>
-<li>  列出 P0、P1 优先级</li>
-</ul>
-</li>
+<li>  版本更迭（如果已有 CHANGELOG.md 可以省去）</li>
+<li>  功能展望，可以列出 P0、P1 优先级</li>
 <li>  联系我们</li>
 </ul>
 </li>
 </ul>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="组件名-XXXX"><a href="#组件名-XXXX" class="headerlink" title="组件名 XXXX"></a>组件名 XXXX</h3><h4 id="Attributes-属性"><a href="#Attributes-属性" class="headerlink" title="Attributes 属性"></a>Attributes 属性</h4><table>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="组件定义"><a href="#组件定义" class="headerlink" title="组件定义"></a>组件定义</h3><p>这边是该组件的简单介绍</p>
+<h4 id="Attributes（属性）"><a href="#Attributes（属性）" class="headerlink" title="Attributes（属性）"></a>Attributes（属性）</h4><table>
 <thead>
 <tr>
 <th>参数</th>
@@ -490,62 +477,61 @@ height:50vh;
 <td>value</td>
 <td>绑定值</td>
 <td>string | number</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
 </tr>
 <tr>
 <td>size</td>
 <td>尺寸</td>
-<td>string</td>
-<td>small | medium | large</td>
-<td>medium</td>
+<td>string?</td>
+<td>‘small’ | ‘medium’ | ‘large’</td>
+<td>‘medium’</td>
 <td>1.0.1</td>
 </tr>
 <tr>
 <td>someObject</td>
 <td>某个对象类型属性</td>
-<td>SomeObjectType</td>
-<td>—</td>
+<td>CustomType?</td>
+<td>/</td>
 <td>{ }</td>
-<td>—</td>
+<td>/</td>
 </tr>
 </tbody></table>
 <blockquote>
-<p><strong>注意：注意文本一般加粗。</strong></p>
+<p><strong>注意：注意文本可以加粗处理来起强调作用</strong></p>
 </blockquote>
 <ul>
-<li>  还有一些详细信息可以在这里说</li>
-<li>  比如：内置了<code>async-validator</code>组件校验，校验规则使用该组件的语法，具体参考这里</li>
-<li>  版本是涉及到版本改动才需要补充，正常是不用加的</li>
-<li>  参数名和一些术语，要用 ` ` 扩起来</li>
+<li>  还有一些详细信息可以在这里说，比如：<code>内置了 `async-validator` 组件校验，校验规则使用该组件的语法，具体[参考这里](xxx)</code></li>
+<li>  <code>类型</code> 的定义类似于 <code>Typescript</code>，可选参数是后面带<code>?</code></li>
+<li>  <code>可选值</code> 是出现枚举值是才需要填写，如没有可以不加</li>
+<li>  <code>版本</code> 是涉及到版本改动才需要填写，正常是不加的</li>
 </ul>
-<h5 id="SomeObjectType"><a href="#SomeObjectType" class="headerlink" title="SomeObjectType"></a>SomeObjectType</h5><table>
+<h5 id="CustomType（自定义数据结构）"><a href="#CustomType（自定义数据结构）" class="headerlink" title="CustomType（自定义数据结构）"></a>CustomType（自定义数据结构）</h5><p>这边是组件中某个特定类型结构的定义，写法同上（简化版），如上述例子中的 <code>CustomType</code></p>
+<table>
 <thead>
 <tr>
 <th>参数</th>
 <th>说明</th>
 <th>类型</th>
-<th>可选值</th>
 <th>默认值</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>aaa</td>
+<td>xxx</td>
 <td>属性 1</td>
-<td>string?</td>
-<td>—</td>
-<td>—</td>
+<td>string</td>
+<td>/</td>
 </tr>
 <tr>
-<td>bbb</td>
+<td>yyy</td>
 <td>属性 2</td>
-<td>number?</td>
-<td>—</td>
-<td>—</td>
+<td>number</td>
+<td>/</td>
 </tr>
 </tbody></table>
-<h4 id="Events-回调方法"><a href="#Events-回调方法" class="headerlink" title="Events 回调方法"></a>Events 回调方法</h4><table>
+<h4 id="Events（回调方法）"><a href="#Events（回调方法）" class="headerlink" title="Events（回调方法）"></a>Events（回调方法）</h4><p>这边是回调触发方法的定义</p>
+<table>
 <thead>
 <tr>
 <th>方法名</th>
@@ -555,38 +541,17 @@ height:50vh;
 </thead>
 <tbody><tr>
 <td>onChange</td>
-<td>仅在失去焦点或用户按下回车时触发</td>
+<td>变化回调</td>
+<td>(value: string | number) =&gt; void</td>
+</tr>
+<tr>
+<td>onBlur</td>
+<td>失去焦点回调</td>
 <td>(value: string | number) =&gt; void</td>
 </tr>
 </tbody></table>
-<h5 id="onChange（这边可以详细解释下某个方法或某个参数对象）"><a href="#onChange（这边可以详细解释下某个方法或某个参数对象）" class="headerlink" title="onChange（这边可以详细解释下某个方法或某个参数对象）"></a>onChange（这边可以详细解释下某个方法或某个参数对象）</h5><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-<th>类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>value</td>
-<td>绑定值，当什么什么时要做啥特殊处理</td>
-<td>string | number</td>
-</tr>
-</tbody></table>
-<h5 id="函数的另一种写法，比如-abbrAmount"><a href="#函数的另一种写法，比如-abbrAmount" class="headerlink" title="函数的另一种写法，比如 abbrAmount"></a>函数的另一种写法，比如 abbrAmount</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abbrAmount(count, isRound &#x3D; false)</span><br></pre></td></tr></table></figure>
-
-<p>对一个数字 <code>count</code> 进行缩略，大数缩略成以 <code>w</code> 或 <code>亿</code> 为结尾。</p>
-<p><strong>参数</strong></p>
-<ol>
-<li><code>count</code>（string | number）需要被缩略的数字。</li>
-<li><code>isRount = false</code>（boolean）是代表四舍五入，否代表向下取整。</li>
-</ol>
-<p><strong>返回值</strong></p>
-<p>(string): 返回缩略后的字符串</p>
-<p><strong>例子</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">abbrAmount(<span class="number">14500</span>); <span class="comment">// &#x27;1.4w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">14500</span>, <span class="literal">true</span>); <span class="comment">// &#x27;1.5w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">10005000</span>); <span class="comment">// &#x27;1000w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">10005000</span>, <span class="literal">true</span>); <span class="comment">// &#x27;1001w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">100500000</span>); <span class="comment">// &#x27;1亿&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">100500000</span>, <span class="literal">true</span>); <span class="comment">// &#x27;1.01亿&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Methods-主动调用方法"><a href="#Methods-主动调用方法" class="headerlink" title="Methods 主动调用方法"></a>Methods 主动调用方法</h4><table>
+<h4 id="Methods（主动调用方法）"><a href="#Methods（主动调用方法）" class="headerlink" title="Methods（主动调用方法）"></a>Methods（主动调用方法）</h4><p>这边是组件实例的主动触发方法的定义，使用方式有别于回调方法，最好分开展示，让用户感到清晰</p>
+<table>
 <thead>
 <tr>
 <th>方法名</th>
@@ -600,8 +565,42 @@ height:50vh;
 <td>() =&gt; void</td>
 </tr>
 </tbody></table>
-<h3 id="其他组件名-YYYY"><a href="#其他组件名-YYYY" class="headerlink" title="其他组件名 YYYY"></a>其他组件名 YYYY</h3><p><code>YYYY</code> 的其他属性和 <code>XXXX</code> 一致。</p>
-<h3 id="LESS-变量"><a href="#LESS-变量" class="headerlink" title="LESS 变量"></a>LESS 变量</h3><table>
+<h5 id="对象或函数的简单定义"><a href="#对象或函数的简单定义" class="headerlink" title="对象或函数的简单定义"></a>对象或函数的简单定义</h5><p>这边可以具体解释下某个方法中的参数，比如 <code>onChange(value)</code>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>当前值</td>
+<td>string | number</td>
+</tr>
+</tbody></table>
+<ul>
+<li>  如果是参数对象的写法比如 <code>onChange(&#123; value &#125;)</code>，同样可以用上述写法</li>
+<li>  如果比较复杂，建议用下文<a href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89">函数定义</a>的写法</li>
+</ul>
+<h3 id="其他组件定义"><a href="#其他组件定义" class="headerlink" title="其他组件定义"></a>其他组件定义</h3><p>当一个仓库还有其他组件时，可以在同层级增加定义</p>
+<h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><p>这边是在需要详细介绍一个函数定义的时候采用的写法，比如 <code>abbrAmount</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abbrAmount(count, isRound)</span><br></pre></td></tr></table></figure>
+
+<p>对一个数字 <code>count</code> 进行缩略，大数缩略成以 <code>w</code> 或 <code>亿</code> 为结尾。（这边是功能说明）</p>
+<p><strong>参数</strong></p>
+<ol>
+<li><code>count</code> <em>(string | number)</em> 需要被缩略的数字。（这边是解释下每个参数的变量名、类型、定义，变量名最好加下``，类型最好用斜体区分）</li>
+<li><code>isRount = false</code> <em>(boolean)</em> 是代表四舍五入，否代表向下取整。（这边如果有默认值直接就写在等号后面）</li>
+</ol>
+<p><strong>返回值</strong></p>
+<p><em>(string)</em> 返回缩略后的字符串（这边是返回值的类型和定义）</p>
+<p><strong>例子</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">abbrAmount(<span class="number">14500</span>); <span class="comment">// &#x27;1.4w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">14500</span>, <span class="literal">true</span>); <span class="comment">// &#x27;1.5w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">10005000</span>); <span class="comment">// &#x27;1000w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">10005000</span>, <span class="literal">true</span>); <span class="comment">// &#x27;1001w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">100500000</span>); <span class="comment">// &#x27;1亿&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">100500000</span>, <span class="literal">true</span>); <span class="comment">// &#x27;1.01亿&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="CSS-变量"><a href="#CSS-变量" class="headerlink" title="CSS 变量"></a>CSS 变量</h3><p>这边是补充一些在样式文件中定义的变量，比如 <code>LESS</code> 变量：</p>
+<table>
 <thead>
 <tr>
 <th>变量名</th>
@@ -663,7 +662,7 @@ height:50vh;
             <p>原文作者：<a href="http://shenyizhou.github.io">Yizhou Shen</a>
             <p>原文链接：<a href="http://shenyizhou.github.io/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/">http://shenyizhou.github.io/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/</a>
             <p>发表日期：<a href="http://shenyizhou.github.io/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/">January 27th 2021, 10:40:01 am</a>
-            <p>更新日期：<a href="http://shenyizhou.github.io/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/">February 4th 2021, 4:02:41 pm</a>
+            <p>更新日期：<a href="http://shenyizhou.github.io/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/">February 25th 2021, 10:16:39 am</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -811,7 +810,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E6%8C%87%E5%8C%97"><span class="toc-number">1.</span> <span class="toc-text">文档编写指北</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">整体思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.2.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%90%8D-XXXX"><span class="toc-number">1.2.1.</span> <span class="toc-text">组件名 XXXX</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Attributes-%E5%B1%9E%E6%80%A7"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Attributes 属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#SomeObjectType"><span class="toc-number">1.2.1.1.1.</span> <span class="toc-text">SomeObjectType</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Events-%E5%9B%9E%E8%B0%83%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Events 回调方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#onChange%EF%BC%88%E8%BF%99%E8%BE%B9%E5%8F%AF%E4%BB%A5%E8%AF%A6%E7%BB%86%E8%A7%A3%E9%87%8A%E4%B8%8B%E6%9F%90%E4%B8%AA%E6%96%B9%E6%B3%95%E6%88%96%E6%9F%90%E4%B8%AA%E5%8F%82%E6%95%B0%E5%AF%B9%E8%B1%A1%EF%BC%89"><span class="toc-number">1.2.1.2.1.</span> <span class="toc-text">onChange（这边可以详细解释下某个方法或某个参数对象）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E5%86%99%E6%B3%95%EF%BC%8C%E6%AF%94%E5%A6%82-abbrAmount"><span class="toc-number">1.2.1.2.2.</span> <span class="toc-text">函数的另一种写法，比如 abbrAmount</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Methods-%E4%B8%BB%E5%8A%A8%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Methods 主动调用方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6%E5%90%8D-YYYY"><span class="toc-number">1.2.2.</span> <span class="toc-text">其他组件名 YYYY</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LESS-%E5%8F%98%E9%87%8F"><span class="toc-number">1.2.3.</span> <span class="toc-text">LESS 变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%91%BD%E5%90%8D"><span class="toc-number">1.3.</span> <span class="toc-text">常见命名</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E6%8C%87%E5%8C%97"><span class="toc-number">1.</span> <span class="toc-text">文档编写指北</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">整体结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.2.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">组件定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Attributes%EF%BC%88%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Attributes（属性）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#CustomType%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%89"><span class="toc-number">1.2.1.1.1.</span> <span class="toc-text">CustomType（自定义数据结构）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Events%EF%BC%88%E5%9B%9E%E8%B0%83%E6%96%B9%E6%B3%95%EF%BC%89"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Events（回调方法）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Methods%EF%BC%88%E4%B8%BB%E5%8A%A8%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%89"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Methods（主动调用方法）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%88%96%E5%87%BD%E6%95%B0%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.1.3.1.</span> <span class="toc-text">对象或函数的简单定义</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">其他组件定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">函数定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-%E5%8F%98%E9%87%8F"><span class="toc-number">1.2.4.</span> <span class="toc-text">CSS 变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%91%BD%E5%90%8D"><span class="toc-number">1.3.</span> <span class="toc-text">常见命名</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1987,9 +1986,139 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 85
+        Total : 91
         </div>
         <!-- search  -->
         
@@ -2002,6 +2131,36 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/24</span><a class="archive-post-title" href= "/2021/02/24/2021-02-24-threejs/" >threejs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/23</span><a class="archive-post-title" href= "/2021/02/23/2021-02-23-%E5%89%8D%E7%AB%AF%E5%86%B7%E7%9F%A5%E8%AF%86%E5%90%88%E9%9B%86%EF%BC%881%EF%BC%89/" >前端冷知识合集（1）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/2021/02/22/2021-02-22-%E5%91%A8%E6%97%A5%E8%B7%91%E5%9B%A2%E5%87%86%E5%A4%87/" >周日跑团准备</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/2021/02/22/2021-02-22-%E5%BD%B1%E8%A7%86%E5%88%86%E7%B1%BB/" >影视分类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span><a class="archive-post-title" href= "/2021/02/16/2021-02-16-COC/" >COC</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/2021-02-09-2021%20%E8%BF%BD%E7%95%AA%E8%AE%A1%E5%88%92/" >2021 追番计划</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2473,21 +2632,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
     
-        <span class="sidebar-tag-name" data-tags="汇编"><span class="iconfont-archer">&#xe606;</span>汇编</span>
-    
-        <span class="sidebar-tag-name" data-tags="微机原理"><span class="iconfont-archer">&#xe606;</span>微机原理</span>
-    
         <span class="sidebar-tag-name" data-tags="注释"><span class="iconfont-archer">&#xe606;</span>注释</span>
     
         <span class="sidebar-tag-name" data-tags="导入"><span class="iconfont-archer">&#xe606;</span>导入</span>
+    
+        <span class="sidebar-tag-name" data-tags="汇编"><span class="iconfont-archer">&#xe606;</span>汇编</span>
+    
+        <span class="sidebar-tag-name" data-tags="微机原理"><span class="iconfont-archer">&#xe606;</span>微机原理</span>
     
         <span class="sidebar-tag-name" data-tags="数据类型"><span class="iconfont-archer">&#xe606;</span>数据类型</span>
     
         <span class="sidebar-tag-name" data-tags="Lua"><span class="iconfont-archer">&#xe606;</span>Lua</span>
     
-        <span class="sidebar-tag-name" data-tags="略"><span class="iconfont-archer">&#xe606;</span>略</span>
-    
         <span class="sidebar-tag-name" data-tags="LuaSocket"><span class="iconfont-archer">&#xe606;</span>LuaSocket</span>
+    
+        <span class="sidebar-tag-name" data-tags="略"><span class="iconfont-archer">&#xe606;</span>略</span>
     
         <span class="sidebar-tag-name" data-tags="C#"><span class="iconfont-archer">&#xe606;</span>C#</span>
     
@@ -2519,13 +2678,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="深入理解C#"><span class="iconfont-archer">&#xe606;</span>深入理解C#</span>
     
-        <span class="sidebar-tag-name" data-tags="mock"><span class="iconfont-archer">&#xe606;</span>mock</span>
-    
-        <span class="sidebar-tag-name" data-tags="WPF"><span class="iconfont-archer">&#xe606;</span>WPF</span>
-    
         <span class="sidebar-tag-name" data-tags="GitHub"><span class="iconfont-archer">&#xe606;</span>GitHub</span>
     
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="WPF"><span class="iconfont-archer">&#xe606;</span>WPF</span>
+    
+        <span class="sidebar-tag-name" data-tags="mock"><span class="iconfont-archer">&#xe606;</span>mock</span>
     
         <span class="sidebar-tag-name" data-tags="字符串"><span class="iconfont-archer">&#xe606;</span>字符串</span>
     
@@ -2573,13 +2732,27 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Node"><span class="iconfont-archer">&#xe606;</span>Node</span>
     
-        <span class="sidebar-tag-name" data-tags="王者"><span class="iconfont-archer">&#xe606;</span>王者</span>
-    
         <span class="sidebar-tag-name" data-tags="快乐"><span class="iconfont-archer">&#xe606;</span>快乐</span>
     
         <span class="sidebar-tag-name" data-tags="文档"><span class="iconfont-archer">&#xe606;</span>文档</span>
     
+        <span class="sidebar-tag-name" data-tags="动漫"><span class="iconfont-archer">&#xe606;</span>动漫</span>
+    
         <span class="sidebar-tag-name" data-tags="武侠"><span class="iconfont-archer">&#xe606;</span>武侠</span>
+    
+        <span class="sidebar-tag-name" data-tags="COC"><span class="iconfont-archer">&#xe606;</span>COC</span>
+    
+        <span class="sidebar-tag-name" data-tags="分类"><span class="iconfont-archer">&#xe606;</span>分类</span>
+    
+        <span class="sidebar-tag-name" data-tags="标签"><span class="iconfont-archer">&#xe606;</span>标签</span>
+    
+        <span class="sidebar-tag-name" data-tags="前端综合"><span class="iconfont-archer">&#xe606;</span>前端综合</span>
+    
+        <span class="sidebar-tag-name" data-tags="threejs"><span class="iconfont-archer">&#xe606;</span>threejs</span>
+    
+        <span class="sidebar-tag-name" data-tags="动画"><span class="iconfont-archer">&#xe606;</span>动画</span>
+    
+        <span class="sidebar-tag-name" data-tags="王者"><span class="iconfont-archer">&#xe606;</span>王者</span>
     
         <span class="sidebar-tag-name" data-tags="炉石"><span class="iconfont-archer">&#xe606;</span>炉石</span>
     
@@ -2620,9 +2793,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="前端综合"><span class="iconfont-archer">&#xe60a;</span>前端综合</span>
     
-        <span class="sidebar-category-name" data-categories="汇编"><span class="iconfont-archer">&#xe60a;</span>汇编</span>
-    
         <span class="sidebar-category-name" data-categories="技术比较"><span class="iconfont-archer">&#xe60a;</span>技术比较</span>
+    
+        <span class="sidebar-category-name" data-categories="汇编"><span class="iconfont-archer">&#xe60a;</span>汇编</span>
     
         <span class="sidebar-category-name" data-categories="Lua"><span class="iconfont-archer">&#xe60a;</span>Lua</span>
     
@@ -2662,9 +2835,17 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Node"><span class="iconfont-archer">&#xe60a;</span>Node</span>
     
-        <span class="sidebar-category-name" data-categories="游戏"><span class="iconfont-archer">&#xe60a;</span>游戏</span>
+        <span class="sidebar-category-name" data-categories="动漫"><span class="iconfont-archer">&#xe60a;</span>动漫</span>
     
         <span class="sidebar-category-name" data-categories="小说"><span class="iconfont-archer">&#xe60a;</span>小说</span>
+    
+        <span class="sidebar-category-name" data-categories="跑团"><span class="iconfont-archer">&#xe60a;</span>跑团</span>
+    
+        <span class="sidebar-category-name" data-categories="影视"><span class="iconfont-archer">&#xe60a;</span>影视</span>
+    
+        <span class="sidebar-category-name" data-categories="前端"><span class="iconfont-archer">&#xe60a;</span>前端</span>
+    
+        <span class="sidebar-category-name" data-categories="游戏"><span class="iconfont-archer">&#xe60a;</span>游戏</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
