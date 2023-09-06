@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>前端错题集（1） | 无主之地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript类型 七种数据类型：Undefined、Null、Boolean、Number、String、Object、(Symbol) 五种基本数据类型：Undefined、Null、Boolean Number、String typeof六种返回格式：undefined、boolean、number、string、object、function">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端错题集（1）">
+<meta property="og:url" content="http://shenyizhou.github.io/2016/03/13/2016-03-13-%E5%89%8D%E7%AB%AF%E9%94%99%E9%A2%98%E9%9B%86%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content="JavaScript类型 七种数据类型：Undefined、Null、Boolean、Number、String、Object、(Symbol) 五种基本数据类型：Undefined、Null、Boolean Number、String typeof六种返回格式：undefined、boolean、number、string、object、function">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://uploadfiles.nowcoder.com/images/20150809/129829_1439111186698_FY092QDH60Y9UYU9M.png">
+<meta property="article:published_time" content="2016-03-12T17:20:32.000Z">
+<meta property="article:modified_time" content="2023-09-06T07:04:23.691Z">
+<meta property="article:author" content="Yizhou Shen">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://uploadfiles.nowcoder.com/images/20150809/129829_1439111186698_FY092QDH60Y9UYU9M.png">
+  
+    <link rel="alternate" href="/atom.xml" title="无主之地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">无主之地</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shenyizhou.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016-03-13-前端错题集（1）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/13/2016-03-13-%E5%89%8D%E7%AB%AF%E9%94%99%E9%A2%98%E9%9B%86%EF%BC%881%EF%BC%89/" class="article-date">
+  <time datetime="2016-03-12T17:20:32.000Z" itemprop="datePublished">2016年03月13日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端错题集（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><h4 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h4><ul>
+<li>七种数据类型：Undefined、Null、Boolean、Number、String、Object、(Symbol)</li>
+<li>五种基本数据类型：Undefined、Null、Boolean Number、String</li>
+<li>typeof六种返回格式：undefined、boolean、number、string、object、function<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">23</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="keyword">typeof</span> f;<span class="comment">//function</span></span><br><span class="line"><span class="keyword">typeof</span> f();<span class="comment">//number</span></span><br><span class="line"><span class="keyword">typeof</span> g;<span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">typeof</span> g();<span class="comment">//ReferenceError，g is not defined</span></span><br><span class="line"><span class="comment">//&quot;&quot;代表字符串</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>+ <span class="string">&quot;2&quot;</span>+<span class="string">&quot;2&quot;</span>);<span class="comment">//122</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>+ +<span class="string">&quot;2&quot;</span>+<span class="string">&quot;2&quot;</span>);<span class="comment">//32</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;A&quot;</span>- <span class="string">&quot;B&quot;</span>+<span class="string">&quot;2&quot;</span>);<span class="comment">//NaN2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;A&quot;</span>- <span class="string">&quot;B&quot;</span>+<span class="number">2</span>);<span class="comment">//NaN</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>);<span class="comment">//对象</span></span><br><span class="line"><span class="comment">//true</span></span><br><span class="line"><span class="keyword">if</span> (x) &#123;</span><br><span class="line">  alert(<span class="string">&#x27;hi&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> y = <span class="built_in">Boolean</span>(<span class="number">0</span>);<span class="comment">//值</span></span><br><span class="line"><span class="comment">//false</span></span><br><span class="line"><span class="keyword">if</span> (y) &#123;</span><br><span class="line">  alert(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a,b;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(a);<span class="comment">//undefined</span></span><br><span class="line">    alert(b);<span class="comment">//undefined</span></span><br><span class="line">    <span class="keyword">var</span> a=b=<span class="number">3</span>;<span class="comment">//a是局部变量，而b是全局变量</span></span><br><span class="line">    alert(a);<span class="comment">//3</span></span><br><span class="line">    alert(b);<span class="comment">//3</span></span><br><span class="line">&#125;)();</span><br><span class="line">alert(a);<span class="comment">//undefined</span></span><br><span class="line">alert(b);<span class="comment">//3</span></span><br></pre></td></tr></table></figure>
+<h4 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];     </span><br><span class="line"><span class="keyword">var</span> arr=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);     </span><br><span class="line"><span class="keyword">var</span> arr=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">12</span>);<span class="comment">//如果只有一个数，代表数组的length是12个</span></span><br><span class="line"><span class="keyword">var</span> arr=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">0</span>);<span class="comment">//清空数组</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h3><h4 id="AngularJS"><a href="#AngularJS" class="headerlink" title="AngularJS"></a>AngularJS</h4><ul>
+<li>大大减少了对DOM的访问</li>
+<li>前端mvc，极大降低前端开发的耦合</li>
+<li>实现了数据双向绑定</li>
+<li>实现了依赖注入</li>
+<li>compile绑定DOM，link绑定数据</li>
+<li>调用compile函数将得到一个编译好的template函数，他将会调用从所有指令中搜集而来的link函数</li>
+<li>ng-if会移除dom，生成dom</li>
+<li>ng-show只是改变其display属性</li>
+<li>ng-class是AngularJS预设的一个指令，用于动态自定义dom元素的css class name</li>
+<li>control间通信最好使用广播</li>
+<li>AngularJS的服务是一个单例对象或函数，对外提供特定的功能</li>
+</ul>
+<h4 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery"></a>JQuery</h4><ul>
+<li>极大的丰富了DOM操作<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">alert($(<span class="built_in">window</span>).height()); <span class="comment">//浏览器当前窗口可视区域高度</span></span><br><span class="line">alert($(<span class="built_in">document</span>).height()); <span class="comment">//浏览器当前窗口文档的高度</span></span><br><span class="line">alert($(<span class="built_in">document</span>.body).height());<span class="comment">//浏览器当前窗口文档body的高度</span></span><br><span class="line">alert($(<span class="built_in">document</span>.body).outerHeight(<span class="literal">true</span>));<span class="comment">//浏览器当前窗口文档body的总高度 包括border padding margin</span></span><br><span class="line">alert($(<span class="built_in">window</span>).width()); <span class="comment">//浏览器当前窗口可视区域宽度</span></span><br><span class="line">alert($(<span class="built_in">document</span>).width());<span class="comment">//浏览器当前窗口文档对象宽度</span></span><br><span class="line">alert($(<span class="built_in">document</span>.body).width());<span class="comment">//浏览器当前窗口文档body的宽度</span></span><br><span class="line">alert($(<span class="built_in">document</span>.body).outerWidth(<span class="literal">true</span>));<span class="comment">//浏览器当前窗口文档body的总宽度 包括border padding margin</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h4><ul>
+<li>应该将被包裹的元素放到navbar-collapse类中</li>
+<li>表单应该放置于navbar-form内</li>
+<li>可以使用navbar-left和navbar-right来对齐导航条</li>
+<li>可以使用navbar-fixed-top和navbar-fixed-bottom来将导航条固定到顶部或底<img src="http://uploadfiles.nowcoder.com/images/20150809/129829_1439111186698_FY092QDH60Y9UYU9M.png" alt="enter image description here"></li>
+</ul>
+<h3 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h3><h4 id="IE"><a href="#IE" class="headerlink" title="IE"></a>IE</h4><ul>
+<li>混淆了 DOM 对象属性（property）及 HTML 标签属性（attribute），造成了对 setAttribute、getAttribute 的不正确实现</li>
+<li>仅 IE 中的 createElement 方法支持传入 HTML String 做参数</li>
+</ul>
+<h4 id="FireFox"><a href="#FireFox" class="headerlink" title="FireFox"></a>FireFox</h4><ul>
+<li>不支持 DOM 对象的 outerHTML、innerText（用textContent替代）、outerText 属性</li>
+</ul>
+<h3 id="异步编程Asynchronous-Programming"><a href="#异步编程Asynchronous-Programming" class="headerlink" title="异步编程Asynchronous Programming"></a>异步编程Asynchronous Programming</h3><ul>
+<li>回调函数，这是异步编程最基本的方法。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">f1();</span><br><span class="line">f2();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// f1的任务代码</span></span><br><span class="line">        callback();</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>事件监听，另一种思路是采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f1.on(<span class="string">&#x27;done&#x27;</span>, f2);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// f1的任务代码</span></span><br><span class="line">        f1.trigger(<span class="string">&#x27;done&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>发布/订阅，上一节的”事件”，完全可以理解成”信号”。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">jQuery.subscribe(<span class="string">&quot;done&quot;</span>, f2);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// f1的任务代码</span></span><br><span class="line">        jQuery.publish(<span class="string">&quot;done&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line">jQuery.unsubscribe(<span class="string">&quot;done&quot;</span>, f2);</span><br></pre></td></tr></table></figure></li>
+<li>Promises对象，Promises 对象是CommonJS 工作组提出的一种规范，目的是为异步编程提供统一接口。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">f1().then(f2);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> dfd = $.Deferred();</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// f1的任务代码</span></span><br><span class="line">        dfd.resolve();</span><br><span class="line">    &#125;, <span class="number">500</span>);</span><br><span class="line">    <span class="keyword">return</span> dfd.promise;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指定多个回调函数：</span></span><br><span class="line">f1().then(f2).then(f3);</span><br><span class="line"><span class="comment">//指定发生错误时的回调函数：</span></span><br><span class="line">f1().then(f2).fail(f3);</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="AJAX与Flash"><a href="#AJAX与Flash" class="headerlink" title="AJAX与Flash"></a>AJAX与Flash</h3><ul>
+<li>AJAX的优势：可搜索性、开放性、费用、易用性、易于开发。</li>
+<li>Flash的优势：多媒体处理、兼容性、矢量图形、客户端资源调度</li>
+<li>AJAX的劣势：它可能破坏浏览器的后退功能；使用动态页面更新使得用户难于将某个特定的状态保存到收藏夹中，不过这些都有相关方法解决</li>
+<li>Flash的劣势：二进制格式；格式私有；flash文件经常会很大，用户第一次使用的时候需要忍耐较长的等待时间；性能问题</li>
+</ul>
+<h3 id="作用域Scope"><a href="#作用域Scope" class="headerlink" title="作用域Scope"></a>作用域Scope</h3><ul>
+<li>scope: true和transclude: true会创建新的子作用域，并且进行原型继承</li>
+<li>scope: {…} 会创建新的独立作用域，不会进行原型继承</li>
+<li>默认情况下创建directive使用了scope: false，不会创建子作用域</li>
+<li>For不会形成作用域</li>
+</ul>
+<h3 id="原型Prototype"><a href="#原型Prototype" class="headerlink" title="原型Prototype"></a>原型Prototype</h3><p>javascript语言实现继承机制的核心就是<strong>prototype</strong>，而不是Java语言那样的类式继承。Javascript 解析引擎在读取一个Object的属性的值时，会沿着<strong>原型链</strong>向上寻找，如果最终没有找到，则该属性值为<strong>undefined</strong>； 如果最终找到该属性的值，则返回结果。与这个过程不同的是，当javascript解析引擎执行“给一个Object的某个属性赋值”的时候，如果当前Object存在该属性，则改写该属性的值，如果当前的Object本身并不存在该属性，则赋值该属性的值。</p>
+<h4 id="用HasOwnProperty判断原型链属性"><a href="#用HasOwnProperty判断原型链属性" class="headerlink" title="用HasOwnProperty判断原型链属性"></a>用HasOwnProperty判断原型链属性</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.name=<span class="string">&quot;Nicholas&quot;</span>;</span><br><span class="line">Person.prototype.age=<span class="number">29</span>;</span><br><span class="line">Person.prototype.sayName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1=<span class="keyword">new</span> Person();</span><br><span class="line">person1.name=<span class="string">&quot;Greg&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person2=<span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person1.hasOwnProperty(<span class="string">&quot;name&quot;</span>));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.hasOwnProperty(<span class="string">&quot;name&quot;</span>));<span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;name&quot;</span> <span class="keyword">in</span> person1);<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;name&quot;</span> <span class="keyword">in</span> person2);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> prop <span class="keyword">in</span> person1) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(prop);<span class="comment">//name   age   sayName</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasPrototypeProperty</span>(<span class="params">object,pro</span>) </span>&#123;<span class="comment">//如此可判断存在于原型中的属性</span></span><br><span class="line">    <span class="keyword">return</span> (!object.hasOwnProperty(pro))&amp;&amp;(pro <span class="keyword">in</span> object);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(hasPrototypeProperty(person1,<span class="string">&quot;name&quot;</span>));<span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(hasPrototypeProperty(person2,<span class="string">&quot;name&quot;</span>));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="原型链与this"><a href="#原型链与this" class="headerlink" title="原型链与this"></a>原型链与this</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现a.name = “name1”; b.name = “name2”;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">obj</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(name)&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;<span class="comment">//填写语句</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">obj.prototype.name = <span class="string">&quot;name2&quot;</span>;<span class="comment">//填写语句</span></span><br><span class="line"><span class="keyword">var</span> a = obj(<span class="string">&quot;name1&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> obj;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a.name); <span class="comment">// name1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.name); <span class="comment">// name1</span></span><br><span class="line"><span class="built_in">console</span>.log(b.name); <span class="comment">// name2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//一般函数直接调用，默认this执行全局window|global</span></span><br><span class="line"><span class="comment">//通过obj(&#x27;name1&#x27;)调用，返回this引用，并传给a, 此时a等于window对象，即可输出属性name值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//new操作， new obj 等价于 new obj() ,实例化一个对象，这时this指向obj,要拿到b.name的值</span></span><br><span class="line"><span class="comment">//需要保证name属性存在，属性查找原则是先查找当前实例有没有属性，如果有就直接使用，如果没有就到原型上面找，再没有就接着原型链一步一步，这里为了和a.name作属性区别，使用了if(name)有条件地构建this的属性name</span></span><br><span class="line"><span class="comment">//所以，现在实例name属性提供给a使用，原型上的name提供给b使用。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//两个变体</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">obj</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//if(name)&#123;</span></span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="comment">//&#125;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">obj.prototype.name = <span class="string">&quot;name2&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> a = obj(<span class="string">&quot;name1&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> obj;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a.name);<span class="comment">//name1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.name);<span class="comment">//name1</span></span><br><span class="line"><span class="built_in">console</span>.log(b.name);<span class="comment">//undefined</span></span><br><span class="line"><span class="comment">// 这时b实例已经有属性name，但参数name为undefined ,所以这时可以把this.name属性删掉，这样就能去原型找name了</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">obj</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//if(name)&#123;</span></span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="comment">//&#125;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">obj.prototype.name = <span class="string">&quot;name2&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> a = obj(<span class="string">&quot;name1&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> obj;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a.name);<span class="comment">//name1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.name);<span class="comment">//name1</span></span><br><span class="line"><span class="keyword">delete</span> b.name;</span><br><span class="line"><span class="built_in">console</span>.log(b.name);<span class="comment">//name2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 再试试 new obj(&#x27;myName&#x27;) 传个参数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">obj</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//if(name)&#123;</span></span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="comment">//&#125;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">obj.prototype.name = <span class="string">&quot;name2&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> a = obj(<span class="string">&quot;name1&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> obj(<span class="string">&#x27;myName&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a.name);<span class="comment">//name1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.name);<span class="comment">//name1</span></span><br><span class="line"><span class="built_in">console</span>.log(b.name);<span class="comment">//myName</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="延时"><a href="#延时" class="headerlink" title="延时"></a>延时</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.setTimeout(checkState, <span class="number">10000</span>);<span class="comment">//延时10S执行</span></span><br><span class="line"><span class="built_in">window</span>.setTimeout(checkState(), <span class="number">10000</span>);<span class="comment">//加了圆括弧相当于函数表达式，会立即执行，执行的结果作为返回值传递给setTimeout</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><h4 id="输出对象中值大于2的key的数组"><a href="#输出对象中值大于2的key的数组" class="headerlink" title="输出对象中值大于2的key的数组"></a>输出对象中值大于2的key的数组</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = &#123;<span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: <span class="number">3</span>, <span class="attr">d</span>: <span class="number">4</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.keys(data).filter(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> data[x]&gt;<span class="number">2</span>;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//filter的第二个参数是index， 这里可以用arguments[1]来取到</span></span><br><span class="line"><span class="built_in">Object</span>.keys(data).filter(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">arguments</span>[<span class="number">1</span>]&gt;=<span class="number">2</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2016/03/13/2016-03-13-%E5%89%8D%E7%AB%AF%E9%94%99%E9%A2%98%E9%9B%86%EF%BC%881%EF%BC%89/" data-id="clm7edcns00018gabeexk2lxm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/15/2016-03-15-IFE%E4%BB%BB%E5%8A%A1%E4%B8%80%E6%94%B6%E8%8E%B7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          IFE任务一收获
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ionic/">Ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VPN/">VPN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BD%93%E8%82%B2/">体育</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8A%A8%E6%BC%AB/">动漫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E8%AF%B4/">小说</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%AF%94%E8%BE%83/">技术比较</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/">技术综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%95%E8%B5%84/">投资</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%8C%E6%B8%B8/">桌游</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%91%E5%9B%A2/">跑团</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/" rel="tag">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COC/" rel="tag">COC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ElementUI/" rel="tag">ElementUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ionic/" rel="tag">Ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LuaSocket/" rel="tag">LuaSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyEclipse/" rel="tag">MyEclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Power-Designer/" rel="tag">Power Designer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPF/" rel="tag">WPF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mock/" rel="tag">mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-json/" rel="tag">package.json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threejs/" rel="tag">threejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E7%B1%BB/" rel="tag">分类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/" rel="tag">前端综合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%BC%AB/" rel="tag">动漫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" rel="tag">域名劫持</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E5%85%A5/" rel="tag">导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag">微机原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B/" rel="tag">德州扑克</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E4%B9%90/" rel="tag">快乐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" rel="tag">技术名词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" rel="tag">技术综合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" rel="tag">技术陷阱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%95%E8%B5%84/" rel="tag">投资</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A6%E4%BE%A0/" rel="tag">武侠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E9%87%8A/" rel="tag">注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" rel="tag">深入理解C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%88%8F%E7%8E%8B/" rel="tag">游戏王</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%82%89%E7%9F%B3/" rel="tag">炉石</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" rel="tag">王者荣耀</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%95%A5/" rel="tag">略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" rel="tag">知识体系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E5%AE%9D%E5%8F%AF%E6%A2%A6%E6%B8%B8%E6%88%8F/" rel="tag">类宝可梦游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A5%E9%9B%B6/" rel="tag">补零</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BA%BB%E5%B0%86/" rel="tag">麻将</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 12.86px;">Android</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/COC/" style="font-size: 11.43px;">COC</a> <a href="/tags/CSS/" style="font-size: 15.71px;">CSS</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Database/" style="font-size: 10px;">Database</a> <a href="/tags/ElementUI/" style="font-size: 11.43px;">ElementUI</a> <a href="/tags/Git/" style="font-size: 17.14px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Grunt/" style="font-size: 11.43px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IDE/" style="font-size: 12.86px;">IDE</a> <a href="/tags/Ionic/" style="font-size: 10px;">Ionic</a> <a href="/tags/Java/" style="font-size: 11.43px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 18.57px;">JavaScript</a> <a href="/tags/Lua/" style="font-size: 11.43px;">Lua</a> <a href="/tags/LuaSocket/" style="font-size: 10px;">LuaSocket</a> <a href="/tags/MyEclipse/" style="font-size: 10px;">MyEclipse</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Power-Designer/" style="font-size: 11.43px;">Power Designer</a> <a href="/tags/SEO/" style="font-size: 10px;">SEO</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/WPF/" style="font-size: 10px;">WPF</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/mock/" style="font-size: 10px;">mock</a> <a href="/tags/package-json/" style="font-size: 10px;">package.json</a> <a href="/tags/threejs/" style="font-size: 10px;">threejs</a> <a href="/tags/%E5%88%86%E7%B1%BB/" style="font-size: 10px;">分类</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/" style="font-size: 10px;">前端综合</a> <a href="/tags/%E5%8A%A8%E6%BC%AB/" style="font-size: 11.43px;">动漫</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 10px;">动画</a> <a href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" style="font-size: 10px;">域名劫持</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AF%BC%E5%85%A5/" style="font-size: 10px;">导入</a> <a href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" style="font-size: 11.43px;">微机原理</a> <a href="/tags/%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B/" style="font-size: 10px;">德州扑克</a> <a href="/tags/%E5%BF%AB%E4%B9%90/" style="font-size: 10px;">快乐</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" style="font-size: 11.43px;">技术名词</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" style="font-size: 10px;">技术综合</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" style="font-size: 10px;">技术陷阱</a> <a href="/tags/%E6%8A%95%E8%B5%84/" style="font-size: 10px;">投资</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">数据类型</a> <a href="/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 10px;">标签</a> <a href="/tags/%E6%AD%A6%E4%BE%A0/" style="font-size: 10px;">武侠</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 11.43px;">汇编</a> <a href="/tags/%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">注释</a> <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" style="font-size: 14.29px;">深入理解C#</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E7%8E%8B/" style="font-size: 12.86px;">游戏王</a> <a href="/tags/%E7%82%89%E7%9F%B3/" style="font-size: 10px;">炉石</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 10px;">状态码</a> <a href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" style="font-size: 11.43px;">王者荣耀</a> <a href="/tags/%E7%95%A5/" style="font-size: 10px;">略</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" style="font-size: 10px;">知识体系</a> <a href="/tags/%E7%B1%BB%E5%AE%9D%E5%8F%AF%E6%A2%A6%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">类宝可梦游戏</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 10px;">缓存</a> <a href="/tags/%E8%A1%A5%E9%9B%B6/" style="font-size: 10px;">补零</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 14.29px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 11.43px;">跨域</a> <a href="/tags/%E9%BA%BB%E5%B0%86/" style="font-size: 12.86px;">麻将</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/09/12/2021-09-12-%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B/">德州扑克</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/27/2021-07-27-%E7%AE%80%E4%B8%AD%E5%BD%B1%E4%BE%9D%E6%94%BB%E7%95%A5/">简中影依攻略</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/25/2021-07-25-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%BA%BB%E5%B0%86%E8%A7%84%E5%88%99%20copy/">自定义麻将规则</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/2021-07-20-%E6%B8%B8%E6%88%8F%E7%8E%8B%E6%94%B6%E5%8D%A1%E8%AE%A1%E5%88%92%E2%80%94%E2%80%94%E7%9B%B8%E5%89%91/">游戏王收卡计划——相剑</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/18/2021-07-18-%E3%80%8A%E5%A4%8D%E5%88%A9%E6%80%9D%E7%BB%B4%E3%80%8B/">《复利思维》</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Yizhou Shen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
