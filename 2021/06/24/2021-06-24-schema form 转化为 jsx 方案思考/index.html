@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>schema form 转化为 jsx 方案思考 | 无主之地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景   直播中后台绝大部分(90%)的页面使用 schema form 搭建   schema form 虽然带来了效率的提升，但由于只支持 json，无法自定义地实现一些定制化的需求">
+<meta property="og:type" content="article">
+<meta property="og:title" content="schema form 转化为 jsx 方案思考">
+<meta property="og:url" content="http://shenyizhou.github.io/2021/06/24/2021-06-24-schema%20form%20%E8%BD%AC%E5%8C%96%E4%B8%BA%20jsx%20%E6%96%B9%E6%A1%88%E6%80%9D%E8%80%83/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content="背景   直播中后台绝大部分(90%)的页面使用 schema form 搭建   schema form 虽然带来了效率的提升，但由于只支持 json，无法自定义地实现一些定制化的需求">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-24T15:01:30.000Z">
+<meta property="article:modified_time" content="2024-03-05T15:18:51.038Z">
+<meta property="article:author" content="Yizhou Shen">
+<meta property="article:tag" content="表单">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="无主之地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">无主之地</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shenyizhou.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2021-06-24-schema form 转化为 jsx 方案思考" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/06/24/2021-06-24-schema%20form%20%E8%BD%AC%E5%8C%96%E4%B8%BA%20jsx%20%E6%96%B9%E6%A1%88%E6%80%9D%E8%80%83/" class="article-date">
+  <time datetime="2021-06-24T15:01:30.000Z" itemprop="datePublished">2021年06月24日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      schema form 转化为 jsx 方案思考
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><ul>
+<li>  直播中后台绝大部分(90%)的页面使用 schema form 搭建</li>
+<li>  schema form 虽然带来了效率的提升，但由于只支持 json，无法自定义地实现一些定制化的需求</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h1><ul>
+<li>  json 自身的局限性，导致框架不满足需求时，只能被动等待框架支持该功能</li>
+<li>  无法利用 React jsx 一些方便的特性，无法侵入到组件内部去动态修改一些逻辑</li>
+<li>  无法自由自在地进行布局，目前 schema form 只有从上到下的展示</li>
+<li>  有时候封装一个自定义组件只是为了一个特殊的展示</li>
+</ul>
+<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
+<li>  使用 jsx 的方式支持 json 所有已有的功能点，同时尽可能不改变用户已有的认知</li>
+<li>  最大化地满足用户定制化的需求，使得用 jsx 的写法能替代大部分(70%)使用自定义组件的场景</li>
+<li>  在保证自由度的需求上，尽可能简化写法，方便用户的开发</li>
+</ul>
+<h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><ul>
+<li>  实现 jsx 功能</li>
+<li>  提供 json 到 jsx 的一键转化功能</li>
+<li>  提供布局组件</li>
+</ul>
+<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><p>原有的使用方式是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> schema = [</span><br><span class="line">    &#123;</span><br><span class="line">        key: <span class="string">&#x27;radio1&#x27;</span>,</span><br><span class="line">        type: <span class="string">&#x27;Radio&#x27;</span>,</span><br><span class="line">        ui: &#123;</span><br><span class="line">            label: <span class="string">&#x27;表单项 1&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        value: <span class="number">1</span>,</span><br><span class="line">        options: [</span><br><span class="line">            &#123;</span><br><span class="line">                name: <span class="string">&#x27;联动&#x27;</span>,</span><br><span class="line">                value: <span class="number">1</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                name: <span class="string">&#x27;不联动&#x27;</span>,</span><br><span class="line">                value: <span class="number">0</span></span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        props: &#123;</span><br><span class="line">            placeholder: <span class="string">&#x27;占位信息&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        key: <span class="string">&#x27;input1&#x27;</span>,</span><br><span class="line">        type: <span class="string">&#x27;Input&#x27;</span>,</span><br><span class="line">        ui: &#123;</span><br><span class="line">            label: <span class="string">&#x27;表单项 2&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        listeners: [</span><br><span class="line">            &#123;</span><br><span class="line">                watch: [<span class="string">&#x27;radio1&#x27;</span>],</span><br><span class="line">                condition: <span class="string">&#x27;radio1.value == 1&#x27;</span>,</span><br><span class="line">                set: &#123;</span><br><span class="line">                    value: <span class="string">&#x27;联动&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        key: <span class="string">&#x27;input2&#x27;</span>,</span><br><span class="line">        type: <span class="string">&#x27;Input&#x27;</span>,</span><br><span class="line">        ui: &#123;</span><br><span class="line">            label: <span class="string">&#x27;表单项 3&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">&lt;XForm schema=&#123;schema&#125; /&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>转化为 jsx 之后的写法为：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> listerners = useFormListeners(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 联动逻辑</span></span><br><span class="line">&#125;, []);</span><br><span class="line"></span><br><span class="line">&lt;XForm&gt;</span><br><span class="line">    &lt;Row&gt;</span><br><span class="line">        &lt;Col flex=&#123;<span class="number">1</span>&#125;&gt;</span><br><span class="line">            &lt;XFormItem</span><br><span class="line">                key=<span class="string">&quot;radio1&quot;</span></span><br><span class="line">                type=<span class="string">&quot;Radio&quot;</span></span><br><span class="line">                label=<span class="string">&quot;表单项 1&quot;</span></span><br><span class="line">                placeholder=<span class="string">&quot;占位信息&quot;</span></span><br><span class="line">                value=&#123;<span class="number">1</span>&#125;</span><br><span class="line">                options=&#123;[</span><br><span class="line">                    &#123;</span><br><span class="line">                        name: <span class="string">&#x27;联动&#x27;</span>,</span><br><span class="line">                        value: <span class="number">1</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        name: <span class="string">&#x27;不联动&#x27;</span>,</span><br><span class="line">                        value: <span class="number">0</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ]&#125;</span><br><span class="line">            /&gt;</span><br><span class="line">        &lt;/Col&gt;</span><br><span class="line">        &lt;Col flex=&#123;<span class="number">1</span>&#125;&gt;</span><br><span class="line">            &lt;XFormItem key=<span class="string">&quot;input1&quot;</span> label=<span class="string">&quot;表单项 2&quot;</span> listerners=&#123;listerners&#125;&gt;</span><br><span class="line">                &lt;Input /&gt;</span><br><span class="line">            &lt;/XFormItem&gt;</span><br><span class="line">        &lt;/Col&gt;</span><br><span class="line">    &lt;/Row&gt;</span><br><span class="line">    &lt;XFormItem key=<span class="string">&quot;input2&quot;</span> type=<span class="string">&quot;Input&quot;</span> label=<span class="string">&quot;表单项 3&quot;</span> /&gt;</span><br><span class="line">&lt;/XForm&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>主要做了以下优化：</p>
+<ul>
+<li>  尽可能采用简写的形式，比如 <code>ui: &#123; label: &#39;&#39; &#125;</code> 直接简写为 <code>label</code> 字段，同时 <code>props</code> 中的参数也可以直接透传，比如 <code>placeholder</code></li>
+<li>  更符合 jsx 编写的习惯，可以把 <code>type</code> 对应的组件，放入 <code>children</code> 中，也可以直接作为 <code>type</code> 传递</li>
+<li>  增加了 <code>Row</code>、<code>Col</code> 等布局组件，也可以直接自己写 <code>div</code> 传入希望的样式，或者加入其它展示元素</li>
+</ul>
+<p>XTable 也做了相应优化：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;XTable&gt;</span><br><span class="line">    &lt;Filters&gt;</span><br><span class="line">        &lt;XFormItem /&gt;</span><br><span class="line">        &lt;XFormItem /&gt;</span><br><span class="line">        &lt;XFormItem /&gt;</span><br><span class="line">        &lt;XButton type=<span class="string">&quot;search&quot;</span> /&gt;</span><br><span class="line">        &lt;XButton type=<span class="string">&quot;reset&quot;</span> /&gt;</span><br><span class="line">    &lt;/Filters&gt;</span><br><span class="line">    &lt;XButton type=<span class="string">&quot;search&quot;</span> /&gt;</span><br><span class="line">    &lt;XButtonModal &#123;...ui&#125; action=<span class="string">&quot;add&quot;</span>&gt;</span><br><span class="line">        &lt;XForm &#123;...props&#125; /&gt;</span><br><span class="line">    &lt;/XButtonModal&gt;</span><br><span class="line">    &lt;Table</span><br><span class="line">        column=&#123;[</span><br><span class="line">            <span class="number">11</span>,</span><br><span class="line">            <span class="number">22</span>,</span><br><span class="line">            (record, filter) =&gt; (</span><br><span class="line">                &lt;ButtonModal &#123;...ui&#125; action=<span class="string">&quot;add&quot;</span>&gt;</span><br><span class="line">                    &lt;XForm &#123;...props&#125; /&gt;</span><br><span class="line">                &lt;/ButtonModal&gt;</span><br><span class="line">            )</span><br><span class="line">        ]&#125;</span><br><span class="line">    /&gt;</span><br><span class="line">&lt;/XTable&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> actionRef = useRef&lt;ActionType&gt;();</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;ProTable&lt;GithubIssueItem&gt;</span><br><span class="line">      columns=&#123;columns&#125;</span><br><span class="line">      actionRef=&#123;actionRef&#125;</span><br><span class="line">      request=&#123;<span class="keyword">async</span> (params = &#123;&#125;, sort, filter) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(sort, filter);</span><br><span class="line">        <span class="keyword">return</span> request&lt;&#123;</span><br><span class="line">          data: GithubIssueItem[];</span><br><span class="line">        &#125;&gt;(<span class="string">&#x27;https://proapi.azurewebsites.net/github/issues&#x27;</span>, &#123;</span><br><span class="line">          params,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;&#125;</span><br><span class="line">      editable=&#123;&#123;</span><br><span class="line">        type: <span class="string">&#x27;multiple&#x27;</span>,</span><br><span class="line">      &#125;&#125;</span><br><span class="line">      columnsState=&#123;&#123;</span><br><span class="line">        persistenceKey: <span class="string">&#x27;pro-table-singe-demos&#x27;</span>,</span><br><span class="line">        persistenceType: <span class="string">&#x27;localStorage&#x27;</span>,</span><br><span class="line">      &#125;&#125;</span><br><span class="line">      rowKey=<span class="string">&quot;id&quot;</span></span><br><span class="line">      search=&#123;&#123;</span><br><span class="line">        labelWidth: <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">      &#125;&#125;</span><br><span class="line">      form=&#123;&#123;</span><br><span class="line">        <span class="comment">// 由于配置了 transform，提交的参与与定义的不同这里需要转化一下</span></span><br><span class="line">        syncToUrl: <span class="function">(<span class="params">values, type</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (type === <span class="string">&#x27;get&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">              ...values,</span><br><span class="line">              created_at: [values.startTime, values.endTime],</span><br><span class="line">            &#125;;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> values;</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;&#125;</span><br><span class="line">      pagination=&#123;&#123;</span><br><span class="line">        pageSize: <span class="number">5</span>,</span><br><span class="line">      &#125;&#125;</span><br><span class="line">      dateFormatter=<span class="string">&quot;string&quot;</span></span><br><span class="line">      headerTitle=<span class="string">&quot;高级表格&quot;</span></span><br><span class="line">      toolBarRender=&#123;<span class="function">() =&gt;</span> [</span><br><span class="line">        &lt;Button key=<span class="string">&quot;button&quot;</span> icon=&#123;<span class="xml"><span class="tag">&lt;<span class="name">PlusOutlined</span> /&gt;</span></span>&#125; type=<span class="string">&quot;primary&quot;</span>&gt;</span><br><span class="line">          新建</span><br><span class="line">        &lt;/Button&gt;,</span><br><span class="line">        &lt;Dropdown key=<span class="string">&quot;menu&quot;</span> overlay=&#123;menu&#125;&gt;</span><br><span class="line">          &lt;Button&gt;</span><br><span class="line">            &lt;EllipsisOutlined /&gt;</span><br><span class="line">          &lt;/Button&gt;</span><br><span class="line">        &lt;/Dropdown&gt;,</span><br><span class="line">      ]&#125;</span><br><span class="line">    /&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="进展"><a href="#进展" class="headerlink" title="进展"></a>进展</h1><ul>
+<li>  本地 demo 预研，进行中</li>
+</ul>
+<h1 id="XTableJSX初版方案"><a href="#XTableJSX初版方案" class="headerlink" title="XTableJSX初版方案"></a>XTableJSX初版方案</h1><p>2021年11月01日</p>
+<pre><code class="javascript">   &lt;ConfigProvider locale=&#123;zh_CN&#125;&gt;
+      &lt;div style=&#123;&#123; padding: "20px" &#125;&#125;&gt;
+        &lt;XTable
+          ref=&#123;ref&#125;
+          onSearch=&#123;(core) =&gt; console.log(&quot;onSearch&quot;, core)&#125;
+          request=&#123;API.list&#125;
+        &gt;
+          &lt;Row&gt;
+            &lt;Col span=&#123;20&#125;&gt;
+              &#123;/* 检索区域 */&#125;
+              &lt;SearchForm
+                values=&#123;&#123;
+                  input: "我是默认值",
+                &#125;&#125;
+                buttons=&#123;(action) =&gt; [
+                  &lt;Button type=&quot;primary&quot; onClick=&#123;action.search&#125;&gt;
+                    搜索
+                  &lt;/Button&gt;,
+                  &lt;Button onClick=&#123;action.reset&#125;&gt;重置&lt;/Button&gt;,
+                  &lt;Button onClick=&#123;action.empty&#125;&gt;清空&lt;/Button&gt;,
+                ]&#125;
+              &gt;
+                &lt;XFormItem name=&quot;input&quot; type=&quot;Input&quot; label=&quot;测试&quot; /&gt;
+                &lt;XFormItem name=&quot;input2&quot; type=&quot;Input&quot; label=&quot;测试2&quot; /&gt;
+              &lt;/SearchForm&gt;
+            &lt;/Col&gt;
+            &lt;Col span=&#123;4&#125;&gt;
+              &lt;Toolbar&gt;
+                &lt;Action
+                  type=&quot;create&quot;
+                  title=&quot;新增&quot;
+                  buttonProps=&#123;&#123;
+                    type: "primary",
+                  &#125;&#125;
+                  api=&#123;API.add&#125;
+                &gt;
+                  &lt;XFormItem name=&quot;name&quot; type=&quot;Input&quot; label=&quot;名字&quot; /&gt;
+                &lt;/Action&gt;
+              &lt;/Toolbar&gt;
+            &lt;/Col&gt;
+          &lt;/Row&gt;
+
+          &lt;ColumnRender
+            columns=&#123;[
+              &#123;
+                key: &quot;name&quot;,
+                title: &quot;名字&quot;,
+                sortable: true,
+              &#125;,
+              // TODO: 序号列
+              // &#123;
+              //   key: &quot;index&quot;,
+              //   type: (&#123; pageSize, pageIndex, rowIndex &#125;: any) =&gt; (
+              //     &lt;span&gt;&#123;(pageIndex - 1) * pageSize + rowIndex&#125;&lt;/span&gt;
+              //   ),
+              //   title: &quot;序号&quot;,
+              // &#125;,
+              &#123;
+                key: &quot;time&quot;,
+                title: &quot;时间&quot;,
+                type: &quot;Datetime&quot;,
+                sortable: true,
+              &#125;,
+              &#123;
+                key: &quot;type&quot;,
+                title: &quot;类型&quot;,
+                type: &quot;Enum&quot;,
+                props: &#123;
+                  options: [
+                    &#123; name: &quot;水果&quot;, value: &quot;1&quot; &#125;,
+                    &#123; name: &quot;蔬菜&quot;, value: &quot;2&quot; &#125;,
+                  ],
+                &#125;,
+              &#125;,
+              &#123;
+                key: &quot;image&quot;,
+                title: &quot;图片&quot;,
+                type: &quot;Image&quot;,
+              &#125;,
+              &#123;
+                key: &quot;format&quot;,
+                title: &quot;格式&quot;,
+                type: &quot;Format&quot;,
+                props: &#123;
+                  format: (data: any) =&gt; data.value * 100,
+                &#125;,
+              &#125;,
+              &#123;
+                key: &quot;audio&quot;,
+                title: &quot;音频&quot;,
+                type: &quot;Audio&quot;,
+                ui: &#123;
+                  width: 300,
+                &#125;,
+              &#125;,
+              &#123;
+                key: &quot;video&quot;,
+                title: &quot;视频&quot;,
+                type: &quot;Video&quot;,
+                ui: &#123;
+                  width: 300,
+                &#125;,
+              &#125;,
+              &#123;
+                title: &quot;测试&quot;,
+                key: &quot;test&quot;,
+                type: (&#123; value &#125;: any) =&gt; &#123;
+                  return &lt;span&gt;&#123;value?.a&#125;&lt;/span&gt;;
+                &#125;,
+              &#125;,
+              &#123;
+                title: &quot;操作&quot;,
+                type: (&#123; record &#125;: any) =&gt; &#123;
+                  return (
+                    &lt;&gt;
+                      &lt;Action
+                        type=&quot;edit&quot;
+                        title=&quot;编辑&quot;
+                        api=&#123;API.update&#125;
+                        record=&#123;record&#125;
+                        buttonProps=&#123;&#123;
+                          type: "primary",
+                        &#125;&#125;
+                      &gt;
+                        &lt;XFormItem name=&quot;name&quot; type=&quot;Input&quot; label=&quot;名字&quot; /&gt;
+                      &lt;/Action&gt;
+                      &lt;Action
+                        type=&quot;delete&quot;
+                        title=&quot;删除&quot;
+                        api=&#123;API.delete&#125;
+                        popConfirm=&#123;&#123;
+                          title: "确认删除", // 此处不配置则默认使用外层title
+                          okText: "确定",
+                          cancelText: "取消",
+                        &#125;&#125;
+                        record=&#123;record&#125;
+                        buttonProps=&#123;&#123;
+                          type: "danger",
+                        &#125;&#125;
+                      &gt;&lt;/Action&gt;
+                      &lt;Button onClick=&#123;() =&gt; console.log(record)&#125;&gt;
+                        自定义按钮
+                      &lt;/Button&gt;
+                    &lt;/&gt;
+                  );
+                &#125;,
+              &#125;,
+            ]&#125;
+          &gt;&lt;/ColumnRender&gt;
+        &lt;/XTable&gt;
+      &lt;/div&gt;
+    &lt;/ConfigProvider&gt;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2021/06/24/2021-06-24-schema%20form%20%E8%BD%AC%E5%8C%96%E4%B8%BA%20jsx%20%E6%96%B9%E6%A1%88%E6%80%9D%E8%80%83/" data-id="cltejaeh70083xyab5i436guu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A1%A8%E5%8D%95/" rel="tag">表单</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/13/2021-07-13-%E8%AF%BB%E4%B9%A6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          怎么写书评
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/24/2021-03-24-1-%E4%B8%8D%E5%87%BA%E6%9F%90%E4%BB%B6%E8%A3%85%E5%A4%87%E7%9A%84%E8%83%9C%E7%8E%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">简单实用的胜率算法模型，及在王者荣耀中的应用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ionic/">Ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VPN/">VPN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8A%A8%E7%94%BB/">动画</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E8%AF%B4/">小说</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%AF%94%E8%BE%83/">技术比较</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/">技术综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%AE%B0/">杂记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/" rel="tag">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ElementUI/" rel="tag">ElementUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ionic/" rel="tag">Ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LuaSocket/" rel="tag">LuaSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyEclipse/" rel="tag">MyEclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Power-Designer/" rel="tag">Power Designer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPF/" rel="tag">WPF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mock/" rel="tag">mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-json/" rel="tag">package.json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threejs/" rel="tag">threejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C/" rel="tag">世界</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" rel="tag">域名劫持</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E5%85%A5/" rel="tag">导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag">微机原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" rel="tag">技术名词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" rel="tag">技术综合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" rel="tag">技术陷阱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A6%E4%BE%A0/" rel="tag">武侠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E9%87%8A/" rel="tag">注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" rel="tag">深入理解C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" rel="tag">王者荣耀</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%95%A5/" rel="tag">略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" rel="tag">知识体系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A5%E9%9B%B6/" rel="tag">补零</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A8%E5%8D%95/" rel="tag">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E4%B9%90/" rel="tag">音乐</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Android/" style="font-size: 12.86px;">Android</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/CSS/" style="font-size: 17.14px;">CSS</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Database/" style="font-size: 10px;">Database</a> <a href="/tags/ElementUI/" style="font-size: 11.43px;">ElementUI</a> <a href="/tags/Git/" style="font-size: 17.14px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Grunt/" style="font-size: 11.43px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IDE/" style="font-size: 12.86px;">IDE</a> <a href="/tags/Ionic/" style="font-size: 10px;">Ionic</a> <a href="/tags/Java/" style="font-size: 11.43px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 18.57px;">JavaScript</a> <a href="/tags/Lua/" style="font-size: 11.43px;">Lua</a> <a href="/tags/LuaSocket/" style="font-size: 10px;">LuaSocket</a> <a href="/tags/MyEclipse/" style="font-size: 10px;">MyEclipse</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Power-Designer/" style="font-size: 11.43px;">Power Designer</a> <a href="/tags/SEO/" style="font-size: 10px;">SEO</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/WPF/" style="font-size: 10px;">WPF</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/mock/" style="font-size: 10px;">mock</a> <a href="/tags/package-json/" style="font-size: 10px;">package.json</a> <a href="/tags/threejs/" style="font-size: 10px;">threejs</a> <a href="/tags/%E4%B8%96%E7%95%8C/" style="font-size: 10px;">世界</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 12.86px;">动画</a> <a href="/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" style="font-size: 10px;">域名劫持</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AF%BC%E5%85%A5/" style="font-size: 10px;">导入</a> <a href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" style="font-size: 11.43px;">微机原理</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" style="font-size: 11.43px;">技术名词</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" style="font-size: 10px;">技术综合</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" style="font-size: 10px;">技术陷阱</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">数据类型</a> <a href="/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/tags/%E6%97%B6%E9%97%B4/" style="font-size: 10px;">时间</a> <a href="/tags/%E6%AD%A6%E4%BE%A0/" style="font-size: 10px;">武侠</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 11.43px;">汇编</a> <a href="/tags/%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">注释</a> <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" style="font-size: 14.29px;">深入理解C#</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 10px;">状态码</a> <a href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" style="font-size: 10px;">王者荣耀</a> <a href="/tags/%E7%95%A5/" style="font-size: 10px;">略</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" style="font-size: 10px;">知识体系</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.43px;">缓存</a> <a href="/tags/%E8%A1%A5%E9%9B%B6/" style="font-size: 10px;">补零</a> <a href="/tags/%E8%A1%A8%E5%8D%95/" style="font-size: 11.43px;">表单</a> <a href="/tags/%E8%AF%B7%E6%B1%82/" style="font-size: 15.71px;">请求</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 11.43px;">跨域</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/10/2023-08-10-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84css%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E9%87%91%E8%89%B2%E5%85%89%E6%99%95+%E6%89%AB%E5%85%89%E7%89%B9%E6%95%88/">记录一次简单的css动画实现金色光晕+扫光特效</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/27/2023-03-27-%E6%B4%BB%E5%8A%A8%E5%8A%A8%E7%94%BB%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/">活动动画相关技术方案</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/20/2023-03-22-%E5%88%86%E4%BA%AB%E6%96%B0%E9%B2%9C%E4%BA%8B/">分享新鲜事</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/16/2023-03-16-%E7%A7%BB%E5%8A%A8%E7%AB%AF%20CSS%20%E5%8D%95%E4%BD%8D%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/">移动端 CSS 单位处理方案</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/">前端通用依赖库缓存方案</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 Yizhou Shen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

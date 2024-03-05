@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>schema form 转化为 jsx 方案思考 | 无主之地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这本书不会让人变得聪明，但至少不容易受骗。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="schema form 转化为 jsx 方案思考">
+<meta property="og:url" content="http://shenyizhou.github.io/2022/05/06/2022-05-06-%E5%A4%A9%E6%9C%9D%E9%98%B2%E9%AA%97%E6%8C%87%E5%8D%97%E4%B9%8B%E3%80%8A%E5%BD%B1%E5%93%8D%E5%8A%9B%E3%80%8B/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content="这本书不会让人变得聪明，但至少不容易受骗。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pfp.ps.netease.com/kmspvt/file/62751eac9355990530f20cc4ARi4oAdP01?sign=AWTDnqX46kAs0rKwdyx2i0vlT4o=&expire=1709652858">
+<meta property="article:published_time" content="2022-05-06T13:41:54.000Z">
+<meta property="article:modified_time" content="2024-03-05T15:17:50.323Z">
+<meta property="article:author" content="Yizhou Shen">
+<meta property="article:tag" content="表单">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pfp.ps.netease.com/kmspvt/file/62751eac9355990530f20cc4ARi4oAdP01?sign=AWTDnqX46kAs0rKwdyx2i0vlT4o=&expire=1709652858">
+  
+    <link rel="alternate" href="/atom.xml" title="无主之地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">无主之地</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shenyizhou.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2022-05-06-天朝防骗指南之《影响力》" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/06/2022-05-06-%E5%A4%A9%E6%9C%9D%E9%98%B2%E9%AA%97%E6%8C%87%E5%8D%97%E4%B9%8B%E3%80%8A%E5%BD%B1%E5%93%8D%E5%8A%9B%E3%80%8B/" class="article-date">
+  <time datetime="2022-05-06T13:41:54.000Z" itemprop="datePublished">2022年05月06日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      schema form 转化为 jsx 方案思考
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这本书不会让人变得聪明，但至少不容易受骗。</p>
+<a id="more"></a>
+
+<p><img src="http://pfp.ps.netease.com/kmspvt/file/62751eac9355990530f20cc4ARi4oAdP01?sign=AWTDnqX46kAs0rKwdyx2i0vlT4o=&expire=1709652858" alt="s34026206.jpeg"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>你，是否想玩好狼人杀？</p>
+<p>你，是否想在血染中大杀四方？</p>
+<p>来，没准这本鸡汤文学反倒能带给你答案。</p>
+<p>本文将结合个人的感悟，从多个角度剖析人性中最阴暗、最不为人知的一面，虽然有些道理你可能早已听烂，但它却一直根植在你的骨子里：</p>
+<h2 id="一、如何买到好东西？"><a href="#一、如何买到好东西？" class="headerlink" title="一、如何买到好东西？"></a>一、如何买到好东西？</h2><h3 id="1-❌-只看评分"><a href="#1-❌-只看评分" class="headerlink" title="(1) ❌ 只看评分"></a>(1) ❌ 只看评分</h3><p>我知道，在当今社会，人无论做什么事情，都要看下评分：</p>
+<p>看电影要刷豆瓣评分、点外卖要看美团评分、买东西当然也要看淘宝评分。</p>
+<p>但其实，评分真的可靠吗？</p>
+<p>有时候，你其实并不想买一件东西，但是大家都说好，甚至你自己就会说服自己，给一个买它的理由。评论对卖家才是最有利的，而非买家。</p>
+<p>所以，一定要鉴别出那些虚假的评论，它们一般具有以下特点：</p>
+<h4 id="1-1-缺少细节"><a href="#1-1-缺少细节" class="headerlink" title="1.1 缺少细节"></a>1.1 缺少细节</h4><p>人很难描写出自己没有体验过的东西，所以在欺骗中，会融合更多的<strong>情感和场景描写</strong>，而不是事物本身的描写。比如评价酒店时，会聊自己的心情、为什么来这、和谁来这，而非浴室咋样、服务咋样、价格咋样。</p>
+<h4 id="1-2-第一人称"><a href="#1-2-第一人称" class="headerlink" title="1.2 第一人称"></a>1.2 第一人称</h4><p>人在撒谎的时候，会担心自己不够真诚，就会用更多的第一人称。而真正经历过的人，往往可能用第三人称客观地陈述一个事实。</p>
+<h4 id="1-3-动词比名词多"><a href="#1-3-动词比名词多" class="headerlink" title="1.3 动词比名词多"></a>1.3 动词比名词多</h4><p>因为害怕被拆穿，说谎者更倾向用使人愉悦或者令人震惊的故事，来转移人的注意力。从语言分析角度动词会出现得更频繁，而真话中更多的是名词。</p>
+<h3 id="2-❌-贵的-好的"><a href="#2-❌-贵的-好的" class="headerlink" title="(2) ❌ 贵的 = 好的"></a>(2) ❌ 贵的 = 好的</h3><p>人对于不了解的、复杂的事情，往往会用简单的准则去做抉择：</p>
+<p>模式化的自动行为，也叫启发式判断，即<strong>根据少量关键特征简化判断</strong>，</p>
+<p>“一分钱一分货”，便是个简单的准则。</p>
+<p>所以有些时候，一件东西卖得贵，反倒会引起你购买的冲动。</p>
+<p>只有人在既有欲望也有能力的时候，才会以深思熟虑的可控方式做出回应。</p>
+<p>越是买贵的东西，越应该想清楚之后，再做选择。</p>
+<h3 id="3-❌-便宜的-实惠的"><a href="#3-❌-便宜的-实惠的" class="headerlink" title="(3) ❌ 便宜的 = 实惠的"></a>(3) ❌ 便宜的 = 实惠的</h3><p>“锚点效应” 可能是生活中出现最频繁的一个<strong>对比原理</strong>了。</p>
+<p>当你看到一件特别贵的东西时，一定要小心它周围的便宜货，那才是真正想让你买的东西。</p>
+<h3 id="4-❌-“这是最后一个”"><a href="#4-❌-“这是最后一个”" class="headerlink" title="(4) ❌ “这是最后一个”"></a>(4) ❌ “这是最后一个”</h3><p>“饥饿营销”的本质就是饥饿营销，数量的信息从来就是假的，只是强行创造出一种供不应求的假象，来提升产品的附加价值。</p>
+<p>更有甚者，先告知已售罄再突然通知补货的操作，愈发能强化人的购买欲。因为失而复得，更让人感到珍惜。</p>
+<p>这就是“<strong>稀缺原理</strong>”，它的本质是在于人们在有风险和不确定感的情况下，更容易去做避免价值损失的选择，而不是去做获取性质的选择，也就是所谓的“损失厌恶”。</p>
+<p>所以有时候，交换下文案的表述，就更容易让人上当：“你获得了 xxx，只要你…” 相比于 “只要你…，就可以获得 xxx” 有说服力得多。因为前者会让人有损失感。</p>
+<h2 id="二、如何避免渣男-PUA？"><a href="#二、如何避免渣男-PUA？" class="headerlink" title="二、如何避免渣男 PUA？"></a>二、如何避免渣男 PUA？</h2><h3 id="1-❌-“因为。。。”"><a href="#1-❌-“因为。。。”" class="headerlink" title="(1) ❌ “因为。。。”"></a>(1) ❌ “因为。。。”</h3><p>听到这两个字就要起疑心了啊朋友们，人做一件事情的时候一定会有一个理由，没有理由也要创造一个理由。</p>
+<p>当别人向你请求时，也许真正的原因并不重要，重要的是，当你听到“因为”两个字时，内心就会放松警惕，从而轻信别人。</p>
+<p>千万要好好听清楚“因为”后面的半句，到底能否让你信服。</p>
+<h3 id="2-❌-爱你的人"><a href="#2-❌-爱你的人" class="headerlink" title="(2) ❌ 爱你的人"></a>(2) ❌ 爱你的人</h3><p>这是个永恒经典的恋爱问题：选一个爱你的人，还是你爱的人？</p>
+<p>按照常理来说，选爱你的人，会更加幸福。</p>
+<p>但其实，“<strong>互惠理论</strong>”告诉我们，选爱你的人，遇到爱情骗子的可能性更高。</p>
+<p>诚如钢之炼金术师所言，“等价交换”便是世界的真实，付出的同时往往是为了索取更多。</p>
+<p>甚至连机器学习，都告诉我们 No Free Lunch 原理。</p>
+<p>所以要警惕，英雄救美更像是以身相许的陷阱。</p>
+<h3 id="3-✅-爱你一万年"><a href="#3-✅-爱你一万年" class="headerlink" title="(3) ✅ 爱你一万年"></a>(3) ✅ 爱你一万年</h3><p>都 21 世纪了，还有人会相信这种鬼话吗？</p>
+<p>要我说，得信。</p>
+<p>“<strong>承诺与一致性</strong>”原理，告诉我们：承诺本身也会强化一个人的看法，就算说的时候不是真心的，但为了维护这种立场，慢慢也会变为真的。</p>
+<p>不过，要注意，这种承诺一定得是积极的、公开的、自由的、不那么容易实现的。</p>
+<p>要不然，私下里说的承诺，还是鬼话。</p>
+<h3 id="4-❌-我偏要勉强"><a href="#4-❌-我偏要勉强" class="headerlink" title="(4) ❌ 我偏要勉强"></a>(4) ❌ 我偏要勉强</h3><p>江湖爱情不如意。</p>
+<p>李莫愁，愁“世间情是何物？”</p>
+<p>周芷若，“若我问心有愧呢？”</p>
+<p>李文秀，白马载着她悠悠向南，“那些都是很好很好的，可是我偏不喜欢”</p>
+<p>而敏敏说，“我偏要勉强”</p>
+<p>情之乎“偏”字，这是为何呢？</p>
+<p>罗密欧与朱丽叶是极浪漫的，他们反抗的理由只是因为爱情吗？</p>
+<p>用稀缺原理，我们就可以知道，当一样东西被限制时，它的价值就会攀高。</p>
+<p>这就是<strong>逆反心理</strong>的本质：</p>
+<p>稀缺的不是爱情，而是自由选择的权利。</p>
+<p>所以，当你被禁止做某件事时，要反思下，是不是人家的真实目的就是要激起你的逆反心理呢？</p>
+<h3 id="5-❌-沉没成本"><a href="#5-❌-沉没成本" class="headerlink" title="(5) ❌ 沉没成本"></a>(5) ❌ 沉没成本</h3><p>呆在舒适区是人类的本能，人往往偏爱自己熟悉的，日久生情就是这个道理。</p>
+<p><strong>“登门槛”效应</strong>，告诉我们，人一旦接受了一点甜头，就只会加倍往里投入，以至于沉没。</p>
+<h3 id="6-❌-长得好看"><a href="#6-❌-长得好看" class="headerlink" title="(6) ❌ 长得好看"></a>(6) ❌ 长得好看</h3><p>这是个看脸的社会，背后当然是进化心理学遗传的本能。</p>
+<p>人甚至会自动给好看的人，添加正面特征，比如有才华、善良、诚实和聪明等。</p>
+<p>这就是“<strong>光环效应</strong>”：一个人的正面特征，就能主导其他人看待此人的眼光。</p>
+<p>长得好看，本身就是影响力。</p>
+<p>当你想要答应喜欢的人的请求时，一定要三思下，到底是对事，还是对人。</p>
+<h3 id="7-❌-制服诱惑"><a href="#7-❌-制服诱惑" class="headerlink" title="(7) ❌ 制服诱惑"></a>(7) ❌ 制服诱惑</h3><p>人往往会根据外在的标签，来判断一件事物内在的价值。</p>
+<p>像是相亲市场中的名牌衣服、名表、豪车，一个专家标签，一次奖项的获得，都能代表一个人的价值。</p>
+<p>比如，《猫鼠游戏》中，小李子仅仅靠着一身制服，就能伪装成机长和医生。</p>
+<p>所以，我们得谨慎面对<strong>权威</strong>，得认清事件所在的真实领域。</p>
+<h3 id="8-❌-负面情绪"><a href="#8-❌-负面情绪" class="headerlink" title="(8) ❌ 负面情绪"></a>(8) ❌ 负面情绪</h3><p>一件负面事件，就算以批判的态度被报道出来，也会带来消极的后果。</p>
+<p>因为它实际上传达的意思是：虽然这件事很消极，但是世界上仍有不少人都在做，所以你想做也可以做。</p>
+<p>从结果上来说，报喜不报忧就是最积极的传递方式。</p>
+<h2 id="三、如何不被白嫖？"><a href="#三、如何不被白嫖？" class="headerlink" title="三、如何不被白嫖？"></a>三、如何不被白嫖？</h2><h3 id="1-❌-拒绝-后撤术"><a href="#1-❌-拒绝-后撤术" class="headerlink" title="(1) ❌ 拒绝-后撤术"></a>(1) ❌ 拒绝-后撤术</h3><p>这是经典骗术了，就是在提出一个很难的请求后，利用人的<strong>负债感</strong>，提出一个更容易实现的请求，而此时人们往往难以拒绝。</p>
+<h3 id="2-❌-“我们是老乡”"><a href="#2-❌-“我们是老乡”" class="headerlink" title="(2) ❌ “我们是老乡”"></a>(2) ❌ “我们是老乡”</h3><p>当人在二择时，会不自觉地选择和自己相似性更高的选项，甚至可能这相似性与选项本身毫无关联。</p>
+<p>“庞氏骗局”也是利用了“我们”。当别人跟你拉关系时，就应该警醒啦。</p>
+<h3 id="3-❌-托儿"><a href="#3-❌-托儿" class="headerlink" title="(3) ❌ 托儿"></a>(3) ❌ 托儿</h3><p>人类三大本质之一，就是复读机。</p>
+<p>“<strong>多元无知</strong>”效应，告诉我们，人在不确定性占上风时，最有可能的行为模式就是参照他人的行为。</p>
+<p>跟风是人的天性。一定要避免成为“乌合之众”。</p>
+<h3 id="4-❌-甜言蜜语"><a href="#4-❌-甜言蜜语" class="headerlink" title="(4) ❌ 甜言蜜语"></a>(4) ❌ 甜言蜜语</h3><p>千穿万穿，马屁不穿，人更容易接受对自己说好话的人的请求。</p>
+<p>主动赞扬就是获得信任的最简单方式，也最不可信。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>整体上，《影响力》分为互惠、喜好、社会认同、权威、稀缺、承诺与一致、联盟七大部分。</p>
+<p>而我觉得，其实不用那么划分，影响力本质上都是在强调如何凸显价值，而人最大的精神价值就是<strong>安全感</strong>。</p>
+<p>所以影响力的手段，实质都是在强化或利用人的安全感。</p>
+<p>希望各位看官，品完本文能有些许收获。不用玩转手段，至少能不被手段玩转就好啦。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2022/05/06/2022-05-06-%E5%A4%A9%E6%9C%9D%E9%98%B2%E9%AA%97%E6%8C%87%E5%8D%97%E4%B9%8B%E3%80%8A%E5%BD%B1%E5%93%8D%E5%8A%9B%E3%80%8B/" data-id="cltejaehc008ixyab17ta7v9i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A1%A8%E5%8D%95/" rel="tag">表单</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/24/2022-05-24-%E5%88%86%E4%BA%AB%E6%96%B0%E9%B2%9C%E4%BA%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          分享新鲜事
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/17/2022-04-17-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20useRequest%20%E7%9A%84%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">自动批量请求（5）—— useRequest 的实现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ionic/">Ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VPN/">VPN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8A%A8%E7%94%BB/">动画</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E8%AF%B4/">小说</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%AF%94%E8%BE%83/">技术比较</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/">技术综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%AE%B0/">杂记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/" rel="tag">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ElementUI/" rel="tag">ElementUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ionic/" rel="tag">Ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LuaSocket/" rel="tag">LuaSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyEclipse/" rel="tag">MyEclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Power-Designer/" rel="tag">Power Designer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPF/" rel="tag">WPF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mock/" rel="tag">mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-json/" rel="tag">package.json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threejs/" rel="tag">threejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C/" rel="tag">世界</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" rel="tag">域名劫持</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E5%85%A5/" rel="tag">导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag">微机原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" rel="tag">技术名词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" rel="tag">技术综合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" rel="tag">技术陷阱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A6%E4%BE%A0/" rel="tag">武侠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E9%87%8A/" rel="tag">注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" rel="tag">深入理解C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" rel="tag">王者荣耀</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%95%A5/" rel="tag">略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" rel="tag">知识体系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A5%E9%9B%B6/" rel="tag">补零</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A8%E5%8D%95/" rel="tag">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E4%B9%90/" rel="tag">音乐</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Android/" style="font-size: 12.86px;">Android</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/CSS/" style="font-size: 17.14px;">CSS</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Database/" style="font-size: 10px;">Database</a> <a href="/tags/ElementUI/" style="font-size: 11.43px;">ElementUI</a> <a href="/tags/Git/" style="font-size: 17.14px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Grunt/" style="font-size: 11.43px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IDE/" style="font-size: 12.86px;">IDE</a> <a href="/tags/Ionic/" style="font-size: 10px;">Ionic</a> <a href="/tags/Java/" style="font-size: 11.43px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 18.57px;">JavaScript</a> <a href="/tags/Lua/" style="font-size: 11.43px;">Lua</a> <a href="/tags/LuaSocket/" style="font-size: 10px;">LuaSocket</a> <a href="/tags/MyEclipse/" style="font-size: 10px;">MyEclipse</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Power-Designer/" style="font-size: 11.43px;">Power Designer</a> <a href="/tags/SEO/" style="font-size: 10px;">SEO</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/WPF/" style="font-size: 10px;">WPF</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/mock/" style="font-size: 10px;">mock</a> <a href="/tags/package-json/" style="font-size: 10px;">package.json</a> <a href="/tags/threejs/" style="font-size: 10px;">threejs</a> <a href="/tags/%E4%B8%96%E7%95%8C/" style="font-size: 10px;">世界</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 12.86px;">动画</a> <a href="/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" style="font-size: 10px;">域名劫持</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AF%BC%E5%85%A5/" style="font-size: 10px;">导入</a> <a href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" style="font-size: 11.43px;">微机原理</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" style="font-size: 11.43px;">技术名词</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" style="font-size: 10px;">技术综合</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" style="font-size: 10px;">技术陷阱</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">数据类型</a> <a href="/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/tags/%E6%97%B6%E9%97%B4/" style="font-size: 10px;">时间</a> <a href="/tags/%E6%AD%A6%E4%BE%A0/" style="font-size: 10px;">武侠</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 11.43px;">汇编</a> <a href="/tags/%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">注释</a> <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" style="font-size: 14.29px;">深入理解C#</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 10px;">状态码</a> <a href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" style="font-size: 10px;">王者荣耀</a> <a href="/tags/%E7%95%A5/" style="font-size: 10px;">略</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" style="font-size: 10px;">知识体系</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.43px;">缓存</a> <a href="/tags/%E8%A1%A5%E9%9B%B6/" style="font-size: 10px;">补零</a> <a href="/tags/%E8%A1%A8%E5%8D%95/" style="font-size: 11.43px;">表单</a> <a href="/tags/%E8%AF%B7%E6%B1%82/" style="font-size: 15.71px;">请求</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 11.43px;">跨域</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/10/2023-08-10-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84css%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E9%87%91%E8%89%B2%E5%85%89%E6%99%95+%E6%89%AB%E5%85%89%E7%89%B9%E6%95%88/">记录一次简单的css动画实现金色光晕+扫光特效</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/27/2023-03-27-%E6%B4%BB%E5%8A%A8%E5%8A%A8%E7%94%BB%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/">活动动画相关技术方案</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/20/2023-03-22-%E5%88%86%E4%BA%AB%E6%96%B0%E9%B2%9C%E4%BA%8B/">分享新鲜事</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/16/2023-03-16-%E7%A7%BB%E5%8A%A8%E7%AB%AF%20CSS%20%E5%8D%95%E4%BD%8D%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/">移动端 CSS 单位处理方案</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/">前端通用依赖库缓存方案</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 Yizhou Shen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

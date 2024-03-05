@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>活动动画相关技术方案 | 无主之地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="罗列了下一些活动中用到动画的地方，以及踩的一些坑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="活动动画相关技术方案">
+<meta property="og:url" content="http://shenyizhou.github.io/2023/03/27/2023-03-27-%E6%B4%BB%E5%8A%A8%E5%8A%A8%E7%94%BB%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content="罗列了下一些活动中用到动画的地方，以及踩的一些坑">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9864722357/6f62/6600/d105/aea98e5920050f4e637b7f988ddbce13.jpg">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9865363772/b149/d4cd/b9a4/5e8cb7dea6e730497f9071de4a773d8f.gif">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9864945118/2cbd/8cdc/3ea0/03bdd29720aa4040bf7a4e83273c1ce4.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9867454268/5a30/e407/f9e9/8e04d88b19a1ab0f3ff317b16411cf96.png">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9865459885/8527/6eee/7157/c31da430193d551f4178e51a2bf0b4d2.gif">
+<meta property="article:published_time" content="2023-03-27T15:21:26.000Z">
+<meta property="article:modified_time" content="2024-03-05T15:36:56.877Z">
+<meta property="article:author" content="Yizhou Shen">
+<meta property="article:tag" content="动画">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9864722357/6f62/6600/d105/aea98e5920050f4e637b7f988ddbce13.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="无主之地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">无主之地</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shenyizhou.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2023-03-27-活动动画相关技术方案" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/03/27/2023-03-27-%E6%B4%BB%E5%8A%A8%E5%8A%A8%E7%94%BB%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/" class="article-date">
+  <time datetime="2023-03-27T15:21:26.000Z" itemprop="datePublished">2023年03月27日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8A%A8%E7%94%BB/">动画</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      活动动画相关技术方案
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>罗列了下一些活动中用到动画的地方，以及踩的一些坑</p>
+<a id="more"></a>
+
+<p><a target="_blank" rel="noopener" href="https://h5.look.163.com/st/threeyear20210713?full_screen=true&nm_style=sbt&keep_status_bar=true&status_bar_type=light&bounces=false">三周年页面</a></p>
+<h3 id="背景动画-gif"><a href="#背景动画-gif" class="headerlink" title="背景动画 gif"></a>背景动画 gif</h3><p>这块一开始的思路是：用一个尽可能小的 gif 来保障用户加载的速度。</p>
+<p>先尝试了下 12 帧的 gif (压缩完大小为 6mb)，卡顿感很明显，体验不佳：</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9864722357/6f62/6600/d105/aea98e5920050f4e637b7f988ddbce13.jpg"></p>
+<p>而且，当未完全加载完 gif 时，在加载的过程中还是会有过分明显的卡顿：</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9865363772/b149/d4cd/b9a4/5e8cb7dea6e730497f9071de4a773d8f.gif"></p>
+<p>于是调整了下思路：</p>
+<p>用静态图预先展示，向下保障用户最低体验；然后等高清 gif 完全加载完才展示，向上带给用户最佳体验。</p>
+<p>代码实现上，只要用两层叠加的图片，控制上层 gif 的 <code>visibility</code> 属性即可，如下：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [isGifShow, setGifShow] = useState(<span class="literal">false</span>); <span class="comment">// 是否展示 gif</span></span><br><span class="line"><span class="keyword">const</span> gifRef = useRef(); <span class="comment">// gif 对象</span></span><br><span class="line"></span><br><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 如果渲染页面时已经加载完，则直接展示</span></span><br><span class="line">    <span class="keyword">if</span> (gifRef.current?.complete) &#123;</span><br><span class="line">        setGifShow(<span class="literal">true</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 否则等待完全加载完才展示</span></span><br><span class="line">        gifRef.current.onload = <span class="function">() =&gt;</span> setGifShow(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, []);</span><br><span class="line"></span><br><span class="line">&lt;Image</span><br><span class="line">    className=<span class="string">&quot;f-pa bg&quot;</span></span><br><span class="line">    src=&#123;IMG_BG&#125;</span><br><span class="line">    client=&#123;&#123; <span class="attr">paramWidth</span>: <span class="number">375</span>, <span class="attr">extraParam</span>: &#123; <span class="attr">interlace</span>: <span class="number">1</span> &#125; &#125;&#125; /&gt;</span><br><span class="line">&lt;Image</span><br><span class="line">    className=&#123;classNames(<span class="string">&#x27;f-pa bg gif&#x27;</span>, &#123;</span><br><span class="line">        <span class="string">&#x27;z-show&#x27;</span>: isGifShow, <span class="comment">// 通过这个类来控制 visibility</span></span><br><span class="line">    &#125;)&#125;</span><br><span class="line">    ref=&#123;gifRef&#125;</span><br><span class="line">    src=&#123;IMG_BG_GIF&#125;</span><br><span class="line">    client=&#123;&#123; <span class="attr">paramWidth</span>: <span class="number">375</span>, <span class="attr">extraParam</span>: &#123; <span class="attr">interlace</span>: <span class="number">1</span> &#125; &#125;&#125; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>又和视觉尝试了几次，发现不用 24 帧 (压缩完是 14mb)，20 帧 (压缩完是 10mb) 即可在视觉上体验完美：</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9864945118/2cbd/8cdc/3ea0/03bdd29720aa4040bf7a4e83273c1ce4.gif"></p>
+<h3 id="进场视频-video"><a href="#进场视频-video" class="headerlink" title="进场视频 video"></a>进场视频 video</h3><p>先抛出一个问题：</p>
+<p>部分移动端浏览器，比如 iOS 微信，为了减少用户流量的浪费，只允许让用户交互完之后才可以播放 video，无法自动播放。</p>
+<h4 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h4><p>正因为之前站外场景 video 比较难兼容，故头部视频都采用，站外直接展示静态图的方案，或者就是转化成 canvas 的方案，但体验不佳。</p>
+<p>而这一次是全屏视频，好看得很，故尽管时间有限，但还是在临上线前一天，又和视觉商量了下加了个引导点击交互图，整体流程如下：</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9867454268/5a30/e407/f9e9/8e04d88b19a1ab0f3ff317b16411cf96.png"></p>
+<p>(其中，因为时间原因，这次加载中进度条没实现，而是同样展示了点击引导图做替换</p>
+<h4 id="Video-相关基础知识"><a href="#Video-相关基础知识" class="headerlink" title="Video 相关基础知识"></a>Video 相关基础知识</h4><p><strong>video 属性</strong></p>
+<p>首先我们的场景是自动播放视频的场景，不需要控件和声音，所以默认的配置如下：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>自定义</td>
+<td>识别视频的唯一标识。<em>这边通过 <code>Math.floor(Math.random()\*100000)</code> 创建。</em></td>
+</tr>
+<tr>
+<td>controls</td>
+<td>/</td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td>height</td>
+<td>/</td>
+<td>设置视频播放器的高度。</td>
+</tr>
+<tr>
+<td>width</td>
+<td>/</td>
+<td>设置视频播放器的宽度。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>URL</td>
+<td>要播放的视频的 URL。</td>
+</tr>
+<tr>
+<td>poster</td>
+<td>‘x’</td>
+<td>规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。<em>目前场景下只要黑屏即可，即给 video 设置 <code>background-color: #000;</code>。但如果不设置该属性，在某华为机型下，会有一个播放按钮一闪而逝，所以得随便设置个字符串。</em></td>
+</tr>
+<tr>
+<td>autoplay</td>
+<td>true</td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>/</td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>false</td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td>muted</td>
+<td>true</td>
+<td>规定视频的音频输出应该被静音。<em>在直播间打开的页面，不设置该属性的话，可能会使得主播的声音消失。</em></td>
+</tr>
+<tr>
+<td>playsinline</td>
+<td>true</td>
+<td>包括 <code>webkit-playsinline</code> 和 <code>x5-playsinline</code>。设置 iOS 微信浏览器支持行内播放，否则会全屏置顶播放且有控件。<em>目前场景下，虽然同样是全屏播放，但如果不设置会盖住跳过按钮，影响功能</em></td>
+</tr>
+</tbody></table>
+<p>顺带一提，video 样式通过 <code>object-fit</code> 来控制视频大小的展示。<em>目前场景因为需要视频全屏播放，在不同设备不同百分比下，用 <code>cover</code> 来保持视频的宽高比，并居中展示，体验最好。</em></p>
+<p><strong>video 方法</strong></p>
+<p>首先视频没有一个开始播放的回调，只能用 <code>timeupdate</code> 变相实现。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>play</td>
+<td>开始播放。</td>
+</tr>
+<tr>
+<td>pause</td>
+<td>暂停播放。</td>
+</tr>
+<tr>
+<td>timeupdate</td>
+<td>视频播放过程中会不停触发，每次 <code>currentTime</code> 都会更新，通过比较时间可以变相地实现开始播放 <code>onStart</code> 或即将结束播放 <code>onNearlyEnd</code> 等事件。</td>
+</tr>
+<tr>
+<td>ended</td>
+<td>结束播放后触发。</td>
+</tr>
+<tr>
+<td>canplay</td>
+<td>是否可以开始播放。 <em>在 iOS 可能有兼容问题无法触发</em></td>
+</tr>
+<tr>
+<td>canplaythrough</td>
+<td>是否可以开始播放到结束。<em>在 iOS 可能有兼容问题无法触发</em></td>
+</tr>
+<tr>
+<td>complete</td>
+<td>当离线音频加载完成时触发。</td>
+</tr>
+</tbody></table>
+<h4 id="渐入渐出"><a href="#渐入渐出" class="headerlink" title="渐入渐出"></a>渐入渐出</h4><p>这次开屏动画是刚启动就播放，所以不必加上渐入，如果是点击触发的全屏动画建议增加渐入，使得过渡更自然。</p>
+<p>渐出的思路就是在 <code>timeupdate</code> 事件中计算时间，即将结束时给视频增加一个渐隐类，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [isSlowlyHidden, setSlowlyHidden] = useState(<span class="literal">false</span>); <span class="comment">// 开始渐隐</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> onTimeUpdate = useCallback(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> value = videoRef.current?.currentTime;</span><br><span class="line">    <span class="keyword">if</span> (value &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        onStart &amp;&amp; onStart(); <span class="comment">// 因为 video 没有直白的开始事件，这里可以执行一些开始后的回调</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (value &gt; <span class="number">17</span>) &#123;</span><br><span class="line">        setSlowlyHidden(<span class="literal">true</span>); <span class="comment">// 视频长度是 20s，在 17s 之后开始慢慢渐隐</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, [onStart]);</span><br><span class="line"></span><br><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    video?.addEventListener(<span class="string">&#x27;timeupdate&#x27;</span>, onTimeUpdate, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        video?.removeEventListener(<span class="string">&#x27;timeupdate&#x27;</span>, onTimeUpdate);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;, [uuid, autoPlay, playHtmlVideo, onTimeUpdate, onEnd]);</span><br><span class="line"></span><br><span class="line">&lt;video</span><br><span class="line">    className=&#123;classNames(className, &#123;</span><br><span class="line">        <span class="string">&#x27;z-hidden&#x27;</span>: isSlowlyHidden</span><br><span class="line">    &#125;)&#125;</span><br><span class="line">    ref=&#123;videoRef&#125;</span><br><span class="line">    &#123;...props&#125;</span><br><span class="line">/&gt;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.headvideo</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">transition</span>: opacity <span class="number">4.2s</span> ease;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">object-fit</span>: cover;</span><br><span class="line"></span><br><span class="line">    &amp;.z-hidden &#123;</span><br><span class="line">        <span class="selector-tag">opacity</span>: 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="全屏展示"><a href="#全屏展示" class="headerlink" title="全屏展示"></a>全屏展示</h4><p>这块主要是通过，让 url 携带客户端全屏参数来支持实现：</p>
+<p><code>?full_screen=true&amp;nm_style=sbt&amp;keep_status_bar=true&amp;status_bar_type=light&amp;bounces=false</code></p>
+<blockquote>
+<p>这里的 <code>bounces=false</code> 是让客户端禁用边界滚动，毕竟 <code>overscroll-behavior: none;</code> 能力有限</p>
+</blockquote>
+<p>然后在配合全屏组件增加<strong>后退</strong>和<strong>分享</strong>功能，同时需要向下兼容站外非全屏场景。</p>
+<p>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isInApp = Env.isInNEMapp() || Env.isInLOOKapp(); <span class="comment">// 是否在 app 内</span></span><br><span class="line"></span><br><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 非全屏时的分享，这块考虑直接加进 FullHeader 组件里，最新版已支持，不用单独编写</span></span><br><span class="line">    adapter.share(</span><br><span class="line">        <span class="built_in">window</span>.location.href,</span><br><span class="line">        <span class="string">&#x27;LOOK3周年 一起狂欢吧！&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9848769524/db72/741e/a839/b4b1c199d71d64934635c9ac649934f1.jpg&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;参加3周年游园会，点亮徽章赢取限时好礼，珍稀实体奖励等你拿！&#x27;</span></span><br><span class="line">    );</span><br><span class="line">&#125;, []);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全屏时的头部栏组件</span></span><br><span class="line">&lt;Header</span><br><span class="line">    backgroundColor=<span class="string">&quot;#01224a&quot;</span></span><br><span class="line">    show=&#123;isInApp&#125; <span class="comment">// 根据是否在 app 内来判断是否展示</span></span><br><span class="line">    shareConfig=&#123;&#123;</span><br><span class="line">        url: <span class="built_in">window</span>.location.href,</span><br><span class="line">        title: <span class="string">&#x27;LOOK3周年 一起狂欢吧！&#x27;</span>,</span><br><span class="line">        content: <span class="string">&#x27;参加3周年游园会，点亮徽章赢取限时好礼，珍稀实体奖励等你拿！&#x27;</span>,</span><br><span class="line">        img: <span class="string">&#x27;https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9848769524/db72/741e/a839/b4b1c199d71d64934635c9ac649934f1.jpg&#x27;</span></span><br><span class="line">    &#125;&#125;&gt;</span><br><span class="line">    LOOK直播三周年</span><br><span class="line">&lt;/Header&gt;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>  全屏组件的高度是写死的，因为目前客户端还没提供比较好的获取实际状态栏高度的方式，目前高度是 2rem，所以全屏时头部按钮还要额外往下移动一段距离</li>
+<li>  全屏下要去除 iOS 底部的 <code>padding-bottom</code> 安全距离的处理</li>
+</ul>
+</blockquote>
+<h4 id="资源路径"><a href="#资源路径" class="headerlink" title="资源路径"></a>资源路径</h4><p>video 资源最好还是上传到云音乐的这个<a target="_blank" rel="noopener" href="https://music-swiss.hz.netease.com/media">图床</a>，否则可能会有跨域风险。</p>
+<p>权限可以联系 吴丹妮(<a href="mailto:&#119;&#x75;&#100;&#x61;&#110;&#110;&#x69;&#x30;&#x32;&#64;&#99;&#111;&#114;&#x70;&#x2e;&#x6e;&#101;&#116;&#x65;&#97;&#x73;&#x65;&#46;&#x63;&#x6f;&#109;">&#119;&#x75;&#100;&#x61;&#110;&#110;&#x69;&#x30;&#x32;&#64;&#99;&#111;&#114;&#x70;&#x2e;&#x6e;&#101;&#116;&#x65;&#97;&#x73;&#x65;&#46;&#x63;&#x6f;&#109;</a>) 开启。</p>
+<h3 id="强调动画"><a href="#强调动画" class="headerlink" title="强调动画"></a>强调动画</h3><p>这块一般用 css animation 来实现，一般最常用的特效就是 <strong>放大抖动</strong>：</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9865459885/8527/6eee/7157/c31da430193d551f4178e51a2bf0b4d2.gif"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> tada &#123;</span><br><span class="line">    0% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scaleX</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    10%,</span><br><span class="line">    20% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scale3d</span>(<span class="number">0.9</span>, <span class="number">0.9</span>, <span class="number">0.9</span>) <span class="built_in">rotate</span>(-<span class="number">3deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    30%,</span><br><span class="line">    50%,</span><br><span class="line">    70%,</span><br><span class="line">    90% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scale3d</span>(<span class="number">1.1</span>, <span class="number">1.1</span>, <span class="number">1.1</span>) <span class="built_in">rotate</span>(<span class="number">3deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    40%,</span><br><span class="line">    60%,</span><br><span class="line">    80% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scale3d</span>(<span class="number">1.1</span>, <span class="number">1.1</span>, <span class="number">1.1</span>) <span class="built_in">rotate</span>(-<span class="number">3deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    100% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scaleX</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.xxx</span> &#123;</span><br><span class="line">    <span class="comment">/* 时长 1 秒，缓动 ease，延迟 0 秒，无限循环，正向播放，会恢复原始状态，正在运行，关键帧名 tada */</span></span><br><span class="line">    <span class="attribute">animation</span>: <span class="number">1s</span> ease <span class="number">0s</span> infinite normal both running tada;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="渐入和渐出"><a href="#渐入和渐出" class="headerlink" title="渐入和渐出"></a>渐入和渐出</h3><p>这块也用 css transition 配合动态添加 class 即可实现，比如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.xxx</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">transition</span>: opacity <span class="number">0.5s</span> ease;</span><br><span class="line"></span><br><span class="line">    &amp;.z-show &#123;</span><br><span class="line">        <span class="selector-tag">opacity</span>: 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [show, setShow] = useState(<span class="literal">false</span>); <span class="comment">// 是否展示</span></span><br><span class="line"></span><br><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    setShow(<span class="literal">true</span>);</span><br><span class="line">&#125;, []);</span><br><span class="line"></span><br><span class="line">&lt;div</span><br><span class="line">    className=&#123;classNames(<span class="string">&#x27;xxx&#x27;</span>, &#123;</span><br><span class="line">        <span class="string">&#x27;z-show&#x27;</span>: show</span><br><span class="line">    &#125;)&#125;&gt;&lt;/div&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>上下弹出的动画，也可以用这种方式，动态设置 <code>bottom</code> 来实现。</p>
+<p>复杂的渐入渐出效果建议还是用 <a target="_blank" rel="noopener" href="http://reactcommunity.org/react-transition-group/">React Transition Group</a></p>
+<h3 id="元素层级"><a href="#元素层级" class="headerlink" title="元素层级"></a>元素层级</h3><p>层级一般不用 <code>z-index</code> 来实现，这会给后期维护带来很大困难。</p>
+<p>主要还是靠给父元素和浮于上层的元素都加上 <code>position: relative</code> 或 <code>position: absolute</code> (即 f-pr 和 f-pa)，然后通过声明位置的先后来控制层级。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>总结一下技术方案对比：</p>
+<ul>
+<li><p>前端动画工作流方案</p>
+<ul>
+<li>展示型动效<ul>
+<li>apng-canvas</li>
+<li>video</li>
+<li>jsmpeg</li>
+<li>lottie很多效果实现不了, 不适合复杂动画，只适合简单几何动画</li>
+<li>gif</li>
+</ul>
+</li>
+<li>非展示型动效:<ul>
+<li>css 手写</li>
+<li>pixi.js 手写</li>
+<li>three.js 手写</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>展示型动效实现</p>
+<ul>
+<li>GIF<ul>
+<li>这是在看了花椒头图动画: <a target="_blank" rel="noopener" href="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/4494809066/c284/ffa9/e764/a0c34818ac3aecfdd3374f4f174302c8.gif">https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/4494809066/c284/ffa9/e764/a0c34818ac3aecfdd3374f4f174302c8.gif</a> 得出的结论。</li>
+<li>相较于video动画而言，gif拥有最好的支持率，最好的兼容性。(<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Comparison_of_web_browsers#Image_format_support">https://en.wikipedia.org/wiki/Comparison_of_web_browsers#Image_format_support</a>)</li>
+<li>GIF动画格式每个像素有8bit空间，支持引用256个内置调色盘颜色，每个调色盘支持传统24位RGB空间，所以一张GIF如果色彩种类低于256色依然可以展现出很惊艳的动画, 支持透明(视觉反馈会边缘会有锯齿)</li>
+<li>现在存在的问题是目前我们导出GIF的姿势有点不对，上面的GIF导出的图层中每个图层只包含部分动画图层，而我们导出的GIF文件每个图层是个独立帧，压缩率不够高。</li>
+</ul>
+</li>
+<li>动态图片APNG<ul>
+<li>使用apng-canvas库，将其在canvas上进行绘制。</li>
+<li>优点：<ul>
+<li>兼容性好，使用方便；</li>
+<li>控制方便；</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>无npm包，需要引入js文件，使用window.APNG方法；</li>
+<li>初次解析apng文件，会有卡顿情况, 可以先预解析下；</li>
+<li>不能使用webgl render，帧率低；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>视频<ul>
+<li>web端／移动端有用户交互<ul>
+<li>使用video标签播放；</li>
+</ul>
+</li>
+<li>移动端无用户交互<ul>
+<li>使用jsmpeg库转canvas播放；</li>
+</ul>
+</li>
+<li>优点：<ul>
+<li>可以使用webgl render和2d render;</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>需要先转为MPEG-1，且转码后的大小会明显增大；</li>
+<li>素材上传中心不支持MPEG-1格式视频，需要自行上传cdn；</li>
+<li>低端机在播放时会出现页面崩溃（iphone5）;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>透明视频<ul>
+<li>使用video播放, 读取纹理，支持webgl时，采用webgl render，不支持时采用canvas 2d render</li>
+<li>优点<ul>
+<li>由于video压缩率高，没有256色限制，所以自由度高。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>只能在站内播放 微信不支持自动播放。</li>
+<li>另外对于循环动画: iOS下video循环动画头尾会存在一个gap</li>
+<li>开启页面后锁屏，打开后视频不会自动播放</li>
+<li>两个视频无法实现无缝切换，会有微小的空白出现</li>
+<li>ios端半屏的boss动效放一段时间之后就会停了，安卓的可以一直播放boss动效（有待验证）</li>
+</ul>
+</li>
+<li>暂时没有好的解决方法，可以考虑改写jsmsg读MPEG-1视频，然后再进行计算。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2023/03/27/2023-03-27-%E6%B4%BB%E5%8A%A8%E5%8A%A8%E7%94%BB%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/" data-id="cltejaehl0095xyab3fev56je" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/10/2023-08-10-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84css%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E9%87%91%E8%89%B2%E5%85%89%E6%99%95+%E6%89%AB%E5%85%89%E7%89%B9%E6%95%88/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          记录一次简单的css动画实现金色光晕+扫光特效
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/03/20/2023-03-22-%E5%88%86%E4%BA%AB%E6%96%B0%E9%B2%9C%E4%BA%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">分享新鲜事</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ionic/">Ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VPN/">VPN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8A%A8%E7%94%BB/">动画</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E8%AF%B4/">小说</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%AF%94%E8%BE%83/">技术比较</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/">技术综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%AE%B0/">杂记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/" rel="tag">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ElementUI/" rel="tag">ElementUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ionic/" rel="tag">Ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LuaSocket/" rel="tag">LuaSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyEclipse/" rel="tag">MyEclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Power-Designer/" rel="tag">Power Designer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPF/" rel="tag">WPF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mock/" rel="tag">mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-json/" rel="tag">package.json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threejs/" rel="tag">threejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C/" rel="tag">世界</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" rel="tag">域名劫持</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E5%85%A5/" rel="tag">导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag">微机原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" rel="tag">技术名词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" rel="tag">技术综合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" rel="tag">技术陷阱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A6%E4%BE%A0/" rel="tag">武侠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E9%87%8A/" rel="tag">注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" rel="tag">深入理解C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" rel="tag">王者荣耀</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%95%A5/" rel="tag">略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" rel="tag">知识体系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A5%E9%9B%B6/" rel="tag">补零</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A8%E5%8D%95/" rel="tag">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E4%B9%90/" rel="tag">音乐</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Android/" style="font-size: 12.86px;">Android</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/CSS/" style="font-size: 17.14px;">CSS</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Database/" style="font-size: 10px;">Database</a> <a href="/tags/ElementUI/" style="font-size: 11.43px;">ElementUI</a> <a href="/tags/Git/" style="font-size: 17.14px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Grunt/" style="font-size: 11.43px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IDE/" style="font-size: 12.86px;">IDE</a> <a href="/tags/Ionic/" style="font-size: 10px;">Ionic</a> <a href="/tags/Java/" style="font-size: 11.43px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 18.57px;">JavaScript</a> <a href="/tags/Lua/" style="font-size: 11.43px;">Lua</a> <a href="/tags/LuaSocket/" style="font-size: 10px;">LuaSocket</a> <a href="/tags/MyEclipse/" style="font-size: 10px;">MyEclipse</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Power-Designer/" style="font-size: 11.43px;">Power Designer</a> <a href="/tags/SEO/" style="font-size: 10px;">SEO</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/WPF/" style="font-size: 10px;">WPF</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/mock/" style="font-size: 10px;">mock</a> <a href="/tags/package-json/" style="font-size: 10px;">package.json</a> <a href="/tags/threejs/" style="font-size: 10px;">threejs</a> <a href="/tags/%E4%B8%96%E7%95%8C/" style="font-size: 10px;">世界</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 12.86px;">动画</a> <a href="/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" style="font-size: 10px;">域名劫持</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AF%BC%E5%85%A5/" style="font-size: 10px;">导入</a> <a href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" style="font-size: 11.43px;">微机原理</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" style="font-size: 11.43px;">技术名词</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" style="font-size: 10px;">技术综合</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" style="font-size: 10px;">技术陷阱</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">数据类型</a> <a href="/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/tags/%E6%97%B6%E9%97%B4/" style="font-size: 10px;">时间</a> <a href="/tags/%E6%AD%A6%E4%BE%A0/" style="font-size: 10px;">武侠</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 11.43px;">汇编</a> <a href="/tags/%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">注释</a> <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" style="font-size: 14.29px;">深入理解C#</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 10px;">状态码</a> <a href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" style="font-size: 10px;">王者荣耀</a> <a href="/tags/%E7%95%A5/" style="font-size: 10px;">略</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" style="font-size: 10px;">知识体系</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.43px;">缓存</a> <a href="/tags/%E8%A1%A5%E9%9B%B6/" style="font-size: 10px;">补零</a> <a href="/tags/%E8%A1%A8%E5%8D%95/" style="font-size: 11.43px;">表单</a> <a href="/tags/%E8%AF%B7%E6%B1%82/" style="font-size: 15.71px;">请求</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 11.43px;">跨域</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/10/2023-08-10-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84css%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E9%87%91%E8%89%B2%E5%85%89%E6%99%95+%E6%89%AB%E5%85%89%E7%89%B9%E6%95%88/">记录一次简单的css动画实现金色光晕+扫光特效</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/27/2023-03-27-%E6%B4%BB%E5%8A%A8%E5%8A%A8%E7%94%BB%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/">活动动画相关技术方案</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/20/2023-03-22-%E5%88%86%E4%BA%AB%E6%96%B0%E9%B2%9C%E4%BA%8B/">分享新鲜事</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/16/2023-03-16-%E7%A7%BB%E5%8A%A8%E7%AB%AF%20CSS%20%E5%8D%95%E4%BD%8D%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/">移动端 CSS 单位处理方案</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/">前端通用依赖库缓存方案</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 Yizhou Shen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
