@@ -15,7 +15,7 @@
 <meta property="og:description" content="前言因为有个需求要展示活动的第几天，以及根据这个天数回查历史记录，所以要写一个函数计算两个日期相差的天数。 一般想到计算两个时间的差值，肯定就是转成时间戳然后相减，最后除以 86400000 就完事了嘛~  这在相隔时间超过 1 天的情况下基本都是没问题的，但是如果相差时间在同一天内，就没法直接通过差值来判断相差天数。 比如说 23:59:59 和 00:00:00 是相差 1 秒，00:00:0">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-12-25T14:31:04.000Z">
-<meta property="article:modified_time" content="2024-03-05T14:31:52.047Z">
+<meta property="article:modified_time" content="2024-03-05T14:57:01.071Z">
 <meta property="article:author" content="Yizhou Shen">
 <meta property="article:tag" content="时间">
 <meta name="twitter:card" content="summary">
@@ -98,6 +98,8 @@
 <p>这在相隔时间超过 1 天的情况下基本都是没问题的，但是如果相差时间在同一天内，就没法直接通过差值来判断相差天数。</p>
 <p>比如说 23:59:59 和 00:00:00 是相差 1 秒，00:00:00 和 00:00:01 也是相差 1 秒，但前者相隔了一天，而后者却是同一天。</p>
 <p>产生这个问题的根源其实在于对于每一天的偏移量不同，即 23:59:59 几乎偏移了一整天，而 00:00:01 只偏移了 1 秒，如果把这部分偏移量去除干净，那比较的就是绝对的天数之差了。</p>
+<a id="more"></a>
+
 <p>所以最简单的思路就是把每个时间处理为那天 00:00:00 时的时间戳，也就是如下的代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">date.setHours(<span class="number">0</span>);</span><br><span class="line">date.setMinutes(<span class="number">0</span>);</span><br><span class="line">date.setSeconds(<span class="number">0</span>);</span><br><span class="line">date.setMilliseconds(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 
@@ -156,7 +158,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2019/12/25/2019-12-25-%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%B7%AE%E5%A4%A9%E6%95%B0%E7%9A%84%E4%B8%A4%E4%B8%89%E4%BA%8B/" data-id="cltehmzfv0077rbabbczqbfu5" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2019/12/25/2019-12-25-%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%B7%AE%E5%A4%A9%E6%95%B0%E7%9A%84%E4%B8%A4%E4%B8%89%E4%BA%8B/" data-id="cltehv42b0077akabgx4bf53z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%B6%E9%97%B4/" rel="tag">时间</a></li></ul>

@@ -7,15 +7,15 @@
   
   <title>前端通用依赖库缓存方案 | 无主之地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景看到这篇文章 https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;0q0E3fIxdii5e-AgjXskdA 发现活动这边基本上也是重复代码率很高，例如 React, React-DOM, encrypt-fetch 这几个包能占到每次活动 js 的 80%文件体积。 将这份代码放到通用库中，从缓存或者离线包中获取，这样每次上线就可以打包非常小体积的代码上线。 静态部署相关部署 id &#x3D;">
+  <meta name="description" content="背景看到这篇文章 https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;0q0E3fIxdii5e-AgjXskdA 发现活动这边基本上也是重复代码率很高，例如 React, React-DOM, encrypt-fetch 这几个包能占到每次活动 js 的 80%文件体积。 将这份代码放到通用库中，从缓存或者离线包中获取，这样每次上线就可以打包非常小体积的代码上线。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端通用依赖库缓存方案">
 <meta property="og:url" content="http://shenyizhou.github.io/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="无主之地">
-<meta property="og:description" content="背景看到这篇文章 https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;0q0E3fIxdii5e-AgjXskdA 发现活动这边基本上也是重复代码率很高，例如 React, React-DOM, encrypt-fetch 这几个包能占到每次活动 js 的 80%文件体积。 将这份代码放到通用库中，从缓存或者离线包中获取，这样每次上线就可以打包非常小体积的代码上线。 静态部署相关部署 id &#x3D;">
+<meta property="og:description" content="背景看到这篇文章 https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;0q0E3fIxdii5e-AgjXskdA 发现活动这边基本上也是重复代码率很高，例如 React, React-DOM, encrypt-fetch 这几个包能占到每次活动 js 的 80%文件体积。 将这份代码放到通用库中，从缓存或者离线包中获取，这样每次上线就可以打包非常小体积的代码上线。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-02T06:44:30.000Z">
-<meta property="article:modified_time" content="2024-03-05T14:50:26.016Z">
+<meta property="article:modified_time" content="2024-03-05T14:55:04.473Z">
 <meta property="article:author" content="Yizhou Shen">
 <meta property="article:tag" content="缓存">
 <meta name="twitter:card" content="summary">
@@ -95,6 +95,8 @@
       
         <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>看到这篇文章 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0q0E3fIxdii5e-AgjXskdA">https://mp.weixin.qq.com/s/0q0E3fIxdii5e-AgjXskdA</a> 发现活动这边基本上也是重复代码率很高，例如 React, React-DOM, encrypt-fetch 这几个包能占到每次活动 js 的 80%文件体积。</p>
 <p>将这份代码放到通用库中，从缓存或者离线包中获取，这样每次上线就可以打包非常小体积的代码上线。</p>
+<a id="more"></a>
+
 <h1 id="静态部署相关"><a href="#静态部署相关" class="headerlink" title="静态部署相关"></a>静态部署相关</h1><h2 id="部署-id-项目-id-环境-id"><a href="#部署-id-项目-id-环境-id" class="headerlink" title="部署 id = 项目 id + 环境 id"></a>部署 id = 项目 id + 环境 id</h2><p>形如 xxxx/appcore-react16.js 的 CDN 地址，其中 5fc64a46358dbb5df667b1d0 是项目 id 大家都知道，但是后面的 5fcee95c3d3224c86b199944 其实是环境地址，同一个环境也是不会变的。</p>
 <p>一开始我以为这个是版本 id，每次发包都会改变，但实际上不会。而且这个普通的包和离线包都是如此，离线包后缀会带 _0，这也是预留字段，目前也是不会变的。</p>
 <p>期间还踩了个坑：webpack 5 + webpack cli 4.2.0 在跑 webpack –env.id xxx 的时候就会报错 Unknown argument: –env，仿佛不支持 –env.id 这种写法，于是降级到 webpack 4 + webpack cli 3 跑通（还把 wepback 5 下的 target: [‘web’, ‘es5’] 写法改回了 target: ‘web’ 终于发布成功）。</p>
@@ -126,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/" data-id="cltehmzgc008mrbabg7q18rir" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/" data-id="cltehv42r008makabhdmjfrgj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>

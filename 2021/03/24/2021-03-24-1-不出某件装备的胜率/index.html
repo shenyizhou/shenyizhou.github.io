@@ -7,12 +7,12 @@
   
   <title>1 - 不出某件装备的胜率 | 无主之地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先有个看出装胜率的网站 一般想要找到最佳出装的思路，肯定是按照胜率倒排选 6 件；但实际上，这几件出装的出场率一般都比较低，数据相对不够有说服力，所以我们把出场率也考虑进去 那么我们反过来思考，不出某件装备时胜率有多少，如果特别低的话，是不是就说明务必要出了，那我们假设有装备 A，则： 不出A的胜率 &#x3D; (英雄总胜率 - A出场率 * A胜率) &#x2F; (100% - A出场率) 比如芈月，整体胜率">
+  <meta name="description" content="首先有个看出装胜率的网站 一般想要找到最佳出装的思路，肯定是按照胜率倒排选 6 件；但实际上，这几件出装的出场率一般都比较低，数据相对不够有说服力，所以我们把出场率也考虑进去 那么我们反过来思考，不出某件装备时胜率有多少，如果特别低的话，是不是就说明务必要出了，那我们假设有装备 A，则： 不出A的胜率 &#x3D; (英雄总胜率 - A出场率 * A胜率) &#x2F; (100% - A出场率)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1 - 不出某件装备的胜率">
 <meta property="og:url" content="http://shenyizhou.github.io/2021/03/24/2021-03-24-1-%E4%B8%8D%E5%87%BA%E6%9F%90%E4%BB%B6%E8%A3%85%E5%A4%87%E7%9A%84%E8%83%9C%E7%8E%87/index.html">
 <meta property="og:site_name" content="无主之地">
-<meta property="og:description" content="首先有个看出装胜率的网站 一般想要找到最佳出装的思路，肯定是按照胜率倒排选 6 件；但实际上，这几件出装的出场率一般都比较低，数据相对不够有说服力，所以我们把出场率也考虑进去 那么我们反过来思考，不出某件装备时胜率有多少，如果特别低的话，是不是就说明务必要出了，那我们假设有装备 A，则： 不出A的胜率 &#x3D; (英雄总胜率 - A出场率 * A胜率) &#x2F; (100% - A出场率) 比如芈月，整体胜率">
+<meta property="og:description" content="首先有个看出装胜率的网站 一般想要找到最佳出装的思路，肯定是按照胜率倒排选 6 件；但实际上，这几件出装的出场率一般都比较低，数据相对不够有说服力，所以我们把出场率也考虑进去 那么我们反过来思考，不出某件装备时胜率有多少，如果特别低的话，是不是就说明务必要出了，那我们假设有装备 A，则： 不出A的胜率 &#x3D; (英雄总胜率 - A出场率 * A胜率) &#x2F; (100% - A出场率)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1240.png">
 <meta property="og:image" content="http://image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1240.png">
@@ -183,7 +183,7 @@
 <meta property="og:image" content="https://image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1722.png">
 <meta property="og:image" content="https://image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1422.png">
 <meta property="article:published_time" content="2021-03-23T18:28:11.000Z">
-<meta property="article:modified_time" content="2023-09-06T07:04:23.719Z">
+<meta property="article:modified_time" content="2024-03-05T14:55:44.252Z">
 <meta property="article:author" content="Yizhou Shen">
 <meta property="article:tag" content="王者荣耀">
 <meta name="twitter:card" content="summary">
@@ -266,6 +266,8 @@
 <p>一般想要找到最佳出装的思路，肯定是按照胜率倒排选 6 件；但实际上，这几件出装的出场率一般都比较低，数据相对不够有说服力，所以我们把出场率也考虑进去</p>
 <p>那么我们反过来思考，不出某件装备时胜率有多少，如果特别低的话，是不是就说明务必要出了，那我们假设有装备 A，则：</p>
 <p><code>不出A的胜率 = (英雄总胜率 - A出场率 * A胜率) / (100% - A出场率)</code></p>
+<a id="more"></a>
+
 <p>比如芈月，整体胜率 52%，<img src="//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1240.png" alt="噬神之书" style="display:inline-block;margin:0 auto;width:22px;height:22px;line-height:22px;box-shadow:none" />出场率 80%，<img src="//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1240.png" alt="噬神之书" style="display:inline-block;margin:0 auto;width:22px;height:22px;line-height:22px;box-shadow:none" />胜率 56%，可以计算出：不出<img src="//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1240.png" alt="噬神之书" style="display:inline-block;margin:0 auto;width:22px;height:22px;line-height:22px;box-shadow:none" />芈月的胜率为 36%</p>
 <p>可见非常的低，所以可以认为<img src="//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1240.png" alt="噬神之书" style="display:inline-block;margin:0 auto;width:22px;height:22px;line-height:22px;box-shadow:none" />是芈月不得不出的一件装备</p>
 <p>那么再来一个逻辑题，100% - 不出某件装备的胜率 = ?</p>
@@ -320,7 +322,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2021/03/24/2021-03-24-1-%E4%B8%8D%E5%87%BA%E6%9F%90%E4%BB%B6%E8%A3%85%E5%A4%87%E7%9A%84%E8%83%9C%E7%8E%87/" data-id="cltehmzg80086rbab7xz0eo2r" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2021/03/24/2021-03-24-1-%E4%B8%8D%E5%87%BA%E6%9F%90%E4%BB%B6%E8%A3%85%E5%A4%87%E7%9A%84%E8%83%9C%E7%8E%87/" data-id="cltehv42j007yakabg7iy6h8p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" rel="tag">王者荣耀</a></li></ul>

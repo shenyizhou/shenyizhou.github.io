@@ -7,18 +7,18 @@
   
   <title>记一次前端 Mac 新机配置之路 | 无主之地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先肯定是拷贝老机子的内容啦这时候正好手边没有 U 盘，叫外卖性价比太低，京东又要等双十二才有优惠，怎么办呢？ 这时候我们可以直接用局域网来传递，在老机子上执行： 123npm i -g host-your-folderhost-your-folder -g# listen on :::50771  这时候访问老机子的 ip 就可以访问用户目录下的文件啦！如 xxx.xxx.xxx.xxx:507">
+  <meta name="description" content="首先肯定是拷贝老机子的内容啦这时候正好手边没有 U 盘，叫外卖性价比太低，京东又要等双十二才有优惠，怎么办呢？ 这时候我们可以直接用局域网来传递，在老机子上执行： 123npm i -g host-your-folderhost-your-folder -g# listen on :::50771">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次前端 Mac 新机配置之路">
 <meta property="og:url" content="http://shenyizhou.github.io/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/index.html">
 <meta property="og:site_name" content="无主之地">
-<meta property="og:description" content="首先肯定是拷贝老机子的内容啦这时候正好手边没有 U 盘，叫外卖性价比太低，京东又要等双十二才有优惠，怎么办呢？ 这时候我们可以直接用局域网来传递，在老机子上执行： 123npm i -g host-your-folderhost-your-folder -g# listen on :::50771  这时候访问老机子的 ip 就可以访问用户目录下的文件啦！如 xxx.xxx.xxx.xxx:507">
+<meta property="og:description" content="首先肯定是拷贝老机子的内容啦这时候正好手边没有 U 盘，叫外卖性价比太低，京东又要等双十二才有优惠，怎么办呢？ 这时候我们可以直接用局域网来传递，在老机子上执行： 123npm i -g host-your-folderhost-your-folder -g# listen on :::50771">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5192874733/ff38/9ec2/a448/29d7fa333c425db05cc33a4883453f76.png">
 <meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5192833655/e6a2/d1a0/de8e/fb7ed6c18027dd1c6e28e92cd04ca215.jpg">
 <meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5192897486/505c/b816/3882/c073e8da218268eeba4b7cffd1845518.png">
 <meta property="article:published_time" content="2020-12-09T17:52:22.000Z">
-<meta property="article:modified_time" content="2023-09-06T07:04:23.714Z">
+<meta property="article:modified_time" content="2024-03-05T14:56:50.102Z">
 <meta property="article:author" content="Yizhou Shen">
 <meta property="article:tag" content="IDE">
 <meta name="twitter:card" content="summary">
@@ -101,6 +101,8 @@
 <p>这时候我们可以直接用局域网来传递，在老机子上执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i -g host-your-folder</span><br><span class="line">host-your-folder -g</span><br><span class="line"><span class="comment"># listen on :::50771</span></span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
+
 <p>这时候访问老机子的 ip 就可以访问用户目录下的文件啦！如 <code>xxx.xxx.xxx.xxx:50771/xxx.zip</code>。</p>
 <p>但是要注意的是 .ssh 之类 <code>.</code> 开头的文件是系统文件，没法通过这种方式传递，需要改个其他名字。</p>
 <p>最容易的办法就是把所有要传递的文件打包成一个 <code>xxx.zip</code> 放在用户目录下一起下载。</p>
@@ -162,7 +164,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" data-id="cltehmzfx007erbabgasn0apk" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" data-id="cltehv42d007eakabbip25586" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li></ul>

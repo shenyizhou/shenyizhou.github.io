@@ -7,15 +7,15 @@
   
   <title>自动批量请求（5）—— useRequest 的实现 | 无主之地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="经过以上几篇文章，已经可以很好地处理 batch 请求的场景了。 但是每次还是得手动处理 loading 和 error，不够方便。 况且现在已经是 hooks 的时代了，本文便引入了 useRequest 的概念。 useRequest 的使用我们对 useFetch 的使用习惯肯定是要符合我们对 hooks 的直觉，如此这般： 1234const &amp;#123; data, loading, e">
+  <meta name="description" content="经过以上几篇文章，已经可以很好地处理 batch 请求的场景了。 但是每次还是得手动处理 loading 和 error，不够方便。 况且现在已经是 hooks 的时代了，本文便引入了 useRequest 的概念。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自动批量请求（5）—— useRequest 的实现">
 <meta property="og:url" content="http://shenyizhou.github.io/2022/04/17/2022-04-17-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20useRequest%20%E7%9A%84%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="无主之地">
-<meta property="og:description" content="经过以上几篇文章，已经可以很好地处理 batch 请求的场景了。 但是每次还是得手动处理 loading 和 error，不够方便。 况且现在已经是 hooks 的时代了，本文便引入了 useRequest 的概念。 useRequest 的使用我们对 useFetch 的使用习惯肯定是要符合我们对 hooks 的直觉，如此这般： 1234const &amp;#123; data, loading, e">
+<meta property="og:description" content="经过以上几篇文章，已经可以很好地处理 batch 请求的场景了。 但是每次还是得手动处理 loading 和 error，不够方便。 况且现在已经是 hooks 的时代了，本文便引入了 useRequest 的概念。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-17T04:41:51.000Z">
-<meta property="article:modified_time" content="2024-03-05T14:42:08.932Z">
+<meta property="article:modified_time" content="2024-03-05T14:55:14.045Z">
 <meta property="article:author" content="Yizhou Shen">
 <meta property="article:tag" content="请求">
 <meta name="twitter:card" content="summary">
@@ -96,6 +96,8 @@
         <p>经过以上几篇文章，已经可以很好地处理 batch 请求的场景了。</p>
 <p>但是每次还是得手动处理 loading 和 error，不够方便。</p>
 <p>况且现在已经是 hooks 的时代了，本文便引入了 useRequest 的概念。</p>
+<a id="more"></a>
+
 <h2 id="useRequest-的使用"><a href="#useRequest-的使用" class="headerlink" title="useRequest 的使用"></a>useRequest 的使用</h2><p>我们对 useFetch 的使用习惯肯定是要符合我们对 hooks 的直觉，如此这般：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; data, loading, error &#125; = useRequest(</span><br><span class="line">    &#123; <span class="attr">url</span>: <span class="string">&#x27;url&#x27;</span>, <span class="attr">data</span>: &#123;&#125;, ...options &#125;,</span><br><span class="line">    [...deps]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
@@ -119,7 +121,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2022/04/17/2022-04-17-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20useRequest%20%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-id="cltehmzga008erbab820ghnyd" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2022/04/17/2022-04-17-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20useRequest%20%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-id="cltehv42o008eakabhbikcdby" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li></ul>

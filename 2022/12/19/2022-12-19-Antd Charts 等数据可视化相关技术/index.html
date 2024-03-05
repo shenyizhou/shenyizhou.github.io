@@ -7,17 +7,17 @@
   
   <title>Antd Charts 等数据可视化相关技术 | 无主之地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="大概涉及到的几个技术栈中，Ant Design Charts 是对 G2Plot 做了 React 化，G2Plot 是对 G2 做了API上的优化，G2 是对 G 做了图表的封装，而最底层的 G 是一套同时支持 Canvas 和 SVG 的 2D 渲染引擎。后三者都是 AntV 团队的作品，已开源，文档地址统一贴在文末。 GG 的实现原理就是在画布 Canvas 上增加图形 Shape，仿佛作画">
+  <meta name="description" content="大概涉及到的几个技术栈中，Ant Design Charts 是对 G2Plot 做了 React 化，G2Plot 是对 G2 做了API上的优化，G2 是对 G 做了图表的封装，而最底层的 G 是一套同时支持 Canvas 和 SVG 的 2D 渲染引擎。后三者都是 AntV 团队的作品，已开源，文档地址统一贴在文末。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Antd Charts 等数据可视化相关技术">
 <meta property="og:url" content="http://shenyizhou.github.io/2022/12/19/2022-12-19-Antd%20Charts%20%E7%AD%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF/index.html">
 <meta property="og:site_name" content="无主之地">
-<meta property="og:description" content="大概涉及到的几个技术栈中，Ant Design Charts 是对 G2Plot 做了 React 化，G2Plot 是对 G2 做了API上的优化，G2 是对 G 做了图表的封装，而最底层的 G 是一套同时支持 Canvas 和 SVG 的 2D 渲染引擎。后三者都是 AntV 团队的作品，已开源，文档地址统一贴在文末。 GG 的实现原理就是在画布 Canvas 上增加图形 Shape，仿佛作画">
+<meta property="og:description" content="大概涉及到的几个技术栈中，Ant Design Charts 是对 G2Plot 做了 React 化，G2Plot 是对 G2 做了API上的优化，G2 是对 G 做了图表的封装，而最底层的 G 是一套同时支持 Canvas 和 SVG 的 2D 渲染引擎。后三者都是 AntV 团队的作品，已开源，文档地址统一贴在文末。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gw.alipayobjects.com/mdn/rms_6ae20b/afts/img/A*Hz29QLOXPRYAAAAAAAAAAABkARQnAQ">
 <meta property="og:image" content="https://gw.alipayobjects.com/mdn/rms_2274c3/afts/img/A*8qbLQb7A0loAAAAAAAAAAABkARQnAQ">
 <meta property="article:published_time" content="2022-12-19T10:43:16.000Z">
-<meta property="article:modified_time" content="2024-03-05T14:43:39.344Z">
+<meta property="article:modified_time" content="2024-03-05T14:55:09.796Z">
 <meta property="article:author" content="Yizhou Shen">
 <meta property="article:tag" content="图表">
 <meta name="twitter:card" content="summary">
@@ -97,6 +97,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>大概涉及到的几个技术栈中，<code>Ant Design Charts</code> 是对 <code>G2Plot</code> 做了 React 化，<code>G2Plot</code> 是对 <code>G2</code> 做了API上的优化，<code>G2</code> 是对 <code>G</code> 做了图表的封装，而最底层的 <code>G</code> 是一套同时支持 Canvas 和 SVG 的 2D 渲染引擎。后三者都是 <code>AntV</code> 团队的作品，已开源，文档地址统一贴在文末。</p>
+<a id="more"></a>
+
 <h3 id="G"><a href="#G" class="headerlink" title="G"></a>G</h3><p><code>G</code> 的实现原理就是在画布 <code>Canvas</code> 上增加图形 <code>Shape</code>，仿佛作画一般。</p>
 <p>如下的代码画一块 600 * 500 的画布：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里的 Canvas 只是画布的意思，如果是 svg，则是 import &#123; Canvas &#125; from &#x27;@antv/g-svg&#x27;;</span></span><br><span class="line"><span class="keyword">import</span> &#123; Canvas &#125; <span class="keyword">from</span> <span class="string">&#x27;@antv/g-canvas&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 会有个只读属性 renderer = &#x27;canvas&#x27; | &#x27;svg&#x27;</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="keyword">new</span> Canvas(&#123;</span><br><span class="line">    container: <span class="string">&#x27;container&#x27;</span>, <span class="comment">// 容器 id，也可以直接传入 DOM 元素</span></span><br><span class="line">    width: <span class="number">600</span>,</span><br><span class="line">    height: <span class="number">500</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -151,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2022/12/19/2022-12-19-Antd%20Charts%20%E7%AD%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF/" data-id="cltehmzgb008irbabcxrye9rz" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2022/12/19/2022-12-19-Antd%20Charts%20%E7%AD%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF/" data-id="cltehv42q008iakabg1lfbdmu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li></ul>
