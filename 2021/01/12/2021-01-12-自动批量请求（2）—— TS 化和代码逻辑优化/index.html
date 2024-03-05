@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>自动批量请求（2）—— TS 化和代码逻辑优化 | 无主之地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="先看图来回顾一下（假设一次 EventLoop 占用 5 个时间单位，请求回复也需要 5 个时间单位）：  我们已经实现了自动把同一时刻的请求合并，并统一渲染。 但写完之后，发现很多写法都比较 low，所以对代码做了一次整体重构。 TS 化首先，我们把之前涉及到的对象都用 typescript 定义，以方便后期维护： 123456789101112131415161718192021&#x2F;** * 通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动批量请求（2）—— TS 化和代码逻辑优化">
+<meta property="og:url" content="http://shenyizhou.github.io/2021/01/12/2021-01-12-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20TS%20%E5%8C%96%E5%92%8C%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content="先看图来回顾一下（假设一次 EventLoop 占用 5 个时间单位，请求回复也需要 5 个时间单位）：  我们已经实现了自动把同一时刻的请求合并，并统一渲染。 但写完之后，发现很多写法都比较 low，所以对代码做了一次整体重构。 TS 化首先，我们把之前涉及到的对象都用 typescript 定义，以方便后期维护： 123456789101112131415161718192021&#x2F;** * 通">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5733277210/25b8/a88b/ef27/c19c77ade001f7208ee47fef48b9061d.png">
+<meta property="article:published_time" content="2021-01-12T14:35:17.000Z">
+<meta property="article:modified_time" content="2024-03-05T14:42:15.060Z">
+<meta property="article:author" content="Yizhou Shen">
+<meta property="article:tag" content="请求">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5733277210/25b8/a88b/ef27/c19c77ade001f7208ee47fef48b9061d.png">
+  
+    <link rel="alternate" href="/atom.xml" title="无主之地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">无主之地</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shenyizhou.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2021-01-12-自动批量请求（2）—— TS 化和代码逻辑优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/12/2021-01-12-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20TS%20%E5%8C%96%E5%92%8C%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%E4%BC%98%E5%8C%96/" class="article-date">
+  <time datetime="2021-01-12T14:35:17.000Z" itemprop="datePublished">2021年01月12日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自动批量请求（2）—— TS 化和代码逻辑优化
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先看图来回顾一下（假设一次 EventLoop 占用 5 个时间单位，请求回复也需要 5 个时间单位）：</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5733277210/25b8/a88b/ef27/c19c77ade001f7208ee47fef48b9061d.png" alt="自动批量请求"></p>
+<p>我们已经实现了自动把同一时刻的请求合并，并统一渲染。</p>
+<p>但写完之后，发现很多写法都比较 low，所以对代码做了一次整体重构。</p>
+<h2 id="TS-化"><a href="#TS-化" class="headerlink" title="TS 化"></a>TS 化</h2><p>首先，我们把之前涉及到的对象都用 typescript 定义，以方便后期维护：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通用对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> IObject = Record&lt;<span class="built_in">string</span> | <span class="built_in">number</span> | symbol, <span class="built_in">any</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通用返回体</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">interface</span> IResponse &#123;</span><br><span class="line">    code: <span class="built_in">number</span>; <span class="comment">// 状态码，200 为正常</span></span><br><span class="line">    data: IObject; <span class="comment">// 返回数据</span></span><br><span class="line">    message?: <span class="built_in">string</span>; <span class="comment">// 报错信息</span></span><br><span class="line">    msg?: <span class="built_in">string</span>; <span class="comment">// 报错信息，某些接口用缩写返回</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 继承 Error 的错误返回体</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">interface</span> IErrorResponse <span class="keyword">extends</span> Error &#123;</span><br><span class="line">    code?: <span class="built_in">number</span>; <span class="comment">// 补充错误的状态码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="拆分代码功能"><a href="#拆分代码功能" class="headerlink" title="拆分代码功能"></a>拆分代码功能</h2><p>原有的逻辑是把所有功能耦合在一次顺序执行，但实际上整个批量请求的流程可以分为：</p>
+<ol>
+<li>添加请求到队列中</li>
+<li>发送请求</li>
+<li>清空请求队列</li>
+<li>处理请求回调</li>
+</ol>
+<blockquote>
+<p>注：处理请求回调是异步执行的，而清空请求队列是每个 EventLoop 发送完请求都会执行一遍的，所以实际发生的时间是：清空在前，处理回调在后。</p>
+</blockquote>
+<p>这其中，第 2 和 第 3 就可以抽成 <code>addRequest</code> 和 <code>clearRequest</code> 方法。</p>
+<h2 id="合并松散对象"><a href="#合并松散对象" class="headerlink" title="合并松散对象"></a>合并松散对象</h2><p>原先的逻辑是，根据请求 url 作区分，分别用三个对象存请求参数、成功和错误回调的信息，这样存的好处是 <code>paramsMap</code> 可以直接作为 <code>/api/batch</code> 的请求参数。</p>
+<p>但是这样子存，感觉过于分散，其实可以耦合成一个对象：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 单个请求的元数据信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">type</span> IRequestItem = &#123;</span><br><span class="line">    name: <span class="built_in">string</span>; <span class="comment">// 请求 url</span></span><br><span class="line">    data: IObject; <span class="comment">// 请求参数</span></span><br><span class="line">    success: <span class="function">(<span class="params">obj: IObject</span>) =&gt;</span> <span class="built_in">void</span>; <span class="comment">// 成功回调</span></span><br><span class="line">    error: <span class="function">(<span class="params">err: <span class="built_in">Error</span></span>) =&gt;</span> <span class="built_in">void</span>; <span class="comment">// 错误回调</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后把多个请求组合成一个新的 Map 对象，同时在 <code>addRequest</code> 中添加如下处理：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 同一个队列多个请求组成的 Map，键名是 api</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">type</span> IRequestMap = &#123;</span><br><span class="line">    [url: <span class="built_in">string</span>]: IRequestItem; <span class="comment">// 每个请求对应的元数据信息</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> requestMap: IRequestMap = &#123;&#125;; <span class="comment">// 同一个队列下多个请求组成的 Map，键名是 api</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 增加请求到队列中</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>requestItem 单个请求信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> addRequest: <span class="function">(<span class="params">requestItem: IRequestItem</span>) =&gt;</span> <span class="built_in">void</span> = <span class="function">(<span class="params">requestItem</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; name, data, success, error &#125; = requestItem;</span><br><span class="line">    requestMap[name] = &#123;</span><br><span class="line">        name,</span><br><span class="line">        data: deepStringify(data),</span><br><span class="line">        success,</span><br><span class="line">        error</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用并传参</span></span><br><span class="line">addRequest(&#123;</span><br><span class="line">    name,</span><br><span class="line">    data: deepStringify(params.data), <span class="comment">// 深度 stringify 对象，batch 请求需要</span></span><br><span class="line">    success: params.success ?? success,</span><br><span class="line">    error: params.error ?? error</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以及在 <code>clearRequest</code> 中添加如下处理：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 清空请求队列</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> clearRequest: <span class="function">() =&gt;</span> <span class="built_in">void</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    requestMap = &#123;&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后如下方式转化成 <code>batch</code> 请求的参数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> batchData = <span class="built_in">Object</span>.values(requestMap).reduce(</span><br><span class="line">    (pre: IObject, <span class="attr">cur</span>: IRequestItem) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; <span class="attr">name</span>: requestName, data &#125; = cur;</span><br><span class="line">        <span class="keyword">return</span> &#123; ...pre, [requestName]: data &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>以及封装下发送批量请求的函数 <code>sendRequestBatch</code>，使得逻辑更为清晰：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * batch 请求的返回结构，键名是 api</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">type</span> IBatchResponse = &#123;</span><br><span class="line">    [url: <span class="built_in">string</span>]: IResponse; <span class="comment">// 每个请求对应的返回信息</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 发送批量请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>tempRequestMap 临时缓存的变量，在执行请求回调时，原来的 requestMap 其实已经清空了</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> sendRequestBatch: <span class="function">(<span class="params">tempRequestMap: IRequestMap</span>) =&gt;</span> <span class="built_in">void</span> = (</span><br><span class="line">    tempRequestMap</span><br><span class="line">) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 转化为 batch 请求需要的格式</span></span><br><span class="line">    <span class="keyword">const</span> batchData = &#123;&#125;; <span class="comment">/* 见上述代码 */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用批处理请求</span></span><br><span class="line">    fetchBase(<span class="string">&#x27;/api/batch&#x27;</span>, &#123;</span><br><span class="line">        data: batchData</span><br><span class="line">    &#125;)</span><br><span class="line">        .then(<span class="function">(<span class="params">res: IBatchResponse</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 用 unstable_batchedUpdates 统一更新，减少渲染次数</span></span><br><span class="line">            unstable_batchedUpdates(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">Object</span>.keys(res).forEach(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">const</span> &#123; code, message, msg, data &#125; = res[key];</span><br><span class="line">                    <span class="keyword">const</span> &#123;</span><br><span class="line">                        success: successCallback,</span><br><span class="line">                        error: errorCallback</span><br><span class="line">                    &#125; = tempRequestMap[key];</span><br><span class="line">                    <span class="keyword">if</span> (code !== <span class="number">200</span>) &#123;</span><br><span class="line">                        <span class="keyword">const</span> err: IErrorResponse = <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">                            (message || msg) ?? <span class="string">&#x27;系统繁忙，请稍后再试&#x27;</span></span><br><span class="line">                        );</span><br><span class="line">                        err.code = code;</span><br><span class="line">                        <span class="keyword">if</span> (errorCallback) &#123;</span><br><span class="line">                            errorCallback(err);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (successCallback) &#123;</span><br><span class="line">                        successCallback(data);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function">(<span class="params">err: <span class="built_in">Error</span></span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 如果 batch 请求报错了，则给每个请求都返回 batch 请求的报错</span></span><br><span class="line">            <span class="built_in">Object</span>.keys(tempRequestMap).forEach(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> &#123; <span class="attr">error</span>: errorCallback &#125; = tempRequestMap[key];</span><br><span class="line">                <span class="keyword">if</span> (errorCallback) &#123;</span><br><span class="line">                    errorCallback(err);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>最后删除 count，直接用 requestMap 的 keys 数量做判断，就生成了最后的 fetchBatch 函数啦：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * fetch 的 options 对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">interface</span> IFetchOptions &#123;</span><br><span class="line">    data: IObject;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 空函数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> noop = <span class="function">() =&gt;</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自动批处理及批量更新的 fetch，通过闭包保存一些变量</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> fetchBatch = (<span class="function"><span class="keyword">function</span> <span class="title">anonymousFetch</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> batchFlag: <span class="built_in">Promise</span>&lt;<span class="built_in">void</span>&gt; | <span class="literal">null</span> = <span class="literal">null</span>; <span class="comment">// 标记一次 EventLoop 上是否已存在其他请求</span></span><br><span class="line">    <span class="keyword">let</span> requestMap: IRequestMap = &#123;&#125;; <span class="comment">// 同一个队列（batch）下多个请求组成的 Map，键名是 api</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> sendRequestBatch = <span class="function">() =&gt;</span> &#123;&#125;; <span class="comment">/* 见上述代码 */</span></span><br><span class="line">    <span class="keyword">const</span> addRequest = <span class="function">() =&gt;</span> &#123;&#125;; <span class="comment">/* 见上述代码 */</span></span><br><span class="line">    <span class="keyword">const</span> clearRequest = <span class="function">() =&gt;</span> &#123;&#125;; <span class="comment">/* 见上述代码 */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实际返回匿名函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">anonymous</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">        name: <span class="built_in">string</span> = <span class="string">&#x27;&#x27;</span>, <span class="comment">// 透传 api 地址</span></span></span></span><br><span class="line"><span class="function"><span class="params">        options: IParams = &#123; data: &#123;&#125; &#125;, <span class="comment">// 透传 options 参数对象，格式为 &#123; data: &#123;&#125; &#125;</span></span></span></span><br><span class="line"><span class="function"><span class="params">        success: (obj: IObject) =&gt; <span class="built_in">void</span> = noop, <span class="comment">// 成功回调</span></span></span></span><br><span class="line"><span class="function"><span class="params">        error: (err: <span class="built_in">Error</span>) =&gt; <span class="built_in">void</span> = noop <span class="comment">// 错误回调</span></span></span></span><br><span class="line"><span class="function"><span class="params">    </span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 如果已存在，就直接发送请求</span></span><br><span class="line">        <span class="keyword">if</span> (requestMap[name]) &#123;</span><br><span class="line">            <span class="keyword">return</span> fetch(name, options).then(success, error);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 增加请求到队列中</span></span><br><span class="line">        addRequest(&#123;</span><br><span class="line">            name,</span><br><span class="line">            data: deepStringify(options.data), <span class="comment">// 深度 stringify 对象，batch 请求需要</span></span><br><span class="line">            success,</span><br><span class="line">            error</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// batchFlag 为空，即同一个 EventLoop 的第一次请求时，创建 Promise</span></span><br><span class="line">        <span class="keyword">if</span> (!batchFlag) &#123;</span><br><span class="line">            <span class="comment">// 用微任务合并同一次 EventLoop 上的请求</span></span><br><span class="line">            batchFlag = <span class="built_in">Promise</span>.resolve().then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="comment">// 当数量大于 1 才启用 batch 请求</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">Object</span>.keys(requestMap).length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                    sendRequestBatch(requestMap);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 等于 1 时，则降级到正常请求发送</span></span><br><span class="line">                    <span class="keyword">return</span> fetch(name, options).then(success, error);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 清空变量</span></span><br><span class="line">                clearRequest();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>可以见得，重构后的代码，精简了很多，逻辑也清晰了很多。</p>
+<p>重构到此就初步大功告成啦！~ (<em>^▽^</em>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2021/01/12/2021-01-12-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20TS%20%E5%8C%96%E5%92%8C%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%E4%BC%98%E5%8C%96/" data-id="cltehmzfy007hrbabhvbb89hw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          文档编写指北
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">记一次前端 Mac 新机配置之路</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ionic/">Ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VPN/">VPN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E8%AF%B4/">小说</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%AF%94%E8%BE%83/">技术比较</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/">技术综合</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/" rel="tag">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ElementUI/" rel="tag">ElementUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ionic/" rel="tag">Ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LuaSocket/" rel="tag">LuaSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyEclipse/" rel="tag">MyEclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Power-Designer/" rel="tag">Power Designer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPF/" rel="tag">WPF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mock/" rel="tag">mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-json/" rel="tag">package.json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threejs/" rel="tag">threejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" rel="tag">域名劫持</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E5%85%A5/" rel="tag">导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag">微机原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" rel="tag">技术名词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" rel="tag">技术综合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" rel="tag">技术陷阱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A6%E4%BE%A0/" rel="tag">武侠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E9%87%8A/" rel="tag">注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" rel="tag">深入理解C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" rel="tag">王者荣耀</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%95%A5/" rel="tag">略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" rel="tag">知识体系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A5%E9%9B%B6/" rel="tag">补零</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 12.86px;">Android</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/CSS/" style="font-size: 15.71px;">CSS</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Database/" style="font-size: 10px;">Database</a> <a href="/tags/ElementUI/" style="font-size: 11.43px;">ElementUI</a> <a href="/tags/Git/" style="font-size: 17.14px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Grunt/" style="font-size: 11.43px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IDE/" style="font-size: 12.86px;">IDE</a> <a href="/tags/Ionic/" style="font-size: 10px;">Ionic</a> <a href="/tags/Java/" style="font-size: 11.43px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 18.57px;">JavaScript</a> <a href="/tags/Lua/" style="font-size: 11.43px;">Lua</a> <a href="/tags/LuaSocket/" style="font-size: 10px;">LuaSocket</a> <a href="/tags/MyEclipse/" style="font-size: 10px;">MyEclipse</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Power-Designer/" style="font-size: 11.43px;">Power Designer</a> <a href="/tags/SEO/" style="font-size: 10px;">SEO</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/WPF/" style="font-size: 10px;">WPF</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/mock/" style="font-size: 10px;">mock</a> <a href="/tags/package-json/" style="font-size: 10px;">package.json</a> <a href="/tags/threejs/" style="font-size: 10px;">threejs</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 10px;">动画</a> <a href="/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" style="font-size: 10px;">域名劫持</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AF%BC%E5%85%A5/" style="font-size: 10px;">导入</a> <a href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" style="font-size: 11.43px;">微机原理</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" style="font-size: 11.43px;">技术名词</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" style="font-size: 10px;">技术综合</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" style="font-size: 10px;">技术陷阱</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">数据类型</a> <a href="/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/tags/%E6%97%B6%E9%97%B4/" style="font-size: 10px;">时间</a> <a href="/tags/%E6%AD%A6%E4%BE%A0/" style="font-size: 10px;">武侠</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 11.43px;">汇编</a> <a href="/tags/%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">注释</a> <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" style="font-size: 14.29px;">深入理解C#</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 10px;">状态码</a> <a href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" style="font-size: 10px;">王者荣耀</a> <a href="/tags/%E7%95%A5/" style="font-size: 10px;">略</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" style="font-size: 10px;">知识体系</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.43px;">缓存</a> <a href="/tags/%E8%A1%A5%E9%9B%B6/" style="font-size: 10px;">补零</a> <a href="/tags/%E8%AF%B7%E6%B1%82/" style="font-size: 15.71px;">请求</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 11.43px;">跨域</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/">前端通用依赖库缓存方案</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/19/2022-12-19-Antd%20Charts%20%E7%AD%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF/">Antd Charts 等数据可视化相关技术</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/2022-04-17-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20useRequest%20%E7%9A%84%E5%AE%9E%E7%8E%B0/">自动批量请求（5）—— useRequest 的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/15/2022-04-15-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94%20%E5%88%A0%E5%87%8F%E9%87%8D%E5%A4%8D%E7%9A%84%E8%AF%B7%E6%B1%82/">自动批量请求（4）—— 删减重复的请求</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/18/2021-07-18-%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/">如何构建自己的知识体系</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 Yizhou Shen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

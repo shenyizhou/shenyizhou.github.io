@@ -67,6 +67,291 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2023-01-02-前端通用依赖库缓存方案" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/" class="article-date">
+  <time datetime="2023-01-02T06:44:30.000Z" itemprop="datePublished">2023年01月02日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/">前端通用依赖库缓存方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>看到这篇文章 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0q0E3fIxdii5e-AgjXskdA">https://mp.weixin.qq.com/s/0q0E3fIxdii5e-AgjXskdA</a> 发现活动这边基本上也是重复代码率很高，例如 React, React-DOM, encrypt-fetch 这几个包能占到每次活动 js 的 80%文件体积。</p>
+<p>将这份代码放到通用库中，从缓存或者离线包中获取，这样每次上线就可以打包非常小体积的代码上线。</p>
+<h1 id="静态部署相关"><a href="#静态部署相关" class="headerlink" title="静态部署相关"></a>静态部署相关</h1><h2 id="部署-id-项目-id-环境-id"><a href="#部署-id-项目-id-环境-id" class="headerlink" title="部署 id = 项目 id + 环境 id"></a>部署 id = 项目 id + 环境 id</h2><p>形如 xxxx/appcore-react16.js 的 CDN 地址，其中 5fc64a46358dbb5df667b1d0 是项目 id 大家都知道，但是后面的 5fcee95c3d3224c86b199944 其实是环境地址，同一个环境也是不会变的。</p>
+<p>一开始我以为这个是版本 id，每次发包都会改变，但实际上不会。而且这个普通的包和离线包都是如此，离线包后缀会带 _0，这也是预留字段，目前也是不会变的。</p>
+<p>期间还踩了个坑：webpack 5 + webpack cli 4.2.0 在跑 webpack –env.id xxx 的时候就会报错 Unknown argument: –env，仿佛不支持 –env.id 这种写法，于是降级到 webpack 4 + webpack cli 3 跑通（还把 wepback 5 下的 target: [‘web’, ‘es5’] 写法改回了 target: ‘web’ 终于发布成功）。</p>
+<h2 id="离线包的-url"><a href="#离线包的-url" class="headerlink" title="离线包的 url"></a>离线包的 url</h2><p>顺带说下，走离线包的 url 测试环境是 mpcdn.xxx、线上环境是 s7/s8.xxx，且目录一定要是 public 下。</p>
+<h2 id="客户端存储"><a href="#客户端存储" class="headerlink" title="客户端存储"></a>客户端存储</h2><p>另外客户端离线包用来保存区分的是时候也不是只按照项目 id 存的，而是按照项目 id+环境 id 的完整形式存的。所以同一环境的离线包就算更新了，对应的 cdn 地址也不会变。</p>
+<h1 id="离线包相关"><a href="#离线包相关" class="headerlink" title="离线包相关"></a>离线包相关</h1><h2 id="CDN-与强缓存"><a href="#CDN-与强缓存" class="headerlink" title="CDN 与强缓存"></a>CDN 与强缓存</h2><p>强缓存的优先级要高于离线包，CDN 文件都是走的强缓存，也就是说离线包只能优化第一次访问的速度，从第二次开始都是走的强缓存。</p>
+<h2 id="客户端支持"><a href="#客户端支持" class="headerlink" title="客户端支持"></a>客户端支持</h2><p>目前感觉走缓存的体验效果良好，同时把通用库做成离线包，增加了第一次体验质量。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="1-通过-webpack-插件引入脚本："><a href="#1-通过-webpack-插件引入脚本：" class="headerlink" title="1.通过 webpack 插件引入脚本："></a>1.通过 webpack 插件引入脚本：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackTagsPlugin = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-tags-plugin&#x27;</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackTagsPlugin(&#123;</span><br><span class="line">            usePublicPath: <span class="literal">false</span>,</span><br><span class="line">            append: <span class="literal">false</span>,</span><br><span class="line">            scripts: [</span><br><span class="line">                &#123;</span><br><span class="line">                    path:</span><br><span class="line">                        <span class="string">&#x27;xxxx/appcore-react16.js?v=0&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注 1：千万不要用 async，加载时会报错，可以用 defer</p>
+</blockquote>
+<blockquote>
+<p>注 2：直接用 script 标签用离线包可能在替换时出现问题，建议用 webpack 插件的方式引入</p>
+</blockquote>
+<h2 id="2-在-webpack-中配置："><a href="#2-在-webpack-中配置：" class="headerlink" title="2.在 webpack 中配置："></a>2.在 webpack 中配置：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    externals: &#123;</span><br><span class="line">        <span class="string">&#x27;react&#x27;</span>: <span class="string">&#x27;React&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;react-dom&#x27;</span>: <span class="string">&#x27;ReactDOM&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;prop-types&#x27;</span>: <span class="string">&#x27;PropTypes&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后就能正常使用啦，import ‘react’ 的时候就相当于从 window.React 中获取。</p>
+<h1 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h1><p>目前根据 React 版本分为两个 cdn 地址：</p>
+<p>React 16：xxxx/appcore-react16.js?v=0</p>
+<p>React 17：xxxx/appcore-react17.js?v=0</p>
+<blockquote>
+<p>这边带v=0是为了方便之后强制更新版本, 因为重新部署不会使得离线包升级</p>
+</blockquote>
+<h1 id="打包内容"><a href="#打包内容" class="headerlink" title="打包内容"></a>打包内容</h1><p>React 16 之后依赖集合类型 Map、Set 和 requestAnimationFrame，为了支持老设备使用了全局的 polyfill。</p>
+<h1 id="polyfill"><a href="#polyfill" class="headerlink" title="polyfill"></a>polyfill</h1><p>React 在低版本手机可能有兼容性问题，要主动打 polyfill。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;core-js/es/map&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;core-js/es/set&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;raf/polyfill&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/" data-id="cltehmzgc008mrbabg7q18rir" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2022-12-19-Antd Charts 等数据可视化相关技术" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/12/19/2022-12-19-Antd%20Charts%20%E7%AD%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF/" class="article-date">
+  <time datetime="2022-12-19T10:43:16.000Z" itemprop="datePublished">2022年12月19日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/12/19/2022-12-19-Antd%20Charts%20%E7%AD%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF/">Antd Charts 等数据可视化相关技术</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大概涉及到的几个技术栈中，<code>Ant Design Charts</code> 是对 <code>G2Plot</code> 做了 React 化，<code>G2Plot</code> 是对 <code>G2</code> 做了API上的优化，<code>G2</code> 是对 <code>G</code> 做了图表的封装，而最底层的 <code>G</code> 是一套同时支持 Canvas 和 SVG 的 2D 渲染引擎。后三者都是 <code>AntV</code> 团队的作品，已开源，文档地址统一贴在文末。</p>
+<h3 id="G"><a href="#G" class="headerlink" title="G"></a>G</h3><p><code>G</code> 的实现原理就是在画布 <code>Canvas</code> 上增加图形 <code>Shape</code>，仿佛作画一般。</p>
+<p>如下的代码画一块 600 * 500 的画布：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里的 Canvas 只是画布的意思，如果是 svg，则是 import &#123; Canvas &#125; from &#x27;@antv/g-svg&#x27;;</span></span><br><span class="line"><span class="keyword">import</span> &#123; Canvas &#125; <span class="keyword">from</span> <span class="string">&#x27;@antv/g-canvas&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 会有个只读属性 renderer = &#x27;canvas&#x27; | &#x27;svg&#x27;</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="keyword">new</span> Canvas(&#123;</span><br><span class="line">    container: <span class="string">&#x27;container&#x27;</span>, <span class="comment">// 容器 id，也可以直接传入 DOM 元素</span></span><br><span class="line">    width: <span class="number">600</span>,</span><br><span class="line">    height: <span class="number">500</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>如下的代码在这块画布上画一个圆：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">canvas.addShape(<span class="string">&#x27;circle&#x27;</span>, &#123;</span><br><span class="line">    attrs: &#123;</span><br><span class="line">        x: <span class="number">300</span>, <span class="comment">// x 坐标(圆形是相对于圆心，矩形是相对于左上角)</span></span><br><span class="line">        y: <span class="number">200</span>, <span class="comment">// y 坐标(同上)</span></span><br><span class="line">        r: <span class="number">100</span>, <span class="comment">// 半径</span></span><br><span class="line">        fill: <span class="string">&#x27;#1890FF&#x27;</span>, <span class="comment">// 填充色</span></span><br><span class="line">        stroke: <span class="string">&#x27;#F04864&#x27;</span>, <span class="comment">// 边框色</span></span><br><span class="line">        lineWidth: <span class="number">4</span>, <span class="comment">// 边框宽度</span></span><br><span class="line">        radius: <span class="number">8</span> <span class="comment">// 圆角半径，主要对矩形配置使用，这里其实没用上</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>结果如图所示：</p>
+<p><img src="https://gw.alipayobjects.com/mdn/rms_6ae20b/afts/img/A*Hz29QLOXPRYAAAAAAAAAAABkARQnAQ" alt="结果图"></p>
+<p>类型除了圆形<code>circle</code>，还支持椭圆<code>ellipse</code>、矩形<code>rect</code>(包括圆角)、直线<code>line</code>、折线<code>polyline</code>、多边形<code>polygon</code>、路径<code>path</code>，以及几何图形、图片、文本、DOM 节点等。</p>
+<p>除了单独画图形 <code>Shape</code>，还支持增加分组 <code>Group</code>，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> group = canvas.addGroup();</span><br><span class="line"><span class="keyword">const</span> circle = group.addShape(<span class="string">&#x27;circle&#x27;</span> <span class="comment">/* 同上省略参数 */</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这样的好处是可以实现事件冒泡和委托，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 事件冒泡</span></span><br><span class="line">group.on(<span class="string">&#x27;mouseenter&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    circle.attr(<span class="string">&#x27;fill&#x27;</span>, <span class="string">&#x27;#2FC25B&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 事件委托</span></span><br><span class="line">group.on(<span class="string">&#x27;circle:mouseenter&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    circle.attr(<span class="string">&#x27;fill&#x27;</span>, <span class="string">&#x27;#2FC25B&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a><a target="_blank" rel="noopener" href="https://github.com/antvis/g">源码</a></h4><p><code>G</code> 是一个用 <code>lerna</code> 搭建的仓库，底下包括 <code>g-base</code>、<code>g-canva</code>、<code>g-svg</code>、<code>g-math</code>、<code>g-mobile</code>、<code>g-webgl</code> 几个仓库。</p>
+<p><code>g-base</code> 包含了抽象画布 <code>AbstractCanvas</code> 之类的基类定义，以及在 <code>g-base/lib/types</code> 保存了相关 ts 定义。</p>
+<p><code>g-canva</code>、<code>g-svg</code> 则是两套分别基于 canvas 和 svg 的具体实现，两者在 <code>draw</code> 方法的实现上有差异。</p>
+<p><code>g-math</code> 提供几何图形的运算。</p>
+<p><code>g-mobile</code>、<code>g-webgl</code> 暂时还无内容。</p>
+<h3 id="G2"><a href="#G2" class="headerlink" title="G2"></a>G2</h3><p><code>G2</code> 是相对比较完善的图表库了，也是 AntV 团队 Star 数最高(10.3k)的作品了。</p>
+<p>他是通过容器和数据源，配合图形语法，绘制出图表的。如下是创建 <code>Chart</code> 对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Chart &#125; <span class="keyword">from</span> <span class="string">&#x27;@antv/g2&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> chart = <span class="keyword">new</span> Chart(&#123;</span><br><span class="line">    container: <span class="string">&#x27;c1&#x27;</span>, <span class="comment">// 指定图表容器 ID</span></span><br><span class="line">    width: <span class="number">600</span>, <span class="comment">// 指定图表宽度</span></span><br><span class="line">    height: <span class="number">300</span> <span class="comment">// 指定图表高度</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可以见到和 <code>G</code> 创建画布如出一辙。如下是载入数据源：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> data = [</span><br><span class="line">  &#123; <span class="attr">genre</span>: <span class="string">&#x27;Sports&#x27;</span>, <span class="attr">sold</span>: <span class="number">275</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">genre</span>: <span class="string">&#x27;Strategy&#x27;</span>, <span class="attr">sold</span>: <span class="number">115</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">genre</span>: <span class="string">&#x27;Action&#x27;</span>, <span class="attr">sold</span>: <span class="number">120</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">genre</span>: <span class="string">&#x27;Shooter&#x27;</span>, <span class="attr">sold</span>: <span class="number">350</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">genre</span>: <span class="string">&#x27;Other&#x27;</span>, <span class="attr">sold</span>: <span class="number">150</span> &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">chart.data(data);</span><br></pre></td></tr></table></figure>
+
+<p>接下来便是用 <code>G2</code> 的图形语法绘制图表。如下是绘制柱状图的一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chart.interval().position(<span class="string">&#x27;genre*sold&#x27;</span>);</span><br><span class="line">chart.render(); <span class="comment">// 渲染</span></span><br></pre></td></tr></table></figure>
+
+<p>结果如图所示：</p>
+<p><img src="https://gw.alipayobjects.com/mdn/rms_2274c3/afts/img/A*8qbLQb7A0loAAAAAAAAAAABkARQnAQ" alt="结果图"></p>
+<h4 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h4><p><code>G2</code> 的容器就是 <code>G</code> 的画布，会根据 <code>renderer</code> 调用 <code>getEngine</code> 获取不同的引擎（canvas/svg）。</p>
+<h3 id="G2Plot"><a href="#G2Plot" class="headerlink" title="G2Plot"></a>G2Plot</h3><p><code>G2Plot</code> 就是在 <code>G2</code> 封装的基础上做了写法的优化。</p>
+<h3 id="Ant-Design-Charts"><a href="#Ant-Design-Charts" class="headerlink" title="Ant Design Charts"></a>Ant Design Charts</h3><p><code>Ant Design Charts</code> 对我而言就是就是封装了一层自定义组件，让我可以不必再手动写 <code>useEffect</code> 等逻辑去手动更新 <code>G2Plot</code> 的 <code>config</code> 或 <code>data</code>。额外地，他还支持以下几个新功能：</p>
+<ul>
+<li>  Tooltip 支持 ReactNode</li>
+<li>  额外的 <code>downloadImage()</code>、<code>toDataURL()</code> 等 API</li>
+<li>  自定义 memoData 功能，按需控制图表 rerender</li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li>  <a target="_blank" rel="noopener" href="https://charts.ant.design/guide">Ant Design Charts 文档</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://g2plot.antv.vision/zh/docs/manual/introduction">G2Plot 文档</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://antv-g2.gitee.io/zh/docs/manual/about-g2">G2 文档</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://g.antv.vision/zh/docs/guide/introduce">G 文档</a></li>
+</ul>
+<blockquote>
+<p>未完待续</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2022/12/19/2022-12-19-Antd%20Charts%20%E7%AD%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF/" data-id="cltehmzgb008irbabcxrye9rz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2022-04-17-自动批量请求（5）—— useRequest 的实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/17/2022-04-17-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20useRequest%20%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time datetime="2022-04-17T04:41:51.000Z" itemprop="datePublished">2022年04月17日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/17/2022-04-17-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20useRequest%20%E7%9A%84%E5%AE%9E%E7%8E%B0/">自动批量请求（5）—— useRequest 的实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>经过以上几篇文章，已经可以很好地处理 batch 请求的场景了。</p>
+<p>但是每次还是得手动处理 loading 和 error，不够方便。</p>
+<p>况且现在已经是 hooks 的时代了，本文便引入了 useRequest 的概念。</p>
+<h2 id="useRequest-的使用"><a href="#useRequest-的使用" class="headerlink" title="useRequest 的使用"></a>useRequest 的使用</h2><p>我们对 useFetch 的使用习惯肯定是要符合我们对 hooks 的直觉，如此这般：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; data, loading, error &#125; = useRequest(</span><br><span class="line">    &#123; <span class="attr">url</span>: <span class="string">&#x27;url&#x27;</span>, <span class="attr">data</span>: &#123;&#125;, ...options &#125;,</span><br><span class="line">    [...deps]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>然后直接使用 data 渲染数据和控制空态，用 loading 展示加载态，用 error 展示错误态和错误信息。</p>
+<p>由此见得，<code>useRequest</code> 的使用场景，主要是查询类的被动请求，像是点击操作这类的主动请求不太适合。</p>
+<h2 id="useRequest-的实现"><a href="#useRequest-的实现" class="headerlink" title="useRequest 的实现"></a>useRequest 的实现</h2><p><code>useRequest</code> 的实现原理也很简单，相当于是自定义 hooks，如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 被动触发的 fetch hooks</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>param0 请求地址 url，请求参数 data，以及其他配置参数，如请求频次 frequence</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>deps 依赖数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> useRequest = (</span><br><span class="line">    &#123; url, data &#125;: IUseRequestProps,</span><br><span class="line">    deps: <span class="built_in">any</span>[] = []</span><br><span class="line">) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> stringifyData = <span class="built_in">JSON</span>.stringify(data); <span class="comment">// 序列化，因为是依赖，防止 immutable 对象无限刷新</span></span><br><span class="line">    <span class="keyword">const</span> [state, setState] = useState&lt;IObject | <span class="literal">null</span>&gt;(<span class="literal">null</span>); <span class="comment">// 数据</span></span><br><span class="line">    <span class="keyword">const</span> [loading, setLoading] = useState(<span class="literal">true</span>); <span class="comment">// 是否加载中</span></span><br><span class="line">    <span class="keyword">const</span> [error, setError] = useState(<span class="string">&#x27;&#x27;</span>); <span class="comment">// 错误文本</span></span><br><span class="line"></span><br><span class="line">    useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        setLoading(<span class="literal">true</span>);</span><br><span class="line">        fetchBatch(</span><br><span class="line">            url,</span><br><span class="line">            &#123;</span><br><span class="line">                data: <span class="built_in">JSON</span>.parse(stringifyData)</span><br><span class="line">            &#125;,</span><br><span class="line">            (res: IObject) =&gt; &#123;</span><br><span class="line">                withBatch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                    setState(res);</span><br><span class="line">                    setLoading(<span class="literal">false</span>);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;,</span><br><span class="line">            (err: <span class="built_in">Error</span>) =&gt; &#123;</span><br><span class="line">                withBatch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                    setError(err.message);</span><br><span class="line">                    setLoading(<span class="literal">false</span>);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;, [url, stringifyData, ...deps]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        data: state,</span><br><span class="line">        loading,</span><br><span class="line">        error</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="额外功能"><a href="#额外功能" class="headerlink" title="额外功能"></a>额外功能</h2><p>上文只是实现了最基础的功能，在实际使用中经常会不满足需求，于是又产生了下文的几个功能点。</p>
+<h3 id="主动修改数据"><a href="#主动修改数据" class="headerlink" title="主动修改数据"></a>主动修改数据</h3><p>因为数据是存在黑盒里的，用户无法进行受控的修改，所以其实可以把 <code>setState</code> 给暴露出去。</p>
+<h3 id="主动控制触发"><a href="#主动控制触发" class="headerlink" title="主动控制触发"></a>主动控制触发</h3><p>增加 <code>manual</code> 配置和 <code>run</code> 方法。</p>
+<h3 id="请求频次"><a href="#请求频次" class="headerlink" title="请求频次"></a>请求频次</h3><p>因为是 hooks 的写法，只有依赖更新的时候才会重新发请求，这样的话一些轮询的接口需要借助一个布尔值，定时器每次对布尔值取反来实现，这样很不优雅。</p>
+<p>可以增加一个 <code>frequncy</code> 参数，内置一个定时器发送的功能。</p>
+<h3 id="延迟展示的额外数据"><a href="#延迟展示的额外数据" class="headerlink" title="延迟展示的额外数据"></a>延迟展示的额外数据</h3><p>某些场景下，我们可能需要一些数据在请求返回结果之后再一起更新，而这些数据不是从返回结果里取的，而是我们手动设置的。</p>
+<p>这时候如果我们通过 <code>loading</code> 来进行判断会过于复杂，所以也可以增加一个 <code>extraData</code> 的功能。</p>
+<h3 id="SWR"><a href="#SWR" class="headerlink" title="SWR"></a>SWR</h3><p>即请求缓存的功能，在请求回来之前，不是展示空数据，而是展示上一次同样正确请求的数据来预先展示。</p>
+<p>这个功能需要用个有 <code>getCache</code> 和 <code>setCache</code> 的库来实现即可，本文用的是 <code>localStorage</code> 的实现方式。</p>
+<p>将以上几点修改后，代码如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * useRequest 参数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">interface</span> IUseRequestProps &#123;</span><br><span class="line">    url: <span class="built_in">string</span>; <span class="comment">// 请求地址</span></span><br><span class="line">    data: IObject; <span class="comment">// 请求参数</span></span><br><span class="line">    extraData?: IObject; <span class="comment">// 额外数据，随着返回数据一起更新</span></span><br><span class="line">    frequence?: <span class="built_in">number</span>; <span class="comment">// 请求频次，单位为毫秒</span></span><br><span class="line">    manual?: <span class="built_in">boolean</span>; <span class="comment">// 是否手动触发</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 被动触发的 fetch hooks</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>param0 请求地址 url，请求参数 data，以及其他配置参数，如请求频次 frequence</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>deps 依赖数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> useRequest = (</span><br><span class="line">    &#123;</span><br><span class="line">        url, data, extraData = &#123;&#125;, frequence = -<span class="number">1</span>, manual = <span class="literal">false</span></span><br><span class="line">    &#125;: IUseRequestProps,</span><br><span class="line">    deps: <span class="built_in">any</span>[] = []</span><br><span class="line">) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 序列化，因为是依赖，防止 immutable 对象无限刷新</span></span><br><span class="line">    <span class="keyword">const</span> stringifyData = <span class="built_in">JSON</span>.stringify(data); <span class="comment">// 请求参数</span></span><br><span class="line">    <span class="keyword">const</span> stringifyExtraData = <span class="built_in">JSON</span>.stringify(extraData); <span class="comment">// 额外数据，随着返回数据一起更新</span></span><br><span class="line">    <span class="keyword">const</span> localData = <span class="built_in">localStorage</span>.getItem(<span class="string">`<span class="subst">$&#123;url&#125;</span>/<span class="subst">$&#123;stringifyData&#125;</span>`</span>);</span><br><span class="line">    <span class="keyword">const</span> [state, setState] = useState&lt;<span class="built_in">any</span>&gt;(localData ? <span class="built_in">JSON</span>.parse(localData) : <span class="literal">null</span>); <span class="comment">// 返回数据</span></span><br><span class="line">    <span class="keyword">const</span> [loading, setLoading] = useState(!manual); <span class="comment">// 加载中</span></span><br><span class="line">    <span class="keyword">const</span> [error, setError] = useState(<span class="string">&#x27;&#x27;</span>); <span class="comment">// 错误文本</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 因为要加定时器逻辑，所以单独抽离出来</span></span><br><span class="line">    <span class="keyword">const</span> onFetch = useCallback(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        fetchBatch(</span><br><span class="line">            url,</span><br><span class="line">            &#123;</span><br><span class="line">                data: <span class="built_in">JSON</span>.parse(stringifyData)</span><br><span class="line">            &#125;,</span><br><span class="line">            (res: <span class="built_in">any</span>) =&gt; &#123;</span><br><span class="line">                withBatch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">const</span> result = &#123; ...res, ...JSON.parse(stringifyExtraData) &#125;;</span><br><span class="line">                    setLoading(<span class="literal">false</span>);</span><br><span class="line">                    setState(result);</span><br><span class="line">                    <span class="built_in">localStorage</span>.setItem(<span class="string">`<span class="subst">$&#123;url&#125;</span>/<span class="subst">$&#123;stringifyData&#125;</span>`</span>, <span class="built_in">JSON</span>.stringify(result)); <span class="comment">// 缓存数据到本地</span></span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;,</span><br><span class="line">            (err: <span class="built_in">Error</span>) =&gt; &#123;</span><br><span class="line">                withBatch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                    setLoading(<span class="literal">false</span>);</span><br><span class="line">                    setError(err.message);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;, [url, stringifyData, stringifyExtraData]);</span><br><span class="line"></span><br><span class="line">    useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        setLoading(<span class="literal">true</span>);</span><br><span class="line">        onFetch();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 定时器逻辑</span></span><br><span class="line">        <span class="keyword">if</span> (frequence &amp;&amp; frequence !== -<span class="number">1</span> &amp;&amp; <span class="built_in">Number</span>.isInteger(frequence)) &#123;</span><br><span class="line">            <span class="keyword">const</span> timer = <span class="built_in">setInterval</span>(onFetch, <span class="built_in">Math</span>.max(frequence, <span class="number">1000</span>));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;&#125;;</span><br><span class="line">    &#125;, [onFetch, frequence, ...deps]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        data: state,</span><br><span class="line">        setData: setState,</span><br><span class="line">        loading,</span><br><span class="line">        error,</span><br><span class="line">        run: onFetch</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2022/04/17/2022-04-17-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20useRequest%20%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-id="cltehmzga008erbab820ghnyd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2022-04-15-自动批量请求（4）—— 删减重复的请求" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/15/2022-04-15-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94%20%E5%88%A0%E5%87%8F%E9%87%8D%E5%A4%8D%E7%9A%84%E8%AF%B7%E6%B1%82/" class="article-date">
+  <time datetime="2022-04-15T14:40:23.000Z" itemprop="datePublished">2022年04月15日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/15/2022-04-15-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94%20%E5%88%A0%E5%87%8F%E9%87%8D%E5%A4%8D%E7%9A%84%E8%AF%B7%E6%B1%82/">自动批量请求（4）—— 删减重复的请求</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们已经实现了自动把同一时刻的请求合并成多个 fetch，并统一渲染。</p>
+<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><p>但是又遇到了一种新的场景：就是不同组件，发送相同参数的相同请求时，这在原来的场景下，还是会发两个相同的请求。</p>
+<p>而想要优化，只能把请求移到外层，通过参数分别透传给两个组件。</p>
+<p>那，我们这个 fetch 组件能不能直接把这个工作给做了呢，让用户自由地发送请求，而由 fetch 组件来做优化呢？</p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><p>我们来思考一下，这个思路，就是把请求删减为一个，而把成功处理和失败回调变成多个，就可以啦。</p>
+<p>细节上来说的话，就是遇到同名且相同参数的请求时，原本会作增加新请求操作，而现在直接跳过，同时把回调函数加到对应的成功及失败回调中。</p>
+<p>那我们先来第一步：</p>
+<h3 id="回调变为数组"><a href="#回调变为数组" class="headerlink" title="回调变为数组"></a>回调变为数组</h3><p>首先是增加一些新的定义：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 成功回调</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">type</span> ISuccessCallback = <span class="function">(<span class="params">obj: IObject</span>) =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 失败回调</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">type</span> IErrorCallback = <span class="function">(<span class="params">err: <span class="built_in">Error</span></span>) =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * batch 队列的单元数据信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">interface</span> IBatchItem &#123;</span><br><span class="line">    name: <span class="built_in">string</span>; <span class="comment">// 请求 url</span></span><br><span class="line">    options: IFetchOptions; <span class="comment">// fetch 的 options 参数</span></span><br><span class="line">    successList: ISuccessCallback[]; <span class="comment">// 成功回调列表</span></span><br><span class="line">    errorList: IErrorCallback[]; <span class="comment">// 错误回调列表</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 同一个队列多个请求组成的 Map，键名是 api</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">interface</span> IBatchMap &#123;</span><br><span class="line">    [url: <span class="built_in">string</span>]: IBatchItem; <span class="comment">// 每个请求对应的元数据信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后便是处理这些逻辑的地方：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> batchList: IBatchMap[] = []; <span class="comment">// 多个batch请求组成的数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 发送批量请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>tempRequestMap 临时缓存的变量，在执行请求回调时，原来的 requestMap 其实已经清空了</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> sendRequestBatch: <span class="function">(<span class="params">tempRequestMap: IBatchMap</span>) =&gt;</span> <span class="built_in">void</span> = (</span><br><span class="line">    tempRequestMap</span><br><span class="line">) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 转化为 batch 请求需要的格式</span></span><br><span class="line">    <span class="keyword">const</span> batchData = <span class="built_in">Object</span>.values(tempRequestMap).reduce(</span><br><span class="line">        (pre: IObject, <span class="attr">cur</span>: IBatchItem) =&gt; &#123;</span><br><span class="line">            <span class="keyword">const</span> &#123; <span class="attr">name</span>: requestName, options &#125; = cur;</span><br><span class="line">            <span class="keyword">return</span> &#123; ...pre, [requestName]: deepStringify(options.data) &#125;; <span class="comment">// 深度 stringify 对象，batch 请求需要</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;&#125;</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用批处理请求</span></span><br><span class="line">    fetchBase(<span class="string">&#x27;/api/batch&#x27;</span>, &#123;</span><br><span class="line">        data: batchData</span><br><span class="line">    &#125;)</span><br><span class="line">        .then(<span class="function">(<span class="params">res: IBatchResponse</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 用 unstable_batchedUpdates 统一更新，减少渲染次数</span></span><br><span class="line">            withBatch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">Object</span>.keys(res).forEach(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">const</span> &#123; code, message, msg, data &#125; = res[key];</span><br><span class="line">                    <span class="keyword">if</span> (!tempRequestMap[key]) &#123;</span><br><span class="line">                        <span class="keyword">return</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">const</span> &#123;</span><br><span class="line">                        successList: successCallbackList,</span><br><span class="line">                        errorList: errorCallbackList</span><br><span class="line">                    &#125; = tempRequestMap[key];</span><br><span class="line">                    <span class="keyword">if</span> (code !== <span class="number">200</span>) &#123;</span><br><span class="line">                        <span class="keyword">const</span> err: IErrorResponse = <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">                            (message || msg) ?? <span class="string">&#x27;系统繁忙，请稍后再试&#x27;</span></span><br><span class="line">                        );</span><br><span class="line">                        err.code = code;</span><br><span class="line">                        errorCallbackList.forEach(</span><br><span class="line">                            (errorCallback: IErrorCallback) =&gt; &#123;</span><br><span class="line">                                <span class="keyword">if</span> (errorCallback) &#123;</span><br><span class="line">                                    errorCallback(err);</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        );</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        successCallbackList.forEach(</span><br><span class="line">                            (successCallback: ISuccessCallback) =&gt; &#123;</span><br><span class="line">                                <span class="keyword">if</span> (successCallback) &#123;</span><br><span class="line">                                    successCallback(data);</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        );</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function">(<span class="params">err: <span class="built_in">Error</span></span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 如果 batch 请求报错了，则给每个请求都返回 batch 请求的报错</span></span><br><span class="line">            <span class="built_in">Object</span>.keys(tempRequestMap).forEach(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> &#123; <span class="attr">errorList</span>: errorCallbackList &#125; = tempRequestMap[key];</span><br><span class="line">                errorCallbackList.forEach(<span class="function">(<span class="params">errorCallback: IErrorCallback</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (errorCallback) &#123;</span><br><span class="line">                        errorCallback(err);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="跳过同参数请求"><a href="#跳过同参数请求" class="headerlink" title="跳过同参数请求"></a>跳过同参数请求</h3><p>第二步便是在 <code>addRequest</code> 增加跳过逻辑和增加回调操作：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 增加请求到队列中</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>requestItem 单个请求信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> addRequest: <span class="function">(<span class="params">requestItem: IRequestItem</span>) =&gt;</span> <span class="built_in">void</span> = <span class="function">(<span class="params">requestItem</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; name, options, success, error &#125; = requestItem;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 寻找相同参数的相同请求，通过 name 和序列化的请求参数进行比较</span></span><br><span class="line">    <span class="keyword">const</span> stringifyData = <span class="built_in">JSON</span>.stringify(options?.data);</span><br><span class="line">    <span class="keyword">const</span> equalIndex = <span class="built_in">Math</span>.max(</span><br><span class="line">        -<span class="number">1</span>,</span><br><span class="line">        ...batchList.map(<span class="function">(<span class="params">item: IBatchMap, index: <span class="built_in">number</span></span>) =&gt;</span></span><br><span class="line">            item[name] &amp;&amp;</span><br><span class="line">            <span class="built_in">JSON</span>.stringify(item[name].options?.data) === stringifyData</span><br><span class="line">                ? index</span><br><span class="line">                : -<span class="number">1</span></span><br><span class="line">        )</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">if</span> (equalIndex &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">        batchList[equalIndex][name].successList.push(success);</span><br><span class="line">        batchList[equalIndex][name].errorList.push(error);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// batch 元数据</span></span><br><span class="line">    <span class="keyword">const</span> batchItem = &#123;</span><br><span class="line">        name,</span><br><span class="line">        options,</span><br><span class="line">        successList: [success],</span><br><span class="line">        errorList: [error]</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找最后一个含有对应 name 的请求对象，查找不到时默认赋值为 -1，这样当队列为空即数组长度为0时，lastIndex + 1 也为 0</span></span><br><span class="line">    <span class="keyword">const</span> lastIndex = <span class="built_in">Math</span>.max(</span><br><span class="line">        -<span class="number">1</span>,</span><br><span class="line">        ...batchList.map(<span class="function">(<span class="params">item: IBatchMap, index: <span class="built_in">number</span></span>) =&gt;</span></span><br><span class="line">            item[name] ? index : -<span class="number">1</span></span><br><span class="line">        )</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 后略 */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2022/04/15/2022-04-15-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94%20%E5%88%A0%E5%87%8F%E9%87%8D%E5%A4%8D%E7%9A%84%E8%AF%B7%E6%B1%82/" data-id="cltehmzg9008brbab5w38620j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2021-07-18-如何构建自己的知识体系" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/07/18/2021-07-18-%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" class="article-date">
@@ -171,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2021/07/18/2021-07-18-%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" data-id="cltegptk4007uc4abf2zc1hx9" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2021/07/18/2021-07-18-%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" data-id="cltehmzg70083rbabdfjrfx4z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" rel="tag">知识体系</a></li></ul>
@@ -239,7 +524,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2021/07/13/2021-07-13-%E8%AF%BB%E4%B9%A6/" data-id="cltegptk1007nc4abfmp2fzie" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2021/07/13/2021-07-13-%E8%AF%BB%E4%B9%A6/" data-id="cltehmzg6007yrbab137e1zlc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li></ul>
@@ -335,10 +620,90 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2021/03/24/2021-03-24-1-%E4%B8%8D%E5%87%BA%E6%9F%90%E4%BB%B6%E8%A3%85%E5%A4%87%E7%9A%84%E8%83%9C%E7%8E%87/" data-id="cltegptk3007rc4abfu51ekgz" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2021/03/24/2021-03-24-1-%E4%B8%8D%E5%87%BA%E6%9F%90%E4%BB%B6%E8%A3%85%E5%A4%87%E7%9A%84%E8%83%9C%E7%8E%87/" data-id="cltehmzg80086rbab7xz0eo2r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" rel="tag">王者荣耀</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2021-03-05-自动批量请求（3）—— 同时发送多个 batch 请求" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/05/2021-03-05-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%883%EF%BC%89%E2%80%94%E2%80%94%20%E5%90%8C%E6%97%B6%E5%8F%91%E9%80%81%E5%A4%9A%E4%B8%AA%20batch%20%E8%AF%B7%E6%B1%82/" class="article-date">
+  <time datetime="2021-03-05T14:37:50.000Z" itemprop="datePublished">2021年03月05日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/05/2021-03-05-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%883%EF%BC%89%E2%80%94%E2%80%94%20%E5%90%8C%E6%97%B6%E5%8F%91%E9%80%81%E5%A4%9A%E4%B8%AA%20batch%20%E8%AF%B7%E6%B1%82/">自动批量请求（3）—— 同时发送多个 batch 请求</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们已经实现了自动把同一时刻的请求合并，并统一渲染。</p>
+<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><p>老样子，先来看图回顾一下（假设一次 EventLoop 占用 5 个时间单位，请求回复也需要 5 个时间单位）：</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5733697576/db12/dbbc/38e4/b51d60482683002dbae929ffe5c329c5.png" alt="问题图"></p>
+<p>由图可见，我们遇到了一个新的问题：</p>
+<blockquote>
+<p>同一时刻，最多只能合并一个 batch 请求，导致多次重复的同类型请求，无法合并成多个 batch 请求（如上图的 2 个 A、2 个 B，最后只合成了 1 个 batch、1 个 A 和 1 个 B，而非 2 个 batch）。</p>
+</blockquote>
+<p>我们的期望是尽可能合并 batch 请求，如上图第 3、第 4 个请求可以合并成一个新的 batch 请求，并在 5 个时间单位的时候发送。</p>
+<p>所以本文对原有的代码又做了一次优化。</p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><p>因为原先是用一个对象来保存多个请求的信息，键名容易重，这才导致无法实现。</p>
+<p>所以我们的方案就是，把原有的对象形式转为数组形式，以此来存储信息，而数组的长度就代表了 <code>batch</code> 请求的次数。</p>
+<blockquote>
+<p>注：之所以没法只用一个 <code>batch</code> 请求的原因是，<code>batch</code> 请求的参数无法支持同时处理多个同名请求。</p>
+</blockquote>
+<p>衔接上一篇的 <code>IRequestMap</code> 对象，我们定义如下数组来代表 batch 队列：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 单个请求的元数据信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">interface</span> IRequestItem &#123;</span><br><span class="line">    name: <span class="built_in">string</span>; <span class="comment">// 请求 url</span></span><br><span class="line">    data: IObject; <span class="comment">// 深入 stringify 之后的请求参数</span></span><br><span class="line">    success: <span class="function">(<span class="params">obj: IObject</span>) =&gt;</span> <span class="built_in">void</span>; <span class="comment">// 成功回调</span></span><br><span class="line">    error: <span class="function">(<span class="params">err: <span class="built_in">Error</span></span>) =&gt;</span> <span class="built_in">void</span>; <span class="comment">// 错误回调</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 同一个队列多个请求组成的 Map，键名是 api</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">interface</span> IRequestMap &#123;</span><br><span class="line">    [url: <span class="built_in">string</span>]: IRequestItem; <span class="comment">// 每个请求对应的元数据信息</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> batchList: IRequestMap[] = []; <span class="comment">// 多个batch请求组成的数组</span></span><br></pre></td></tr></table></figure>
+
+<p>在我们编写 batch 队列处理的逻辑前，不妨先考虑一下，当一个新的请求，即 <code>IRequestItem</code> 对象进来时，我们该如何处理。</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5733694442/7dd1/8a80/432e/8a099006490216163e46fef3c734e0e5.png" alt="流程图"></p>
+<p>所以 <code>addRequest</code> 可调整为如下写法：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 增加请求到队列中</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>requestItem 单个请求信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> addRequest: <span class="function">(<span class="params">requestItem: IRequestItem</span>) =&gt;</span> <span class="built_in">void</span> = <span class="function">(<span class="params">requestItem</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; name &#125; = requestItem;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找最后一个含有对应 name 的请求对象，查找不到时默认赋值为 -1，这样当队列为空即数组长度为0时，lastIndex + 1 也为 0</span></span><br><span class="line">    <span class="keyword">const</span> lastIndex = <span class="built_in">Math</span>.max(</span><br><span class="line">        -<span class="number">1</span>,</span><br><span class="line">        ...batchList.map(<span class="function">(<span class="params">item: IRequestMap, index: <span class="built_in">number</span></span>) =&gt;</span> (item[name] ? index : -<span class="number">1</span>))</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在 batch 队列为空，或batch 队列的所有元素都包含该 name 时，都是创建一个新 Map</span></span><br><span class="line">    <span class="keyword">if</span> (lastIndex + <span class="number">1</span> === batchList.length) &#123;</span><br><span class="line">        batchList.push(&#123;</span><br><span class="line">            name: requestItem</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (lastIndex) &#123;</span><br><span class="line">        <span class="comment">// 否则在第一个未出现该请求的 Map 增加该请求</span></span><br><span class="line">        batchList[lastIndex + <span class="number">1</span>][name] = requestItem;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>相应地，<code>clearRequest</code> 也可以简单调整成这样：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 清空请求队列</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> clearRequest: <span class="function">() =&gt;</span> <span class="built_in">void</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    batchList = [];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>但是，<code>clearRequest</code> 的调用时机却发生了变化。</p>
+<p>我们再来梳理一下，之前 <code>clearRequest</code> 是在 <code>Promise.resolve().then()</code> 的回调中，发完请求之后执行。</p>
+<p>但是现在同一个 EventLoop 会包含多个 batch 队列，而每个 batch 队列都对应一个 <code>Promise.resolve()</code>，也就是说，我们必然不能在每个 <code>Promise.resolve().then()</code> 的回调中都执行清空队列的操作，而是只能在最后一个中执行。</p>
+<p>而这样，又暴露了一个新的问题，那就是创建 <code>Promise.resolve()</code> 的时机：之前是每个 EventLoop 的第一个请求添加到队列的时候执行，而现在变成了每当 batch 队列添加新元素时都应该执行。</p>
+<p>我们期盼的场景是这样（假设一次 EventLoop 占用 5 个时间单位，请求回复也需要 5 个时间单位）：</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5733691305/5f37/8008/3d57/163af94d8deaccd2de343f7643da25dc.png" alt="期望图"></p>
+<p>于是，我们将发送请求的逻辑迁移到 <code>addRequest</code> 创建 batch 队列的逻辑中：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (lastIndex + <span class="number">1</span> === batchList.length) &#123;</span><br><span class="line">    batchList.push(&#123;</span><br><span class="line">        [name]: requestItem</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 同时也要创建一个新的 Promise</span></span><br><span class="line">    <span class="built_in">Promise</span>.resolve().then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 缓存的 lastIndex 其实是当前 Map 前一个，为空是 lastIndex 也为 -1，lastIndex + 1 即为当前值</span></span><br><span class="line">        <span class="keyword">const</span> requestMap = batchList[lastIndex + <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 当数量大于 1 才启用 batch 请求</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">Object</span>.keys(requestMap).length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            sendRequestBatch(requestMap);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 等于 1 时，则降级到正常请求发送</span></span><br><span class="line">            fetch(name, options).then(success, error);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 清空变量，lastIndex + 1 为当前值，lastIndex + 2 即为数组当前长度，相等即为最后一个 batch 队列</span></span><br><span class="line">        <span class="keyword">if</span> (lastIndex + <span class="number">2</span> === batchList.length) &#123;</span><br><span class="line">            clearRequest();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时，我们也可以把累赘的 <code>batchFlag</code> 给去掉。最后，生成的 <code>fetchBatch</code> 简直简得不能再简：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自动批处理及批量更新的 fetch，通过闭包保存一些变量</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> fetchBatch = (<span class="function"><span class="keyword">function</span> <span class="title">anonymousFetch</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> batchList: IRequestMap[] = []; <span class="comment">// 多个batch请求组成的数组</span></span><br><span class="line">    <span class="keyword">const</span> sendRequestBatch = <span class="function">() =&gt;</span> &#123;&#125;; <span class="comment">/* 见上述代码 */</span></span><br><span class="line">    <span class="keyword">const</span> addRequest = <span class="function">() =&gt;</span> &#123;&#125;; <span class="comment">/* 见上述代码 */</span></span><br><span class="line">    <span class="keyword">const</span> clearRequest = <span class="function">() =&gt;</span> &#123;&#125;; <span class="comment">/* 见上述代码 */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实际返回匿名函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">anonymous</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">        name: <span class="built_in">string</span> = <span class="string">&#x27;&#x27;</span>, <span class="comment">// 透传 api 地址</span></span></span></span><br><span class="line"><span class="function"><span class="params">        options: IFetchOptions = &#123; data: &#123;&#125; &#125;, <span class="comment">// 透传 options 参数对象，格式为 &#123; data: &#123;&#125; &#125;</span></span></span></span><br><span class="line"><span class="function"><span class="params">        success: (obj: IObject) =&gt; <span class="built_in">void</span> = noop, <span class="comment">// 成功回调</span></span></span></span><br><span class="line"><span class="function"><span class="params">        error: (err: <span class="built_in">Error</span>) =&gt; <span class="built_in">void</span> = noop <span class="comment">// 错误回调</span></span></span></span><br><span class="line"><span class="function"><span class="params">    </span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 增加请求到队列中</span></span><br><span class="line">        addRequest(&#123;</span><br><span class="line">            name,</span><br><span class="line">            options,</span><br><span class="line">            success,</span><br><span class="line">            error</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+
+<p>试验了一下，就可以在同一个 EventLoop 中发送多次 batch 请求啦~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2021/03/05/2021-03-05-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%883%EF%BC%89%E2%80%94%E2%80%94%20%E5%90%8C%E6%97%B6%E5%8F%91%E9%80%81%E5%A4%9A%E4%B8%AA%20batch%20%E8%AF%B7%E6%B1%82/" data-id="cltehmzg5007wrbabau8x1glr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li></ul>
 
     </footer>
   </div>
@@ -423,7 +788,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2021/02/24/2021-02-24-threejs/" data-id="cltegptk0007kc4ab9bn17cuq" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2021/02/24/2021-02-24-threejs/" data-id="cltehmzg4007srbab0idn6qk5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/threejs/" rel="tag">threejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li></ul>
@@ -557,541 +922,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2021/02/09/2021-02-09-%E4%BB%8A%E7%94%9F%E5%BF%85%E8%AF%BB%E7%9A%84%E6%AD%A6%E4%BE%A0%E5%B0%8F%E8%AF%B4%E5%88%97%E8%A1%A8/" data-id="cltegptjz007ic4abc91z9ofe" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2021/02/09/2021-02-09-%E4%BB%8A%E7%94%9F%E5%BF%85%E8%AF%BB%E7%9A%84%E6%AD%A6%E4%BE%A0%E5%B0%8F%E8%AF%B4%E5%88%97%E8%A1%A8/" data-id="cltehmzg3007prbab3z06a1ax" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AD%A6%E4%BE%A0/" rel="tag">武侠</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2021-01-27-文档编写" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/" class="article-date">
-  <time datetime="2021-01-27T02:40:01.000Z" itemprop="datePublished">2021年01月27日</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/">技术综合</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/">文档编写指北</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<!-- 大概遍览了一下云音乐的 React 组件库，整理了一下文档编写的要点 -->
-
-<h1 id="文档编写指北"><a href="#文档编写指北" class="headerlink" title="文档编写指北"></a>文档编写指北</h1><h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><ul>
-<li>目录（如果内容多的话）<ul>
-<li>  可以用<code>- [目录名](#目录名)</code> 的写法</li>
-</ul>
-</li>
-<li>前言<ul>
-<li>  适用条件，如：<code>iOS 10.3及以上、Android 5.0及以上系统版本可以使用</code></li>
-<li>  有啥兼容性问题，如：<code>由于MSE当前的兼容性在移动端受限，建议在PC-WEB下使用该组件</code></li>
-<li>  在一些场景下是否建议用其他组件，如：<code>移动端建议使用：@music/activity-audio</code></li>
-<li>  想明确列一下支持功能，可以用这种写法：<code>✔︎ 支持绑定音频、视频播放器播放</code></li>
-</ul>
-</li>
-<li>快速开始<ul>
-<li>  下载和安装</li>
-<li>快速使用<ul>
-<li>  准备工作和配置</li>
-<li>  hello world 代码示例</li>
-</ul>
-</li>
-<li>  核心概念简介</li>
-</ul>
-</li>
-<li>详细内容<ul>
-<li>  各组件属性和方法的定义</li>
-<li>场景用例<ul>
-<li>场景 1<ol>
-<li>描述下场景需求</li>
-<li>放个图 <code>![xxx](xxx)</code></li>
-<li>写下关键代码 ``` xxx ```</li>
-</ol>
-</li>
-<li>  场景 2 …</li>
-</ul>
-</li>
-<li>  其他概念介绍，如生命周期、渲染方式、覆盖场景等等</li>
-</ul>
-</li>
-<li>后记<ul>
-<li>  版本更迭（如果已有 CHANGELOG.md 可以省去）</li>
-<li>  功能展望，可以列出 P0、P1 优先级</li>
-<li>  联系我们</li>
-</ul>
-</li>
-</ul>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="组件定义"><a href="#组件定义" class="headerlink" title="组件定义"></a>组件定义</h3><p>这边是该组件的简单介绍</p>
-<h4 id="Attributes（属性）"><a href="#Attributes（属性）" class="headerlink" title="Attributes（属性）"></a>Attributes（属性）</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-<th>类型</th>
-<th>可选值</th>
-<th>默认值</th>
-<th>版本</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>value</td>
-<td>绑定值</td>
-<td>string | number</td>
-<td>/</td>
-<td>/</td>
-<td>/</td>
-</tr>
-<tr>
-<td>size</td>
-<td>尺寸</td>
-<td>string?</td>
-<td>‘small’ | ‘medium’ | ‘large’</td>
-<td>‘medium’</td>
-<td>1.0.1</td>
-</tr>
-<tr>
-<td>someObject</td>
-<td>某个对象类型属性</td>
-<td>CustomType?</td>
-<td>/</td>
-<td>{ }</td>
-<td>/</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p><strong>注意：注意文本可以加粗处理来起强调作用</strong></p>
-</blockquote>
-<ul>
-<li>  还有一些详细信息可以在这里说，比如：<code>内置了 `async-validator` 组件校验，校验规则使用该组件的语法，具体[参考这里](xxx)</code></li>
-<li>  <code>类型</code> 的定义类似于 <code>Typescript</code>，可选参数是后面带<code>?</code></li>
-<li>  <code>可选值</code> 是出现枚举值是才需要填写，如没有可以不加</li>
-<li>  <code>版本</code> 是涉及到版本改动才需要填写，正常是不加的</li>
-<li>  一般属性按照常用 <code>className</code>、<code>style</code>、<code>children</code> 放最前面或省略，其他属性按照 <code>boolean</code>、<code>number</code>、<code>string</code>、<code>object</code> 类型排序</li>
-</ul>
-<h5 id="CustomType（自定义数据结构）"><a href="#CustomType（自定义数据结构）" class="headerlink" title="CustomType（自定义数据结构）"></a>CustomType（自定义数据结构）</h5><p>这边是组件中某个特定类型结构的定义，写法同上（简化版），如上述例子中的 <code>CustomType</code></p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-<th>类型</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>xxx</td>
-<td>属性 1</td>
-<td>string</td>
-<td>/</td>
-</tr>
-<tr>
-<td>yyy</td>
-<td>属性 2</td>
-<td>number</td>
-<td>/</td>
-</tr>
-</tbody></table>
-<h4 id="Events（回调方法）"><a href="#Events（回调方法）" class="headerlink" title="Events（回调方法）"></a>Events（回调方法）</h4><p>这边是回调触发方法的定义</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-<th>参数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>onChange</td>
-<td>变化回调</td>
-<td>(value: string | number) =&gt; void</td>
-</tr>
-<tr>
-<td>onBlur</td>
-<td>失去焦点回调</td>
-<td>(value: string | number) =&gt; void</td>
-</tr>
-</tbody></table>
-<h4 id="Methods（主动调用方法）"><a href="#Methods（主动调用方法）" class="headerlink" title="Methods（主动调用方法）"></a>Methods（主动调用方法）</h4><p>这边是组件实例的主动触发方法的定义，使用方式有别于回调方法，最好分开展示，让用户感到清晰</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-<th>参数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>focus</td>
-<td>使获得焦点</td>
-<td>() =&gt; void</td>
-</tr>
-</tbody></table>
-<h5 id="对象或函数的简单定义"><a href="#对象或函数的简单定义" class="headerlink" title="对象或函数的简单定义"></a>对象或函数的简单定义</h5><p>这边可以具体解释下某个方法中的参数，比如 <code>onChange(value)</code>：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-<th>类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>value</td>
-<td>当前值</td>
-<td>string | number</td>
-</tr>
-</tbody></table>
-<ul>
-<li>  如果是参数对象的写法比如 <code>onChange(&#123; value &#125;)</code>，同样可以用上述写法</li>
-<li>  如果比较复杂，建议用下文<a href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89">函数定义</a>的写法</li>
-</ul>
-<h3 id="其他组件定义"><a href="#其他组件定义" class="headerlink" title="其他组件定义"></a>其他组件定义</h3><p>当一个仓库还有其他组件时，可以在同层级增加定义</p>
-<h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><p>这边是在需要详细介绍一个函数定义的时候采用的写法，比如 <code>abbrAmount</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abbrAmount(count, isRound)</span><br></pre></td></tr></table></figure>
-
-<p>对一个数字 <code>count</code> 进行缩略，大数缩略成以 <code>w</code> 或 <code>亿</code> 为结尾。（这边是功能说明）</p>
-<p><strong>参数</strong></p>
-<ol>
-<li><code>count</code> <em>(string | number)</em> 需要被缩略的数字。（这边是解释下每个参数的变量名、类型、定义，变量名最好加下``，类型最好用斜体区分）</li>
-<li><code>isRount = false</code> <em>(boolean)</em> 是代表四舍五入，否代表向下取整。（这边如果有默认值直接就写在等号后面）</li>
-</ol>
-<p><strong>返回值</strong></p>
-<p><em>(string)</em> 返回缩略后的字符串（这边是返回值的类型和定义）</p>
-<p><strong>例子</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">abbrAmount(<span class="number">14500</span>); <span class="comment">// &#x27;1.4w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">14500</span>, <span class="literal">true</span>); <span class="comment">// &#x27;1.5w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">10005000</span>); <span class="comment">// &#x27;1000w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">10005000</span>, <span class="literal">true</span>); <span class="comment">// &#x27;1001w&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">100500000</span>); <span class="comment">// &#x27;1亿&#x27;</span></span><br><span class="line">abbrAmount(<span class="number">100500000</span>, <span class="literal">true</span>); <span class="comment">// &#x27;1.01亿&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="CSS-变量"><a href="#CSS-变量" class="headerlink" title="CSS 变量"></a>CSS 变量</h3><p>这边是补充一些在样式文件中定义的变量，比如 <code>LESS</code> 变量：</p>
-<table>
-<thead>
-<tr>
-<th>变量名</th>
-<th>说明</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>@base_input_color</td>
-<td>字体颜色</td>
-<td>#000</td>
-</tr>
-</tbody></table>
-<h2 id="常见命名"><a href="#常见命名" class="headerlink" title="常见命名"></a>常见命名</h2><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>className</td>
-<td>自定义类名</td>
-</tr>
-<tr>
-<td>xxxClassName</td>
-<td>其他自定义类名</td>
-</tr>
-<tr>
-<td>style</td>
-<td>自定义样式</td>
-</tr>
-<tr>
-<td>value</td>
-<td>绑定值</td>
-</tr>
-<tr>
-<td>placeholder</td>
-<td>占位提示</td>
-</tr>
-<tr>
-<td>onChange</td>
-<td>值变化时的回调</td>
-</tr>
-<tr>
-<td>onClick</td>
-<td>点击回调</td>
-</tr>
-<tr>
-<td>close</td>
-<td>主动触发关闭</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/" data-id="cltegptjy007dc4abddc4adpq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2020-12-10-记一次前端 Mac 新机配置之路" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" class="article-date">
-  <time datetime="2020-12-09T17:52:22.000Z" itemprop="datePublished">2020年12月10日</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/">技术综合</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/">记一次前端 Mac 新机配置之路</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="首先肯定是拷贝老机子的内容啦"><a href="#首先肯定是拷贝老机子的内容啦" class="headerlink" title="首先肯定是拷贝老机子的内容啦"></a>首先肯定是拷贝老机子的内容啦</h3><p>这时候正好手边没有 U 盘，叫外卖性价比太低，京东又要等双十二才有优惠，怎么办呢？</p>
-<p>这时候我们可以直接用局域网来传递，在老机子上执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i -g host-your-folder</span><br><span class="line">host-your-folder -g</span><br><span class="line"><span class="comment"># listen on :::50771</span></span><br></pre></td></tr></table></figure>
-
-<p>这时候访问老机子的 ip 就可以访问用户目录下的文件啦！如 <code>xxx.xxx.xxx.xxx:50771/xxx.zip</code>。</p>
-<p>但是要注意的是 .ssh 之类 <code>.</code> 开头的文件是系统文件，没法通过这种方式传递，需要改个其他名字。</p>
-<p>最容易的办法就是把所有要传递的文件打包成一个 <code>xxx.zip</code> 放在用户目录下一起下载。</p>
-<p>另外要转移代码的话记得先删除 <code>node_modules</code>，用如下的命令就可以对当前目录下所有仓库执行删除：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -name node_modules -<span class="built_in">type</span> d -<span class="built_in">exec</span> rm -rf &#123;&#125; \;</span><br><span class="line"><span class="comment"># 找到所有名字为 node_modules 的目录并执行删除</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="安装-git-和配置-ssh"><a href="#安装-git-和配置-ssh" class="headerlink" title="安装 git 和配置 ssh"></a>安装 git 和配置 ssh</h3><p>Mac 在命令行里打 <code>git</code> 就能安装了。</p>
-<p>然后因为上述操作迁移过 <code>.ssh</code> 文件夹，直接拷贝到用户根目录就行啦！</p>
-<blockquote>
-<p>注：记得显示隐藏文件，快捷键是 <code>Shift + cmd + .</code></p>
-</blockquote>
-<p>不用每次都再用如下麻烦的方式生成一遍 ssh 文件啦：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C “xxx@xxx.com”</span><br><span class="line">cat ~/.ssh/id_rsa.pub | pbcopy</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装-brew"><a href="#安装-brew" class="headerlink" title="安装 brew"></a>安装 brew</h3><p><code>Homebrew</code> 是一款 Mac OS 平台下必备的软件包管理工具，没有它安装和卸载可真的很麻烦。</p>
-<p>尝试了下在公司内网可以执行<code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code>，但是卡在 github 那步。</p>
-<p>后来发现在公司内网没法用 ssh 连 github，改为用流量就可以了。但是用流量访问上述链接会 403。</p>
-<p>最后在流量下执行<code>/usr/bin/ruby -e &quot;$(curl -fsSL https://cdn.jsdelivr.net/gh/ineo6/homebrew-install/install)&quot;</code> 终于下载成功。</p>
-<h3 id="安装-iterm2-和-zsh"><a href="#安装-iterm2-和-zsh" class="headerlink" title="安装 iterm2 和 zsh"></a>安装 iterm2 和 zsh</h3><p>iterm2 好看的配色、灵活的快捷键、智能的选中和点击地址跳转，配合 Oh My Zsh 的快捷命令，用起来十分舒服。</p>
-<p>iterm2 <a target="_blank" rel="noopener" href="https://iterm2.com/">官网</a> 下载即可，zsh 安装：<code>sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</code></p>
-<p>顺带贴一下自己常用 git 命令的缩写：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gcp <span class="comment"># git cherry-pick</span></span><br><span class="line">gfa <span class="comment"># git fetch --all --prune</span></span><br><span class="line">gupa <span class="comment"># git pull --rebase --autostash</span></span><br><span class="line">gpsup <span class="comment"># git push --set-upstream origin $(git_current_branch)</span></span><br><span class="line">glols <span class="comment"># git log --graph --pretty=&#x27;%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#x27; --stat</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="安装-nvm-和-npm"><a href="#安装-nvm-和-npm" class="headerlink" title="安装 nvm 和 npm"></a>安装 nvm 和 npm</h3><p>用 nvm 来管理 npm 的版本是种很优雅的方式，nvm 的安装如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.37.2/install.sh | bash</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注：0.37.2 是编者写文章时的最新版，见<a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">nvm仓库</a></p>
-</blockquote>
-<p>之后就是用 nvm 安装 node 和 npm</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm install node</span><br><span class="line">nvm use node</span><br></pre></td></tr></table></figure>
-
-<p>像我司有一些内部包得从内部源下载，所以要配置下 nenpm。</p>
-<p>可以把 alias 写到 .bash_profile 里永久保存，像我用了zsh则是保存到 .zshrc 中：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启前端相关的插件</span></span><br><span class="line">plugins=(docker git node react-native vscode)</span><br><span class="line"></span><br><span class="line"><span class="comment"># nvm 脚本</span></span><br><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/.nvm&quot;</span></span><br><span class="line">[ -s <span class="string">&quot;<span class="variable">$NVM_DIR</span>/nvm.sh&quot;</span> ] &amp;&amp; \. <span class="string">&quot;<span class="variable">$NVM_DIR</span>/nvm.sh&quot;</span>  <span class="comment"># This loads nvm</span></span><br><span class="line">[ -s <span class="string">&quot;<span class="variable">$NVM_DIR</span>/bash_completion&quot;</span> ] &amp;&amp; \. <span class="string">&quot;<span class="variable">$NVM_DIR</span>/bash_completion&quot;</span>  <span class="comment"># This loads nvm bash_completion</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># nenpm alias</span></span><br><span class="line"><span class="built_in">alias</span> nenpm=<span class="string">&#x27;npm --registry=http://rnpm.hz.netease.com/ --registryweb=http://npm.hz.netease.com/ --cache=$HOME/.nenpm/.cache --userconfig=$HOME/.nenpmrc&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="然后就是下载常用的软件啦"><a href="#然后就是下载常用的软件啦" class="headerlink" title="然后就是下载常用的软件啦"></a>然后就是下载常用的软件啦</h3><p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5192874733/ff38/9ec2/a448/29d7fa333c425db05cc33a4883453f76.png" alt="image"></p>
-<p>最重要的当然是 chrome，没有 chrome 的收藏夹和记住密码简直寸步难行！</p>
-<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5192833655/e6a2/d1a0/de8e/fb7ed6c18027dd1c6e28e92cd04ca215.jpg" alt="image"></p>
-<p>剩下除了公司自带的几个，ppduck 压图真的好使，强烈建议买正式版！</p>
-<p>xcode 的 simulator 配合测试包可以直接在 Mac 上方便地调试 webview 下的效果~</p>
-<h3 id="接下来就准备开始开发了"><a href="#接下来就准备开始开发了" class="headerlink" title="接下来就准备开始开发了"></a>接下来就准备开始开发了</h3><p>VSCode Insiders 可以登录账户同步的功能真是太棒啦，直接就把配置和插件安装了(VSC目前也支持啦)。</p>
-<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5192897486/505c/b816/3882/c073e8da218268eeba4b7cffd1845518.png" alt="image"></p>
-<p>Chinese 汉化、gitlens 查看提交记录、eslint 统一规范自是不必多说。</p>
-<p>prettier 格式化 js 很好看，我通常都会时不时地手动格式化一下，然后保存的时候再解决一下 eslint 报错和调整 import 顺序，设置如下：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;editor.codeActionsOnSave&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;source.organizeImports&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">&quot;source.fixAll.eslint&quot;</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>csscomb 可以很好地格式化 css 文件，能按照<a target="_blank" rel="noopener" href="https://github.com/shenyizhou/css-comb/blob/master/csscomb.json">配置文件</a>指定的顺序排列样式，一般我都是按照以下顺序：</p>
-<ol>
-<li>位置属性（如 position、top、z-index、display、flex、margin、padding 等）</li>
-<li>自身属性（如 width、border、background、color 等）</li>
-<li>文字属性（如 text-align、word-wrap、font、line-height 等）</li>
-<li>动画属性及其他</li>
-</ol>
-<p>统一 css 顺序不仅美观，而且不容易出错，用法就是 <code>Shift + cmd + p</code> 执行格式化命令。</p>
-<p>jsdoc 是为了方便加函数注解，markdown preview enhanced 让 md 写作的体验更上一层楼。</p>
-<p>最后隆重地介绍下 Tabnine，用完之后我简直可以不带脑子写代码，人工智能就帮我写好了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" data-id="cltegptjx007ac4abh6qc7a11" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2018-7-11-跨域" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/" class="article-date">
-  <time datetime="2018-07-11T04:14:29.000Z" itemprop="datePublished">2018年07月11日</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/">跨域</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="跨域产生原因"><a href="#跨域产生原因" class="headerlink" title="跨域产生原因"></a>跨域产生原因</h3><p>首先要说下浏览器的同源策略，也就是相同协议、域名、端口的才算作同源，浏览器只允许同源之间互发请求</p>
-<p>然后在不同源间发的请求就算作是跨域请求啦</p>
-<p>因为只是浏览器的限制，所以在 Postman 或者 Electron 下就没有跨域限制</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/" data-id="cltegptju0072c4abf1745eix" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2018-7-8-Node初探" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/" class="article-date">
-  <time datetime="2018-07-08T07:50:42.000Z" itemprop="datePublished">2018年07月08日</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Node/">Node</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/">Node初探</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>从一个简单的 Hello World 开始</p>
-<p>借鉴自<a target="_blank" rel="noopener" href="https://github.com/yjhjstz">yjhjstz</a>的 <a target="_blank" rel="noopener" href="https://github.com/yjhjstz/deep-into-node">deep-into-node</a>这篇文章</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/" data-id="cltegptjw0076c4abeokpa53e" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/" rel="tag">Node</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2018-6-30-Gulp初探" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/" class="article-date">
-  <time datetime="2018-06-30T03:58:36.000Z" itemprop="datePublished">2018年06月30日</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/">Gulp初探</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Gulp 是基于 NodeJS 的自动任务运行器，它可以自动化地完成测试、合并、压缩、格式化、生成文件、监听文件等任务</p>
-<p>相比于 Grunt 的频繁 IO 操作，Gulp 的流操作更快，Gulp 还借鉴了 Unix 的管道(pipe)思想，前一级的输出直接变成后一级的输入</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/" data-id="cltegptjq006oc4ab81a6gp3i" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li></ul>
 
     </footer>
   </div>
@@ -1104,7 +938,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -1125,7 +959,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/" rel="tag">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ElementUI/" rel="tag">ElementUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ionic/" rel="tag">Ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LuaSocket/" rel="tag">LuaSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyEclipse/" rel="tag">MyEclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Power-Designer/" rel="tag">Power Designer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPF/" rel="tag">WPF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mock/" rel="tag">mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-json/" rel="tag">package.json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threejs/" rel="tag">threejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" rel="tag">域名劫持</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E5%85%A5/" rel="tag">导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag">微机原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" rel="tag">技术名词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" rel="tag">技术综合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" rel="tag">技术陷阱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A6%E4%BE%A0/" rel="tag">武侠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E9%87%8A/" rel="tag">注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" rel="tag">深入理解C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" rel="tag">王者荣耀</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%95%A5/" rel="tag">略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" rel="tag">知识体系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A5%E9%9B%B6/" rel="tag">补零</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/" rel="tag">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/" rel="tag">Database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ElementUI/" rel="tag">ElementUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ionic/" rel="tag">Ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua/" rel="tag">Lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LuaSocket/" rel="tag">LuaSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyEclipse/" rel="tag">MyEclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Power-Designer/" rel="tag">Power Designer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPF/" rel="tag">WPF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mock/" rel="tag">mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-json/" rel="tag">package.json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threejs/" rel="tag">threejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" rel="tag">域名劫持</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E5%85%A5/" rel="tag">导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" rel="tag">微机原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" rel="tag">技术名词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" rel="tag">技术综合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" rel="tag">技术陷阱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A6%E4%BE%A0/" rel="tag">武侠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E9%87%8A/" rel="tag">注释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" rel="tag">深入理解C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" rel="tag">王者荣耀</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%95%A5/" rel="tag">略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" rel="tag">知识体系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A5%E9%9B%B6/" rel="tag">补零</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
     </div>
   </div>
 
@@ -1135,7 +969,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 12.86px;">Android</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/CSS/" style="font-size: 15.71px;">CSS</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Database/" style="font-size: 10px;">Database</a> <a href="/tags/ElementUI/" style="font-size: 11.43px;">ElementUI</a> <a href="/tags/Git/" style="font-size: 17.14px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Grunt/" style="font-size: 11.43px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IDE/" style="font-size: 12.86px;">IDE</a> <a href="/tags/Ionic/" style="font-size: 10px;">Ionic</a> <a href="/tags/Java/" style="font-size: 11.43px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 18.57px;">JavaScript</a> <a href="/tags/Lua/" style="font-size: 11.43px;">Lua</a> <a href="/tags/LuaSocket/" style="font-size: 10px;">LuaSocket</a> <a href="/tags/MyEclipse/" style="font-size: 10px;">MyEclipse</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Power-Designer/" style="font-size: 11.43px;">Power Designer</a> <a href="/tags/SEO/" style="font-size: 10px;">SEO</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/WPF/" style="font-size: 10px;">WPF</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/mock/" style="font-size: 10px;">mock</a> <a href="/tags/package-json/" style="font-size: 10px;">package.json</a> <a href="/tags/threejs/" style="font-size: 10px;">threejs</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 10px;">动画</a> <a href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" style="font-size: 10px;">域名劫持</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AF%BC%E5%85%A5/" style="font-size: 10px;">导入</a> <a href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" style="font-size: 11.43px;">微机原理</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" style="font-size: 11.43px;">技术名词</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" style="font-size: 10px;">技术综合</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" style="font-size: 10px;">技术陷阱</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">数据类型</a> <a href="/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/tags/%E6%AD%A6%E4%BE%A0/" style="font-size: 10px;">武侠</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 11.43px;">汇编</a> <a href="/tags/%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">注释</a> <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" style="font-size: 14.29px;">深入理解C#</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 10px;">状态码</a> <a href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" style="font-size: 10px;">王者荣耀</a> <a href="/tags/%E7%95%A5/" style="font-size: 10px;">略</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" style="font-size: 10px;">知识体系</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 10px;">缓存</a> <a href="/tags/%E8%A1%A5%E9%9B%B6/" style="font-size: 10px;">补零</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 11.43px;">跨域</a>
+      <a href="/tags/Android/" style="font-size: 12.86px;">Android</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/CSS/" style="font-size: 15.71px;">CSS</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Database/" style="font-size: 10px;">Database</a> <a href="/tags/ElementUI/" style="font-size: 11.43px;">ElementUI</a> <a href="/tags/Git/" style="font-size: 17.14px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Grunt/" style="font-size: 11.43px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 11.43px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IDE/" style="font-size: 12.86px;">IDE</a> <a href="/tags/Ionic/" style="font-size: 10px;">Ionic</a> <a href="/tags/Java/" style="font-size: 11.43px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 18.57px;">JavaScript</a> <a href="/tags/Lua/" style="font-size: 11.43px;">Lua</a> <a href="/tags/LuaSocket/" style="font-size: 10px;">LuaSocket</a> <a href="/tags/MyEclipse/" style="font-size: 10px;">MyEclipse</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Power-Designer/" style="font-size: 11.43px;">Power Designer</a> <a href="/tags/SEO/" style="font-size: 10px;">SEO</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/WPF/" style="font-size: 10px;">WPF</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/mock/" style="font-size: 10px;">mock</a> <a href="/tags/package-json/" style="font-size: 10px;">package.json</a> <a href="/tags/threejs/" style="font-size: 10px;">threejs</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 10px;">动画</a> <a href="/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/tags/%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81/" style="font-size: 10px;">域名劫持</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AF%BC%E5%85%A5/" style="font-size: 10px;">导入</a> <a href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" style="font-size: 11.43px;">微机原理</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%90%8D%E8%AF%8D/" style="font-size: 11.43px;">技术名词</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E7%BB%BC%E5%90%88/" style="font-size: 10px;">技术综合</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E9%99%B7%E9%98%B1/" style="font-size: 10px;">技术陷阱</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">数据类型</a> <a href="/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/tags/%E6%97%B6%E9%97%B4/" style="font-size: 10px;">时间</a> <a href="/tags/%E6%AD%A6%E4%BE%A0/" style="font-size: 10px;">武侠</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 11.43px;">汇编</a> <a href="/tags/%E6%B3%A8%E9%87%8A/" style="font-size: 10px;">注释</a> <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C/" style="font-size: 14.29px;">深入理解C#</a> <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/" style="font-size: 10px;">状态码</a> <a href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" style="font-size: 10px;">王者荣耀</a> <a href="/tags/%E7%95%A5/" style="font-size: 10px;">略</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" style="font-size: 10px;">知识体系</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.43px;">缓存</a> <a href="/tags/%E8%A1%A5%E9%9B%B6/" style="font-size: 10px;">补零</a> <a href="/tags/%E8%AF%B7%E6%B1%82/" style="font-size: 15.71px;">请求</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 11.43px;">跨域</a>
     </div>
   </div>
 
@@ -1144,7 +978,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
     </div>
   </div>
 
@@ -1157,23 +991,23 @@
       <ul>
         
           <li>
+            <a href="/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/">前端通用依赖库缓存方案</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/19/2022-12-19-Antd%20Charts%20%E7%AD%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF/">Antd Charts 等数据可视化相关技术</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/2022-04-17-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20useRequest%20%E7%9A%84%E5%AE%9E%E7%8E%B0/">自动批量请求（5）—— useRequest 的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/15/2022-04-15-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94%20%E5%88%A0%E5%87%8F%E9%87%8D%E5%A4%8D%E7%9A%84%E8%AF%B7%E6%B1%82/">自动批量请求（4）—— 删减重复的请求</a>
+          </li>
+        
+          <li>
             <a href="/2021/07/18/2021-07-18-%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/">如何构建自己的知识体系</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/13/2021-07-13-%E8%AF%BB%E4%B9%A6/">怎么写书评</a>
-          </li>
-        
-          <li>
-            <a href="/2021/03/24/2021-03-24-1-%E4%B8%8D%E5%87%BA%E6%9F%90%E4%BB%B6%E8%A3%85%E5%A4%87%E7%9A%84%E8%83%9C%E7%8E%87/">1 - 不出某件装备的胜率</a>
-          </li>
-        
-          <li>
-            <a href="/2021/02/24/2021-02-24-threejs/">js 3d 学习</a>
-          </li>
-        
-          <li>
-            <a href="/2021/02/09/2021-02-09-%E4%BB%8A%E7%94%9F%E5%BF%85%E8%AF%BB%E7%9A%84%E6%AD%A6%E4%BE%A0%E5%B0%8F%E8%AF%B4%E5%88%97%E8%A1%A8/">今生必读的武侠小说列表</a>
           </li>
         
       </ul>
