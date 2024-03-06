@@ -41,7 +41,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>活动动画相关技术方案 · fi3ework&#39;s Studio</title>
+    <title>活动动画相关技术方案 · Orion&#39;s Studio</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -255,7 +255,7 @@
         </span>
         <!-- back to home page text -->
         <span class="home-link header-element">
-            <a href=/>fi3ework's Studio.</a>
+            <a href=/>Orion's Studio.</a>
         </span>
     </div>
     <!-- toggle banner for post layout -->
@@ -264,7 +264,7 @@
             <div class="banner">
         
             <div class="blog-title header-element">
-                <a href="/">fi3ework&#39;s Studio.</a>
+                <a href="/">Orion&#39;s Studio.</a>
             </div>
             <div class="post-title header-element">
                 <a href="#" class="post-name">活动动画相关技术方案</a>
@@ -647,7 +647,7 @@
 </ul>
 </blockquote>
 <h4 id="资源路径"><a href="#资源路径" class="headerlink" title="资源路径"></a>资源路径</h4><p>video 资源最好还是上传到云音乐的这个<a target="_blank" rel="noopener" href="https://music-swiss.hz.netease.com/media">图床</a>，否则可能会有跨域风险。</p>
-<p>权限可以联系 吴丹妮(<a href="mailto:&#119;&#x75;&#100;&#97;&#110;&#110;&#105;&#x30;&#50;&#x40;&#x63;&#x6f;&#x72;&#112;&#x2e;&#x6e;&#101;&#116;&#x65;&#x61;&#x73;&#101;&#46;&#x63;&#x6f;&#109;">&#119;&#x75;&#100;&#97;&#110;&#110;&#105;&#x30;&#50;&#x40;&#x63;&#x6f;&#x72;&#112;&#x2e;&#x6e;&#101;&#116;&#x65;&#x61;&#x73;&#101;&#46;&#x63;&#x6f;&#109;</a>) 开启。</p>
+<p>权限可以联系 吴丹妮(<a href="mailto:&#x77;&#117;&#100;&#97;&#110;&#110;&#x69;&#x30;&#50;&#x40;&#x63;&#x6f;&#114;&#x70;&#46;&#x6e;&#x65;&#116;&#101;&#97;&#x73;&#x65;&#x2e;&#x63;&#x6f;&#109;">&#x77;&#117;&#100;&#97;&#110;&#110;&#x69;&#x30;&#50;&#x40;&#x63;&#x6f;&#114;&#x70;&#46;&#x6e;&#x65;&#116;&#101;&#97;&#x73;&#x65;&#x2e;&#x63;&#x6f;&#109;</a>) 开启。</p>
 <h3 id="强调动画"><a href="#强调动画" class="headerlink" title="强调动画"></a>强调动画</h3><p>这块一般用 css animation 来实现，一般最常用的特效就是 <strong>放大抖动</strong>：</p>
 <p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9865459885/8527/6eee/7157/c31da430193d551f4178e51a2bf0b4d2.gif"></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> tada &#123;</span><br><span class="line">    0% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scaleX</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    10%,</span><br><span class="line">    20% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scale3d</span>(<span class="number">0.9</span>, <span class="number">0.9</span>, <span class="number">0.9</span>) <span class="built_in">rotate</span>(-<span class="number">3deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    30%,</span><br><span class="line">    50%,</span><br><span class="line">    70%,</span><br><span class="line">    90% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scale3d</span>(<span class="number">1.1</span>, <span class="number">1.1</span>, <span class="number">1.1</span>) <span class="built_in">rotate</span>(<span class="number">3deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    40%,</span><br><span class="line">    60%,</span><br><span class="line">    80% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scale3d</span>(<span class="number">1.1</span>, <span class="number">1.1</span>, <span class="number">1.1</span>) <span class="built_in">rotate</span>(-<span class="number">3deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    100% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scaleX</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.xxx</span> &#123;</span><br><span class="line">    <span class="comment">/* 时长 1 秒，缓动 ease，延迟 0 秒，无限循环，正向播放，会恢复原始状态，正在运行，关键帧名 tada */</span></span><br><span class="line">    <span class="attribute">animation</span>: <span class="number">1s</span> ease <span class="number">0s</span> infinite normal both running tada;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2320,72 +2320,6 @@
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
     
     
@@ -3105,14 +3039,14 @@
                 导入
             </span>
         
-            <span class="sidebar-tag-name" data-tags="Lua">
-                <span class="iconfont-archer">&#xe606;</span>
-                Lua
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="数据类型">
                 <span class="iconfont-archer">&#xe606;</span>
                 数据类型
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Lua">
+                <span class="iconfont-archer">&#xe606;</span>
+                Lua
             </span>
         
             <span class="sidebar-tag-name" data-tags="LuaSocket">
@@ -3150,14 +3084,14 @@
                 跨域
             </span>
         
-            <span class="sidebar-tag-name" data-tags="技术陷阱">
-                <span class="iconfont-archer">&#xe606;</span>
-                技术陷阱
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="Atom">
                 <span class="iconfont-archer">&#xe606;</span>
                 Atom
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="技术陷阱">
+                <span class="iconfont-archer">&#xe606;</span>
+                技术陷阱
             </span>
         
             <span class="sidebar-tag-name" data-tags="技术综合">
@@ -3210,14 +3144,14 @@
                 Hexo
             </span>
         
-            <span class="sidebar-tag-name" data-tags="WPF">
-                <span class="iconfont-archer">&#xe606;</span>
-                WPF
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="mock">
                 <span class="iconfont-archer">&#xe606;</span>
                 mock
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="WPF">
+                <span class="iconfont-archer">&#xe606;</span>
+                WPF
             </span>
         
             <span class="sidebar-tag-name" data-tags="字符串">
@@ -3240,6 +3174,11 @@
                 ElementUI
             </span>
         
+            <span class="sidebar-tag-name" data-tags="域名劫持">
+                <span class="iconfont-archer">&#xe606;</span>
+                域名劫持
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="Nginx">
                 <span class="iconfont-archer">&#xe606;</span>
                 Nginx
@@ -3248,11 +3187,6 @@
             <span class="sidebar-tag-name" data-tags="PHP">
                 <span class="iconfont-archer">&#xe606;</span>
                 PHP
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="域名劫持">
-                <span class="iconfont-archer">&#xe606;</span>
-                域名劫持
             </span>
         
             <span class="sidebar-tag-name" data-tags="WebStorm">
@@ -3295,14 +3229,14 @@
                 VPS
             </span>
         
-            <span class="sidebar-tag-name" data-tags="Chrome">
-                <span class="iconfont-archer">&#xe606;</span>
-                Chrome
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="package.json">
                 <span class="iconfont-archer">&#xe606;</span>
                 package.json
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Chrome">
+                <span class="iconfont-archer">&#xe606;</span>
+                Chrome
             </span>
         
             <span class="sidebar-tag-name" data-tags="缓存">
@@ -3365,11 +3299,6 @@
                 动画
             </span>
         
-            <span class="sidebar-tag-name" data-tags="王者荣耀">
-                <span class="iconfont-archer">&#xe606;</span>
-                王者荣耀
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="表单">
                 <span class="iconfont-archer">&#xe606;</span>
                 表单
@@ -3378,6 +3307,11 @@
             <span class="sidebar-tag-name" data-tags="读书">
                 <span class="iconfont-archer">&#xe606;</span>
                 读书
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="王者荣耀">
+                <span class="iconfont-archer">&#xe606;</span>
+                王者荣耀
             </span>
         
             <span class="sidebar-tag-name" data-tags="知识体系">
@@ -3531,14 +3465,14 @@
             小说
         </span>
     
-        <span class="sidebar-category-name" data-categories="游戏">
-            <span class="iconfont-archer">&#xe60a;</span>
-            游戏
-        </span>
-    
         <span class="sidebar-category-name" data-categories="读书">
             <span class="iconfont-archer">&#xe60a;</span>
             读书
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="游戏">
+            <span class="iconfont-archer">&#xe60a;</span>
+            游戏
         </span>
     
         <span class="sidebar-category-name" data-categories="知识">
