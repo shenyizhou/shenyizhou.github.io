@@ -19,23 +19,25 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="静存高远">
-    <meta name="description" content="Enum.GetName(typeof(XXX),xxx) 和 Enum.Parse(typeof(XXX),string)">
+    <meta name="description" content="题目(easy)：给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。 思路暴力破解就是遍历一遍之后再排序，时间复杂度为 O(n+nlogn)。 双指针法 12345678910111213141516171819const sortedSquares &#x3D; (nums) &#x3D;&gt; &amp;#123;    let n &#x3D; nums.leng">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSharp对枚举和字符串的转化">
-<meta property="og:url" content="http://shenyizhou.github.io/2017/05/09/2017-05-09-CSharp%E5%AF%B9%E6%9E%9A%E4%B8%BE%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E5%8C%96/index.html">
+<meta property="og:title" content="算法(4)-有序数组的平方与左右指针">
+<meta property="og:url" content="http://shenyizhou.github.io/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(4)-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%B7%A6%E5%8F%B3%E6%8C%87%E9%92%88/index.html">
 <meta property="og:site_name" content="无主之地">
-<meta property="og:description" content="Enum.GetName(typeof(XXX),xxx) 和 Enum.Parse(typeof(XXX),string)">
+<meta property="og:description" content="题目(easy)：给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。 思路暴力破解就是遍历一遍之后再排序，时间复杂度为 O(n+nlogn)。 双指针法 12345678910111213141516171819const sortedSquares &#x3D; (nums) &#x3D;&gt; &amp;#123;    let n &#x3D; nums.leng">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2017-05-09T01:41:51.000Z">
-<meta property="article:modified_time" content="2023-09-06T07:04:23.696Z">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/gifs/977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.gif">
+<meta property="article:published_time" content="2024-03-06T12:32:57.000Z">
+<meta property="article:modified_time" content="2024-03-06T12:37:53.298Z">
 <meta property="article:author" content="Yizhou Shen">
-<meta property="article:tag" content="C#">
+<meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://code-thinking.cdn.bcebos.com/gifs/977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.gif">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>CSharp对枚举和字符串的转化 · Orion&#39;s Studio</title>
+    <title>算法(4)-有序数组的平方与左右指针 · Orion&#39;s Studio</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -261,7 +263,7 @@
                 <a href="/">Orion&#39;s Studio.</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">CSharp对枚举和字符串的转化</a>
+                <a href="#" class="post-name">算法(4)-有序数组的平方与左右指针</a>
             </div>
         </div>
     
@@ -307,7 +309,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                CSharp对枚举和字符串的转化
+                算法(4)-有序数组的平方与左右指针
             <!-- 404 -->
             
         </h1>
@@ -327,7 +329,7 @@
                     <div class= post-intro-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="C#">C#</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="数组">数组</a>
     
 </div>
 
@@ -337,7 +339,7 @@
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2017/05/09</span>
+                    <span class="post-intro-time">2024/03/06</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -492,15 +494,21 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h2 id="Enum-GetName-typeof-XXX-xxx-和-Enum-Parse-typeof-XXX-string"><a href="#Enum-GetName-typeof-XXX-xxx-和-Enum-Parse-typeof-XXX-string" class="headerlink" title="Enum.GetName(typeof(XXX),xxx) 和 Enum.Parse(typeof(XXX),string)"></a>Enum.GetName(typeof(XXX),xxx) 和 Enum.Parse(typeof(XXX),string)</h2>
+        <h2 id="题目-easy-："><a href="#题目-easy-：" class="headerlink" title="题目(easy)："></a>题目(easy)：</h2><p>给你一个按 <strong>非递减顺序</strong> 排序的整数数组 nums，返回 <strong>每个数字的平方</strong> 组成的新数组，要求也按 <strong>非递减顺序</strong> 排序。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>暴力破解就是遍历一遍之后再排序，时间复杂度为 O(n+nlogn)。</p>
+<h3 id="双指针法"><a href="#双指针法" class="headerlink" title="双指针法"></a>双指针法</h3><p><img src="https://code-thinking.cdn.bcebos.com/gifs/977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.gif"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedSquares = <span class="function">(<span class="params">nums</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> n = nums.length;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="keyword">new</span> <span class="built_in">Array</span>(n).fill(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> j = n - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> k = n - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= j) &#123;</span><br><span class="line">        <span class="keyword">let</span> left = nums[i] * nums[i];</span><br><span class="line">        <span class="keyword">let</span> right = nums[j] * nums[j];</span><br><span class="line">        <span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">            res[k--] = right;</span><br><span class="line">            j--;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            res[k--] = left;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度为 O(n)。</p>
+
     </article>
     <!-- license -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="http://shenyizhou.github.io">Yizhou Shen</a>
-            <p>原文链接：<a href="http://shenyizhou.github.io/2017/05/09/2017-05-09-CSharp%E5%AF%B9%E6%9E%9A%E4%B8%BE%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E5%8C%96/">http://shenyizhou.github.io/2017/05/09/2017-05-09-CSharp%E5%AF%B9%E6%9E%9A%E4%B8%BE%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E5%8C%96/</a>
-            <p>发表日期：<a href="http://shenyizhou.github.io/2017/05/09/2017-05-09-CSharp%E5%AF%B9%E6%9E%9A%E4%B8%BE%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E5%8C%96/">May 9th 2017, 9:41:51 am</a>
-            <p>更新日期：<a href="http://shenyizhou.github.io/2017/05/09/2017-05-09-CSharp%E5%AF%B9%E6%9E%9A%E4%B8%BE%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E5%8C%96/">September 6th 2023, 3:04:23 pm</a>
+            <p>原文链接：<a href="http://shenyizhou.github.io/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(4)-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%B7%A6%E5%8F%B3%E6%8C%87%E9%92%88/">http://shenyizhou.github.io/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(4)-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%B7%A6%E5%8F%B3%E6%8C%87%E9%92%88/</a>
+            <p>发表日期：<a href="http://shenyizhou.github.io/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(4)-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%B7%A6%E5%8F%B3%E6%8C%87%E9%92%88/">March 6th 2024, 8:32:57 pm</a>
+            <p>更新日期：<a href="http://shenyizhou.github.io/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(4)-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%B7%A6%E5%8F%B3%E6%8C%87%E9%92%88/">March 6th 2024, 8:37:53 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -508,17 +516,12 @@
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2017/06/25/2017-06-25-%E4%B8%80%E7%9B%B4%E4%BB%A5%E4%B8%BA@%E6%98%AF%E5%8F%96%E7%BB%9D%E5%AF%B9%E5%9C%B0%E5%9D%80%E7%AC%A6/" title="一直以为@是取绝对地址符">
-                    <div class="nextTitle">一直以为@是取绝对地址符</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2017/05/05/2017-05-05-%E5%8F%91%E7%8E%B0%E6%88%91Atom%E7%94%A8%E7%9A%84%E6%9C%80%E5%A4%9A%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%B1%85%E7%84%B6%E6%98%AF.../" title="发现我Atom用的最多的快捷键居然是...">
-                    <div class="prevTitle">发现我Atom用的最多的快捷键居然是...</div>
+                <a href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(3)-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%E4%B8%8E%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/" title="算法(3)-移除元素与快慢指针">
+                    <div class="prevTitle">算法(3)-移除元素与快慢指针</div>
                 </a>
             
         </li>
@@ -649,7 +652,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Enum-GetName-typeof-XXX-xxx-%E5%92%8C-Enum-Parse-typeof-XXX-string"><span class="toc-number">1.</span> <span class="toc-text">Enum.GetName(typeof(XXX),xxx) 和 Enum.Parse(typeof(XXX),string)</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-easy-%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">题目(easy)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">双指针法</span></a></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
