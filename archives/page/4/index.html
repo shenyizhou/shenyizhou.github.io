@@ -433,6 +433,115 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2017/12/24/2017-12-24-OO%20in%20JS%EF%BC%882%EF%BC%89/">
+                
+                <span class="abstract-title-text">OO in JS（2）</span>
+            </a>
+            <div class="abstract-content">
+                <h3 id="瞎扯一通"><a href="#瞎扯一通" class="headerlink" title="瞎扯一通"></a>瞎扯一通</h3>
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2023/09/06">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/24</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2017/12/20/2017-12-20-%E5%89%8D%E7%AB%AF%E5%AD%97%E4%BD%93/">
+                
+                <span class="abstract-title-text">前端字体</span>
+            </a>
+            <div class="abstract-content">
+                宋体分2种粗细，雅黑分3种，通过font-weight切换
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2023/09/06">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/20</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="CSS">CSS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="字体">字体</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2017/12/17/2017-12-17-OO%20in%20JS%EF%BC%881%EF%BC%89/">
+                
+                <span class="abstract-title-text">OO in JS（1）</span>
+            </a>
+            <div class="abstract-content">
+                <h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><h4 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按照我的理解此时生成了一个prototype，constructor为Person1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person1</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>() <span class="comment">// 等价于let o = &#123;&#125;，注意new的是Object</span></span><br><span class="line">  o.name = name</span><br><span class="line">  o.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">return</span> o</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person1 = Person1(<span class="string">&#x27;Orion&#x27;</span>)</span><br><span class="line">Person1.prototype <span class="comment">// __proto__为Obejct的只有constructor的对象，代表该构造函数对应的prototype</span></span><br><span class="line">person1.__proto__ <span class="comment">// Object，代表该实例的原型对象</span></span><br><span class="line">person1 <span class="keyword">instanceof</span> Person1 <span class="comment">// false，是Object</span></span><br><span class="line">person1.constructor === Person1 <span class="comment">// false，是Object</span></span><br></pre></td></tr></table></figure>
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2023/09/06">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/17</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2017/12/14/2017-12-14-WebStorm%E6%96%87%E4%BB%B6%E6%A8%A1%E6%9D%BF/">
                 
                 <span class="abstract-title-text">WebStorm文件模板</span>
@@ -1141,194 +1250,6 @@ ES2017(ES8)
         </article>
         <div class="index-post-divider"></div>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2017/08/18/2017-08-18-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%884%EF%BC%89/">
-                
-                <span class="abstract-title-text">《深入理解C Sharp》第3版（4）</span>
-            </a>
-            <div class="abstract-content">
-                各版本主要特性
-
-
-版本
-特性
-
-
-
-C# 1.0
-/
-
-
-C# 2.0
-对1.0的修补
-
-
-C# 3.0
-LINQ
-
-
-C# 4.0
-互操作性
-
-
-C# 5.0
-异步函数
-
-
-
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/18</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="C#">C#</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="深入理解C#">深入理解C#</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2017/08/17/2017-08-17-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%883%EF%BC%89/">
-                
-                <span class="abstract-title-text">《深入理解C Sharp》第3版（3）</span>
-            </a>
-            <div class="abstract-content">
-                处理未知数据
-
-
-版本
-排序
-
-
-
-C# 1.0
-标志、包装类型、魔数
-
-
-C# 2.0/3.0
-可空类型
-
-
-C# 4.0
-可选参数
-
-
-
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/17</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="C#">C#</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="深入理解C#">深入理解C#</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2017/08/16/2017-08-16-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%882%EF%BC%89/">
-                
-                <span class="abstract-title-text">《深入理解C Sharp》第3版（2）</span>
-            </a>
-            <div class="abstract-content">
-                排序和过滤的发展
-
-
-版本
-排序
-查询
-
-
-
-C# 1.0
-弱类型比较
-条件和操作耦合
-
-
-C# 2.0
-强类型比较、委托比较、匿名函数
-条件和操作分开、匿名函数
-
-
-C# 3.0
-Lambda表达式、扩展方法、不影响原列表
-Lambda表达式
-
-
-C# 4.0
-泛型可变性
-/
-
-
-
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/16</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="C#">C#</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="深入理解C#">深入理解C#</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
     <!-- paginator  -->
     
         <nav class="page-nav">
@@ -1977,101 +1898,22 @@ C# 4.0
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -3086,7 +2928,7 @@ C# 4.0
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 110
+        Total : 113
         </div>
         <!-- search  -->
         
@@ -3103,7 +2945,25 @@ C# 4.0
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(16)-%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D/">算法(16)-有效的字母异位词</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(17)-%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86/">算法(17)-两个数组的交集</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
             <a class="archive-post-title" href="/2024/03/11/2024-03-10-%E7%AE%97%E6%B3%95(11)-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/">算法(11)-两两交换链表中的节点</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(15)-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法(15)-哈希表</a>
         </li>
     
         
@@ -4176,6 +4036,11 @@ C# 4.0
             <span class="sidebar-tag-name" data-tags="链表">
                 <span class="iconfont-archer">&#xe606;</span>
                 链表
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="哈希表">
+                <span class="iconfont-archer">&#xe606;</span>
+                哈希表
             </span>
         
     </div>
