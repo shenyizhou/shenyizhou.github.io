@@ -448,6 +448,125 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2016/03/22/2016-03-22-%E5%BE%AE%E6%9C%BA%E6%8C%87%E4%BB%A4%EF%BC%882%EF%BC%89/">
+                
+                <span class="abstract-title-text">微机指令（2）</span>
+            </a>
+            <div class="abstract-content">
+                <h2 id="指令系统"><a href="#指令系统" class="headerlink" title="指令系统"></a>指令系统</h2><p>CPU全部指令的集合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">;符号指令</span><br><span class="line">MOV AX,1234H</span><br><span class="line">ADD AX,BX</span><br><span class="line">SUB CX,DX</span><br><span class="line"></span><br><span class="line">;机器指令</span><br><span class="line">B8 34 12</span><br><span class="line">03 C3</span><br><span class="line">2B CA</span><br></pre></td></tr></table></figure>
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2023/09/06">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/03/22</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="汇编">汇编</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="微机原理">微机原理</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2016/03/20/2016-03-20-%E5%BE%AE%E6%9C%BA%E6%8C%87%E4%BB%A4%EF%BC%881%EF%BC%89/">
+                
+                <span class="abstract-title-text">微机指令（1）</span>
+            </a>
+            <div class="abstract-content">
+                <h2 id="微机指令"><a href="#微机指令" class="headerlink" title="微机指令"></a>微机指令</h2><h3 id="传送类"><a href="#传送类" class="headerlink" title="传送类"></a>传送类</h3><h4 id="通用数据传送"><a href="#通用数据传送" class="headerlink" title="通用数据传送"></a>通用数据传送</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MOV ES,DX;DX中16位数据送ES</span><br><span class="line">MOV AX,[BX];BX和BX+1所指的两个内存单元内容送AX</span><br><span class="line">MOV [DI],AX;累加器内容送DI和DI+1所指向的两个单元</span><br><span class="line">MOV CX,[1000H];将1000H和1001H两单元的内容送CX</span><br><span class="line">MOV DX,5040H;立即数5040H送DX</span><br><span class="line">MOV WORD PTR[SI],6070H;立即数6070H送SI和SI+1所指向的两个单元；这里PTR是一个汇编操作符，与前面的WORD一起，意思是从SI地址中取一个字；而不是一个字节</span><br></pre></td></tr></table></figure>
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2023/09/06">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/03/20</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="汇编">汇编</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="微机原理">微机原理</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2016/03/15/2016-03-15-IFE%E4%BB%BB%E5%8A%A1%E4%B8%80%E6%94%B6%E8%8E%B7/">
+                
+                <span class="abstract-title-text">IFE任务一收获</span>
+            </a>
+            <div class="abstract-content">
+                <h2 id="一、标签布局"><a href="#一、标签布局" class="headerlink" title="一、标签布局"></a>一、标签布局</h2><ul>
+<li>header：顶部，放标题等</li>
+<li>footer：底部，放版权信息等</li>
+<li>nav：导航栏，主要是内部导航</li>
+<li>aside：侧边栏，提供注册等功能</li>
+<li>section：我的理解是有header、article、footer划分的区块</li>
+<li>article：正文内容
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2023/09/06">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/03/15</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="HTML">HTML</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2016/03/13/2016-03-13-%E5%89%8D%E7%AB%AF%E9%94%99%E9%A2%98%E9%9B%86%EF%BC%881%EF%BC%89/">
                 
                 <span class="abstract-title-text">前端错题集（1）</span>
@@ -1356,7 +1475,152 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -2117,7 +2381,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 121
+        Total : 124
         </div>
         <!-- search  -->
         
@@ -2183,6 +2447,24 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/11</span>
             <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(18)-%E5%BF%AB%E4%B9%90%E6%95%B0/">算法(18)-快乐数</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(12)-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/">算法(12)-删除链表的倒数第N个节点</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(13)-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/">算法(13)-链表相交</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(14)-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/">算法(14)-环形链表II</a>
         </li>
     
         
@@ -3225,6 +3507,11 @@
                 动画
             </span>
         
+            <span class="sidebar-tag-name" data-tags="王者荣耀">
+                <span class="iconfont-archer">&#xe606;</span>
+                王者荣耀
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="表单">
                 <span class="iconfont-archer">&#xe606;</span>
                 表单
@@ -3233,11 +3520,6 @@
             <span class="sidebar-tag-name" data-tags="读书">
                 <span class="iconfont-archer">&#xe606;</span>
                 读书
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="王者荣耀">
-                <span class="iconfont-archer">&#xe606;</span>
-                王者荣耀
             </span>
         
             <span class="sidebar-tag-name" data-tags="知识体系">
@@ -3411,14 +3693,14 @@
             小说
         </span>
     
-        <span class="sidebar-category-name" data-categories="读书">
-            <span class="iconfont-archer">&#xe60a;</span>
-            读书
-        </span>
-    
         <span class="sidebar-category-name" data-categories="游戏">
             <span class="iconfont-archer">&#xe60a;</span>
             游戏
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="读书">
+            <span class="iconfont-archer">&#xe60a;</span>
+            读书
         </span>
     
         <span class="sidebar-category-name" data-categories="知识">
