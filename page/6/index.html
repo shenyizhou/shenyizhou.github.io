@@ -448,6 +448,200 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/">
+                
+                <span class="abstract-title-text">文档编写指北</span>
+            </a>
+            <div class="abstract-content">
+                <p>[TOC]</p>
+<h1 id="文档编写指北"><a href="#文档编写指北" class="headerlink" title="文档编写指北"></a>文档编写指北</h1><h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><ul>
+<li>目录（如果内容多的话）<ul>
+<li>  可以用<code>- [目录名](#目录名)</code> 的写法</li>
+</ul>
+</li>
+<li>前言<ul>
+<li>  适用条件，如：<code>iOS 10.3及以上、Android 5.0及以上系统版本可以使用</code></li>
+<li>  有啥兼容性问题，如：<code>由于MSE当前的兼容性在移动端受限，建议在PC-WEB下使用该组件</code></li>
+<li>  在一些场景下是否建议用其他组件，如：<code>移动端建议使用：@music/activity-audio</code></li>
+<li>  想明确列一下支持功能，可以用这种写法：<code>✔︎ 支持绑定音频、视频播放器播放</code></li>
+</ul>
+</li>
+<li>快速开始<ul>
+<li>  下载和安装</li>
+<li>快速使用<ul>
+<li>  准备工作和配置</li>
+<li>  hello world 代码示例</li>
+</ul>
+</li>
+<li>  核心概念简介</li>
+</ul>
+</li>
+<li>详细内容<ul>
+<li>  各组件属性和方法的定义</li>
+<li>场景用例<ul>
+<li>场景 1<ol>
+<li>描述下场景需求</li>
+<li>放个图 <code>![xxx](xxx)</code></li>
+<li>写下关键代码 ``` xxx ```</li>
+</ol>
+</li>
+<li>  场景 2 …</li>
+</ul>
+</li>
+<li>  其他概念介绍，如生命周期、渲染方式、覆盖场景等等</li>
+</ul>
+</li>
+<li>后记<ul>
+<li>  版本更迭（如果已有 CHANGELOG.md 可以省去）</li>
+<li>  功能展望，可以列出 P0、P1 优先级</li>
+<li>  联系我们</li>
+</ul>
+</li>
+</ul>
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/03/05">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/01/27</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="文档">文档</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2021/01/12/2021-01-12-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20TS%20%E5%8C%96%E5%92%8C%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%E4%BC%98%E5%8C%96/">
+                
+                <span class="abstract-title-text">自动批量请求（2）—— TS 化和代码逻辑优化</span>
+            </a>
+            <div class="abstract-content">
+                <p>先看图来回顾一下（假设一次 EventLoop 占用 5 个时间单位，请求回复也需要 5 个时间单位）：</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5733277210/25b8/a88b/ef27/c19c77ade001f7208ee47fef48b9061d.png" alt="自动批量请求"></p>
+<p>我们已经实现了自动把同一时刻的请求合并，并统一渲染。</p>
+<p>但写完之后，发现很多写法都比较 low，所以对代码做了一次整体重构。</p>
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/03/05">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/01/12</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="请求">请求</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/">
+                
+                <span class="abstract-title-text">记一次前端 Mac 新机配置之路</span>
+            </a>
+            <div class="abstract-content">
+                <h3 id="首先肯定是拷贝老机子的内容啦"><a href="#首先肯定是拷贝老机子的内容啦" class="headerlink" title="首先肯定是拷贝老机子的内容啦"></a>首先肯定是拷贝老机子的内容啦</h3><p>这时候正好手边没有 U 盘，叫外卖性价比太低，京东又要等双十二才有优惠，怎么办呢？</p>
+<p>这时候我们可以直接用局域网来传递，在老机子上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i -g host-your-folder</span><br><span class="line">host-your-folder -g</span><br><span class="line"><span class="comment"># listen on :::50771</span></span><br></pre></td></tr></table></figure>
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/03/05">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/10</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="IDE">IDE</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2020/03/31/2020-03-31-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82/">
+                
+                <span class="abstract-title-text">自动批量请求</span>
+            </a>
+            <div class="abstract-content">
+                <p>先来个问题，假设有如下一颗元素树，React 各个元素的渲染顺序和 useEffect 的顺序是怎样的？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    A</span><br><span class="line">  &#x2F;   \</span><br><span class="line"> B     C  </span><br><span class="line">&#x2F;  \  &#x2F;  \</span><br><span class="line">D  E  F  G</span><br></pre></td></tr></table></figure>
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/03/05">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/31</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="请求">请求</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2019/12/25/2019-12-25-%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%B7%AE%E5%A4%A9%E6%95%B0%E7%9A%84%E4%B8%A4%E4%B8%89%E4%BA%8B/">
                 
                 <span class="abstract-title-text">跨域关于计算相差天数的两三事</span>
@@ -668,181 +862,10 @@
         </article>
         <div class="index-post-divider"></div>
     
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2018/06/07/2018-6-7-Webpack%E5%85%A5%E9%97%A8/">
-                
-                <span class="abstract-title-text">Webpack入门</span>
-            </a>
-            <div class="abstract-content">
-                <h3 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h3><p>Webpack 2 开始对 ES6、CommonJS、AMD 内置支持</p>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/07</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Webpack">Webpack</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/">
-                
-                <span class="abstract-title-text">CSS的@规则</span>
-            </a>
-            <div class="abstract-content">
-                <h3 id="规则"><a href="#规则" class="headerlink" title="@规则"></a>@规则</h3><h4 id="charset"><a href="#charset" class="headerlink" title="@charset"></a>@charset</h4><p>样式表的第一个元素，前面不得有任意字符,只有第一个会被使用，属性值大小写不敏感且必须用双引号，主常用于让content属性使用非ASCII字符</p>
-<p>浏览器查找样式表字符编码顺序：</p>
-<ol>
-<li>BOM(byte-order mark)</li>
-<li>Content-Type: Http header中的charset属性</li>
-<li>@charset</li>
-<li>link元素的charset属性(HTML5标准已废弃)</li>
-<li>假设文档是UTF-8</li>
-</ol>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/07</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="CSS">CSS</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2018/06/05/2018-6-5-Vue%E6%B0%B4%E5%8D%B0%E7%BB%84%E4%BB%B6/">
-                
-                <span class="abstract-title-text">Vue水印组件</span>
-            </a>
-            <div class="abstract-content">
-                
-
-
-  .example-item {
-    margin-bottom: 80px;
-  }
-
-  .example1 {
-    margin: 10px 0;
-  }
-
-  .label {
-    display: inline-block !important;
-    width: 96px;
-    color: #2f4f4f;
-    font-size: 16px;
-    display: inline-block;
-    /*margin: 15px 30px 15px 0;*/
-  }
-
-  .input {
-    position: relative;...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/05</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Vue">Vue</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2018/05/28/2018-5-28-js%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E8%84%9A%E6%9C%AC/">
-                
-                <span class="abstract-title-text">js动态添加脚本</span>
-            </a>
-            <div class="abstract-content">
-                123456789function addScript(url) &#123;  var head &#x3D; document.getElementsByTagName(&#39;head&#39;)[0]  var script &#x3D; document.createElement(&#39;script&#39;)  script.src &#x3D; url  script.type &#x3D; &#39;text&#x2F;javascript&#39;  script.defer &#x3D; true  head.appendChild(script)&#125;...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/28</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
     <!-- paginator  -->
     
         <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/page/5/">&lt; PREV</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/7/">NEXT &gt;</a>
+            <a class="extend prev" rel="prev" href="/page/5/">&lt; PREV</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/7/">NEXT &gt;</a>
         </nav>
     
 </main>
@@ -1756,7 +1779,131 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -2587,7 +2734,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 129
+        Total : 133
         </div>
         <!-- search  -->
         
@@ -2628,13 +2775,37 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/16</span>
-            <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(40)-%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88/">算法(40)-用队列实现栈</a>
+            <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(39)-%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/">算法(39)-用栈实现队列</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/16</span>
-            <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(39)-%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/">算法(39)-用栈实现队列</a>
+            <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(40)-%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88/">算法(40)-用队列实现栈</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(25)-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%20II/">算法(25)-反转字符串 II</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(26)-%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97/">算法(26)-替换数字</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(27)-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D/">算法(27)-翻转字符串里的单词</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(24)-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">算法(24)-反转字符串</a>
         </li>
     
         
@@ -2754,13 +2925,13 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/06</span>
-            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(3)-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%E4%B8%8E%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">算法(3)-移除元素与快慢指针</a>
+            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(4)-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%B7%A6%E5%8F%B3%E6%8C%87%E9%92%88/">算法(4)-有序数组的平方与左右指针</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/06</span>
-            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(4)-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%B7%A6%E5%8F%B3%E6%8C%87%E9%92%88/">算法(4)-有序数组的平方与左右指针</a>
+            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(3)-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%E4%B8%8E%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">算法(3)-移除元素与快慢指针</a>
         </li>
     
         
@@ -3663,6 +3834,11 @@
                 补零
             </span>
         
+            <span class="sidebar-tag-name" data-tags="Chrome">
+                <span class="iconfont-archer">&#xe606;</span>
+                Chrome
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="VPN">
                 <span class="iconfont-archer">&#xe606;</span>
                 VPN
@@ -3671,11 +3847,6 @@
             <span class="sidebar-tag-name" data-tags="VPS">
                 <span class="iconfont-archer">&#xe606;</span>
                 VPS
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="Chrome">
-                <span class="iconfont-archer">&#xe606;</span>
-                Chrome
             </span>
         
             <span class="sidebar-tag-name" data-tags="package.json">
