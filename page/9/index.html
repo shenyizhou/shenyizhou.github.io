@@ -448,63 +448,28 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2017/12/24/2017-12-24-OO%20in%20JS%EF%BC%882%EF%BC%89/">
+            <a class="abstract-title" href="/2018/04/24/2018-4-24-%E6%90%AD%E5%BB%BA%E8%87%AA%E7%94%A8%E6%A2%AF%E5%AD%90/">
                 
-                <span class="abstract-title-text">OO in JS（2）</span>
+                <span class="abstract-title-text">搭建自用梯子</span>
             </a>
             <div class="abstract-content">
-                <h3 id="瞎扯一通"><a href="#瞎扯一通" class="headerlink" title="瞎扯一通"></a>瞎扯一通</h3>
+                <h2 id="购买主机"><a href="#购买主机" class="headerlink" title="购买主机"></a>购买主机</h2><p>首先在枫叶主机里购买1个”美国 KVM VPS标准型”，附上我的推广链接：<a target="_blank" rel="noopener" href="https://www.fyzhuji.com/aff.php?aff=4973">https://www.fyzhuji.com/aff.php?aff=4973</a></p>
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
                 <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/24</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/24</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="VPN">VPN</a>
     
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2017/12/20/2017-12-20-%E5%89%8D%E7%AB%AF%E5%AD%97%E4%BD%93/">
-                
-                <span class="abstract-title-text">前端字体</span>
-            </a>
-            <div class="abstract-content">
-                宋体分2种粗细，雅黑分3种，通过font-weight切换
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/20</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="CSS">CSS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="字体">字体</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="VPS">VPS</a>
     
 </div>
 
@@ -521,26 +486,61 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2017/12/17/2017-12-17-OO%20in%20JS%EF%BC%881%EF%BC%89/">
+            <a class="abstract-title" href="/2018/03/26/2018-3-26-%E5%AE%89%E5%8D%93%E5%9C%86%E5%BD%A2%E5%9B%BE%E7%89%87%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/">
                 
-                <span class="abstract-title-text">OO in JS（1）</span>
+                <span class="abstract-title-text">安卓圆形图片两种方式</span>
             </a>
             <div class="abstract-content">
-                <h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><h4 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按照我的理解此时生成了一个prototype，constructor为Person1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person1</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>() <span class="comment">// 等价于let o = &#123;&#125;，注意new的是Object</span></span><br><span class="line">  o.name = name</span><br><span class="line">  o.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">return</span> o</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person1 = Person1(<span class="string">&#x27;Orion&#x27;</span>)</span><br><span class="line">Person1.prototype <span class="comment">// __proto__为Obejct的只有constructor的对象，代表该构造函数对应的prototype</span></span><br><span class="line">person1.__proto__ <span class="comment">// Object，代表该实例的原型对象</span></span><br><span class="line">person1 <span class="keyword">instanceof</span> Person1 <span class="comment">// false，是Object</span></span><br><span class="line">person1.constructor === Person1 <span class="comment">// false，是Object</span></span><br></pre></td></tr></table></figure>
+                <h3 id="Glide"><a href="#Glide" class="headerlink" title="Glide"></a>Glide</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Glide.with(this).load(url)</span><br><span class="line">                .apply(RequestOptions.circleCropTransform())</span><br><span class="line">                .into(mIvPic);</span><br></pre></td></tr></table></figure>
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
                 <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/17</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/26</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Android">Android</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2018/03/20/2018-3-20-%E5%AE%89%E5%8D%93%E9%BB%91%E5%B1%8F%E4%B8%8E%E9%94%81%E5%B1%8F/">
+                
+                <span class="abstract-title-text">安卓黑屏与锁屏</span>
+            </a>
+            <div class="abstract-content">
+                123456KeyguardManager km &#x3D; (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);boolean a &#x3D; km.isKeyguardLocked(); &#x2F;&#x2F; 锁屏（可能亮屏解锁中）boolean b &#x3D; km.inKeyguardRestrictedInputMode(); &#x2F;&#x2F; 无锁屏（可能黑屏）或者已解锁PowerManager pm &#x3D; (PowerManager) context.getSys...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2023/09/06">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/20</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Android">Android</a>
     
 </div>
 
@@ -557,28 +557,26 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2017/12/14/2017-12-14-WebStorm%E6%96%87%E4%BB%B6%E6%A8%A1%E6%9D%BF/">
+            <a class="abstract-title" href="/2018/02/26/2018-2-26-%E6%96%B0%E7%9B%91%E7%AE%A1%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E4%B9%A6/">
                 
-                <span class="abstract-title-text">WebStorm文件模板</span>
+                <span class="abstract-title-text">新监管平台说明书（自用）</span>
             </a>
             <div class="abstract-content">
-                <h3 id="Vue文件头注释（自用）"><a href="#Vue文件头注释（自用）" class="headerlink" title="Vue文件头注释（自用）"></a>Vue文件头注释（自用）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">@Author: orion</span><br><span class="line">@Descrition: a test note</span><br><span class="line">@Date: 2017&#x2F;12&#x2F;14 15:34</span><br><span class="line">@Modified by:</span><br><span class="line">@Modify time:</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
+                <h2 id="层级"><a href="#层级" class="headerlink" title="层级"></a>层级</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">interface Region &#123;</span><br><span class="line">  int COUNTRY &#x3D; 0; &#x2F;&#x2F; 国家部委</span><br><span class="line">  int PROVINCE &#x3D; 1; &#x2F;&#x2F; 省厅</span><br><span class="line">  int CITY &#x3D; 2; &#x2F;&#x2F; 地级市</span><br><span class="line">  int DISTRICT &#x3D; 3; &#x2F;&#x2F; 县市-区</span><br><span class="line">  int TOWN &#x3D; 4; &#x2F;&#x2F; 乡镇-街道</span><br><span class="line">  int VILLAGE &#x3D; 5; &#x2F;&#x2F; 村-社区</span><br><span class="line">  int GROUP &#x3D; 6; &#x2F;&#x2F; 组</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
                 <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/14</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/26</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Vue">Vue</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="WebStorm">WebStorm</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="补零">补零</a>
     
 </div>
 
@@ -595,31 +593,26 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2017/12/12/2017-12-12-Vue%E8%A7%84%E8%8C%83%EF%BC%88%E8%87%AA%E7%94%A8%EF%BC%89/">
+            <a class="abstract-title" href="/2018/01/10/2018-1-10-%E5%BC%80%E5%A7%8B%E5%AD%A6Android%E7%AC%AC%E4%B8%80%E5%A4%A9/">
                 
-                <span class="abstract-title-text">Vue规范（自用）</span>
+                <span class="abstract-title-text">开始学Android第一天</span>
             </a>
             <div class="abstract-content">
-                <h2 id="借鉴"><a href="#借鉴" class="headerlink" title="借鉴"></a>借鉴</h2><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000009805187/">Vue规范 @viewweiwu</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangking/p/6542352.html/">Vue组件编码规范 @我爱吃小丸子</a></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008879966/">Vue生命周期探究 @曾广营</a></p>
-<p><a target="_blank" rel="noopener" href="http://codeguide.bootcss.com/">CSS规范 @mdo</a></p>
+                <h3 id="先从快捷键说起"><a href="#先从快捷键说起" class="headerlink" title="先从快捷键说起"></a>先从快捷键说起</h3><p><code>Alt + Enter</code> 选中未引入的能自动引入</p>
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
                 <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/12</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/01/10</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Vue">Vue</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Android">Android</a>
     
 </div>
 
@@ -636,26 +629,26 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2017/12/11/2017-12-11-%E6%9C%80%E8%BF%91%E5%9C%A8%E7%9C%8B%E7%BA%A2%E5%AE%9D%E4%B9%A6/">
+            <a class="abstract-title" href="/2018/01/09/2018-1-10-Power%20Designer%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/">
                 
-                <span class="abstract-title-text">最近在看红宝书</span>
+                <span class="abstract-title-text">Power Designer常见用法</span>
             </a>
             <div class="abstract-content">
-                <h3 id="对函数参数的处理跟java一毛一样"><a href="#对函数参数的处理跟java一毛一样" class="headerlink" title="对函数参数的处理跟java一毛一样"></a>对函数参数的处理跟java一毛一样</h3><p>同样都是值类型，如果传入引用类型，则指向同一对象，而在函数内部改变函数指向并不影响原值</p>
+                <h3 id="同时显示Name和Code"><a href="#同时显示Name和Code" class="headerlink" title="同时显示Name和Code"></a>同时显示Name和Code</h3><p><code>Tools -&gt; Display Preferences -&gt; Table -&gt; Advanced -&gt; Columns -&gt; List Columns (Select)</code>勾选<code>Code</code>并置顶，再右键表<code>Format -&gt; Content -&gt; Stereotype</code>选择<code>Owner and Name</code></p>
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
                 <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/11</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/01/09</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Power Designer">Power Designer</a>
     
 </div>
 
@@ -672,26 +665,26 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2017/12/10/2017-12-10-%E5%AD%A6Web%E7%9A%84%E8%BF%98%E6%80%95%E8%A2%AB%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81%EF%BC%9F/">
+            <a class="abstract-title" href="/2018/01/09/2018-1-9-Power%20Designer%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/">
                 
-                <span class="abstract-title-text">学Web的还怕被域名劫持？</span>
+                <span class="abstract-title-text">Power Designer常见用法</span>
             </a>
             <div class="abstract-content">
-                <h3 id="今天我不幸得被倒霉的543891搜狗劫持了"><a href="#今天我不幸得被倒霉的543891搜狗劫持了" class="headerlink" title="今天我不幸得被倒霉的543891搜狗劫持了"></a>今天我不幸得被倒霉的543891搜狗劫持了</h3><p>同时中弹的有Chrome和IE还是不一样的域名</p>
+                <h3 id="同时显示Name和Code"><a href="#同时显示Name和Code" class="headerlink" title="同时显示Name和Code"></a>同时显示Name和Code</h3><p><code>Tools -&gt; Display Preferences -&gt; Table -&gt; Advanced -&gt; Columns -&gt; List Columns (Select)</code>勾选<code>Code</code>并置顶，再右键表<code>Format -&gt; Content -&gt; Stereotype</code>选择<code>Owner and Name</code></p>
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
                 <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/10</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/01/09</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="域名劫持">域名劫持</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Power Designer">Power Designer</a>
     
 </div>
 
@@ -708,28 +701,26 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2017/12/09/2017-12-09-Nginx%E8%B7%91index.php/">
+            <a class="abstract-title" href="/2018/01/02/2018-1-2-%E5%8F%88%E5%BC%80%E5%A7%8B%E7%94%A8ionic%E4%BA%86/">
                 
-                <span class="abstract-title-text">Nginx跑index.php</span>
+                <span class="abstract-title-text">又开始用ionic了</span>
             </a>
             <div class="abstract-content">
-                <h3 id="一切起源是想在本地服务器搭个showdoc"><a href="#一切起源是想在本地服务器搭个showdoc" class="headerlink" title="一切起源是想在本地服务器搭个showdoc"></a>一切起源是想在本地服务器搭个showdoc</h3>
+                <h3 id="又装了一天环境"><a href="#又装了一天环境" class="headerlink" title="又装了一天环境"></a>又装了一天环境</h3>
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
                 <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/09</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/01/02</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Nginx">Nginx</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="PHP">PHP</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Ionic">Ionic</a>
     
 </div>
 
@@ -746,19 +737,19 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2017/12/08/2017-12-08-%E5%9B%9B%E4%B8%AA%E6%96%B9%E5%90%91border%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+            <a class="abstract-title" href="/2017/12/29/2017-12-29-calc/">
                 
-                <span class="abstract-title-text">四个方向border的实现原理</span>
+                <span class="abstract-title-text">calc</span>
             </a>
             <div class="abstract-content">
-                <h3 id="当隐藏单个方向的border时，会迷之出现缝隙"><a href="#当隐藏单个方向的border时，会迷之出现缝隙" class="headerlink" title="当隐藏单个方向的border时，会迷之出现缝隙"></a>当隐藏单个方向的border时，会迷之出现缝隙</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#e6ebf5</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: none;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                <h3 id="calc-100-300px"><a href="#calc-100-300px" class="headerlink" title="calc(100% - 300px)"></a>calc(100% - 300px)</h3><p><code>-</code>两侧的空格不能省略</p>
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
                 <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/08</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/29</span>
                 </div>
                 <!-- tags -->
                 
@@ -779,28 +770,29 @@
         
         
             
+            
         
         <article class="index-post">
-            <a class="abstract-title" href="/2017/12/07/2017-12-07-sourcetree%E8%A6%81%E6%80%8E%E4%B9%88%E4%BF%AE%E6%94%B9%E4%BF%9D%E5%AD%98%E7%9A%84%E5%AF%86%E7%A0%81%E5%95%8A%E5%95%8A%E5%95%8A/">
+            <a class="abstract-title" href="/2017/12/25/2017-12-25-OO%20in%20JS%EF%BC%883%EF%BC%89/">
                 
-                <span class="abstract-title-text">sourcetree要怎么修改保存的密码啊啊啊</span>
+                <span class="abstract-title-text">OO in JS（3）</span>
             </a>
             <div class="abstract-content">
-                除了卸载重装就没有别的办法了吗吗吗
+                <h3 id="☆组合使用构造函数和原型模式"><a href="#☆组合使用构造函数和原型模式" class="headerlink" title="☆组合使用构造函数和原型模式"></a>☆组合使用构造函数和原型模式</h3><p>数组写在构造函数里，函数写在原型里</p>
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
                 <div class="abstract-date" title="Last updated: 2023/09/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/07</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/25</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Git">Git</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
     
 </div>
 
@@ -812,7 +804,7 @@
     <!-- paginator  -->
     
         <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/page/8/">&lt; PREV</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/10/">NEXT &gt;</a>
+            <a class="extend prev" rel="prev" href="/page/8/">&lt; PREV</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/10/">NEXT &gt;</a>
         </nav>
     
 </main>
@@ -1746,111 +1738,57 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -2681,7 +2619,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 133
+        Total : 143
         </div>
         <!-- search  -->
         
@@ -2729,6 +2667,66 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/16</span>
             <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(40)-%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88/">算法(40)-用队列实现栈</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(34)-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">算法(34)-最长回文子串</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(35)-%E5%BC%82%E6%AC%A1%E5%85%83%E6%98%9F%E4%BA%BA%E7%9A%84%E6%96%87%E5%AD%97/">算法(35)-异次元星人的文字</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(36)-%E8%B6%85%E7%BA%A7%E5%9B%9E%E6%96%87%E6%95%B0/">算法(36)-超级回文数</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(37)-%E5%9B%9E%E6%96%87%E6%95%B0%E6%80%BB%E7%BB%93/">算法(37)-回文数总结</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(33)-%E6%A3%80%E6%B5%8B%E5%9B%9E%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2/">算法(33)-检测回文字符串</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span>
+            <a class="archive-post-title" href="/2024/03/14/2024-03-14-%E7%AE%97%E6%B3%95(31)-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93/">算法(31)-字符串总结</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span>
+            <a class="archive-post-title" href="/2024/03/14/2024-03-14-%E7%AE%97%E6%B3%95(32)-%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/">算法(32)-双指针回顾</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span>
+            <a class="archive-post-title" href="/2024/03/14/2024-03-14-%E7%AE%97%E6%B3%95(30)-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2/">算法(30)-重复的子字符串</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span>
+            <a class="archive-post-title" href="/2024/03/14/2024-03-14-%E7%AE%97%E6%B3%95(29)-strStr%20%E5%92%8C%20KMP/">算法(29)-strStr 和 KMP</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(28)-%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">算法(28)-右旋转字符串</a>
         </li>
     
         
@@ -2872,13 +2870,13 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/06</span>
-            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(4)-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%B7%A6%E5%8F%B3%E6%8C%87%E9%92%88/">算法(4)-有序数组的平方与左右指针</a>
+            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(3)-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%E4%B8%8E%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">算法(3)-移除元素与快慢指针</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/06</span>
-            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(3)-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%E4%B8%8E%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">算法(3)-移除元素与快慢指针</a>
+            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(4)-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%B7%A6%E5%8F%B3%E6%8C%87%E9%92%88/">算法(4)-有序数组的平方与左右指针</a>
         </li>
     
         
@@ -3781,11 +3779,6 @@
                 补零
             </span>
         
-            <span class="sidebar-tag-name" data-tags="Chrome">
-                <span class="iconfont-archer">&#xe606;</span>
-                Chrome
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="VPN">
                 <span class="iconfont-archer">&#xe606;</span>
                 VPN
@@ -3794,6 +3787,11 @@
             <span class="sidebar-tag-name" data-tags="VPS">
                 <span class="iconfont-archer">&#xe606;</span>
                 VPS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Chrome">
+                <span class="iconfont-archer">&#xe606;</span>
+                Chrome
             </span>
         
             <span class="sidebar-tag-name" data-tags="package.json">
@@ -3861,11 +3859,6 @@
                 动画
             </span>
         
-            <span class="sidebar-tag-name" data-tags="王者荣耀">
-                <span class="iconfont-archer">&#xe606;</span>
-                王者荣耀
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="表单">
                 <span class="iconfont-archer">&#xe606;</span>
                 表单
@@ -3879,6 +3872,11 @@
             <span class="sidebar-tag-name" data-tags="知识体系">
                 <span class="iconfont-archer">&#xe606;</span>
                 知识体系
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="王者荣耀">
+                <span class="iconfont-archer">&#xe606;</span>
+                王者荣耀
             </span>
         
             <span class="sidebar-tag-name" data-tags="世界">
@@ -3914,6 +3912,16 @@
             <span class="sidebar-tag-name" data-tags="哈希表">
                 <span class="iconfont-archer">&#xe606;</span>
                 哈希表
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="双指针">
+                <span class="iconfont-archer">&#xe606;</span>
+                双指针
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="回文">
+                <span class="iconfont-archer">&#xe606;</span>
+                回文
             </span>
         
             <span class="sidebar-tag-name" data-tags="栈与队列">
@@ -4047,11 +4055,6 @@
             小说
         </span>
     
-        <span class="sidebar-category-name" data-categories="游戏">
-            <span class="iconfont-archer">&#xe60a;</span>
-            游戏
-        </span>
-    
         <span class="sidebar-category-name" data-categories="读书">
             <span class="iconfont-archer">&#xe60a;</span>
             读书
@@ -4060,6 +4063,11 @@
         <span class="sidebar-category-name" data-categories="知识">
             <span class="iconfont-archer">&#xe60a;</span>
             知识
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="游戏">
+            <span class="iconfont-archer">&#xe60a;</span>
+            游戏
         </span>
     
         <span class="sidebar-category-name" data-categories="杂记">
