@@ -445,6 +445,121 @@
         
         
             
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/03/23/2024-03-23-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/">
+                
+                <span class="abstract-title-text">小程序相关知识点</span>
+            </a>
+            <div class="abstract-content">
+                
+
+自定义组件
+新建自定义组件目录，生成目录结构
+自定义组件内容
+在要使用的页面的 json 文件中配置 usingComponents，引入组件
+以标签的形式在页面中使用该组件即可
+传递数据和 vue 一样，通过自定义属性，然后在组件里通过 properties 接收就可以了
+
+小程序与 web-view 交互
+小程序调用 web-view 的方法
+web-view 组件的 src 属性设置为一个网页地址，使用 &amp; 来附加参数
+每次小程序向页面传参都会刷新一次页面
+
+
+web-view 调用小程序的方法
+web-view 加载的页面中，引入jweixin.js，通过调用 JSS...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/03/23">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/23</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="小程序">小程序</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/03/23/2024-03-23-Vue%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/">
+                
+                <span class="abstract-title-text">Vue相关知识点</span>
+            </a>
+            <div class="abstract-content">
+                
+
+Vue 生命周期Vue 数组更新slice、concat 都会返回新的数组，不会引起视图的更新。
+Vue 优化方案
+代码层面
+
+
+v-if 和 v-show 区分场景使用
+computed 和 watch 区分场景使用
+v-for 添加 key，避免同时使用 v-if
+事件的销毁
+懒执行
+图片资源懒加载
+路由懒加载
+第三方插件按需引入
+优化列表性能
+离线包
+预加载
+SSR或预渲染
+
+
+webpack 层面
+
+
+图片和代码压缩，图片base64，开启 production
+ES6开启 tree shaking
+减少 ES6 转化为 ES5 的冗余代码
+提取公共代码
+模板预编译
+优化 s...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/03/23">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/23</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Vue">Vue</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
             
         
         <article class="index-post">
@@ -720,78 +835,6 @@
     
     
         <a class="post-tag" href="javascript:void(0);" data-tags="算法">算法</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2024/03/19/2024-03-19-%E7%AE%97%E6%B3%95(46)-%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E6%80%BB%E7%BB%93/">
-                
-                <span class="abstract-title-text">算法(46)- 前K个高频元素</span>
-            </a>
-            <div class="abstract-content">
-                <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>一个队列在模拟栈弹出元素的时候只要将队列头部的元素（除了最后一个元素外） 重新添加到队列尾部，此时在去弹出元素就是栈的顺序了。</p>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/03/20">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/19</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="栈与队列">栈与队列</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2024/03/19/2024-03-19-%E7%AE%97%E6%B3%95(45)-%E5%89%8D%20K%20%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/">
-                
-                <span class="abstract-title-text">算法(45)- 前K个高频元素</span>
-            </a>
-            <div class="abstract-content">
-                <h2 id="题目-medium"><a href="#题目-medium" class="headerlink" title="题目(medium)"></a>题目(medium)</h2><p>给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。</p>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/03/20">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/19</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="栈与队列">栈与队列</a>
     
 </div>
 
@@ -1842,79 +1885,17 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -3195,7 +3176,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 154
+        Total : 156
         </div>
         <!-- search  -->
         
@@ -3209,6 +3190,18 @@
             <div class="archive-year"> 2024 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-Vue%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/">Vue相关知识点</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/">小程序相关知识点</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/23</span>
@@ -3326,13 +3319,13 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/15</span>
-            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(36)-%E8%B6%85%E7%BA%A7%E5%9B%9E%E6%96%87%E6%95%B0/">算法(36)-超级回文数</a>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(37)-%E5%9B%9E%E6%96%87%E6%95%B0%E6%80%BB%E7%BB%93/">算法(37)-回文数总结</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/15</span>
-            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(37)-%E5%9B%9E%E6%96%87%E6%95%B0%E6%80%BB%E7%BB%93/">算法(37)-回文数总结</a>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(36)-%E8%B6%85%E7%BA%A7%E5%9B%9E%E6%96%87%E6%95%B0/">算法(36)-超级回文数</a>
         </li>
     
         
@@ -3380,13 +3373,13 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/13</span>
-            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(26)-%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97/">算法(26)-替换数字</a>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(27)-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D/">算法(27)-翻转字符串里的单词</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/13</span>
-            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(27)-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D/">算法(27)-翻转字符串里的单词</a>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(26)-%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97/">算法(26)-替换数字</a>
         </li>
     
         
@@ -4211,14 +4204,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="HTML">
-                <span class="iconfont-archer">&#xe606;</span>
-                HTML
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="JavaScript">
                 <span class="iconfont-archer">&#xe606;</span>
                 JavaScript
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="HTML">
+                <span class="iconfont-archer">&#xe606;</span>
+                HTML
             </span>
         
             <span class="sidebar-tag-name" data-tags="汇编">
@@ -4241,14 +4234,14 @@
                 导入
             </span>
         
-            <span class="sidebar-tag-name" data-tags="数据类型">
-                <span class="iconfont-archer">&#xe606;</span>
-                数据类型
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="Lua">
                 <span class="iconfont-archer">&#xe606;</span>
                 Lua
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="数据类型">
+                <span class="iconfont-archer">&#xe606;</span>
+                数据类型
             </span>
         
             <span class="sidebar-tag-name" data-tags="LuaSocket">
@@ -4266,6 +4259,11 @@
                 C#
             </span>
         
+            <span class="sidebar-tag-name" data-tags="技术名词">
+                <span class="iconfont-archer">&#xe606;</span>
+                技术名词
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="Database">
                 <span class="iconfont-archer">&#xe606;</span>
                 Database
@@ -4274,11 +4272,6 @@
             <span class="sidebar-tag-name" data-tags="Scala">
                 <span class="iconfont-archer">&#xe606;</span>
                 Scala
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="技术名词">
-                <span class="iconfont-archer">&#xe606;</span>
-                技术名词
             </span>
         
             <span class="sidebar-tag-name" data-tags="跨域">
@@ -4501,14 +4494,14 @@
                 动画
             </span>
         
-            <span class="sidebar-tag-name" data-tags="表单">
-                <span class="iconfont-archer">&#xe606;</span>
-                表单
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="王者荣耀">
                 <span class="iconfont-archer">&#xe606;</span>
                 王者荣耀
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="表单">
+                <span class="iconfont-archer">&#xe606;</span>
+                表单
             </span>
         
             <span class="sidebar-tag-name" data-tags="读书">
@@ -4576,6 +4569,11 @@
                 算法
             </span>
         
+            <span class="sidebar-tag-name" data-tags="小程序">
+                <span class="iconfont-archer">&#xe606;</span>
+                小程序
+            </span>
+        
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
@@ -4617,14 +4615,14 @@
             C#
         </span>
     
-        <span class="sidebar-category-name" data-categories="Database">
-            <span class="iconfont-archer">&#xe60a;</span>
-            Database
-        </span>
-    
         <span class="sidebar-category-name" data-categories="技术综合">
             <span class="iconfont-archer">&#xe60a;</span>
             技术综合
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Database">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Database
         </span>
     
         <span class="sidebar-category-name" data-categories="JavaScript">
@@ -4730,6 +4728,11 @@
         <span class="sidebar-category-name" data-categories="算法">
             <span class="iconfont-archer">&#xe60a;</span>
             算法
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="小程序">
+            <span class="iconfont-archer">&#xe60a;</span>
+            小程序
         </span>
     
     </div>
