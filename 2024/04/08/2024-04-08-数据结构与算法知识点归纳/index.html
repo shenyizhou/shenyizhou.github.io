@@ -27,7 +27,7 @@
 <meta property="og:description" content="数据结构并查集 并查集 确定元素属于哪一个集合，将两个子集合并成同一个集合 环 最小生成树 无向图才能正确处理强联通分量    散列表(哈希表)哈希表  缓存管理，快速实现变量在内存中的读取 DNS 解析，快速转化 扩容时间：O(n)  哈希函数  文件校验，key的快速查询 加密 分布式，一致性哈希  一致性哈希  分布式哈希算法，主用用来解决分布式系统中的负载均衡问题 为了解决增加候选集的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-08T12:04:14.000Z">
-<meta property="article:modified_time" content="2024-04-08T12:49:59.048Z">
+<meta property="article:modified_time" content="2024-04-09T02:31:34.119Z">
 <meta property="article:author" content="Yizhou Shen">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="数据结构">
@@ -596,10 +596,6 @@
 </ul>
 </li>
 </ul>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul>
-<li>最长公共子序列时间复杂度 O(mn)</li>
-<li>KMP 时间复杂度 O(m+n)</li>
-</ul>
 <h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><ul>
 <li>先序遍历<ul>
 <li>中左右</li>
@@ -618,6 +614,30 @@
 </ul>
 </li>
 </ul>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>有序数组用堆排序最快。</p>
+<ul>
+<li>不稳定排序<ul>
+<li>快排</li>
+<li>堆排序</li>
+</ul>
+</li>
+</ul>
+<h2 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h2><p>一定要独自子问题。</p>
+<ul>
+<li>使用分治法<ul>
+<li>二分查找</li>
+<li>排序算法<ul>
+<li>快排</li>
+<li>归并</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul>
+<li>最长公共子序列时间复杂度 O(mn)</li>
+<li>KMP 时间复杂度 O(m+n)</li>
+</ul>
 
     </article>
     <!-- license -->
@@ -626,13 +646,18 @@
             <p>原文作者：<a href="http://shenyizhou.github.io">Yizhou Shen</a>
             <p>原文链接：<a href="http://shenyizhou.github.io/2024/04/08/2024-04-08-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E7%82%B9%E5%BD%92%E7%BA%B3/">http://shenyizhou.github.io/2024/04/08/2024-04-08-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E7%82%B9%E5%BD%92%E7%BA%B3/</a>
             <p>发表日期：<a href="http://shenyizhou.github.io/2024/04/08/2024-04-08-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E7%82%B9%E5%BD%92%E7%BA%B3/">April 8th 2024, 8:04:14 pm</a>
-            <p>更新日期：<a href="http://shenyizhou.github.io/2024/04/08/2024-04-08-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E7%82%B9%E5%BD%92%E7%BA%B3/">April 8th 2024, 8:49:59 pm</a>
+            <p>更新日期：<a href="http://shenyizhou.github.io/2024/04/08/2024-04-08-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E7%82%B9%E5%BD%92%E7%BA%B3/">April 9th 2024, 10:31:34 am</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
     <!-- paginator -->
     <ul class="post-paginator">
         <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2024/04/25/2024-04-25-%E7%AE%97%E6%B3%95(48)-easy%20%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/" title="算法(48)-easy 题目汇总">
+                    <div class="nextTitle">算法(48)-easy 题目汇总</div>
+                </a>
             
         </li>
         <li class="previous">
@@ -770,7 +795,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="toc-number">1.1.</span> <span class="toc-text">并查集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8-%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">散列表(哈希表)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97"><span class="toc-number">1.3.</span> <span class="toc-text">队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="toc-number">1.4.</span> <span class="toc-text">线性表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91"><span class="toc-number">1.5.</span> <span class="toc-text">树</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">各种算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-number">2.2.</span> <span class="toc-text">动态规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8D%E5%8E%86"><span class="toc-number">2.3.</span> <span class="toc-text">遍历</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="toc-number">1.1.</span> <span class="toc-text">并查集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8-%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">散列表(哈希表)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97"><span class="toc-number">1.3.</span> <span class="toc-text">队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="toc-number">1.4.</span> <span class="toc-text">线性表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91"><span class="toc-number">1.5.</span> <span class="toc-text">树</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">各种算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8D%E5%8E%86"><span class="toc-number">2.2.</span> <span class="toc-text">遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%B2%BB"><span class="toc-number">2.4.</span> <span class="toc-text">分治</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-number">2.5.</span> <span class="toc-text">动态规划</span></a></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1584,7 +1609,461 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -2691,7 +3170,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 160
+        Total : 164
         </div>
         <!-- search  -->
         
@@ -2705,6 +3184,30 @@
             <div class="archive-year"> 2024 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/30</span>
+            <a class="archive-post-title" href="/2024/04/30/2024-04-28-%E7%AE%97%E6%B3%95(51)-hard%20%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">算法(51)-hard 题目汇总</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span>
+            <a class="archive-post-title" href="/2024/04/28/2024-04-28-%E7%AE%97%E6%B3%95(50)-%E5%B9%B6%E6%9F%A5%E9%9B%86+DFS/">算法(50)-并查集+DFS</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span>
+            <a class="archive-post-title" href="/2024/04/26/2024-04-26-%E7%AE%97%E6%B3%95(49)-medium%20%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">算法(49)-medium 题目汇总</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/25</span>
+            <a class="archive-post-title" href="/2024/04/25/2024-04-25-%E7%AE%97%E6%B3%95(48)-easy%20%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">算法(48)-easy 题目汇总</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">04/08</span>
@@ -3743,14 +4246,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="JavaScript">
-                <span class="iconfont-archer">&#xe606;</span>
-                JavaScript
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="HTML">
                 <span class="iconfont-archer">&#xe606;</span>
                 HTML
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="JavaScript">
+                <span class="iconfont-archer">&#xe606;</span>
+                JavaScript
             </span>
         
             <span class="sidebar-tag-name" data-tags="汇编">
@@ -3798,6 +4301,11 @@
                 C#
             </span>
         
+            <span class="sidebar-tag-name" data-tags="技术名词">
+                <span class="iconfont-archer">&#xe606;</span>
+                技术名词
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="Database">
                 <span class="iconfont-archer">&#xe606;</span>
                 Database
@@ -3806,11 +4314,6 @@
             <span class="sidebar-tag-name" data-tags="Scala">
                 <span class="iconfont-archer">&#xe606;</span>
                 Scala
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="技术名词">
-                <span class="iconfont-archer">&#xe606;</span>
-                技术名词
             </span>
         
             <span class="sidebar-tag-name" data-tags="跨域">
@@ -3848,14 +4351,14 @@
                 SEO
             </span>
         
-            <span class="sidebar-tag-name" data-tags="IDE">
-                <span class="iconfont-archer">&#xe606;</span>
-                IDE
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="状态码">
                 <span class="iconfont-archer">&#xe606;</span>
                 状态码
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="IDE">
+                <span class="iconfont-archer">&#xe606;</span>
+                IDE
             </span>
         
             <span class="sidebar-tag-name" data-tags="Git">
@@ -3933,6 +4436,11 @@
                 字体
             </span>
         
+            <span class="sidebar-tag-name" data-tags="Android">
+                <span class="iconfont-archer">&#xe606;</span>
+                Android
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="Power Designer">
                 <span class="iconfont-archer">&#xe606;</span>
                 Power Designer
@@ -3941,11 +4449,6 @@
             <span class="sidebar-tag-name" data-tags="Ionic">
                 <span class="iconfont-archer">&#xe606;</span>
                 Ionic
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="Android">
-                <span class="iconfont-archer">&#xe606;</span>
-                Android
             </span>
         
             <span class="sidebar-tag-name" data-tags="补零">
@@ -4003,14 +4506,14 @@
                 Node
             </span>
         
-            <span class="sidebar-tag-name" data-tags="时间">
-                <span class="iconfont-archer">&#xe606;</span>
-                时间
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="请求">
                 <span class="iconfont-archer">&#xe606;</span>
                 请求
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="时间">
+                <span class="iconfont-archer">&#xe606;</span>
+                时间
             </span>
         
             <span class="sidebar-tag-name" data-tags="文档">
@@ -4033,19 +4536,14 @@
                 动画
             </span>
         
-            <span class="sidebar-tag-name" data-tags="王者荣耀">
+            <span class="sidebar-tag-name" data-tags="读书">
                 <span class="iconfont-archer">&#xe606;</span>
-                王者荣耀
+                读书
             </span>
         
             <span class="sidebar-tag-name" data-tags="表单">
                 <span class="iconfont-archer">&#xe606;</span>
                 表单
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="读书">
-                <span class="iconfont-archer">&#xe606;</span>
-                读书
             </span>
         
             <span class="sidebar-tag-name" data-tags="知识体系">
@@ -4061,6 +4559,11 @@
             <span class="sidebar-tag-name" data-tags="音乐">
                 <span class="iconfont-archer">&#xe606;</span>
                 音乐
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="王者荣耀">
+                <span class="iconfont-archer">&#xe606;</span>
+                王者荣耀
             </span>
         
             <span class="sidebar-tag-name" data-tags="图表">
@@ -4123,14 +4626,14 @@
                 软件工程
             </span>
         
-            <span class="sidebar-tag-name" data-tags="设计模式">
-                <span class="iconfont-archer">&#xe606;</span>
-                设计模式
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="数据结构">
                 <span class="iconfont-archer">&#xe606;</span>
                 数据结构
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="设计模式">
+                <span class="iconfont-archer">&#xe606;</span>
+                设计模式
             </span>
         
     </div>
@@ -4174,14 +4677,14 @@
             C#
         </span>
     
-        <span class="sidebar-category-name" data-categories="Database">
-            <span class="iconfont-archer">&#xe60a;</span>
-            Database
-        </span>
-    
         <span class="sidebar-category-name" data-categories="技术综合">
             <span class="iconfont-archer">&#xe60a;</span>
             技术综合
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Database">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Database
         </span>
     
         <span class="sidebar-category-name" data-categories="JavaScript">
@@ -4224,14 +4727,14 @@
             Nginx
         </span>
     
-        <span class="sidebar-category-name" data-categories="Ionic">
-            <span class="iconfont-archer">&#xe60a;</span>
-            Ionic
-        </span>
-    
         <span class="sidebar-category-name" data-categories="Android">
             <span class="iconfont-archer">&#xe60a;</span>
             Android
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Ionic">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Ionic
         </span>
     
         <span class="sidebar-category-name" data-categories="Project">
@@ -4259,11 +4762,6 @@
             小说
         </span>
     
-        <span class="sidebar-category-name" data-categories="游戏">
-            <span class="iconfont-archer">&#xe60a;</span>
-            游戏
-        </span>
-    
         <span class="sidebar-category-name" data-categories="读书">
             <span class="iconfont-archer">&#xe60a;</span>
             读书
@@ -4277,6 +4775,11 @@
         <span class="sidebar-category-name" data-categories="杂记">
             <span class="iconfont-archer">&#xe60a;</span>
             杂记
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="游戏">
+            <span class="iconfont-archer">&#xe60a;</span>
+            游戏
         </span>
     
         <span class="sidebar-category-name" data-categories="动画">
@@ -4304,14 +4807,14 @@
             软件工程
         </span>
     
-        <span class="sidebar-category-name" data-categories="设计模式">
-            <span class="iconfont-archer">&#xe60a;</span>
-            设计模式
-        </span>
-    
         <span class="sidebar-category-name" data-categories="数据结构">
             <span class="iconfont-archer">&#xe60a;</span>
             数据结构
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="设计模式">
+            <span class="iconfont-archer">&#xe60a;</span>
+            设计模式
         </span>
     
     </div>
