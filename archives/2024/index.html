@@ -430,6 +430,357 @@
         
         
             
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/05/05/2024-05-05-Babel/">
+                
+                <span class="abstract-title-text">Babel</span>
+            </a>
+            <div class="abstract-content">
+                
+
+[TOC]
+抽象语法树 AST(Abstract Syntax Tree)将我们所写的代码转化为机器能识别的一种树形结构。本身有一堆节点(Node)构成。每个节点都代表一种结构，不同结构用类型(Type)区分。
+AST 结构JS 为了统一 ECMAScript 标准，社区中衍生出了 ESTree Spec 标准。
+节点类型
+
+
+类型
+说明
+
+
+
+File
+文件(顶层节点包含 Program)
+
+
+Program
+程序(包含 body)
+
+
+Directive
+指令(如 “use strict”)
+
+
+Comment
+注释
+
+
+Statement
+语句
+
+
+Literal
+字面量(基本...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/05/05">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/05/05</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Babel">Babel</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/05/04/2024-05-04-Vite/">
+                
+                <span class="abstract-title-text">Vite</span>
+            </a>
+            <div class="abstract-content">
+                
+
+[TOC]
+Vite(读音veet)
+一个开发服务器。基于原生 ESM 提供了丰富的内建功能，如速度惊人的模块热更新(HMR)。
+一套构建指令。用预配置的 Rollup 打包生产代码，可输出高度优化的静态资源。
+提供开箱即用的配置。插件 API 和 JavaScript API 带来高度可扩展性。
+
+解决问题：
+
+缓慢的服务器启动。
+缓慢的更新。
+
+优化服务器启动时间
+Vite 将模块分为依赖和源码。
+依赖基本不变。Vite 使用 esbuild 预构建依赖，用 Go 编写的 esbuild 构建比传统的 JS 快 10 倍。
+源码时常变化，且并不是所有源码需要同时被加载。Vite ...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/05/05">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/05/04</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Vite">Vite</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/05/04/2024-05-04-Rollup/">
+                
+                <span class="abstract-title-text">Rollup</span>
+            </a>
+            <div class="abstract-content">
+                
+
+[TOC]
+RollupRollup 是一个 JS 模块打包工具，用 ES6 的格式来打包。
+ES 模块带来的优势
+是官方标准，是明确的未来发展方向
+CommonJS 是一种特殊的兼容格式，是临时解决方案
+ES 模块允许静态分析，可以辅助优化(如 Tree-shaking 和作用域提升)，并提供高级功能(如循环引用和实时绑定)
+
+Tree-shaking
+ES 模块带来的优势。
+即“保留有用代码”。在 Rollup 中使用，用于消除未使用的代码。
+该名称源自模块的抽象语法树，和“标记-清除”垃圾收集算法类似。
+
+Rollup 使用命令行对于浏览器，Rollup 可以打包成 ES6 模...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/05/04">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/05/04</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Rollup">Rollup</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/05/03/2024-05-03-React%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%20copy/">
+                
+                <span class="abstract-title-text">React相关知识点</span>
+            </a>
+            <div class="abstract-content">
+                
+
+[TOC]
+React 18 新特性新的 ReactHooksuseTransition 和 startTransition，即过渡更新模式(Transition Mode)可以将某些状态更新标记为不紧急的。
+相比于 setTimeout
+
+startTransition 是立刻执行的，setTimeout 是延迟执行的。
+startTransition 可被中断的，setTimeout 是阻塞的。
+
+12345678const [isPending, startTransition] = useTransition();const [count, setCount] = useSt...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/05/06">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/05/03</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="React">React</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/05/03/2024-05-03-Vercel/">
+                
+                <span class="abstract-title-text">Vercel</span>
+            </a>
+            <div class="abstract-content">
+                
+
+[TOC]
+VercelVercel 是一个云平台，用于构建、部署和扩展无服务应用程序和静态网站。
+Vercel 同时也在赞助 Next.js。Next.js 是一个 React 框架，用于构建静态和动态网站。
+Vercel 前身是 ZEIT，是一个云服务提供商，提供部署、托管和监控 Node.js 应用程序的服务。
+特点
+前端代码的零配置无缝部署
+实时洞察、分析和性能指标
+“无限”可扩展性
+边缘网络(CDN、缓存、边缘功能)
+静态资产托管(图像、媒体)
+部署预览和 A/B 测试
+99.99% 正常运行时间
+基于 Git 的工作流
+个人免费套餐
+
+
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/05/05">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/05/03</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Vercel">Vercel</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/05/02/2024-05-02-%E5%89%8D%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9B%B8%E5%85%B3/">
+                
+                <span class="abstract-title-text">前端与客户端相关</span>
+            </a>
+            <div class="abstract-content">
+                
+
+客户端相关WebViewWebView 是一种嵌入到客户端的浏览器控件，可以加载网页，展示 HTML 内容。
+Android
+基于 WebKit 的 WebView：在 Android 4.4 之前，Android 使用的是基于 WebKit 的 WebView。
+基于 Cromiun 的 WebView：从 Android 4.4 开始，为开发者提供了基于 Cromiun 的 WebView，性能、安全、功能更好，支持 HTML5、CSS3 和 JS 新特性。
+
+iOS
+UIWebView：UIWebView 是 iOS 2.0 时期引入的，是一个基于 WebKit 的控件。
+支持...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/05/07">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/05/02</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="客户端">客户端</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/05/01/2024-05-01-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3/">
+                
+                <span class="abstract-title-text">性能优化相关</span>
+            </a>
+            <div class="abstract-content">
+                
+
+页面优化相关指标用户体验指标
+FP（First Paint）：首次绘制时间，即浏览器首次将像素绘制到屏幕的时间。即白屏结束时间。
+FCP（First Contentful Paint）：首次内容绘制时间，即浏览器首次绘制 DOM 元素的时间。
+FMP（First Meaningful Paint）：首次有意义的绘制时间，即首次有意义的内容绘制到屏幕的时间。Lighthouse 6.0 已弃用，优先使用 LCP。
+LCP（Largest Contentful Paint）：最大内容绘制时间，即页面中最大的元素绘制到屏幕的时间。即首屏结束时间。
+TTI（Time To Interacti...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/05/07">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/05/01</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="性能优化">性能优化</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
             
         
         <article class="index-post">
@@ -1028,258 +1379,6 @@ ES6开启 tree shaking
     
     
         <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2024/03/23/2024-03-23-%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0%E5%A4%84%E7%90%86/">
-                
-                <span class="abstract-title-text">时间函数处理</span>
-            </a>
-            <div class="abstract-content">
-                <h1 id="请你实现一个函数处理时间成指定格式返回。"><a href="#请你实现一个函数处理时间成指定格式返回。" class="headerlink" title="请你实现一个函数处理时间成指定格式返回。"></a>请你实现一个函数处理时间成指定格式返回。</h1>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/03/23">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/23</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2024/03/23/2024-03-23-%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">
-                
-                <span class="abstract-title-text">防抖和节流</span>
-            </a>
-            <div class="abstract-content">
-                <h1 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h1><p>返回一个函数，防止函数在短时间内多次触发，只有在最后一次触发后才执行。</p>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/03/23">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/23</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2024/03/23/2024-03-23-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E6%95%B0%E5%AD%97%E7%9A%84%E4%B9%98%E6%B3%95/">
-                
-                <span class="abstract-title-text">字符串格式数字的乘法</span>
-            </a>
-            <div class="abstract-content">
-                <h1 id="BigInt"><a href="#BigInt" class="headerlink" title="BigInt"></a>BigInt</h1><h2 id="声明方式"><a href="#声明方式" class="headerlink" title="声明方式"></a>声明方式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1n</span>;</span><br><span class="line"><span class="keyword">const</span> b = <span class="keyword">new</span> BigInt(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> BigInt(<span class="string">&quot;1&quot;</span>);</span><br></pre></td></tr></table></figure>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/03/23">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/23</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2024/03/23/2024-03-23-%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/">
-                
-                <span class="abstract-title-text">浅拷贝与深拷贝</span>
-            </a>
-            <div class="abstract-content">
-                <h1 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h1><p>创建一个对象的复制，但是其中的元素都是原始对象的引用，所以只解决了第一层的拷贝。如果原始对象的元素变化，在浅拷贝中也会体现这些变化。</p>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/03/23">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/23</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2024/03/19/2024-03-19-%E7%AE%97%E6%B3%95(47)-%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%A7%84%E5%88%92%E8%B0%83%E6%95%B4/">
-                
-                <span class="abstract-title-text">算法(47)-接下来学习的规划调整</span>
-            </a>
-            <div class="abstract-content">
-                <p>时间有限，我们来思考一下怎么最快地从宏观角度学习下算法。</p>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/03/21">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/19</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="算法">算法</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2024/03/19/2024-03-19-%E7%AE%97%E6%B3%95(46)-%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E6%80%BB%E7%BB%93/">
-                
-                <span class="abstract-title-text">算法(46)- 前K个高频元素</span>
-            </a>
-            <div class="abstract-content">
-                <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>一个队列在模拟栈弹出元素的时候只要将队列头部的元素（除了最后一个元素外） 重新添加到队列尾部，此时在去弹出元素就是栈的顺序了。</p>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/03/20">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/19</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="栈与队列">栈与队列</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2024/03/19/2024-03-19-%E7%AE%97%E6%B3%95(45)-%E5%89%8D%20K%20%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/">
-                
-                <span class="abstract-title-text">算法(45)- 前K个高频元素</span>
-            </a>
-            <div class="abstract-content">
-                <h2 id="题目-medium"><a href="#题目-medium" class="headerlink" title="题目(medium)"></a>题目(medium)</h2><p>给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。</p>
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/03/20">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/03/19</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="栈与队列">栈与队列</a>
     
 </div>
 
@@ -2206,17 +2305,42 @@ ES6开启 tree shaking
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -3747,7 +3871,7 @@ ES6开启 tree shaking
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 164
+        Total : 171
         </div>
         <!-- search  -->
         
@@ -3761,6 +3885,48 @@ ES6开启 tree shaking
             <div class="archive-year"> 2024 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/05</span>
+            <a class="archive-post-title" href="/2024/05/05/2024-05-05-Babel/">Babel</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2024/05/04/2024-05-04-Vite/">Vite</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2024/05/04/2024-05-04-Rollup/">Rollup</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span>
+            <a class="archive-post-title" href="/2024/05/03/2024-05-03-React%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%20copy/">React相关知识点</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span>
+            <a class="archive-post-title" href="/2024/05/03/2024-05-03-Vercel/">Vercel</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/02</span>
+            <a class="archive-post-title" href="/2024/05/02/2024-05-02-%E5%89%8D%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9B%B8%E5%85%B3/">前端与客户端相关</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span>
+            <a class="archive-post-title" href="/2024/05/01/2024-05-01-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3/">性能优化相关</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">04/30</span>
@@ -4823,14 +4989,14 @@ ES6开启 tree shaking
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="HTML">
-                <span class="iconfont-archer">&#xe606;</span>
-                HTML
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="JavaScript">
                 <span class="iconfont-archer">&#xe606;</span>
                 JavaScript
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="HTML">
+                <span class="iconfont-archer">&#xe606;</span>
+                HTML
             </span>
         
             <span class="sidebar-tag-name" data-tags="汇编">
@@ -4878,11 +5044,6 @@ ES6开启 tree shaking
                 C#
             </span>
         
-            <span class="sidebar-tag-name" data-tags="技术名词">
-                <span class="iconfont-archer">&#xe606;</span>
-                技术名词
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="Database">
                 <span class="iconfont-archer">&#xe606;</span>
                 Database
@@ -4891,6 +5052,11 @@ ES6开启 tree shaking
             <span class="sidebar-tag-name" data-tags="Scala">
                 <span class="iconfont-archer">&#xe606;</span>
                 Scala
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="技术名词">
+                <span class="iconfont-archer">&#xe606;</span>
+                技术名词
             </span>
         
             <span class="sidebar-tag-name" data-tags="跨域">
@@ -4928,14 +5094,14 @@ ES6开启 tree shaking
                 SEO
             </span>
         
-            <span class="sidebar-tag-name" data-tags="状态码">
-                <span class="iconfont-archer">&#xe606;</span>
-                状态码
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="IDE">
                 <span class="iconfont-archer">&#xe606;</span>
                 IDE
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="状态码">
+                <span class="iconfont-archer">&#xe606;</span>
+                状态码
             </span>
         
             <span class="sidebar-tag-name" data-tags="Git">
@@ -5013,14 +5179,14 @@ ES6开启 tree shaking
                 字体
             </span>
         
-            <span class="sidebar-tag-name" data-tags="Android">
-                <span class="iconfont-archer">&#xe606;</span>
-                Android
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="Power Designer">
                 <span class="iconfont-archer">&#xe606;</span>
                 Power Designer
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Android">
+                <span class="iconfont-archer">&#xe606;</span>
+                Android
             </span>
         
             <span class="sidebar-tag-name" data-tags="Ionic">
@@ -5083,14 +5249,14 @@ ES6开启 tree shaking
                 Node
             </span>
         
-            <span class="sidebar-tag-name" data-tags="请求">
-                <span class="iconfont-archer">&#xe606;</span>
-                请求
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="时间">
                 <span class="iconfont-archer">&#xe606;</span>
                 时间
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="请求">
+                <span class="iconfont-archer">&#xe606;</span>
+                请求
             </span>
         
             <span class="sidebar-tag-name" data-tags="文档">
@@ -5113,14 +5279,19 @@ ES6开启 tree shaking
                 动画
             </span>
         
-            <span class="sidebar-tag-name" data-tags="读书">
+            <span class="sidebar-tag-name" data-tags="王者荣耀">
                 <span class="iconfont-archer">&#xe606;</span>
-                读书
+                王者荣耀
             </span>
         
             <span class="sidebar-tag-name" data-tags="表单">
                 <span class="iconfont-archer">&#xe606;</span>
                 表单
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="读书">
+                <span class="iconfont-archer">&#xe606;</span>
+                读书
             </span>
         
             <span class="sidebar-tag-name" data-tags="知识体系">
@@ -5136,11 +5307,6 @@ ES6开启 tree shaking
             <span class="sidebar-tag-name" data-tags="音乐">
                 <span class="iconfont-archer">&#xe606;</span>
                 音乐
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="王者荣耀">
-                <span class="iconfont-archer">&#xe606;</span>
-                王者荣耀
             </span>
         
             <span class="sidebar-tag-name" data-tags="图表">
@@ -5213,6 +5379,41 @@ ES6开启 tree shaking
                 设计模式
             </span>
         
+            <span class="sidebar-tag-name" data-tags="性能优化">
+                <span class="iconfont-archer">&#xe606;</span>
+                性能优化
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="客户端">
+                <span class="iconfont-archer">&#xe606;</span>
+                客户端
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="React">
+                <span class="iconfont-archer">&#xe606;</span>
+                React
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Vercel">
+                <span class="iconfont-archer">&#xe606;</span>
+                Vercel
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Rollup">
+                <span class="iconfont-archer">&#xe606;</span>
+                Rollup
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Vite">
+                <span class="iconfont-archer">&#xe606;</span>
+                Vite
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Babel">
+                <span class="iconfont-archer">&#xe606;</span>
+                Babel
+            </span>
+        
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
@@ -5254,14 +5455,14 @@ ES6开启 tree shaking
             C#
         </span>
     
-        <span class="sidebar-category-name" data-categories="技术综合">
-            <span class="iconfont-archer">&#xe60a;</span>
-            技术综合
-        </span>
-    
         <span class="sidebar-category-name" data-categories="Database">
             <span class="iconfont-archer">&#xe60a;</span>
             Database
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="技术综合">
+            <span class="iconfont-archer">&#xe60a;</span>
+            技术综合
         </span>
     
         <span class="sidebar-category-name" data-categories="JavaScript">
@@ -5339,6 +5540,11 @@ ES6开启 tree shaking
             小说
         </span>
     
+        <span class="sidebar-category-name" data-categories="游戏">
+            <span class="iconfont-archer">&#xe60a;</span>
+            游戏
+        </span>
+    
         <span class="sidebar-category-name" data-categories="读书">
             <span class="iconfont-archer">&#xe60a;</span>
             读书
@@ -5352,11 +5558,6 @@ ES6开启 tree shaking
         <span class="sidebar-category-name" data-categories="杂记">
             <span class="iconfont-archer">&#xe60a;</span>
             杂记
-        </span>
-    
-        <span class="sidebar-category-name" data-categories="游戏">
-            <span class="iconfont-archer">&#xe60a;</span>
-            游戏
         </span>
     
         <span class="sidebar-category-name" data-categories="动画">
@@ -5392,6 +5593,41 @@ ES6开启 tree shaking
         <span class="sidebar-category-name" data-categories="设计模式">
             <span class="iconfont-archer">&#xe60a;</span>
             设计模式
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="性能优化">
+            <span class="iconfont-archer">&#xe60a;</span>
+            性能优化
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="客户端">
+            <span class="iconfont-archer">&#xe60a;</span>
+            客户端
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="React">
+            <span class="iconfont-archer">&#xe60a;</span>
+            React
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Vercel">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Vercel
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Rollup">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Rollup
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Vite">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Vite
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Babel">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Babel
         </span>
     
     </div>

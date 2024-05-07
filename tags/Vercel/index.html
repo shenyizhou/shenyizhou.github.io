@@ -1,0 +1,4763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Yizhou Shen">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Yizhou Shen">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="静存高远">
+    <meta name="description" content="静存高远">
+<meta property="og:type" content="website">
+<meta property="og:title" content="无主之地">
+<meta property="og:url" content="http://shenyizhou.github.io/tags/Vercel/index.html">
+<meta property="og:site_name" content="无主之地">
+<meta property="og:description" content="静存高远">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Yizhou Shen">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>Orion&#39;s Studio</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- Google tag (gtag.js) -->
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Orion's Studio.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+">
+    
+    <!-- 主页  -->
+    
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main index-page">
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/05/03/2024-05-03-Vercel/">
+                
+                <span class="abstract-title-text">Vercel</span>
+            </a>
+            <div class="abstract-content">
+                
+
+[TOC]
+VercelVercel 是一个云平台，用于构建、部署和扩展无服务应用程序和静态网站。
+Vercel 同时也在赞助 Next.js。Next.js 是一个 React 框架，用于构建静态和动态网站。
+Vercel 前身是 ZEIT，是一个云服务提供商，提供部署、托管和监控 Node.js 应用程序的服务。
+特点
+前端代码的零配置无缝部署
+实时洞察、分析和性能指标
+“无限”可扩展性
+边缘网络(CDN、缓存、边缘功能)
+静态资产托管(图像、媒体)
+部署预览和 A/B 测试
+99.99% 正常运行时间
+基于 Git 的工作流
+个人免费套餐
+
+
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/05/05">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/05/03</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Vercel">Vercel</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+    <!-- paginator  -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:455168247@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/shenyizhou" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 171
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2024 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/05</span>
+            <a class="archive-post-title" href="/2024/05/05/2024-05-05-Babel/">Babel</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2024/05/04/2024-05-04-Vite/">Vite</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2024/05/04/2024-05-04-Rollup/">Rollup</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span>
+            <a class="archive-post-title" href="/2024/05/03/2024-05-03-React%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%20copy/">React相关知识点</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span>
+            <a class="archive-post-title" href="/2024/05/03/2024-05-03-Vercel/">Vercel</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/02</span>
+            <a class="archive-post-title" href="/2024/05/02/2024-05-02-%E5%89%8D%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9B%B8%E5%85%B3/">前端与客户端相关</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span>
+            <a class="archive-post-title" href="/2024/05/01/2024-05-01-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3/">性能优化相关</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/30</span>
+            <a class="archive-post-title" href="/2024/04/30/2024-04-28-%E7%AE%97%E6%B3%95(51)-hard%20%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">算法(51)-hard 题目汇总</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span>
+            <a class="archive-post-title" href="/2024/04/28/2024-04-28-%E7%AE%97%E6%B3%95(50)-%E5%B9%B6%E6%9F%A5%E9%9B%86+DFS/">算法(50)-并查集+DFS</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span>
+            <a class="archive-post-title" href="/2024/04/26/2024-04-26-%E7%AE%97%E6%B3%95(49)-medium%20%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">算法(49)-medium 题目汇总</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/25</span>
+            <a class="archive-post-title" href="/2024/04/25/2024-04-25-%E7%AE%97%E6%B3%95(48)-easy%20%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">算法(48)-easy 题目汇总</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span>
+            <a class="archive-post-title" href="/2024/04/08/2024-04-08-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E7%82%B9%E5%BD%92%E7%BA%B3/">数据结构与算法知识点归纳</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span>
+            <a class="archive-post-title" href="/2024/04/08/2024-04-08-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9F%A5%E8%AF%86%E7%82%B9%E5%BD%92%E7%BA%B3/">设计模式知识点归纳</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/07</span>
+            <a class="archive-post-title" href="/2024/04/07/2024-04-07-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E4%B8%8E%E6%8A%80%E6%9C%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E5%BD%92%E7%BA%B3/">软件工程与技术知识点归纳</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/07</span>
+            <a class="archive-post-title" href="/2024/04/07/2024-04-07-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-Vue%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/">Vue相关知识点</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/">小程序相关知识点</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%BB%84/">随机数组</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-Promise%E5%AE%9E%E8%B7%B5/">Promise实践</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-URL%E5%8F%82%E6%95%B0%E5%A4%84%E7%90%86/">URL参数处理处理</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0%E5%A4%84%E7%90%86/">时间函数处理</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">防抖和节流</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E6%95%B0%E5%AD%97%E7%9A%84%E4%B9%98%E6%B3%95/">字符串格式数字的乘法</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2024/03/23/2024-03-23-%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/">浅拷贝与深拷贝</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/19</span>
+            <a class="archive-post-title" href="/2024/03/19/2024-03-19-%E7%AE%97%E6%B3%95(47)-%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%A7%84%E5%88%92%E8%B0%83%E6%95%B4/">算法(47)-接下来学习的规划调整</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/19</span>
+            <a class="archive-post-title" href="/2024/03/19/2024-03-19-%E7%AE%97%E6%B3%95(45)-%E5%89%8D%20K%20%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/">算法(45)- 前K个高频元素</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/19</span>
+            <a class="archive-post-title" href="/2024/03/19/2024-03-19-%E7%AE%97%E6%B3%95(46)-%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E6%80%BB%E7%BB%93/">算法(46)- 前K个高频元素</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/19</span>
+            <a class="archive-post-title" href="/2024/03/19/2024-03-19-%E7%AE%97%E6%B3%95(44)-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC/">算法(43)-滑动窗口最大值</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span>
+            <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(41)-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/">算法(41)-有效的括号</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span>
+            <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(42)-%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9/">算法(42)-删除字符串中的所有相邻重复项</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span>
+            <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(43)-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/">算法(43)-逆波兰表达式求值</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span>
+            <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(38)-%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/">算法(38)-栈与队列</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span>
+            <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(39)-%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/">算法(39)-用栈实现队列</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span>
+            <a class="archive-post-title" href="/2024/03/16/2024-03-16-%E7%AE%97%E6%B3%95(40)-%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88/">算法(40)-用队列实现栈</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(34)-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">算法(34)-最长回文子串</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(35)-%E5%BC%82%E6%AC%A1%E5%85%83%E6%98%9F%E4%BA%BA%E7%9A%84%E6%96%87%E5%AD%97/">算法(35)-异次元星人的文字</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(36)-%E8%B6%85%E7%BA%A7%E5%9B%9E%E6%96%87%E6%95%B0/">算法(36)-超级回文数</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(37)-%E5%9B%9E%E6%96%87%E6%95%B0%E6%80%BB%E7%BB%93/">算法(37)-回文数总结</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2024/03/15/2024-03-15-%E7%AE%97%E6%B3%95(33)-%E6%A3%80%E6%B5%8B%E5%9B%9E%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2/">算法(33)-检测回文字符串</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span>
+            <a class="archive-post-title" href="/2024/03/14/2024-03-14-%E7%AE%97%E6%B3%95(31)-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93/">算法(31)-字符串总结</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span>
+            <a class="archive-post-title" href="/2024/03/14/2024-03-14-%E7%AE%97%E6%B3%95(32)-%E5%8F%8C%E6%8C%87%E9%92%88%E5%9B%9E%E9%A1%BE/">算法(32)-双指针回顾</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span>
+            <a class="archive-post-title" href="/2024/03/14/2024-03-14-%E7%AE%97%E6%B3%95(30)-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2/">算法(30)-重复的子字符串</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span>
+            <a class="archive-post-title" href="/2024/03/14/2024-03-14-%E7%AE%97%E6%B3%95(29)-strStr%20%E5%92%8C%20KMP/">算法(29)-strStr 和 KMP</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(28)-%E5%8F%B3%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">算法(28)-右旋转字符串</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(25)-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%20II/">算法(25)-反转字符串 II</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(26)-%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97/">算法(26)-替换数字</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(27)-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D/">算法(27)-翻转字符串里的单词</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2024/03/13/2024-03-13-%E7%AE%97%E6%B3%95(24)-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">算法(24)-反转字符串</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span>
+            <a class="archive-post-title" href="/2024/03/12/2024-03-12-%E7%AE%97%E6%B3%95(21)-%E8%B5%8E%E9%87%91%E4%BF%A1/">算法(21)-赎金信</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span>
+            <a class="archive-post-title" href="/2024/03/12/2024-03-12-%E7%AE%97%E6%B3%95(22)-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">算法(22)-三数之和</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span>
+            <a class="archive-post-title" href="/2024/03/12/2024-03-12-%E7%AE%97%E6%B3%95(23)-%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/">算法(23)-四数之和</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span>
+            <a class="archive-post-title" href="/2024/03/12/2024-03-12-%E7%AE%97%E6%B3%95(20)-%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II/">算法(20)-四数相加II</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(19)-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">算法(19)-两数之和</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(16)-%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D/">算法(16)-有效的字母异位词</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(17)-%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86/">算法(17)-两个数组的交集</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(18)-%E5%BF%AB%E4%B9%90%E6%95%B0/">算法(18)-快乐数</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(15)-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法(15)-哈希表</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(12)-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/">算法(12)-删除链表的倒数第N个节点</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(13)-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/">算法(13)-链表相交</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(14)-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/">算法(14)-环形链表II</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2024/03/11/2024-03-11-%E7%AE%97%E6%B3%95(11)-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/">算法(11)-两两交换链表中的节点</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span>
+            <a class="archive-post-title" href="/2024/03/10/2024-03-10-%E7%AE%97%E6%B3%95(10)-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">算法(9)-反转链表</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span>
+            <a class="archive-post-title" href="/2024/03/10/2024-03-10-%E7%AE%97%E6%B3%95(8)-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">算法(8)-移除链表元素</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span>
+            <a class="archive-post-title" href="/2024/03/10/2024-03-10-%E7%AE%97%E6%B3%95(9)-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">算法(9)-设计链表</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/07</span>
+            <a class="archive-post-title" href="/2024/03/07/2024-03-07-%E7%AE%97%E6%B3%95(7)-%E9%93%BE%E8%A1%A8/">算法(7)-链表</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span>
+            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(6)-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/">算法(6)-螺旋矩阵 II</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span>
+            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(5)-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">算法(5)-长度最小的子数组和滑动窗口</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span>
+            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(3)-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%E4%B8%8E%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">算法(3)-移除元素与快慢指针</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span>
+            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(4)-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%B7%A6%E5%8F%B3%E6%8C%87%E9%92%88/">算法(4)-有序数组的平方与左右指针</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span>
+            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(2)-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">算法(2)-二分查找</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span>
+            <a class="archive-post-title" href="/2024/03/06/2024-03-06-%E7%AE%97%E6%B3%95(1)-%E6%95%B0%E7%BB%84/">算法(1)-数组</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2023 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/10</span>
+            <a class="archive-post-title" href="/2023/08/10/2023-08-10-%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84css%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E9%87%91%E8%89%B2%E5%85%89%E6%99%95+%E6%89%AB%E5%85%89%E7%89%B9%E6%95%88/">记录一次简单的css动画实现金色光晕+扫光特效</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span>
+            <a class="archive-post-title" href="/2023/03/27/2023-03-27-%E6%B4%BB%E5%8A%A8%E5%8A%A8%E7%94%BB%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/">活动动画相关技术方案</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span>
+            <a class="archive-post-title" href="/2023/03/20/2023-03-22-%E5%88%86%E4%BA%AB%E6%96%B0%E9%B2%9C%E4%BA%8B/">分享新鲜事</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span>
+            <a class="archive-post-title" href="/2023/03/16/2023-03-16-%E7%A7%BB%E5%8A%A8%E7%AB%AF%20CSS%20%E5%8D%95%E4%BD%8D%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/">移动端 CSS 单位处理方案</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span>
+            <a class="archive-post-title" href="/2023/01/02/2023-01-02-%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E4%BE%9D%E8%B5%96%E5%BA%93%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/">前端通用依赖库缓存方案</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/19</span>
+            <a class="archive-post-title" href="/2022/12/19/2022-12-19-Antd%20Charts%20%E7%AD%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF/">Antd Charts 等数据可视化相关技术</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/24</span>
+            <a class="archive-post-title" href="/2022/05/24/2022-05-24-%E5%88%86%E4%BA%AB%E6%96%B0%E9%B2%9C%E4%BA%8B/">分享新鲜事</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/06</span>
+            <a class="archive-post-title" href="/2022/05/06/2022-05-06-%E5%A4%A9%E6%9C%9D%E9%98%B2%E9%AA%97%E6%8C%87%E5%8D%97%E4%B9%8B%E3%80%8A%E5%BD%B1%E5%93%8D%E5%8A%9B%E3%80%8B/">schema form 转化为 jsx 方案思考</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/17</span>
+            <a class="archive-post-title" href="/2022/04/17/2022-04-17-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20useRequest%20%E7%9A%84%E5%AE%9E%E7%8E%B0/">自动批量请求（5）—— useRequest 的实现</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/15</span>
+            <a class="archive-post-title" href="/2022/04/15/2022-04-15-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94%20%E5%88%A0%E5%87%8F%E9%87%8D%E5%A4%8D%E7%9A%84%E8%AF%B7%E6%B1%82/">自动批量请求（4）—— 删减重复的请求</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2021 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span>
+            <a class="archive-post-title" href="/2021/07/18/2021-07-18-%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/">如何构建自己的知识体系</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span>
+            <a class="archive-post-title" href="/2021/07/13/2021-07-13-%E8%AF%BB%E4%B9%A6/">怎么写书评</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/24</span>
+            <a class="archive-post-title" href="/2021/06/24/2021-06-24-schema%20form%20%E8%BD%AC%E5%8C%96%E4%B8%BA%20jsx%20%E6%96%B9%E6%A1%88%E6%80%9D%E8%80%83/">schema form 转化为 jsx 方案思考</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span>
+            <a class="archive-post-title" href="/2021/03/24/2021-03-24-1-%E4%B8%8D%E5%87%BA%E6%9F%90%E4%BB%B6%E8%A3%85%E5%A4%87%E7%9A%84%E8%83%9C%E7%8E%87/">简单实用的胜率算法模型，及在王者荣耀中的应用</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span>
+            <a class="archive-post-title" href="/2021/03/05/2021-03-05-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%883%EF%BC%89%E2%80%94%E2%80%94%20%E5%90%8C%E6%97%B6%E5%8F%91%E9%80%81%E5%A4%9A%E4%B8%AA%20batch%20%E8%AF%B7%E6%B1%82/">自动批量请求（3）—— 同时发送多个 batch 请求</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/24</span>
+            <a class="archive-post-title" href="/2021/02/24/2021-02-24-threejs/">js 3d 学习</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span>
+            <a class="archive-post-title" href="/2021/02/09/2021-02-09-%E4%BB%8A%E7%94%9F%E5%BF%85%E8%AF%BB%E7%9A%84%E6%AD%A6%E4%BE%A0%E5%B0%8F%E8%AF%B4%E5%88%97%E8%A1%A8/">今生必读的武侠小说列表</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span>
+            <a class="archive-post-title" href="/2021/01/27/2021-01-27-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/">文档编写指北</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/12</span>
+            <a class="archive-post-title" href="/2021/01/12/2021-01-12-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20TS%20%E5%8C%96%E5%92%8C%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%E4%BC%98%E5%8C%96/">自动批量请求（2）—— TS 化和代码逻辑优化</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2020 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span>
+            <a class="archive-post-title" href="/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/">记一次前端 Mac 新机配置之路</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/31</span>
+            <a class="archive-post-title" href="/2020/03/31/2020-03-31-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82/">自动批量请求</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2019 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/25</span>
+            <a class="archive-post-title" href="/2019/12/25/2019-12-25-%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%B7%AE%E5%A4%A9%E6%95%B0%E7%9A%84%E4%B8%A4%E4%B8%89%E4%BA%8B/">跨域关于计算相差天数的两三事</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2018 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/11</span>
+            <a class="archive-post-title" href="/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/">跨域</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span>
+            <a class="archive-post-title" href="/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/">Node初探</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/30</span>
+            <a class="archive-post-title" href="/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/">Gulp初探</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span>
+            <a class="archive-post-title" href="/2018/06/29/2018-6-29-Grunt%E5%88%9D%E6%8E%A2/">Grunt初探</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/23</span>
+            <a class="archive-post-title" href="/2018/06/23/2018-6-23-%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84UI%E5%BA%93/">手把手搭建自己的UI库</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span>
+            <a class="archive-post-title" href="/2018/06/07/2018-6-7-Webpack%E5%85%A5%E9%97%A8/">Webpack入门</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span>
+            <a class="archive-post-title" href="/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/">CSS的@规则</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span>
+            <a class="archive-post-title" href="/2018/06/05/2018-6-5-Vue%E6%B0%B4%E5%8D%B0%E7%BB%84%E4%BB%B6/">Vue水印组件</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/28</span>
+            <a class="archive-post-title" href="/2018/05/28/2018-5-28-js%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E8%84%9A%E6%9C%AC/">js动态添加脚本</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span>
+            <a class="archive-post-title" href="/2018/05/25/2018-5-25-git%20ssh%E5%A4%9A%E9%82%AE%E7%AE%B1%E9%85%8D%E7%BD%AE/">git ssh多邮箱配置</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/24</span>
+            <a class="archive-post-title" href="/2018/05/24/2018-5-24-git%20flow/">git flow</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span>
+            <a class="archive-post-title" href="/2018/05/23/2018-5-23-%E7%BC%93%E5%AD%98/">缓存</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/15</span>
+            <a class="archive-post-title" href="/2018/05/15/2018-5-15-Vue%E6%9D%82%E8%AE%B0/">Vue杂记</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/14</span>
+            <a class="archive-post-title" href="/2018/05/14/2018-5-14-package.json%E6%9D%82%E8%AE%B0/">package.json杂记</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span>
+            <a class="archive-post-title" href="/2018/04/26/2018-4-26-%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%A4%87%E5%BF%98%E5%BD%95/">重装系统后备忘录</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span>
+            <a class="archive-post-title" href="/2018/04/24/2018-4-24-%E6%90%AD%E5%BB%BA%E8%87%AA%E7%94%A8%E6%A2%AF%E5%AD%90/">搭建自用梯子</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/26</span>
+            <a class="archive-post-title" href="/2018/03/26/2018-3-26-%E5%AE%89%E5%8D%93%E5%9C%86%E5%BD%A2%E5%9B%BE%E7%89%87%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/">安卓圆形图片两种方式</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span>
+            <a class="archive-post-title" href="/2018/03/20/2018-3-20-%E5%AE%89%E5%8D%93%E9%BB%91%E5%B1%8F%E4%B8%8E%E9%94%81%E5%B1%8F/">安卓黑屏与锁屏</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/26</span>
+            <a class="archive-post-title" href="/2018/02/26/2018-2-26-%E6%96%B0%E7%9B%91%E7%AE%A1%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E4%B9%A6/">新监管平台说明书（自用）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/10</span>
+            <a class="archive-post-title" href="/2018/01/10/2018-1-10-%E5%BC%80%E5%A7%8B%E5%AD%A6Android%E7%AC%AC%E4%B8%80%E5%A4%A9/">开始学Android第一天</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/09</span>
+            <a class="archive-post-title" href="/2018/01/09/2018-1-10-Power%20Designer%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/">Power Designer常见用法</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/09</span>
+            <a class="archive-post-title" href="/2018/01/09/2018-1-9-Power%20Designer%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/">Power Designer常见用法</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span>
+            <a class="archive-post-title" href="/2018/01/02/2018-1-2-%E5%8F%88%E5%BC%80%E5%A7%8B%E7%94%A8ionic%E4%BA%86/">又开始用ionic了</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2017 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span>
+            <a class="archive-post-title" href="/2017/12/29/2017-12-29-calc/">calc</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/25</span>
+            <a class="archive-post-title" href="/2017/12/25/2017-12-25-OO%20in%20JS%EF%BC%883%EF%BC%89/">OO in JS（3）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/24</span>
+            <a class="archive-post-title" href="/2017/12/24/2017-12-24-OO%20in%20JS%EF%BC%882%EF%BC%89/">OO in JS（2）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span>
+            <a class="archive-post-title" href="/2017/12/20/2017-12-20-%E5%89%8D%E7%AB%AF%E5%AD%97%E4%BD%93/">前端字体</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/17</span>
+            <a class="archive-post-title" href="/2017/12/17/2017-12-17-OO%20in%20JS%EF%BC%881%EF%BC%89/">OO in JS（1）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/14</span>
+            <a class="archive-post-title" href="/2017/12/14/2017-12-14-WebStorm%E6%96%87%E4%BB%B6%E6%A8%A1%E6%9D%BF/">WebStorm文件模板</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span>
+            <a class="archive-post-title" href="/2017/12/12/2017-12-12-Vue%E8%A7%84%E8%8C%83%EF%BC%88%E8%87%AA%E7%94%A8%EF%BC%89/">Vue规范（自用）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/11</span>
+            <a class="archive-post-title" href="/2017/12/11/2017-12-11-%E6%9C%80%E8%BF%91%E5%9C%A8%E7%9C%8B%E7%BA%A2%E5%AE%9D%E4%B9%A6/">最近在看红宝书</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span>
+            <a class="archive-post-title" href="/2017/12/10/2017-12-10-%E5%AD%A6Web%E7%9A%84%E8%BF%98%E6%80%95%E8%A2%AB%E5%9F%9F%E5%90%8D%E5%8A%AB%E6%8C%81%EF%BC%9F/">学Web的还怕被域名劫持？</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span>
+            <a class="archive-post-title" href="/2017/12/09/2017-12-09-Nginx%E8%B7%91index.php/">Nginx跑index.php</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/08</span>
+            <a class="archive-post-title" href="/2017/12/08/2017-12-08-%E5%9B%9B%E4%B8%AA%E6%96%B9%E5%90%91border%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">四个方向border的实现原理</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/07</span>
+            <a class="archive-post-title" href="/2017/12/07/2017-12-07-sourcetree%E8%A6%81%E6%80%8E%E4%B9%88%E4%BF%AE%E6%94%B9%E4%BF%9D%E5%AD%98%E7%9A%84%E5%AF%86%E7%A0%81%E5%95%8A%E5%95%8A%E5%95%8A/">sourcetree要怎么修改保存的密码啊啊啊</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span>
+            <a class="archive-post-title" href="/2017/12/06/2017-12-06-JS%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E7%9A%84%E7%A0%94%E7%A9%B6/">JS语句执行顺序的研究</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/05</span>
+            <a class="archive-post-title" href="/2017/12/05/2017-12-05-%E5%9C%A8el-table%E4%B8%AD%E4%BD%BF%E7%94%A8el-input-number%E4%BC%A0%E5%80%BC%E5%BB%B6%E8%BF%9F/">在el-table中使用el-input-number传值延迟</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span>
+            <a class="archive-post-title" href="/2017/12/04/2017-12-04-%E7%A5%9E%E5%BF%97%E4%B8%8D%E6%B8%85%E5%86%99%E4%B8%8B%E7%9A%84%E4%BB%A3%E7%A0%81/">神志不清写下的代码</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span>
+            <a class="archive-post-title" href="/2017/12/03/2017-12-03-%E5%90%84%E8%AF%AD%E8%A8%80%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6/">各语言获取字符串长度</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/02</span>
+            <a class="archive-post-title" href="/2017/12/02/2017-12-02-JS%E8%BD%AC%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/">JS转化字符串</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/01</span>
+            <a class="archive-post-title" href="/2017/12/01/2017-12-01-JS%E5%B0%8F%E5%8E%86%E5%8F%B2/">JS小历史</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/30</span>
+            <a class="archive-post-title" href="/2017/11/30/2017-11-30-puer%E7%9C%9F%E6%98%AF%E5%A4%AA%E5%A5%BD%E7%94%A8%E4%BA%86/">puer真是太好用了</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/11</span>
+            <a class="archive-post-title" href="/2017/09/11/2017-09-11-toggleSwitch%E7%9A%84IsChecked/">toggleSwitch的IsChecked</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span>
+            <a class="archive-post-title" href="/2017/09/06/2017-09-06-Visual%20Studio%E5%90%84%E7%89%88%E6%9C%AC%E6%AF%94%E8%BE%83/">Visual Studio各版本比较</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span>
+            <a class="archive-post-title" href="/2017/08/29/2017-08-29-github%E5%88%B7%E7%BB%BF%E7%82%B9/">github刷绿点</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span>
+            <a class="archive-post-title" href="/2017/08/18/2017-08-18-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%884%EF%BC%89/">《深入理解C Sharp》第3版（4）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span>
+            <a class="archive-post-title" href="/2017/08/17/2017-08-17-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%883%EF%BC%89/">《深入理解C Sharp》第3版（3）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span>
+            <a class="archive-post-title" href="/2017/08/16/2017-08-16-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%882%EF%BC%89/">《深入理解C Sharp》第3版（2）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/08</span>
+            <a class="archive-post-title" href="/2017/08/08/2017-08-08-%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3C%20Sharp%E3%80%8B%E7%AC%AC3%E7%89%88%EF%BC%881%EF%BC%89/">《深入理解C Sharp》第3版（1）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span>
+            <a class="archive-post-title" href="/2017/08/03/2017-08-03-Java%E5%8C%85%E8%A3%85%E7%B1%BB/">Java包装类</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/27</span>
+            <a class="archive-post-title" href="/2017/07/27/2017-07-27-gogs%E9%85%8D%E7%BD%AE/">gogs配置</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/15</span>
+            <a class="archive-post-title" href="/2017/07/15/2017-07-15-%E5%9C%A8%E6%9F%90%E4%B8%AA%E7%BB%8F%E7%BA%AC%E5%BA%A6%E9%99%84%E8%BF%91/">在某个经纬度附近</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/14</span>
+            <a class="archive-post-title" href="/2017/07/14/2017-07-14-%E7%8A%B6%E6%80%81%E7%A0%81%E6%9C%89%E6%84%9F/">状态码有感</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span>
+            <a class="archive-post-title" href="/2017/07/08/2017-07-08-%E5%90%84%E7%A7%8DIDE%E7%9A%84%E8%B0%83%E8%AF%95%E5%BF%AB%E6%8D%B7%E9%94%AE/">各种IDE的调试快捷键</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/07</span>
+            <a class="archive-post-title" href="/2017/07/07/2017-07-07-%E6%A0%87%E7%AD%BE%E4%B8%8ESEO/">标签与SEO</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span>
+            <a class="archive-post-title" href="/2017/07/04/2017-07-04-MyEclipse%E5%BF%AB%E9%94%AE%E9%94%AE/">MyEclipse快键键</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/28</span>
+            <a class="archive-post-title" href="/2017/06/28/2017-06-28-CSharp%E6%97%A0%E6%B3%95%E5%BC%95%E7%94%A8DLL%E7%9A%84BUG/">CSharp无法引用DLL的BUG</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span>
+            <a class="archive-post-title" href="/2017/06/27/2017-06-27-CSharp%E5%8A%A0%E8%A7%A3%E5%AF%86/">CSharp加解密</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/26</span>
+            <a class="archive-post-title" href="/2017/06/26/2017-06-26-%E5%AF%B9%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC%E7%9A%84%E6%80%9D%E8%80%83/">对编程语言版本的思考</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/25</span>
+            <a class="archive-post-title" href="/2017/06/25/2017-06-25-%E4%B8%80%E7%9B%B4%E4%BB%A5%E4%B8%BA@%E6%98%AF%E5%8F%96%E7%BB%9D%E5%AF%B9%E5%9C%B0%E5%9D%80%E7%AC%A6/">一直以为@是取绝对地址符</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/09</span>
+            <a class="archive-post-title" href="/2017/05/09/2017-05-09-CSharp%E5%AF%B9%E6%9E%9A%E4%B8%BE%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BD%AC%E5%8C%96/">CSharp对枚举和字符串的转化</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/05</span>
+            <a class="archive-post-title" href="/2017/05/05/2017-05-05-%E5%8F%91%E7%8E%B0%E6%88%91Atom%E7%94%A8%E7%9A%84%E6%9C%80%E5%A4%9A%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%B1%85%E7%84%B6%E6%98%AF.../">发现我Atom用的最多的快捷键居然是...</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2017/05/04/2017-05-04-%E9%82%A3%E4%BA%9B%E5%9D%91%EF%BC%881%EF%BC%89/">那些坑（1）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span>
+            <a class="archive-post-title" href="/2017/04/10/2017-04-10-%E8%B7%A8%E5%9F%9F%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F/">跨域到底是什么呢？</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/06</span>
+            <a class="archive-post-title" href="/2017/04/06/2017-04-06-JS%E2%80%9C%E7%A9%BA%E2%80%9D%E4%B9%8B%E7%A6%85/">JS“空”之禅</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span>
+            <a class="archive-post-title" href="/2017/03/29/2017-03-29-%E9%82%A3%E4%BA%9B%E5%90%8D%E8%AF%8D%EF%BC%882%EF%BC%89/">那些名词（2）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/28</span>
+            <a class="archive-post-title" href="/2017/03/28/2017-03-28-%E9%82%A3%E4%BA%9B%E5%90%8D%E8%AF%8D%EF%BC%881%EF%BC%89/">那些名词（1）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span>
+            <a class="archive-post-title" href="/2017/03/27/2017-03-27-%E6%88%91%E7%9C%9F%E7%9A%84%E7%9C%9F%E7%9A%84%E7%9C%9F%E7%9A%84%E5%8F%AA%E6%83%B3%E6%9F%A5%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%81/">我真的真的真的只想查条数据！</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/26</span>
+            <a class="archive-post-title" href="/2017/03/26/2017-03-26-%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E8%83%BD%E7%9B%91%E5%90%AC%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96%E7%9A%84%E5%AD%97%E5%85%B8%EF%BC%81/">手写一个能监听内容变化的字典！</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2017/03/25/2017-03-25-%E4%B8%8D%E6%83%B3%E8%AE%A9%E5%8D%9A%E5%AE%A2%E8%8D%92%E5%BA%9F%E4%BA%8E%E6%98%AF%E4%B9%8E/">不想让博客荒废于是乎</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2016 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/11</span>
+            <a class="archive-post-title" href="/2016/04/11/2016-04-11-%E7%94%A8LuaSocket%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E4%B8%8B%E5%9B%BE/">用LuaSocket实现批量下图</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span>
+            <a class="archive-post-title" href="/2016/04/10/2016-04-10-Lua%E5%B0%8F%E5%BF%83%E5%BE%97/">Lua小心得</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/07</span>
+            <a class="archive-post-title" href="/2016/04/07/2016-04-07-%E5%90%84%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">各语言数据类型</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/06</span>
+            <a class="archive-post-title" href="/2016/04/06/2016-04-06-%E5%90%84%E8%AF%AD%E8%A8%80%E6%B3%A8%E9%87%8A%E3%80%81%E5%AF%BC%E5%85%A5%E5%86%99%E6%B3%95/">各语言注释、导入写法</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span>
+            <a class="archive-post-title" href="/2016/03/22/2016-03-22-%E5%BE%AE%E6%9C%BA%E6%8C%87%E4%BB%A4%EF%BC%882%EF%BC%89/">微机指令（2）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span>
+            <a class="archive-post-title" href="/2016/03/20/2016-03-20-%E5%BE%AE%E6%9C%BA%E6%8C%87%E4%BB%A4%EF%BC%881%EF%BC%89/">微机指令（1）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2016/03/15/2016-03-15-IFE%E4%BB%BB%E5%8A%A1%E4%B8%80%E6%94%B6%E8%8E%B7/">IFE任务一收获</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2016/03/13/2016-03-13-%E5%89%8D%E7%AB%AF%E9%94%99%E9%A2%98%E9%9B%86%EF%BC%881%EF%BC%89/">前端错题集（1）</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="JavaScript">
+                <span class="iconfont-archer">&#xe606;</span>
+                JavaScript
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="HTML">
+                <span class="iconfont-archer">&#xe606;</span>
+                HTML
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="汇编">
+                <span class="iconfont-archer">&#xe606;</span>
+                汇编
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="微机原理">
+                <span class="iconfont-archer">&#xe606;</span>
+                微机原理
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="注释">
+                <span class="iconfont-archer">&#xe606;</span>
+                注释
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="导入">
+                <span class="iconfont-archer">&#xe606;</span>
+                导入
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="数据类型">
+                <span class="iconfont-archer">&#xe606;</span>
+                数据类型
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Lua">
+                <span class="iconfont-archer">&#xe606;</span>
+                Lua
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="LuaSocket">
+                <span class="iconfont-archer">&#xe606;</span>
+                LuaSocket
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="略">
+                <span class="iconfont-archer">&#xe606;</span>
+                略
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="C#">
+                <span class="iconfont-archer">&#xe606;</span>
+                C#
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Database">
+                <span class="iconfont-archer">&#xe606;</span>
+                Database
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Scala">
+                <span class="iconfont-archer">&#xe606;</span>
+                Scala
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="技术名词">
+                <span class="iconfont-archer">&#xe606;</span>
+                技术名词
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="跨域">
+                <span class="iconfont-archer">&#xe606;</span>
+                跨域
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="技术陷阱">
+                <span class="iconfont-archer">&#xe606;</span>
+                技术陷阱
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Atom">
+                <span class="iconfont-archer">&#xe606;</span>
+                Atom
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="技术综合">
+                <span class="iconfont-archer">&#xe606;</span>
+                技术综合
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Java">
+                <span class="iconfont-archer">&#xe606;</span>
+                Java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MyEclipse">
+                <span class="iconfont-archer">&#xe606;</span>
+                MyEclipse
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="SEO">
+                <span class="iconfont-archer">&#xe606;</span>
+                SEO
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="IDE">
+                <span class="iconfont-archer">&#xe606;</span>
+                IDE
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="状态码">
+                <span class="iconfont-archer">&#xe606;</span>
+                状态码
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Git">
+                <span class="iconfont-archer">&#xe606;</span>
+                Git
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="深入理解C#">
+                <span class="iconfont-archer">&#xe606;</span>
+                深入理解C#
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="GitHub">
+                <span class="iconfont-archer">&#xe606;</span>
+                GitHub
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Hexo">
+                <span class="iconfont-archer">&#xe606;</span>
+                Hexo
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="WPF">
+                <span class="iconfont-archer">&#xe606;</span>
+                WPF
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mock">
+                <span class="iconfont-archer">&#xe606;</span>
+                mock
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="字符串">
+                <span class="iconfont-archer">&#xe606;</span>
+                字符串
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="CSS">
+                <span class="iconfont-archer">&#xe606;</span>
+                CSS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Vue">
+                <span class="iconfont-archer">&#xe606;</span>
+                Vue
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ElementUI">
+                <span class="iconfont-archer">&#xe606;</span>
+                ElementUI
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Nginx">
+                <span class="iconfont-archer">&#xe606;</span>
+                Nginx
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="PHP">
+                <span class="iconfont-archer">&#xe606;</span>
+                PHP
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="域名劫持">
+                <span class="iconfont-archer">&#xe606;</span>
+                域名劫持
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="WebStorm">
+                <span class="iconfont-archer">&#xe606;</span>
+                WebStorm
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="字体">
+                <span class="iconfont-archer">&#xe606;</span>
+                字体
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Power Designer">
+                <span class="iconfont-archer">&#xe606;</span>
+                Power Designer
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Android">
+                <span class="iconfont-archer">&#xe606;</span>
+                Android
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Ionic">
+                <span class="iconfont-archer">&#xe606;</span>
+                Ionic
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="补零">
+                <span class="iconfont-archer">&#xe606;</span>
+                补零
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="VPN">
+                <span class="iconfont-archer">&#xe606;</span>
+                VPN
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="VPS">
+                <span class="iconfont-archer">&#xe606;</span>
+                VPS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Chrome">
+                <span class="iconfont-archer">&#xe606;</span>
+                Chrome
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="package.json">
+                <span class="iconfont-archer">&#xe606;</span>
+                package.json
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="缓存">
+                <span class="iconfont-archer">&#xe606;</span>
+                缓存
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="UI">
+                <span class="iconfont-archer">&#xe606;</span>
+                UI
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="NPM">
+                <span class="iconfont-archer">&#xe606;</span>
+                NPM
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Grunt">
+                <span class="iconfont-archer">&#xe606;</span>
+                Grunt
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Webpack">
+                <span class="iconfont-archer">&#xe606;</span>
+                Webpack
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Node">
+                <span class="iconfont-archer">&#xe606;</span>
+                Node
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="时间">
+                <span class="iconfont-archer">&#xe606;</span>
+                时间
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="请求">
+                <span class="iconfont-archer">&#xe606;</span>
+                请求
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="文档">
+                <span class="iconfont-archer">&#xe606;</span>
+                文档
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="武侠">
+                <span class="iconfont-archer">&#xe606;</span>
+                武侠
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="threejs">
+                <span class="iconfont-archer">&#xe606;</span>
+                threejs
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="动画">
+                <span class="iconfont-archer">&#xe606;</span>
+                动画
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="王者荣耀">
+                <span class="iconfont-archer">&#xe606;</span>
+                王者荣耀
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="表单">
+                <span class="iconfont-archer">&#xe606;</span>
+                表单
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="读书">
+                <span class="iconfont-archer">&#xe606;</span>
+                读书
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="知识体系">
+                <span class="iconfont-archer">&#xe606;</span>
+                知识体系
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="世界">
+                <span class="iconfont-archer">&#xe606;</span>
+                世界
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="音乐">
+                <span class="iconfont-archer">&#xe606;</span>
+                音乐
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="图表">
+                <span class="iconfont-archer">&#xe606;</span>
+                图表
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AI">
+                <span class="iconfont-archer">&#xe606;</span>
+                AI
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="数组">
+                <span class="iconfont-archer">&#xe606;</span>
+                数组
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="链表">
+                <span class="iconfont-archer">&#xe606;</span>
+                链表
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="哈希表">
+                <span class="iconfont-archer">&#xe606;</span>
+                哈希表
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="双指针">
+                <span class="iconfont-archer">&#xe606;</span>
+                双指针
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="回文">
+                <span class="iconfont-archer">&#xe606;</span>
+                回文
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="栈与队列">
+                <span class="iconfont-archer">&#xe606;</span>
+                栈与队列
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="算法">
+                <span class="iconfont-archer">&#xe606;</span>
+                算法
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="小程序">
+                <span class="iconfont-archer">&#xe606;</span>
+                小程序
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="正则">
+                <span class="iconfont-archer">&#xe606;</span>
+                正则
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="软件工程">
+                <span class="iconfont-archer">&#xe606;</span>
+                软件工程
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="数据结构">
+                <span class="iconfont-archer">&#xe606;</span>
+                数据结构
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="设计模式">
+                <span class="iconfont-archer">&#xe606;</span>
+                设计模式
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="性能优化">
+                <span class="iconfont-archer">&#xe606;</span>
+                性能优化
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="客户端">
+                <span class="iconfont-archer">&#xe606;</span>
+                客户端
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="React">
+                <span class="iconfont-archer">&#xe606;</span>
+                React
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Vercel">
+                <span class="iconfont-archer">&#xe606;</span>
+                Vercel
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Rollup">
+                <span class="iconfont-archer">&#xe606;</span>
+                Rollup
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Vite">
+                <span class="iconfont-archer">&#xe606;</span>
+                Vite
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Babel">
+                <span class="iconfont-archer">&#xe606;</span>
+                Babel
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="前端综合">
+            <span class="iconfont-archer">&#xe60a;</span>
+            前端综合
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="汇编">
+            <span class="iconfont-archer">&#xe60a;</span>
+            汇编
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="技术比较">
+            <span class="iconfont-archer">&#xe60a;</span>
+            技术比较
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Lua">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Lua
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="生活">
+            <span class="iconfont-archer">&#xe60a;</span>
+            生活
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="C#">
+            <span class="iconfont-archer">&#xe60a;</span>
+            C#
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Database">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Database
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="技术综合">
+            <span class="iconfont-archer">&#xe60a;</span>
+            技术综合
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="JavaScript">
+            <span class="iconfont-archer">&#xe60a;</span>
+            JavaScript
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="IDE">
+            <span class="iconfont-archer">&#xe60a;</span>
+            IDE
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="HTML">
+            <span class="iconfont-archer">&#xe60a;</span>
+            HTML
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Git">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Git
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Java">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Java
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="CSS">
+            <span class="iconfont-archer">&#xe60a;</span>
+            CSS
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Vue">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Vue
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Nginx">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Nginx
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Android">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Android
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Ionic">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Ionic
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Project">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Project
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="VPN">
+            <span class="iconfont-archer">&#xe60a;</span>
+            VPN
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Webpack">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Webpack
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Node">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Node
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="小说">
+            <span class="iconfont-archer">&#xe60a;</span>
+            小说
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="游戏">
+            <span class="iconfont-archer">&#xe60a;</span>
+            游戏
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="读书">
+            <span class="iconfont-archer">&#xe60a;</span>
+            读书
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="知识">
+            <span class="iconfont-archer">&#xe60a;</span>
+            知识
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="杂记">
+            <span class="iconfont-archer">&#xe60a;</span>
+            杂记
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="动画">
+            <span class="iconfont-archer">&#xe60a;</span>
+            动画
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="算法">
+            <span class="iconfont-archer">&#xe60a;</span>
+            算法
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="小程序">
+            <span class="iconfont-archer">&#xe60a;</span>
+            小程序
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="正则">
+            <span class="iconfont-archer">&#xe60a;</span>
+            正则
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="软件工程">
+            <span class="iconfont-archer">&#xe60a;</span>
+            软件工程
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="数据结构">
+            <span class="iconfont-archer">&#xe60a;</span>
+            数据结构
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="设计模式">
+            <span class="iconfont-archer">&#xe60a;</span>
+            设计模式
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="性能优化">
+            <span class="iconfont-archer">&#xe60a;</span>
+            性能优化
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="客户端">
+            <span class="iconfont-archer">&#xe60a;</span>
+            客户端
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="React">
+            <span class="iconfont-archer">&#xe60a;</span>
+            React
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Vercel">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Vercel
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Rollup">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Rollup
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Vite">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Vite
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Babel">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Babel
+        </span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://shenyizhou.github.io",
+        root: siteMetaRoot,
+        author: "Yizhou Shen"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>
