@@ -27,7 +27,7 @@
 <meta property="og:description" content="[TOC] React 18 新特性新的 ReactHooksuseTransition 和 startTransition，即过渡更新模式(Transition Mode)可以将某些状态更新标记为不紧急的。 相比于 setTimeout  startTransition 是立刻执行的，setTimeout 是延迟执行的。 startTransition 可被中断的，setTimeout 是阻">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-03T02:17:51.000Z">
-<meta property="article:modified_time" content="2024-05-06T02:07:10.803Z">
+<meta property="article:modified_time" content="2024-05-07T09:50:30.997Z">
 <meta property="article:author" content="Yizhou Shen">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -531,7 +531,7 @@
 <p>关系：</p>
 <ul>
 <li>Fiber 架构的细粒度任务调度模式，为并发模式提供了基础。</li>
-<li>在 React 18 之前，Fiber 可以让任务暂停并根据优先级执行，并支持异步渲染，但属于同步不可中断更新。在 React 之后，可以交替执行不同任务，变为异步可中断更新。</li>
+<li>在 React 18 之前，Fiber 可以让任务暂停并根据优先级执行，并支持异步渲染，但属于同步不可中断更新。在 React 18 之后，可以交替执行不同任务，变为异步可中断更新。</li>
 <li>并发模式是实现并发更新的基本前提，时间切片是实现并发更新的具体手段。</li>
 </ul>
 <h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><ul>
@@ -561,10 +561,7 @@
 <li>不能用 React Hooks。</li>
 <li>不能访问浏览器 API。</li>
 </ul>
-<h4 id="CSR-gt-SSR"><a href="#CSR-gt-SSR" class="headerlink" title="CSR -&gt; SSR"></a>CSR -&gt; SSR</h4><ul>
-<li><h4 id="React-Suspense-and-Streaming"><a href="#React-Suspense-and-Streaming" class="headerlink" title="React Suspense and Streaming"></a>React Suspense and Streaming</h4></li>
-</ul>
-<p>可以暂停 React 数中的呈现，在后台获取内容并将其分块流式传输到客户端时显示一个正在加载的组件作为占位符，一旦准备就绪就会无缝切换。</p>
+<h4 id="CSR-gt-SSR"><a href="#CSR-gt-SSR" class="headerlink" title="CSR -&gt; SSR"></a>CSR -&gt; SSR</h4><h4 id="React-Suspense-and-Streaming"><a href="#React-Suspense-and-Streaming" class="headerlink" title="React Suspense and Streaming"></a>React Suspense and Streaming</h4><p>可以暂停 React 数中的呈现，在后台获取内容并将其分块流式传输到客户端时显示一个正在加载的组件作为占位符，一旦准备就绪就会无缝切换。</p>
 <h3 id="React-DOM-Server"><a href="#React-DOM-Server" class="headerlink" title="React DOM Server"></a>React DOM Server</h3><p>都支持流式 Suspense。</p>
 <h4 id="renderToPipeableStream"><a href="#renderToPipeableStream" class="headerlink" title="renderToPipeableStream"></a>renderToPipeableStream</h4><p>用于 Node 的流式传输。</p>
 <h4 id="renderToReadableStream"><a href="#renderToReadableStream" class="headerlink" title="renderToReadableStream"></a>renderToReadableStream</h4><p>用于 Deno 或 Cloudflare Workers。</p>
@@ -672,7 +669,7 @@
             <p>原文作者：<a href="http://shenyizhou.github.io">Yizhou Shen</a>
             <p>原文链接：<a href="http://shenyizhou.github.io/2024/05/03/2024-05-03-React%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%20copy/">http://shenyizhou.github.io/2024/05/03/2024-05-03-React%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%20copy/</a>
             <p>发表日期：<a href="http://shenyizhou.github.io/2024/05/03/2024-05-03-React%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%20copy/">May 3rd 2024, 10:17:51 am</a>
-            <p>更新日期：<a href="http://shenyizhou.github.io/2024/05/03/2024-05-03-React%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%20copy/">May 6th 2024, 10:07:10 am</a>
+            <p>更新日期：<a href="http://shenyizhou.github.io/2024/05/03/2024-05-03-React%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%20copy/">May 7th 2024, 5:50:30 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -1691,14 +1688,6 @@
         
         
     
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -4344,11 +4333,6 @@
                 JavaScript
             </span>
         
-            <span class="sidebar-tag-name" data-tags="HTML">
-                <span class="iconfont-archer">&#xe606;</span>
-                HTML
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="汇编">
                 <span class="iconfont-archer">&#xe606;</span>
                 汇编
@@ -4357,6 +4341,11 @@
             <span class="sidebar-tag-name" data-tags="微机原理">
                 <span class="iconfont-archer">&#xe606;</span>
                 微机原理
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="HTML">
+                <span class="iconfont-archer">&#xe606;</span>
+                HTML
             </span>
         
             <span class="sidebar-tag-name" data-tags="注释">
@@ -4379,14 +4368,14 @@
                 Lua
             </span>
         
-            <span class="sidebar-tag-name" data-tags="LuaSocket">
-                <span class="iconfont-archer">&#xe606;</span>
-                LuaSocket
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="略">
                 <span class="iconfont-archer">&#xe606;</span>
                 略
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="LuaSocket">
+                <span class="iconfont-archer">&#xe606;</span>
+                LuaSocket
             </span>
         
             <span class="sidebar-tag-name" data-tags="C#">
