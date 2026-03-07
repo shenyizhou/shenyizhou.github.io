@@ -1,0 +1,19 @@
+title: 老浪的技术博客
+description: 记录每一天的成长和技术经验
+baseurl: ""
+url: "https://shenyizhou.github.io"
+
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+
+header_pages:
+  - about.md
+
+author:
+  name: 老浪
+  email: shenyizhou@126.com
+
+twitter_username: 
+github_username: shenyizhou
