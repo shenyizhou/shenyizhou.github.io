@@ -67,6 +67,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2021-01-12-自动批量请求（2）—— TS 化和代码逻辑优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/12/2021-01-12-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20TS%20%E5%8C%96%E5%92%8C%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%E4%BC%98%E5%8C%96/" class="article-date">
+  <time datetime="2021-01-12T14:35:17.000Z" itemprop="datePublished">2021年01月12日</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88/">前端综合</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/12/2021-01-12-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20TS%20%E5%8C%96%E5%92%8C%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%E4%BC%98%E5%8C%96/">自动批量请求（2）—— TS 化和代码逻辑优化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先看图来回顾一下（假设一次 EventLoop 占用 5 个时间单位，请求回复也需要 5 个时间单位）：</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5733277210/25b8/a88b/ef27/c19c77ade001f7208ee47fef48b9061d.png" alt="自动批量请求"></p>
+<p>我们已经实现了自动把同一时刻的请求合并，并统一渲染。</p>
+<p>但写完之后，发现很多写法都比较 low，所以对代码做了一次整体重构。</p>
+        
+          <p class="article-more-link">
+            <a href="/2021/01/12/2021-01-12-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20TS%20%E5%8C%96%E5%92%8C%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%E4%BC%98%E5%8C%96/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shenyizhou.github.io/2021/01/12/2021-01-12-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20TS%20%E5%8C%96%E5%92%8C%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%E4%BC%98%E5%8C%96/" data-id="cmmxbttj0007hil2zce5386bo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2020-12-10-记一次前端 Mac 新机配置之路" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" class="article-date">
@@ -104,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" data-id="cmmxau6cj007d2q2ze2hx6q2r" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2020/12/10/2020-12-10-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%89%8D%E7%AB%AF%20Mac%20%E6%96%B0%E6%9C%BA%E9%85%8D%E7%BD%AE%E4%B9%8B%E8%B7%AF/" data-id="cmmxbttiz007eil2zgck12jm3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDE/" rel="tag">IDE</a></li></ul>
@@ -152,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2020/03/31/2020-03-31-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82/" data-id="cmmxau6ci007a2q2zfld281jp" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2020/03/31/2020-03-31-%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82/" data-id="cmmxbttiy007bil2z25wjf3t6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%B7%E6%B1%82/" rel="tag">请求</a></li></ul>
@@ -203,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2019/12/25/2019-12-25-%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%B7%AE%E5%A4%A9%E6%95%B0%E7%9A%84%E4%B8%A4%E4%B8%89%E4%BA%8B/" data-id="cmmxau6ch00762q2zgaotc3sl" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2019/12/25/2019-12-25-%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%B7%AE%E5%A4%A9%E6%95%B0%E7%9A%84%E4%B8%A4%E4%B8%89%E4%BA%8B/" data-id="cmmxbttiy0077il2zdxui1444" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%B6%E9%97%B4/" rel="tag">时间</a></li></ul>
@@ -252,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/" data-id="cmmxau6cg006z2q2z47dagg8k" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2018/07/11/2018-7-11-%E8%B7%A8%E5%9F%9F/" data-id="cmmxbttix0070il2z5ehr0dea" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
@@ -300,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/" data-id="cmmxau6ch00722q2zb43cdyq4" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2018/07/08/2018-7-8-Node%E5%88%9D%E6%8E%A2/" data-id="cmmxbttix0073il2zcluy9asn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/" rel="tag">Node</a></li></ul>
@@ -348,7 +398,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/" data-id="cmmxau6ce006l2q2za66de4pg" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2018/06/30/2018-6-30-Gulp%E5%88%9D%E6%8E%A2/" data-id="cmmxbttiv006mil2zg1yx0huq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li></ul>
@@ -395,7 +445,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2018/06/29/2018-6-29-Grunt%E5%88%9D%E6%8E%A2/" data-id="cmmxau6cd006g2q2zh0to6jcx" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2018/06/29/2018-6-29-Grunt%E5%88%9D%E6%8E%A2/" data-id="cmmxbttiu006hil2z7wca2xnc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grunt/" rel="tag">Grunt</a></li></ul>
@@ -442,7 +492,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2018/06/23/2018-6-23-%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84UI%E5%BA%93/" data-id="cmmxau6cd006d2q2zgow1h1yz" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2018/06/23/2018-6-23-%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84UI%E5%BA%93/" data-id="cmmxbttit006eil2zdsrh0s6z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPM/" rel="tag">NPM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/" rel="tag">UI</a></li></ul>
@@ -489,65 +539,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2018/06/07/2018-6-7-Webpack%E5%85%A5%E9%97%A8/" data-id="cmmxau6cg006v2q2z6g3f67jz" class="article-share-link">Share</a>
+      <a data-url="http://shenyizhou.github.io/2018/06/07/2018-6-7-Webpack%E5%85%A5%E9%97%A8/" data-id="cmmxbttiw006wil2z6p6q2rve" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2018-6-7-CSS的@规则" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/" class="article-date">
-  <time datetime="2018-06-07T07:40:24.000Z" itemprop="datePublished">2018年06月07日</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/CSS/">CSS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/">CSS的@规则</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="规则"><a href="#规则" class="headerlink" title="@规则"></a>@规则</h3><h4 id="charset"><a href="#charset" class="headerlink" title="@charset"></a>@charset</h4><p>样式表的第一个元素，前面不得有任意字符,只有第一个会被使用，属性值大小写不敏感且必须用双引号，主常用于让content属性使用非ASCII字符</p>
-<p>浏览器查找样式表字符编码顺序：</p>
-<ol>
-<li>BOM(byte-order mark)</li>
-<li>Content-Type: Http header中的charset属性</li>
-<li>@charset</li>
-<li>link元素的charset属性(HTML5标准已废弃)</li>
-<li>假设文档是UTF-8</li>
-</ol>
-        
-          <p class="article-more-link">
-            <a href="/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shenyizhou.github.io/2018/06/07/2018-6-7-CSS%E7%9A%84@%E8%A7%84%E5%88%99/" data-id="cmmxau6cf006s2q2zfnfp5tzp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
 
     </footer>
   </div>
@@ -600,7 +595,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
     </div>
   </div>
 
@@ -611,6 +606,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/03/19/2026-03-19-Bilibili%20%E4%B8%93%E6%A0%8F%E6%96%87%E7%AB%A0%E5%85%B3%E9%94%AE%E5%86%85%E5%AE%B9%E6%8F%90%E5%8F%96%E4%B8%8E%20PDF%20%E7%94%9F%E6%88%90%E5%B7%A5%E4%BD%9C%E6%B5%81/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2024/05/13/2024-05-13-%E7%AE%97%E6%B3%95(51)-hard%20%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">算法(51)-hard 题目汇总</a>
@@ -626,10 +625,6 @@
         
           <li>
             <a href="/2024/05/04/2024-05-04-Rollup/">Rollup</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/03/2024-05-03-React%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%20copy/">React相关知识点</a>
           </li>
         
       </ul>
